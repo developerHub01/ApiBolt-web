@@ -1,14 +1,11 @@
-import Header from "@/app/(app)/_components/header";
+import React from "react";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface Props {
   children: React.ReactNode;
-}>) {
-  return (
-    <section>
-      <Header />
-      {children}
-    </section>
-  );
 }
+
+const AppLayout = ({ children }: Props) => {
+  return <section className="w-full max-w-6xl px-5 mx-auto">{children}</section>;
+};
+
+export default AppLayout;
