@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import HomeHero from "~/components/public/home/HomeHero.vue";
+</script>
+
 <template>
-  <h1 class="text-3xl bg-gray-800 text-white">hello world</h1>
+  <HomeHero />
 </template>

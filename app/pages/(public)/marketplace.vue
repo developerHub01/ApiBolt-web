@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 useSeoMeta({
   title: "APIBolt theme marketplace",
   description:
