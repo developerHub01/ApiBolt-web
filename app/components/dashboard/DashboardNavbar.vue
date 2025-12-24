@@ -1,17 +1,4 @@
-<script setup lang="ts">
-import type { TabsItem } from "@nuxt/ui";
-
-const items: Array<TabsItem> = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Unread",
-    value: "unread",
-  },
-];
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <UDashboardNavbar>
