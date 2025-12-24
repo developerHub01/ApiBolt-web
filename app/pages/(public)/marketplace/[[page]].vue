@@ -49,7 +49,7 @@ const isOpenDetails = computed(() => Boolean(selectedTheme.value));
 </script>
 
 <template>
-  <UContainer>
+  <!-- <UContainer>
     <UPageSection>
       <section
         class="w-full p-5 rounded-md shadow-2xl bg-elevated flex flex-col gap-5 justify-center items-center"
@@ -132,5 +132,5 @@ const isOpenDetails = computed(() => Boolean(selectedTheme.value));
         :onClose="handleSelectTheme"
       />
     </ClientOnly>
-  </UContainer>
+  </UContainer> -->
 </template>

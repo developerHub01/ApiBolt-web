@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
+// import type { NavigationMenuItem } from "@nuxt/ui";
 
-const route = useRoute();
+// const route = useRoute();
 
-const items = computed<Array<NavigationMenuItem>>(() => [
-  {
-    label: "Home",
-    to: "/",
-    active: route.path === "/",
-  },
-  {
-    label: "Marketplace",
-    to: "/marketplace",
-    active: route.path.startsWith("/marketplace"),
-  },
-  {
-    label: "Developer",
-    to: "/developer",
-    active: route.path.startsWith("/developer"),
-  },
-]);
+// const items = computed<Array<NavigationMenuItem>>(() => [
+//   {
+//     label: "Home",
+//     to: "/",
+//     active: route.path === "/",
+//   },
+//   {
+//     label: "Marketplace",
+//     to: "/marketplace",
+//     active: route.path.startsWith("/marketplace"),
+//   },
+//   {
+//     label: "Developer",
+//     to: "/developer",
+//     active: route.path.startsWith("/developer"),
+//   },
+// ]);
 </script>
 
 <template>
-  <UHeader>
+  <!-- <UHeader>
     <template #title>
       <Logo class="h-6 w-auto">APIBolt</Logo>
     </template>
@@ -44,5 +44,5 @@ const items = computed<Array<NavigationMenuItem>>(() => [
         />
       </UTooltip>
     </template>
-  </UHeader>
+  </UHeader> -->
 </template>

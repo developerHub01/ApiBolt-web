@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import type { ButtonProps } from "@nuxt/ui";
+// import type { ButtonProps } from "@nuxt/ui";
 
-const links = ref<Array<ButtonProps>>([
-  {
-    label: "Get started",
-    to: "/docs/getting-started",
-    icon: "i-lucide-square-play",
-  },
-  {
-    label: "Learn more",
-    to: "/docs/getting-started/theme/design-system",
-    color: "neutral",
-    variant: "subtle",
-    trailingIcon: "i-lucide-arrow-right",
-  },
-]);
+// const links = ref<Array<ButtonProps>>([
+//   {
+//     label: "Get started",
+//     to: "/docs/getting-started",
+//     icon: "i-lucide-square-play",
+//   },
+//   {
+//     label: "Learn more",
+//     to: "/docs/getting-started/theme/design-system",
+//     color: "neutral",
+//     variant: "subtle",
+//     trailingIcon: "i-lucide-arrow-right",
+//   },
+// ]);
 </script>
 
 <template>
-  <UPageHero
+  <!-- <UPageHero
     title="The light REST API tester"
     description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications."
     :links="links"
@@ -28,5 +28,5 @@ const links = ref<Array<ButtonProps>>([
       alt="App screenshot"
       class="rounded-lg shadow-2xl ring ring-default"
     />
-  </UPageHero>
+  </UPageHero> -->
 </template>

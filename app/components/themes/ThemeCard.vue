@@ -1,40 +1,90 @@
 <script setup lang="ts">
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  ButtonGroup,
+  ButtonGroupSeparator,
+} from "@/components/ui/button-group";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { ArrowUpRight, Edit, PencilRuler, User } from "lucide-vue-next";
+
 defineProps<{
-  id: string;
-  onClick: () => void;
-  isSelcted?: boolean;
+  // id: string;
+  // onClick: () => void;
+  // isSelcted?: boolean;
 }>();
 </script>
 
 <template>
-  <article :data-theme-id="id" @click="onClick">
-    <UPageCard
-      orientation="vertical"
-      reverse
-      spotlight
-      class="shadow-2xl"
-      :highlight="isSelcted"
-    >
-      <div class="w-full aspect-video overflow-hidden rounded-md">
+  <Card class="w-full gap-4 p-4 rounded-md">
+    <CardHeader class="px-0">
+      <AspectRatio :ratio="16 / 9" class="w-full rounded-md overflow-hidden">
         <img
           src="/images/hero-image.jpeg"
-          alt="Tailwind CSS"
-          class="w-full h-full object-cover select-none"
+          alt="Image"
+          class="w-full h-full object-cover"
         />
+      </AspectRatio>
+    </CardHeader>
+    <CardContent class="px-0">
+      <CardTitle class="pb-2">Login to your account</CardTitle>
+      <CardDescription class="line-clamp-2 leading-relaxed pb-2">
+        Enter your email below to login to your account
+      </CardDescription>
+      <Button variant="link" class="pl-0! text-sm">
+        <User :size="14" />
+        <NuxtLink href="/profile/1" target="_blank"> Username </NuxtLink>
+      </Button>
+    </CardContent>
+    <CardFooter class="flex gap-2 px-0 justify-between">
+      <div class="flex items-center gap-1">
+        <span class="text-sm text-muted-foreground"> Theme Type: </span>
+        <Badge variant="secondary"> Dark </Badge>
       </div>
-      <template #body>
-        <h3 class="text-lg font-semibold">Tailwind CSS {{ id }}</h3>
-        <p class="text-sm text-gray-500 font-medium line-clamp-2">
-          Nuxt UI integrates with latest Tailwind CSS, bringing significant
-          improvements. Nuxt UI integrates with latest Tailwind CSS, bringing
-          significant improvements.
-        </p>
-        <div class="mt-3 flex items-center gap-2">
-          <UBadge color="primary">Dark</UBadge>
-          <UBadge color="secondary">Light</UBadge>
-          <span class="text-xs text-gray-400"> by Shakil </span>
-        </div>
-      </template>
-    </UPageCard>
-  </article>
+      <TooltipProvider>
+        <ButtonGroup>
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <Button variant="outline" size="icon-sm" aria-label="Go Back">
+                <ArrowUpRight />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>See Details</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <NuxtLink href="/dashboard/update-theme">
+              <TooltipTrigger as-child>
+                <Button
+                  variant="outline"
+                  size="icon-sm"
+                  aria-label="Go Back"
+                  class="rounded-l-none cursor-pointer"
+                >
+                  <PencilRuler />
+                </Button>
+              </TooltipTrigger>
+            </NuxtLink>
+            <TooltipContent side="bottom">
+              <p>Update Theme</p>
+            </TooltipContent>
+          </Tooltip>
+        </ButtonGroup>
+      </TooltipProvider>
+    </CardFooter>
+  </Card>
 </template>

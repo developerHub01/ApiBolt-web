@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
+// import type { NavigationMenuItem } from "@nuxt/ui";
 
-const items: Array<NavigationMenuItem> = [
-  // {
-  //   label: "Figma Kit",
-  //   to: "https://go.nuxt.com/figma-ui",
-  //   target: "_blank",
-  // },
-];
+// const items: Array<NavigationMenuItem> = [
+//   // {
+//   //   label: "Figma Kit",
+//   //   to: "https://go.nuxt.com/figma-ui",
+//   //   target: "_blank",
+//   // },
+// ];
 </script>
 
 <template>
-  <UFooter>
+  <!-- <UFooter>
     <template #left>
       <p class="text-muted text-sm">
         Copyright © {{ new Date().getFullYear() }}
@@ -46,5 +46,5 @@ const items: Array<NavigationMenuItem> = [
         aria-label="GitHub"
       />
     </template>
-  </UFooter>
+  </UFooter> -->
 </template>
