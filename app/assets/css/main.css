@@ -88,9 +88,9 @@
   --primary-foreground: #151b25;
   --secondary: #11151c;
   --secondary-foreground: #fafafa;
-  --muted: "#273246";
+  --muted: #273246;
   --muted-foreground: #9f9fa9;
-  --accent: "#212D40";
+  --accent: #212d40;
   --accent-foreground: #fafafa;
   --destructive: #cb1b16;
   --border: #343f54;
@@ -150,6 +150,9 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  ::selection {
+    @apply bg-primary/80 text-primary-foreground;
   }
   body {
     @apply bg-background text-foreground;

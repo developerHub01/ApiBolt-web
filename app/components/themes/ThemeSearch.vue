@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import DashboardHeading from "~/components/dashboard/DashboardHeading.vue";
 
 const searchTypeList = [
   {
@@ -65,7 +66,7 @@ const handleClearFilter = () => {
 <template>
   <Card class="w-full py-8 border-0">
     <CardHeader>
-      <CardTitle class="text-center text-xl">My themes</CardTitle>
+      <DashboardHeading>My themes</DashboardHeading>
     </CardHeader>
     <CardContent class="flex justify-center items-center">
       <form

@@ -22,8 +22,10 @@ import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
     <AppSidebar variant="inset" />
     <SidebarInset>
       <DashboardHeader />
-      <ScrollArea class="flex-1 min-h-0">
-        <section class="container mx-auto p-5">
+      <ScrollArea
+        class="flex-1 min-h-0 [&>div>div]:h-full [&>div>div]:container [&>div>div]:mx-auto [&>div>div]:min-h-0 [&>div>div]:flex [&>div>div]:flex-col"
+      >
+        <section class="flex-1 container p-5">
           <slot />
         </section>
       </ScrollArea>

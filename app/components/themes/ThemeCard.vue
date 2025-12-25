@@ -8,15 +8,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  ButtonGroup,
-  ButtonGroupSeparator,
-} from "@/components/ui/button-group";
+import { ButtonGroup } from "@/components/ui/button-group";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ArrowUpRight, Edit, PencilRuler, User } from "lucide-vue-next";
@@ -47,7 +43,10 @@ defineProps<{
       <CardDescription class="line-clamp-2 leading-relaxed pb-2">
         Enter your email below to login to your account
       </CardDescription>
-      <Button variant="link" class="pl-0! text-sm text-accent-foreground underline">
+      <Button
+        variant="link"
+        class="pl-0! text-sm text-accent-foreground underline"
+      >
         <User :size="14" />
         <NuxtLink href="/profile/1" target="_blank"> Username </NuxtLink>
       </Button>
@@ -57,42 +56,40 @@ defineProps<{
         <span class="text-sm text-muted-foreground"> Theme Type: </span>
         <Badge variant="secondary"> Dark </Badge>
       </div>
-      <TooltipProvider>
-        <ButtonGroup>
-          <Tooltip>
+      <ButtonGroup>
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <Button
+              variant="outline"
+              size="icon-sm"
+              aria-label="Go Back"
+              @click="onDetails"
+            >
+              <ArrowUpRight />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>See Details</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <NuxtLink href="/dashboard/update-theme">
             <TooltipTrigger as-child>
               <Button
                 variant="outline"
                 size="icon-sm"
                 aria-label="Go Back"
-                @click="onDetails"
+                class="rounded-l-none cursor-pointer"
               >
-                <ArrowUpRight />
+                <PencilRuler />
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="bottom">
-              <p>See Details</p>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <NuxtLink href="/dashboard/update-theme">
-              <TooltipTrigger as-child>
-                <Button
-                  variant="outline"
-                  size="icon-sm"
-                  aria-label="Go Back"
-                  class="rounded-l-none cursor-pointer"
-                >
-                  <PencilRuler />
-                </Button>
-              </TooltipTrigger>
-            </NuxtLink>
-            <TooltipContent side="bottom">
-              <p>Update Theme</p>
-            </TooltipContent>
-          </Tooltip>
-        </ButtonGroup>
-      </TooltipProvider>
+          </NuxtLink>
+          <TooltipContent side="bottom">
+            <p>Update Theme</p>
+          </TooltipContent>
+        </Tooltip>
+      </ButtonGroup>
     </CardFooter>
   </Card>
 </template>
