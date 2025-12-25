@@ -11,7 +11,7 @@ const handleChangeSelectedTheme = (id?: string | null) =>
 </script>
 
 <template>
-  <section class="w-full h-full flex flex-col gap-6">
+  <section class="w-full h-full flex flex-col gap-8">
     <ThemeSearch />
     <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
       <ThemeCard

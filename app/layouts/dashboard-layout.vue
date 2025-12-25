@@ -6,7 +6,7 @@ export const description =
 
 <script setup lang="ts">
 import AppSidebar from "@/components/dashboard/layout/AppSidebar.vue";
-import SiteHeader from "@/components/dashboard/layout/SiteHeader.vue";
+import DashboardHeader from "@/components/dashboard/layout/DashboardHeader.vue";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
 </script>
@@ -21,7 +21,7 @@ import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
   >
     <AppSidebar variant="inset" />
     <SidebarInset>
-      <SiteHeader />
+      <DashboardHeader />
       <ScrollArea class="flex-1 min-h-0">
         <section class="container mx-auto p-5">
           <slot />

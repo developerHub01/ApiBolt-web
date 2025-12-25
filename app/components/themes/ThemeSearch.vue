@@ -63,7 +63,7 @@ const handleClearFilter = () => {
 </script>
 
 <template>
-  <Card class="w-full py-8">
+  <Card class="w-full py-8 border-0">
     <CardHeader>
       <CardTitle class="text-center text-xl">My themes</CardTitle>
     </CardHeader>

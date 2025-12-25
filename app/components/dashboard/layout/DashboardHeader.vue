@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Avatar } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import DashboardHeaderAvatar from "@/components/dashboard/layout/DashboardHeaderAvatar.vue";
 </script>
 
 <template>
@@ -16,12 +16,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
       />
       <h1 class="text-base font-medium">Documents</h1>
       <div class="ml-auto flex items-center gap-2">
-        <NuxtLink href="/dashboard/profile">
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </NuxtLink>
+        <DashboardHeaderAvatar />
       </div>
     </div>
   </header>
