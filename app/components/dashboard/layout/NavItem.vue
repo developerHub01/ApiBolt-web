@@ -8,15 +8,22 @@ interface NavItem {
   icon?: Component;
 }
 
-defineProps<{
+const { item } = defineProps<{
   item: NavItem;
 }>();
+
+const route = useRoute();
+const isActive = computed(() => (item.url ? route.path === item.url : false));
 </script>
 
 <template>
   <SidebarMenuItem class="select-none">
     <NuxtLink v-if="item.url" :href="item.url">
-      <SidebarMenuButton :tooltip="item.title" class="cursor-pointer">
+      <SidebarMenuButton
+        :tooltip="item.title"
+        class="cursor-pointer"
+        :is-active="isActive"
+      >
         <component :is="item.icon" v-if="item.icon" />
         <span>{{ item.title }}</span>
       </SidebarMenuButton>
