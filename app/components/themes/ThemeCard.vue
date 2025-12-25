@@ -22,14 +22,14 @@ import {
 import { ArrowUpRight, Edit, PencilRuler, User } from "lucide-vue-next";
 
 defineProps<{
-  // id: string;
-  // onClick: () => void;
+  id: string;
+  onDetails: () => void;
   // isSelcted?: boolean;
 }>();
 </script>
 
 <template>
-  <Card class="w-full gap-4 p-4 rounded-md">
+  <Card class="w-full gap-4 p-4 rounded-md" :data-theme-id="id">
     <CardHeader class="px-0">
       <AspectRatio :ratio="16 / 9" class="w-full rounded-md overflow-hidden">
         <img
@@ -58,7 +58,12 @@ defineProps<{
         <ButtonGroup>
           <Tooltip>
             <TooltipTrigger as-child>
-              <Button variant="outline" size="icon-sm" aria-label="Go Back">
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label="Go Back"
+                @click="onDetails"
+              >
                 <ArrowUpRight />
               </Button>
             </TooltipTrigger>

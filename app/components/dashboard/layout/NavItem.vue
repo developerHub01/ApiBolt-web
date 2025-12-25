@@ -14,7 +14,7 @@ defineProps<{
 </script>
 
 <template>
-  <SidebarMenuItem>
+  <SidebarMenuItem class="select-none">
     <NuxtLink v-if="item.url" :href="item.url">
       <SidebarMenuButton :tooltip="item.title" class="cursor-pointer">
         <component :is="item.icon" v-if="item.icon" />

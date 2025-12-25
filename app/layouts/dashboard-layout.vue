@@ -5,8 +5,8 @@ export const description =
 </script>
 
 <script setup lang="ts">
-import AppSidebar from "@/components/dashboard/AppSidebar.vue";
-import SiteHeader from "@/components/dashboard/SiteHeader.vue";
+import AppSidebar from "@/components/dashboard/layout/AppSidebar.vue";
+import SiteHeader from "@/components/dashboard/layout/SiteHeader.vue";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
 </script>

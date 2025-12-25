@@ -7,8 +7,8 @@ import {
   ArrowLeft,
   CircleUser,
 } from "lucide-vue-next";
-import NavMain from "@/components/dashboard/NavMain.vue";
-import NavSecondary from "@/components/dashboard/NavSecondary.vue";
+import NavMain from "@/components/dashboard/layout/NavMain.vue";
+import NavSecondary from "@/components/dashboard/layout/NavSecondary.vue";
 import {
   Sidebar,
   SidebarContent,
@@ -64,7 +64,6 @@ const navSecondary = [
             class="data-[slot=sidebar-menu-button]:p-1.5!"
           >
             <NuxtLink href="/dashboard">
-              <IconInnerShadowTop class="size-5!" />
               <span class="text-base font-semibold">APIBolt</span>
             </NuxtLink>
           </SidebarMenuButton>
