@@ -30,14 +30,14 @@ const handleClose = (open: boolean) => {
 <template>
   <Sheet :open="Boolean(id)" @update:open="handleClose">
     <SheetContent
-      class="inset-5 h-auto ml-auto rounded-md border w-10/12 sm:max-w-2xl gap-0"
+      class="inset-5 h-auto ml-auto rounded-md border-0 w-10/12 sm:max-w-2xl gap-0"
     >
       <SheetHeader>
         <SheetTitle>Theme Name</SheetTitle>
         <SheetDescription class="hidden"></SheetDescription>
       </SheetHeader>
       <ScrollArea class="flex-1 min-h-0 p-4 border-y">
-        <section class="w-full h-full flex flex-col gap-2">
+        <section class="w-full h-full flex flex-col gap-2 text-sm">
           <AspectRatio :ratio="16 / 9" class="bg-muted rounded-lg">
             <img
               src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"

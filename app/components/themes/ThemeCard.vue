@@ -29,7 +29,10 @@ defineProps<{
 </script>
 
 <template>
-  <Card class="w-full gap-4 p-4 rounded-md" :data-theme-id="id">
+  <Card
+    class="w-full gap-4 p-4 rounded-md border-0 hover:shadow-2xl transition-all duration-100"
+    :data-theme-id="id"
+  >
     <CardHeader class="px-0">
       <AspectRatio :ratio="16 / 9" class="w-full rounded-md overflow-hidden">
         <img
@@ -44,7 +47,7 @@ defineProps<{
       <CardDescription class="line-clamp-2 leading-relaxed pb-2">
         Enter your email below to login to your account
       </CardDescription>
-      <Button variant="link" class="pl-0! text-sm">
+      <Button variant="link" class="pl-0! text-sm text-accent-foreground underline">
         <User :size="14" />
         <NuxtLink href="/profile/1" target="_blank"> Username </NuxtLink>
       </Button>
