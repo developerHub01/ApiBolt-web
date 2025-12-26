@@ -42,4 +42,13 @@ export default defineNuxtConfig({
      */
     componentDir: "@/components/ui",
   },
+  components: [
+    {
+      path: "~/components",
+    },
+    {
+      path: "~/components/ui",
+      pathPrefix: false,
+    },
+  ],
 });
