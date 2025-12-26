@@ -17,7 +17,7 @@ import { Avatar } from "@/components/ui/avatar";
       </Avatar>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
-      <NuxtLink href="/dashboard/profile">
+      <NuxtLink to="/dashboard/profile">
         <DropdownMenuItem class="cursor-pointer"> Profile </DropdownMenuItem>
       </NuxtLink>
       <DropdownMenuItem variant="destructive">Logout</DropdownMenuItem>

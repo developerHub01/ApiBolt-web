@@ -48,7 +48,7 @@ defineProps<{
         class="pl-0! text-sm text-accent-foreground underline"
       >
         <User :size="14" />
-        <NuxtLink href="/profile/1" target="_blank"> Username </NuxtLink>
+        <NuxtLink to="/profile/1" target="_blank"> Username </NuxtLink>
       </Button>
     </CardContent>
     <CardFooter class="flex gap-2 px-0 justify-between">
@@ -73,7 +73,7 @@ defineProps<{
           </TooltipContent>
         </Tooltip>
         <Tooltip>
-          <NuxtLink href="/dashboard/update-theme">
+          <NuxtLink to="/dashboard/update-theme">
             <TooltipTrigger as-child>
               <Button
                 variant="outline"

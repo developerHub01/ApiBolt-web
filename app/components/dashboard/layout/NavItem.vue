@@ -18,7 +18,7 @@ const isActive = computed(() => (item.url ? route.path === item.url : false));
 
 <template>
   <SidebarMenuItem class="select-none">
-    <NuxtLink v-if="item.url" :href="item.url">
+    <NuxtLink v-if="item.url" :to="item.url">
       <SidebarMenuButton
         :tooltip="item.title"
         class="cursor-pointer"

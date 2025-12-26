@@ -47,7 +47,7 @@ const handleClose = (open: boolean) => {
           </AspectRatio>
           <div class="flex items-center gap-2 text-sm">
             <AuthorIcon :size="16" />
-            <NuxtLink href="/profile/1">
+            <NuxtLink to="/profile/1">
               <Button variant="link" class="underline px-0 cursor-pointer">
                 Username
               </Button>

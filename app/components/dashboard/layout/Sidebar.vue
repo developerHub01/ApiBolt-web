@@ -61,7 +61,7 @@ const navSecondary = [
             as-child
             class="data-[slot=sidebar-menu-button]:p-1.5!"
           >
-            <NuxtLink href="/dashboard">
+            <NuxtLink to="/dashboard">
               <span class="text-base font-semibold">APIBolt</span>
             </NuxtLink>
           </SidebarMenuButton>
