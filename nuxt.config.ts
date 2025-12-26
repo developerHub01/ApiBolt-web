@@ -8,12 +8,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: [
-    "@nuxtjs/tailwindcss",
-    "shadcn-nuxt",
-    "shadcn-nuxt",
-    "@nuxtjs/color-mode",
-  ],
+  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "shadcn-nuxt", "@nuxtjs/color-mode", "@nuxt/image"],
   app: {
     head: {
       charset: "utf-8",

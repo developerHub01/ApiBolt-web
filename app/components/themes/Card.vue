@@ -16,12 +16,16 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ArrowUpRight, PencilRuler, User } from "lucide-vue-next";
+import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 
 defineProps<{
   id: string;
   onDetails: () => void;
   // isSelcted?: boolean;
 }>();
+
+const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
+const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
 </script>
 
 <template>
@@ -31,7 +35,9 @@ defineProps<{
   >
     <CardHeader class="px-0">
       <AspectRatio :ratio="16 / 9" class="w-full rounded-md overflow-hidden">
-        <img
+        <NuxtImg
+          :width="REQUIRED_WIDTH / 4"
+          :height="REQUIRED_HEIGHT / 4"
           src="/images/hero-image.jpeg"
           alt="Image"
           class="w-full h-full object-cover"

@@ -12,6 +12,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
+import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 
 /** Props */
 const props = defineProps<{ modelValue: string }>();
@@ -22,9 +23,9 @@ const uploadedFile = ref<File | null>(null);
 const fileInput = ref<HTMLInputElement | null>(null);
 
 /** Constants */
-const REQUIRED_WIDTH = 1920;
-const REQUIRED_HEIGHT = 1080;
-const MAX_SIZE_MB = 2;
+const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
+const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
+const MAX_SIZE_MB = THEME_PREVIEW_SIZE.MAX_SIZE_MB;
 
 /** Computed preview URL */
 const previewURL = computed(() =>
@@ -105,7 +106,9 @@ const resetPreview = (): void => {
           :ratio="16 / 9"
           class="w-full bg-muted rounded-lg overflow-hidden ring-2 ring-border"
         >
-          <img
+          <NuxtImg
+            :width="REQUIRED_WIDTH / 2"
+            :height="REQUIRED_HEIGHT / 2"
             :src="previewURL"
             alt="Theme Preview"
             class="h-full w-full object-cover"

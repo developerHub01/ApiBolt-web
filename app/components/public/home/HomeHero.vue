@@ -23,7 +23,7 @@
     description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications."
     :links="links"
   >
-    <img
+    <NuxtImg
       src="/images/hero-image.jpeg"
       alt="App screenshot"
       class="rounded-lg shadow-2xl ring ring-default"

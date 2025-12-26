@@ -1,3 +1,9 @@
+export const THEME_PREVIEW_SIZE = {
+  REQUIRED_WIDTH: 1920,
+  REQUIRED_HEIGHT: 1080,
+  MAX_SIZE_MB: 2,
+};
+
 export const DEFAULT_THEME_PALETTE = {
   background: "#151B25",
   foreground: "#fafafa",

@@ -15,11 +15,15 @@ import {
   User as AuthorIcon,
   CloudDownload as DownloadIcon,
 } from "lucide-vue-next";
+import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 
 const { onClose } = defineProps<{
   id?: string | null;
   onClose: () => void;
 }>();
+
+const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
+const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
 
 const handleClose = (open: boolean) => {
   if (!open) onClose();
@@ -38,7 +42,9 @@ const handleClose = (open: boolean) => {
       <ScrollArea class="flex-1 min-h-0 p-4 border-y">
         <section class="w-full h-full flex flex-col gap-2 text-sm">
           <AspectRatio :ratio="16 / 9" class="bg-muted rounded-lg">
-            <img
+            <NuxtImg
+              :width="REQUIRED_WIDTH / 3"
+              :height="REQUIRED_HEIGHT / 3"
               src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
               alt="Photo by Drew Beamer"
               fill
