@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { reactive, computed } from "vue";
 import { DEFAULT_THEME_PALETTE } from "~/constant/default-theme.constant";
 import { Button } from "@/components/ui/button";
 import { isValidColor } from "~/utils/color.utils";
@@ -35,9 +34,14 @@ const isDescriptionValid = computed(
 const isPaletteValid = computed(() =>
   Object.values(themeState.palette).every((c) => isValidColor(c))
 );
+const isPreviewValid = computed(() => Boolean(themeState.preview.trim()));
 
 const isFormValid = computed(
-  () => isNameValid.value && isDescriptionValid.value && isPaletteValid.value
+  () =>
+    isNameValid.value &&
+    isPreviewValid.value &&
+    isDescriptionValid.value &&
+    isPaletteValid.value
 );
 
 const handleReset = (): void => {
@@ -57,7 +61,7 @@ const handleReset = (): void => {
     <Card class="w-full border-0 gap-6 py-8 items-center max-w-4xl">
       <DashboardThemeEditorHeader />
       <CardContent class="w-full flex flex-col gap-6">
-        <DashboardThemeEditor
+        <DashboardThemeEditorBasicInfo
           v-model:name="themeState.name"
           v-model:themeType="themeState.themeType"
           :maxLength="MAX_NAME"
@@ -75,7 +79,6 @@ const handleReset = (): void => {
         <Button variant="outline" type="button" @click="handleReset"
           >Reset</Button
         >
-        <Button variant="outline" type="button">Cancel</Button>
       </CardFooter>
     </Card>
   </form>
