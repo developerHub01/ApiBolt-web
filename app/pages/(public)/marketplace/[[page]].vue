@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import ThemeCard from "~/components/themes/ThemeCard.vue";
-import ThemeDetails from "~/components/themes/ThemeDetails.vue";
-
 useSeoMeta({
   title: "APIBolt theme marketplace",
   description:

@@ -7,8 +7,6 @@ import {
   ArrowLeft,
   CircleUser,
 } from "lucide-vue-next";
-import NavMain from "@/components/dashboard/layout/NavMain.vue";
-import NavSecondary from "@/components/dashboard/layout/NavSecondary.vue";
 import {
   Sidebar,
   SidebarContent,
@@ -71,8 +69,8 @@ const navSecondary = [
       </SidebarMenu>
     </SidebarHeader>
     <SidebarContent>
-      <NavMain :items="navMain" />
-      <NavSecondary :items="navSecondary" class="mt-auto" />
+      <DashboardLayoutNavMain :items="navMain" />
+      <DashboardLayoutNavSecondary :items="navSecondary" class="mt-auto" />
     </SidebarContent>
   </Sidebar>
 </template>

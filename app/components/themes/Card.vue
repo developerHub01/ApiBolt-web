@@ -15,7 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ArrowUpRight, Edit, PencilRuler, User } from "lucide-vue-next";
+import { ArrowUpRight, PencilRuler, User } from "lucide-vue-next";
 
 defineProps<{
   id: string;

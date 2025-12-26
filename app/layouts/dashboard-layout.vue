@@ -5,8 +5,6 @@ export const description =
 </script>
 
 <script setup lang="ts">
-import AppSidebar from "@/components/dashboard/layout/AppSidebar.vue";
-import DashboardHeader from "@/components/dashboard/layout/DashboardHeader.vue";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
 </script>
@@ -19,9 +17,9 @@ import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
     }"
     class="h-screen overflow-hidden"
   >
-    <AppSidebar variant="inset" />
+    <DashboardLayoutSidebar variant="inset" />
     <SidebarInset>
-      <DashboardHeader />
+      <DashboardLayoutHeader />
       <ScrollArea
         class="flex-1 min-h-0 [&>div>div]:h-full [&>div>div]:container [&>div>div]:mx-auto [&>div>div]:min-h-0 [&>div>div]:flex [&>div>div]:flex-col"
       >

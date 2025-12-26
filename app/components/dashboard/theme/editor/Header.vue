@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DashboardHeading from "~/components/dashboard/DashboardHeading.vue";
 import { CardHeader, CardDescription } from "@/components/ui/card";
 </script>
 

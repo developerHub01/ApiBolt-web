@@ -8,7 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import DashboardHeading from "~/components/dashboard/DashboardHeading.vue";
 
 const searchTypeList = [
   {

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import DashboardHeaderAvatar from "@/components/dashboard/layout/DashboardHeaderAvatar.vue";
 </script>
 
 <template>
@@ -16,7 +15,7 @@ import DashboardHeaderAvatar from "@/components/dashboard/layout/DashboardHeader
       />
       <h1 class="text-base font-medium">Documents</h1>
       <div class="ml-auto flex items-center gap-2">
-        <DashboardHeaderAvatar />
+        <DashboardLayoutHeaderAvatar />
       </div>
     </div>
   </header>

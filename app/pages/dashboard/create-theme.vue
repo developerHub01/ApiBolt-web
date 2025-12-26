@@ -1,10 +1,5 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-import ThemeEditorBasicInfo from "~/components/dashboard/theme/ThemeEditorBasicInfo.vue";
-import ThemeEditorDescription from "~/components/dashboard/theme/ThemeEditorDescription.vue";
-import ThemeEditorHeader from "~/components/dashboard/theme/ThemeEditorHeader.vue";
-import ThemeEditorPalette from "~/components/dashboard/theme/ThemeEditorPalette.vue";
-import ThemeEditorPreview from "~/components/dashboard/theme/ThemeEditorPreview.vue";
 import { DEFAULT_THEME_PALETTE } from "~/constant/default-theme.constant";
 import { Button } from "@/components/ui/button";
 import { isValidColor } from "~/utils/color.utils";
@@ -60,17 +55,16 @@ const handleReset = (): void => {
     @submit.prevent="console.log('publish', themeState)"
   >
     <Card class="w-full border-0 gap-6 py-8 items-center max-w-4xl">
-      <ThemeEditorHeader />
-
+      <DashboardThemeEditorHeader />
       <CardContent class="w-full flex flex-col gap-6">
-        <ThemeEditorBasicInfo
+        <DashboardThemeEditor
           v-model:name="themeState.name"
           v-model:themeType="themeState.themeType"
           :maxLength="MAX_NAME"
         />
-        <ThemeEditorPreview v-model:modelValue="themeState.preview" />
-        <ThemeEditorPalette v-model:palette="themeState.palette" />
-        <ThemeEditorDescription
+        <DashboardThemeEditorPreview v-model:modelValue="themeState.preview" />
+        <DashboardThemeEditorPalette v-model:palette="themeState.palette" />
+        <DashboardThemeEditorDescription
           v-model:modelValue="themeState.description"
           :maxLength="MAX_DESCRIPTION"
         />

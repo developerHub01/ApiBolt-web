@@ -6,7 +6,6 @@ import {
   SidebarGroupContent,
   SidebarMenu,
 } from "@/components/ui/sidebar";
-import NavItem from "@/components/dashboard/layout/NavItem.vue";
 
 interface NavItem {
   title: string;
@@ -23,7 +22,7 @@ defineProps<{
   <SidebarGroup>
     <SidebarGroupContent>
       <SidebarMenu>
-        <NavItem v-for="item in items" :key="item.title" :item="item" />
+        <DashboardLayoutNavItem v-for="item in items" :key="item.title" :item="item" />
       </SidebarMenu>
     </SidebarGroupContent>
   </SidebarGroup>

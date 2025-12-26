@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ThemePaletteRow from "./ThemePaletteRow.vue";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import ScrollArea from "@/components/ui/scroll-area/ScrollArea.vue";
@@ -175,7 +174,7 @@ const handlePaletteModifier = async (
 
     <ScrollArea class="w-full min-h-0 flex-1 bg-card p-3 rounded-md">
       <section class="w-full h-full grid lg:grid-cols-2 gap-2">
-        <ThemePaletteRow
+        <DashboardThemeEditorPaletteRow
           v-for="(color, name) in props.palette"
           :key="name"
           :name="name"
