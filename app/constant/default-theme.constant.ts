@@ -4,6 +4,11 @@ export const THEME_PREVIEW_SIZE = {
   MAX_SIZE_MB: 2,
 };
 
+export const THEME_PAYLOAD_SIZE = {
+  MAX_NAME: 50,
+  MAX_DESCRIPTION: 200,
+};
+
 export const DEFAULT_THEME_PALETTE = {
   background: "#151B25",
   foreground: "#fafafa",

@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { DEFAULT_THEME_PALETTE } from "~/constant/default-theme.constant";
+import {
+  DEFAULT_THEME_PALETTE,
+  THEME_PAYLOAD_SIZE,
+} from "~/constant/default-theme.constant";
 import { Button } from "@/components/ui/button";
 import { isValidColor } from "~/utils/color.utils";
 
@@ -11,9 +14,6 @@ interface ThemeState {
   preview: string;
 }
 
-const MAX_NAME = 50;
-const MAX_DESCRIPTION = 200;
-
 const themeState = reactive<ThemeState>({
   name: "",
   themeType: "dark",
@@ -24,12 +24,14 @@ const themeState = reactive<ThemeState>({
 
 /* Compute validation states */
 const isNameValid = computed(
-  () => themeState.name.trim().length > 0 && themeState.name.length <= MAX_NAME
+  () =>
+    themeState.name.trim().length > 0 &&
+    themeState.name.length <= THEME_PAYLOAD_SIZE.MAX_NAME
 );
 const isDescriptionValid = computed(
   () =>
     themeState.description.trim().length > 0 &&
-    themeState.description.length <= MAX_DESCRIPTION
+    themeState.description.length <= THEME_PAYLOAD_SIZE.MAX_DESCRIPTION
 );
 const isPaletteValid = computed(() =>
   Object.values(themeState.palette).every((c) => isValidColor(c))
@@ -64,13 +66,13 @@ const handleReset = (): void => {
         <DashboardThemeEditorBasicInfo
           v-model:name="themeState.name"
           v-model:themeType="themeState.themeType"
-          :maxLength="MAX_NAME"
+          :maxLength="THEME_PAYLOAD_SIZE.MAX_NAME"
         />
         <DashboardThemeEditorPreview v-model:modelValue="themeState.preview" />
         <DashboardThemeEditorPalette v-model:palette="themeState.palette" />
         <DashboardThemeEditorDescription
           v-model:modelValue="themeState.description"
-          :maxLength="MAX_DESCRIPTION"
+          :maxLength="THEME_PAYLOAD_SIZE.MAX_DESCRIPTION"
         />
       </CardContent>
 

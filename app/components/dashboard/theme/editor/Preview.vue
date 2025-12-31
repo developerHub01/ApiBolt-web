@@ -16,7 +16,9 @@ import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 
 /** Props */
 const props = defineProps<{ modelValue: string }>();
-const emit = defineEmits<{ (e: "update:modelValue", value: string): void }>();
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
 
 /** File state */
 const uploadedFile = ref<File | null>(null);
