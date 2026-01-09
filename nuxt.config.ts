@@ -8,7 +8,14 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "shadcn-nuxt", "@nuxtjs/color-mode", "@nuxt/image"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "shadcn-nuxt",
+    "shadcn-nuxt",
+    "@nuxtjs/color-mode",
+    "@nuxt/image",
+    "@nuxtjs/supabase",
+  ],
   app: {
     head: {
       charset: "utf-8",
@@ -21,6 +28,16 @@ export default defineNuxtConfig({
             "APIBolt is a progressive API testing platform. It provide desktop app for windows, mac and linux. It is alternative of postman but opensource and provide feature to test REST API project wise and management.",
         },
       ],
+    },
+  },
+  supabase: {
+    types: "~/types/database.types.ts",
+    redirectOptions: {
+      login: "/login",
+      callback: "/",
+      include: ["/dashboard"],
+      exclude: [],
+      saveRedirectToCookie: false,
     },
   },
   shadcn: {

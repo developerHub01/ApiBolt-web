@@ -1,48 +1,39 @@
 <script setup lang="ts">
-// import type { NavigationMenuItem } from "@nuxt/ui";
+const route = useRoute();
 
-// const route = useRoute();
-
-// const items = computed<Array<NavigationMenuItem>>(() => [
-//   {
-//     label: "Home",
-//     to: "/",
-//     active: route.path === "/",
-//   },
-//   {
-//     label: "Marketplace",
-//     to: "/marketplace",
-//     active: route.path.startsWith("/marketplace"),
-//   },
-//   {
-//     label: "Developer",
-//     to: "/developer",
-//     active: route.path.startsWith("/developer"),
-//   },
-// ]);
+const items = computed(() => [
+  {
+    label: "Home",
+    to: "/",
+    active: route.path === "/",
+  },
+  {
+    label: "Marketplace",
+    to: "/marketplace",
+    active: route.path.startsWith("/marketplace"),
+  },
+  {
+    label: "Developer",
+    to: "/developer",
+    active: route.path.startsWith("/developer"),
+  },
+]);
 </script>
 
 <template>
-  <!-- <UHeader>
-    <template #title>
-      <Logo class="h-6 w-auto">APIBolt</Logo>
-    </template>
-
-    <UNavigationMenu :items="items" />
-
-    <template #right>
-      <UColorModeButton />
-
-      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-        <UButton
-          color="neutral"
-          variant="ghost"
-          to="https://github.com/nuxt/ui"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-        />
-      </UTooltip>
-    </template>
-  </UHeader> -->
+  <section class="w-full flex items-center justify-center">
+    <header class="container flex items-center justify-between gap-2 py-2">
+      <NuxtLink to="/" class="text-lg font-bold select-none">APIBolt</NuxtLink>
+      <div class="flex items-center gap-4">
+        <template v-for="{ to, label } in items">
+          <NuxtLink :to="to">
+            <Button variant="link" size="lg" class="px-1 cursor-pointer">
+              {{ label }}
+            </Button>
+          </NuxtLink>
+        </template>
+        <PublicCommonProfileMenu />
+      </div>
+    </header>
+  </section>
 </template>
