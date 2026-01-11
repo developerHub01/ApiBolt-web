@@ -14,39 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
-      profile: {
+      profiles: {
         Row: {
           avatar_url: string | null
           bio: string | null
           cover_url: string | null
-          created_at: string
-          full_name: string | null
+          created_at: string | null
+          full_name: string
           id: string
-          updated_at: string | null
-          user_name: string | null
-          website: string | null
+          user_name: string
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
           cover_url?: string | null
-          created_at?: string
-          full_name?: string | null
+          created_at?: string | null
+          full_name: string
           id: string
-          updated_at?: string | null
-          user_name?: string | null
-          website?: string | null
+          user_name: string
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
           cover_url?: string | null
-          created_at?: string
-          full_name?: string | null
+          created_at?: string | null
+          full_name?: string
           id?: string
-          updated_at?: string | null
-          user_name?: string | null
-          website?: string | null
+          user_name?: string
         }
         Relationships: []
       }
