@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from "~/components/ui/button/Button.vue";
-import { useAuth } from "~/composable/userAuth";
+import { useAuth } from "~/composable/useUserAuth";
 
 definePageMeta({
   middleware: ["prevent-if-auth"],

@@ -44,6 +44,53 @@ export type Database = {
         }
         Relationships: []
       }
+      themes: {
+        Row: {
+          author: string
+          created_at: string
+          description: string
+          id: string
+          name: string
+          palette: Json
+          preview: string
+          thumbnail: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string
+          created_at?: string
+          description: string
+          id?: string
+          name?: string
+          palette: Json
+          preview: string
+          thumbnail: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          palette?: Json
+          preview?: string
+          thumbnail?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "theme_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

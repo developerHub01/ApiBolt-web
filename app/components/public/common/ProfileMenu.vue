@@ -1,6 +1,6 @@
 <script setup>
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAuth } from "~/composable/userAuth";
+import { useAuth } from "~/composable/useUserAuth";
 
 const { user, avatar, name } = useAuth();
 </script>

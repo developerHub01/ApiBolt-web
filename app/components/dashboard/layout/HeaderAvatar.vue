@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar } from "@/components/ui/avatar";
-import { useAuth } from "~/composable/userAuth";
+import { useAuth } from "~/composable/useUserAuth";
 
 const { supabase, avatar, name, handleLogout } = useAuth();
 </script>
