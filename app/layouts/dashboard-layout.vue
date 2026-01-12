@@ -1,8 +1,4 @@
 <script lang="ts">
-definePageMeta({
-  middleware: ["auth"],
-});
-
 export const iframeHeight = "800px";
 export const description =
   "A dashboard with sidebar, data table, and analytics cards.";
