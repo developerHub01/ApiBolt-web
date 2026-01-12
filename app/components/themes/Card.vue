@@ -17,12 +17,15 @@ import {
 } from "@/components/ui/tooltip";
 import { ArrowUpRight, PencilRuler, User } from "lucide-vue-next";
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
+import type { ThemeInterface } from "~/types/theme.types";
 
-defineProps<{
-  id: string;
-  onDetails: () => void;
-  // isSelcted?: boolean;
-}>();
+defineProps<
+  ThemeInterface & {
+    id: string;
+    onDetails: () => void;
+    // isSelcted?: boolean;
+  }
+>();
 
 const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
 const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
@@ -38,16 +41,16 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
         <NuxtImg
           :width="REQUIRED_WIDTH / 4"
           :height="REQUIRED_HEIGHT / 4"
-          src="/images/hero-image.jpeg"
+          :src="thumbnail"
           alt="Image"
           class="w-full h-full object-cover"
         />
       </AspectRatio>
     </CardHeader>
     <CardContent class="px-0">
-      <CardTitle class="pb-2">Login to your account</CardTitle>
+      <CardTitle class="pb-2">{{ name }}</CardTitle>
       <CardDescription class="line-clamp-2 leading-relaxed pb-2">
-        Enter your email below to login to your account
+        {{ description }}
       </CardDescription>
       <Button
         variant="link"
@@ -60,7 +63,7 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
     <CardFooter class="flex gap-2 px-0 justify-between">
       <div class="flex items-center gap-1">
         <span class="text-sm text-muted-foreground"> Theme Type: </span>
-        <Badge variant="secondary"> Dark </Badge>
+        <Badge variant="secondary"> {{ type }} </Badge>
       </div>
       <ButtonGroup>
         <Tooltip>

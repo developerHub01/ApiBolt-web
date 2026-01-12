@@ -16,9 +16,10 @@ import {
   CloudDownload as DownloadIcon,
 } from "lucide-vue-next";
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
+import type { ThemeInterface } from "~/types/theme.types";
 
 const { onClose } = defineProps<{
-  id?: string | null;
+  theme?: ThemeInterface;
   onClose: () => void;
 }>();
 
@@ -31,24 +32,28 @@ const handleClose = (open: boolean) => {
 </script>
 
 <template>
-  <Sheet :open="Boolean(id)" @update:open="handleClose">
+  <Sheet :open="Boolean(theme)" @update:open="handleClose">
     <SheetContent
       class="inset-5 h-auto ml-auto rounded-md border-0 w-10/12 sm:max-w-2xl gap-0"
+      v-if="theme"
     >
       <SheetHeader>
-        <SheetTitle>Theme Name</SheetTitle>
+        <SheetTitle>{{ theme.name }}</SheetTitle>
         <SheetDescription class="hidden"></SheetDescription>
       </SheetHeader>
-      <ScrollArea class="flex-1 min-h-0 p-4 border-y">
-        <section class="w-full h-full flex flex-col gap-2 text-sm">
-          <AspectRatio :ratio="16 / 9" class="bg-muted rounded-lg">
+      <ScrollArea class="flex-1 min-h-0 border-y">
+        <section class="w-full h-full p-4 flex flex-col gap-2 text-sm">
+          <AspectRatio
+            :ratio="16 / 9"
+            class="bg-muted rounded-lg shadow-2xl ring-4 ring-secondary/30"
+          >
             <NuxtImg
               :width="REQUIRED_WIDTH / 3"
               :height="REQUIRED_HEIGHT / 3"
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+              :src="theme.preview"
               alt="Photo by Drew Beamer"
               fill
-              class="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+              class="h-full w-full rounded-lg object-cover"
             />
           </AspectRatio>
           <div class="flex items-center gap-2 text-sm">
@@ -58,14 +63,11 @@ const handleClose = (open: boolean) => {
                 Username
               </Button>
             </NuxtLink>
-            <Badge variant="secondary" class="ml-auto">Dark</Badge>
+            <Badge variant="secondary" class="ml-auto">{{ theme.type }}</Badge>
             <Badge variant="secondary"><DownloadIcon />10k</Badge>
           </div>
-          <p v-for="value in Array.from({ length: 10 })">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem, sunt
-            provident facilis maiores corporis temporibus tempora officia nulla
-            exercitationem vitae quisquam doloremque atque minima similique
-            fugiat ut impedit rerum ad.
+          <p>
+            {{ theme.description }}
           </p>
         </section>
       </ScrollArea>
