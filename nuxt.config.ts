@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@nuxt/image",
     "@nuxtjs/supabase",
+    "@pinia/nuxt",
   ],
   app: {
     head: {
