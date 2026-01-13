@@ -50,36 +50,42 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          install_count: number
           name: string
           palette: Json
           preview: string
           thumbnail: string
           type: string
           updated_at: string
+          version: number
         }
         Insert: {
           author?: string
           created_at?: string
           description: string
           id?: string
+          install_count?: number
           name?: string
           palette: Json
           preview: string
           thumbnail: string
           type?: string
           updated_at?: string
+          version?: number
         }
         Update: {
           author?: string
           created_at?: string
           description?: string
           id?: string
+          install_count?: number
           name?: string
           palette?: Json
           preview?: string
           thumbnail?: string
           type?: string
           updated_at?: string
+          version?: number
         }
         Relationships: [
           {

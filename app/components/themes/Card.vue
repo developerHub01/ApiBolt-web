@@ -15,17 +15,21 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ArrowUpRight, PencilRuler, User } from "lucide-vue-next";
+import { ArrowUpRight, PencilRuler, Trash2, User } from "lucide-vue-next";
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 import type { ThemeInterface } from "~/types/theme.types";
 
-defineProps<
+const props = defineProps<
   ThemeInterface & {
-    id: string;
-    onDetails: () => void;
-    // isSelcted?: boolean;
+    isSelcted?: boolean;
+    canDelete?: boolean;
   }
 >();
+
+const emit = defineEmits<{
+  (e: "details"): void;
+  (e: "delete"): void;
+}>();
 
 const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
 const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
@@ -34,6 +38,7 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
 <template>
   <Card
     class="w-full gap-4 p-4 rounded-md border-0 hover:shadow-2xl transition-all duration-100"
+    :class="isSelcted ? 'ring-2 ring-primary' : ''"
     :data-theme-id="id"
   >
     <CardHeader class="px-0">
@@ -60,19 +65,21 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
         <NuxtLink to="/profile/1" target="_blank"> Username </NuxtLink>
       </Button>
     </CardContent>
-    <CardFooter class="flex gap-2 px-0 justify-between">
+    <CardFooter class="flex gap-2 px-0 justify-between flex-wrap">
       <div class="flex items-center gap-1">
         <span class="text-sm text-muted-foreground"> Theme Type: </span>
         <Badge variant="secondary"> {{ type }} </Badge>
       </div>
-      <ButtonGroup>
+      <ButtonGroup
+        class="ring ring-ring/50 rounded-md overflow-hidden divide-x"
+      >
         <Tooltip>
           <TooltipTrigger as-child>
             <Button
-              variant="outline"
+              variant="secondary"
               size="icon-sm"
               aria-label="Go Back"
-              @click="onDetails"
+              @click="emit('details')"
             >
               <ArrowUpRight />
             </Button>
@@ -82,13 +89,13 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
           </TooltipContent>
         </Tooltip>
         <Tooltip>
-          <NuxtLink to="/dashboard/update-theme">
+          <NuxtLink :to="`/dashboard/update-theme/${id}`">
             <TooltipTrigger as-child>
               <Button
-                variant="outline"
+                variant="secondary"
                 size="icon-sm"
                 aria-label="Go Back"
-                class="rounded-l-none cursor-pointer"
+                class="cursor-pointer rounded-none"
               >
                 <PencilRuler />
               </Button>
@@ -96,6 +103,21 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
           </NuxtLink>
           <TooltipContent side="bottom">
             <p>Update Theme</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip v-if="canDelete ?? false">
+          <TooltipTrigger as-child>
+            <Button
+              variant="secondary"
+              size="icon-sm"
+              aria-label="Go Back"
+              @click="emit('delete')"
+            >
+              <Trash2 />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Delete Theme</p>
           </TooltipContent>
         </Tooltip>
       </ButtonGroup>

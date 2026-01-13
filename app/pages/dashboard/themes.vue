@@ -1,5 +1,17 @@
 <script setup lang="ts">
 import type { SearchState, ThemeInterface } from "~/types/theme.types";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "~/components/ui/alert-dialog";
+import { toast } from "vue-sonner";
+import { Spinner } from "~/components/ui/spinner";
 
 const client = useSupabaseClient();
 
@@ -13,6 +25,8 @@ const searchParams = reactive<SearchState>({
   searchTerm: "",
   themeType: "all",
 });
+const deleteCandidate = ref<string | null>(null);
+const isDeleting = ref<boolean>(false);
 
 const handleChangeSelectedTheme = (id?: string | null) =>
   (selectedTheme.value = id ?? null);
@@ -59,6 +73,25 @@ const handleUpdatePage = (newPage: number) => {
   handleFetchThemes();
 };
 
+const handleChangedeleteCandidate = async (id?: string) =>
+  (deleteCandidate.value = id ?? null);
+
+const handleDeleteTheme = async () => {
+  isDeleting.value = true;
+  try {
+    await $fetch(`/api/v1/themes/${deleteCandidate.value}`, {
+      method: "DELETE",
+    });
+    toast.success("Theme delete successfully");
+    handleFetchThemes();
+  } catch (error) {
+    console.error(error);
+  } finally {
+    handleChangedeleteCandidate();
+    isDeleting.value = false;
+  }
+};
+
 const selectedThemeDetails = computed(
   () =>
     themeList.value.find(
@@ -72,7 +105,6 @@ onMounted(() => handleFetchThemes());
 <template>
   <section class="w-full h-full flex flex-col gap-8">
     <ThemesSearch @search="handleSearch" :disabled="isLoading" />
-
     <template v-if="isLoading || themeList.length">
       <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
         <ThemesCardSkeleton
@@ -85,21 +117,11 @@ onMounted(() => handleFetchThemes());
             v-for="theme in themeList"
             :key="theme.id"
             v-bind="theme"
-            :onDetails="() => handleChangeSelectedTheme(theme.id)"
+            :isSelcted="selectedTheme === theme.id"
+            :canDelete="true"
+            @details="() => handleChangeSelectedTheme(theme.id)"
+            @delete="() => handleChangedeleteCandidate(theme.id)"
           />
-          <template v-else>
-            <section
-              v-if="themeList.length > 0"
-              class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5"
-            >
-              <ThemesCard
-                v-for="theme in themeList"
-                :key="theme.id"
-                v-bind="theme"
-                :onDetails="() => handleChangeSelectedTheme(theme.id)"
-              />
-            </section>
-          </template>
         </template>
       </section>
     </template>
@@ -124,6 +146,28 @@ onMounted(() => handleFetchThemes());
         :theme="selectedThemeDetails"
         :onClose="handleChangeSelectedTheme"
       />
+      <AlertDialog :open="Boolean(deleteCandidate)">
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete this
+              theme and remove data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel @click="handleChangedeleteCandidate"
+              >Cancel</AlertDialogCancel
+            >
+            <AlertDialogAction
+              @click="handleDeleteTheme"
+              :disabled="isDeleting"
+            >
+              <Spinner v-if="isDeleting" /> Continue</AlertDialogAction
+            >
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </ClientOnly>
   </section>
 </template>
