@@ -20,7 +20,7 @@ const localColor = ref<string>(props.modelValue);
 const isError = computed<boolean>(() => !isValidColor(localColor.value));
 
 watch(localColor, (newColor: string): void => {
-  if (isValidColor(newColor)) emit("update:modelValue", newColor);
+  if (isValidColor(newColor)) emit("update:modelValue", newColor.toLowerCase());
 });
 
 watch(

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { isValidColor } from "~/utils/color.utils";
 import { useThemeAssets } from "~/composable/useThemeAssets";
 import { toast } from "vue-sonner";
+import { FetchError } from "ofetch";
 
 interface ThemeState {
   name: string;
@@ -86,7 +87,8 @@ const handlePublish = async () => {
     toast.success("Theme Published!");
     handleReset();
   } catch (error) {
-    toast.error("Publish failed");
+    console.log();
+    toast.error((error as FetchError).data?.message ?? "Publish failed");
     console.error(error);
   } finally {
     isSubmitting.value = false;
@@ -116,7 +118,10 @@ const handlePublish = async () => {
       </CardContent>
 
       <CardFooter class="w-full flex gap-2 justify-end">
-        <Button type="submit" :disabled="!isEnableSubmit">Publish</Button>
+        <Button type="submit" :disabled="!isEnableSubmit">
+          <Spinner v-if="isSubmitting" />
+          Publish</Button
+        >
         <Button variant="outline" type="button" @click="handleReset"
           >Reset</Button
         >

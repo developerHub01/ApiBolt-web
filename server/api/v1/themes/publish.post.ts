@@ -23,7 +23,11 @@ export default defineEventHandler(async (event) => {
   const name = fields.name?.[0];
   const description = fields.description?.[0];
   const themeType = fields.type?.[0];
-  const palette = JSON.parse(fields.palette?.[0] || "{}");
+  const palette = Object.fromEntries(
+    Object.entries(
+      JSON.parse(fields.palette?.[0] || "{}") as Record<string, string>
+    ).map(([key, value]) => [key, value.toLowerCase()])
+  );
 
   // File fields
   const previewFile = files.preview?.[0];
@@ -90,11 +94,20 @@ export default defineEventHandler(async (event) => {
     if (error) {
       await handleThemeAssetsStorage(event, assetName);
 
-      return sendStandardResponse(event, {
+      const responseOptions = {
         success: false,
         statusCode: 500,
         message: error.message ?? "Something went wrong.",
-      });
+      };
+
+      /* for duplication */
+      if (error.code === "23505") {
+        responseOptions.statusCode = 400;
+        responseOptions.message =
+          "This theme palette is already created by someone.";
+      }
+
+      return sendStandardResponse(event, responseOptions);
     }
 
     return sendStandardResponse(event, {
