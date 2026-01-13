@@ -1,0 +1,65 @@
+<script setup lang="ts">
+import { Github as GithubIcon } from "lucide-vue-next";
+import type { ProfileInterface } from "~/types/theme.types";
+
+const { profile } = defineProps<{
+  profile: ProfileInterface;
+}>();
+
+const coverUrl =
+  profile.cover_url ??
+  "https://images.unsplash.com/photo-1493584753368-64a38a466b66?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+const avatarUrl =
+  profile.avatar_url ??
+  "https://images.unsplash.com/photo-1766548730089-e446483315b1?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+</script>
+
+<template>
+  <section class="w-full flex flex-col justify-center items-center">
+    <AspectRatio
+      :ratio="3 / 1"
+      class="bg-muted rounded-lg overflow-hidden max-w-4xl mx-auto"
+    >
+      <section
+        class="w-full h-full"
+        :style="{
+          background: `url(${coverUrl})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }"
+      />
+    </AspectRatio>
+    <div
+      class="w-4/5 max-w-xl shadow-2xl rounded-lg bg-background p-5 flex justify-center items-center flex-col gap-4 -mt-10 md:-mt-25 lg:-mt-30 z-10"
+    >
+      <div
+        class="size-30 md:size-40 lg:size-45 rounded-full overflow-hidden border-3"
+      >
+        <NuxtImg
+          :src="avatarUrl"
+          width="300"
+          height="300"
+          class="size-full object-cover"
+        />
+      </div>
+      <div
+        class="flex flex-col justify-center items-center w-full max-w-lg text-center gap-2"
+      >
+        <h1 class="text-2xl font-bold line-clamp-1">{{ profile.full_name }}</h1>
+        <NuxtLink
+          :to="`https://github.com/${profile.user_name}`"
+          target="_blank"
+        >
+          <Button class="w-fit cursor-pointer">
+            <GithubIcon />
+            {{ profile.user_name }}
+          </Button>
+        </NuxtLink>
+        <p v-if="profile.bio">
+          {{ profile.bio }}
+        </p>
+      </div>
+    </div>
+  </section>
+</template>

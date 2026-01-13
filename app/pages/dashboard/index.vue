@@ -1,5 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>Dashboard</h1>
+  <section>
+    <DashboardProfileUserDetails />
+  </section>
 </template>

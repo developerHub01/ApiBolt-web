@@ -23,16 +23,6 @@ const navMain = [
     icon: House,
   },
   {
-    title: "Profile",
-    url: "/dashboard/profile",
-    icon: CircleUser,
-  },
-  {
-    title: "Edit Profile",
-    url: "/dashboard/edit-profile",
-    icon: UserRoundPen,
-  },
-  {
     title: "My Themes",
     icon: Palette,
     url: "/dashboard/themes",

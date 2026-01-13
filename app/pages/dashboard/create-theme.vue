@@ -87,7 +87,6 @@ const handlePublish = async () => {
     toast.success("Theme Published!");
     handleReset();
   } catch (error) {
-    console.log();
     toast.error((error as FetchError).data?.message ?? "Publish failed");
     console.error(error);
   } finally {

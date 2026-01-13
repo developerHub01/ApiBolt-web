@@ -17,7 +17,7 @@ export const getProfileData = async (event: H3Event, userName?: string) => {
   return sendStandardResponse(event, {
     success: true,
     statusCode: profile ? 200 : 404,
-    message: `profile data ${profile ? "" : "not"} found`,
+    message: `profile data${profile ? " " : " not "}found`,
     data: profile,
   });
 };
