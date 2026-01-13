@@ -62,7 +62,6 @@ const handleReset = (): void => {
 };
 
 const handlePublish = async () => {
-  console.log("handle publish");
   if (!isEnableSubmit) return;
   isSubmitting.value = true;
 

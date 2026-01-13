@@ -2,8 +2,6 @@ export const useAuth = () => {
   const supabase = useSupabaseClient();
   const user = useSupabaseUser();
 
-  // console.log(user);
-
   const handleSignInWithGithub = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "github",
@@ -13,19 +11,10 @@ export const useAuth = () => {
         },
       },
     });
-
-    console.log({
-      data,
-      error,
-    });
   };
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
-
-    console.log({
-      error,
-    });
 
     if (!error) {
       // Remove session from browser manually
