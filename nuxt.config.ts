@@ -31,6 +31,14 @@ export default defineNuxtConfig({
       ],
     },
   },
+  routeRules: {
+    "/api/**": {
+      cors: true,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:5173",
+      },
+    },
+  },
   supabase: {
     types: "~/types/database.types.ts",
     redirectOptions: {
