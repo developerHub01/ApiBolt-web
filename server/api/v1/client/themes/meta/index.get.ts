@@ -1,9 +1,17 @@
 import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
+  const query = getQuery(event);
+
+  const page = Number(query.page) || 1;
+  const pageSize = Number(query.pageSize) || 6;
+  const searchTerm = query.searchTerm as string | undefined;
+  const searchFilter = query.searchFilter as string | undefined;
+
   const supabase = await serverSupabaseClient(event);
 
-  const { data, error } = await supabase.from("themes").select(`
+  let queryBuilder = supabase.from("themes").select(
+    `
     id, 
     name, 
     description, 
@@ -14,13 +22,33 @@ export default defineEventHandler(async (event) => {
       full_name,
       user_name
     )  
-    `);
+    `,
+    {
+      count: "exact",
+    },
+  );
+
+  if (searchTerm)
+    queryBuilder = queryBuilder.or(
+      `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`,
+    );
+
+  if (searchFilter && searchFilter !== "all")
+    queryBuilder = queryBuilder.eq("type", searchFilter);
+
+  /* Pagination & Sorting */
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, error, count } = await queryBuilder
+    .range(from, to)
+    .order("created_at", { ascending: false });
 
   if (error)
     return sendStandardResponse(event, {
       success: false,
       statusCode: 500,
-      message: "something went wrong",
+      message: error.message,
       data: null,
     });
 
@@ -43,6 +71,14 @@ export default defineEventHandler(async (event) => {
     success: true,
     statusCode: 200,
     message: "theme found successfully",
-    data: sanitizedData,
+    data: {
+      data: sanitizedData,
+      meta: {
+        total: count || 0,
+        page,
+        pageSize,
+        totalPages: Math.ceil((count || 0) / pageSize),
+      },
+    },
   });
 });
