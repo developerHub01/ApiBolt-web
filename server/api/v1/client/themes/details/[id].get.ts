@@ -27,14 +27,13 @@ export default defineEventHandler(async (event) => {
       version,
       install_count,
       profiles (
-      full_name
-    )  
+        full_name,
+        user_name
+      )  
       `
     )
     .eq("id", id)
     .single();
-
-  console.log(data);
 
   if (error)
     return sendStandardResponse(event, {
@@ -55,6 +54,7 @@ export default defineEventHandler(async (event) => {
   const sanitizedData = {
     ...data,
     author: data.profiles?.full_name,
+    authorUsername: data.profiles?.user_name,
     profiles: undefined,
   };
 

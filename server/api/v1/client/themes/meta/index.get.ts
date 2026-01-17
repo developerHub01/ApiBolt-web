@@ -11,7 +11,8 @@ export default defineEventHandler(async (event) => {
     install_count, 
     type,
     profiles (
-      full_name
+      full_name,
+      user_name
     )  
     `);
 
@@ -34,6 +35,7 @@ export default defineEventHandler(async (event) => {
   const sanitizedData = data?.map((theme) => ({
     ...theme,
     author: theme.profiles?.full_name,
+    authorUsername: theme.profiles?.user_name,
     profiles: undefined,
   }));
 
