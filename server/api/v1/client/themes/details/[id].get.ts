@@ -30,24 +30,24 @@ export default defineEventHandler(async (event) => {
         full_name,
         user_name
       )  
-      `
+      `,
     )
     .eq("id", id)
     .single();
-
-  if (error)
-    return sendStandardResponse(event, {
-      success: false,
-      statusCode: 500,
-      message: "something went wrong",
-      data: null,
-    });
 
   if (!data)
     return sendStandardResponse(event, {
       success: false,
       statusCode: 404,
       message: "theme not found",
+      data: null,
+    });
+
+  if (error)
+    return sendStandardResponse(event, {
+      success: false,
+      statusCode: 500,
+      message: "something went wrong",
       data: null,
     });
 
