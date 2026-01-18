@@ -73,7 +73,7 @@ const authorProfileLink = computed(() => `/profile/${theme.authorId}`);
     <div class="flex flex-col gap-3">
       <h2 class="text-xl font-bold">Palette:</h2>
       <div
-        class="grid grid-cols-2 md:grid-cols-4 border-2 border-dashed rounded-md"
+        class="grid grid-cols-2 lg:grid-cols-4 border-2 border-dashed rounded-md"
       >
         <template v-for="([key, value], index) in paletteList">
           <div
@@ -86,7 +86,7 @@ const authorProfileLink = computed(() => `/profile/${theme.authorId}`);
               )
             "
           >
-            {{ key }}
+            {{ key.replaceAll("-", " ") }}
           </div>
           <div
             :class="
