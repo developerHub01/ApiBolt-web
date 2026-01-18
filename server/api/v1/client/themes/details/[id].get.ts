@@ -2,6 +2,7 @@ import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
+  console.log({ id });
 
   if (!id)
     return sendStandardResponse(event, {

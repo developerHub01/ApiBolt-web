@@ -16,13 +16,19 @@ export interface SearchState {
   themeType: TThemeTypeSearch;
 }
 
-export interface ThemeInterface {
+export interface ThemeMetaInterface {
   id: string;
   name: string;
   description: string;
   type: TThemeType;
-  preview: string;
   thumbnail: string;
   author?: string;
-  created_at: string;
+}
+
+export interface ThemeInterface extends ThemeMetaInterface {
+  preview: string;
+  palette: Record<string, string>;
+  version: string;
+  install_count: number;
+  authorUsername?: string;
 }

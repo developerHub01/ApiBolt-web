@@ -4,8 +4,8 @@ import Footer from "~/components/public/common/Footer.vue";
 </script>
 
 <template>
-  <Header />
-  <main class="flex-1 h-auto flex flex-col">
+  <main class="flex-1 h-auto flex flex-col px-4">
+    <Header />
     <slot />
   </main>
   <Footer />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SearchState, ThemeInterface } from "~/types/theme.types";
+import type { SearchState, ThemeMetaInterface } from "~/types/theme.types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,7 +15,7 @@ import { Spinner } from "~/components/ui/spinner";
 
 const client = useSupabaseClient();
 
-const themeList = ref<Array<ThemeInterface>>([]);
+const themeList = ref<Array<ThemeMetaInterface>>([]);
 const currentPage = ref<number>(1);
 const totalCount = ref<number>(0);
 const pageSize = 6;
@@ -27,9 +27,6 @@ const searchParams = reactive<SearchState>({
 });
 const deleteCandidate = ref<string | null>(null);
 const isDeleting = ref<boolean>(false);
-
-const handleChangeSelectedTheme = (id?: string | null) =>
-  (selectedTheme.value = id ?? null);
 
 const handleFetchThemes = async () => {
   isLoading.value = true;
@@ -55,7 +52,7 @@ const handleFetchThemes = async () => {
   const { data, count, error } = await query;
 
   if (!error) {
-    themeList.value = (data || []) as Array<ThemeInterface>;
+    themeList.value = (data || []) as Array<ThemeMetaInterface>;
     totalCount.value = count || 0;
   }
   isLoading.value = false;
@@ -92,13 +89,6 @@ const handleDeleteTheme = async () => {
   }
 };
 
-const selectedThemeDetails = computed(
-  () =>
-    themeList.value.find(
-      (item) => item.id === selectedTheme.value
-    ) as ThemeInterface
-);
-
 onMounted(() => handleFetchThemes());
 </script>
 
@@ -119,7 +109,6 @@ onMounted(() => handleFetchThemes());
             v-bind="theme"
             :isSelcted="selectedTheme === theme.id"
             :canDelete="true"
-            @details="() => handleChangeSelectedTheme(theme.id)"
             @delete="() => handleChangedeleteCandidate(theme.id)"
           />
         </template>
@@ -142,10 +131,6 @@ onMounted(() => handleFetchThemes());
       @update:currentPage="handleUpdatePage"
     />
     <ClientOnly>
-      <ThemesDetails
-        :theme="selectedThemeDetails"
-        :onClose="handleChangeSelectedTheme"
-      />
       <AlertDialog :open="Boolean(deleteCandidate)">
         <AlertDialogContent>
           <AlertDialogHeader>

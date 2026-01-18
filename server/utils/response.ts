@@ -1,12 +1,5 @@
 import type { H3Event } from "h3";
-
-interface ApiResponse<T> {
-  success: boolean;
-  status: number;
-  message: string;
-  data: T | null;
-  timestamp: string;
-}
+import type { ApiResponse } from "~~/server/types/index";
 
 export const sendStandardResponse = <T>(
   event: H3Event,
@@ -15,7 +8,7 @@ export const sendStandardResponse = <T>(
     data?: T;
     message?: string;
     statusCode?: number;
-  }
+  },
 ): ApiResponse<T> => {
   const statusCode = payload.statusCode || 200;
 

@@ -17,28 +17,31 @@ import {
 } from "@/components/ui/tooltip";
 import { ArrowUpRight, PencilRuler, Trash2, User } from "lucide-vue-next";
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
-import type { ThemeInterface } from "~/types/theme.types";
+import type { ThemeMetaInterface } from "~/types/theme.types";
 
 const props = defineProps<
-  ThemeInterface & {
-    isSelcted?: boolean;
+  ThemeMetaInterface & {
     canDelete?: boolean;
   }
 >();
 
 const emit = defineEmits<{
-  (e: "details"): void;
   (e: "delete"): void;
 }>();
 
 const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
 const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
+
+const detailsUrl = computed(() => `/theme/${props.id}`);
+
+watch(detailsUrl, (value) => {
+  console.log({ value });
+});
 </script>
 
 <template>
   <Card
     class="w-full gap-4 p-4 rounded-md border-0 hover:shadow-2xl transition-all duration-100"
-    :class="isSelcted ? 'ring-2 ring-primary' : ''"
     :data-theme-id="id"
   >
     <CardHeader class="px-0">
@@ -75,14 +78,11 @@ const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
       >
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button
-              variant="secondary"
-              size="icon-sm"
-              aria-label="Go Back"
-              @click="emit('details')"
-            >
-              <ArrowUpRight />
-            </Button>
+            <NuxtLink :to="detailsUrl" target="_blank">
+              <Button variant="secondary" size="icon-sm" aria-label="Go Back">
+                <ArrowUpRight />
+              </Button>
+            </NuxtLink>
           </TooltipTrigger>
           <TooltipContent side="bottom">
             <p>See Details</p>
