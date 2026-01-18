@@ -1,50 +1,17 @@
 <script setup lang="ts">
-// import type { NavigationMenuItem } from "@nuxt/ui";
-
-// const items: Array<NavigationMenuItem> = [
-//   // {
-//   //   label: "Figma Kit",
-//   //   to: "https://go.nuxt.com/figma-ui",
-//   //   target: "_blank",
-//   // },
-// ];
+const devLink = "https://shakil-five.vercel.app/";
 </script>
 
 <template>
-  <!-- <UFooter>
-    <template #left>
-      <p class="text-muted text-sm">
-        Copyright © {{ new Date().getFullYear() }}
-      </p>
-    </template>
-
-    <UNavigationMenu :items="items" variant="link" />
-
-    <template #right>
-      <UButton
-        icon="i-simple-icons-discord"
-        color="neutral"
-        variant="ghost"
-        to="https://go.nuxt.com/discord"
+  <section class="flex justify-center items-center p-3">
+    <p class="text-center text-sm">
+      All right reserve for Shakil_lab by
+      <NuxtLink
+        :to="devLink"
         target="_blank"
-        aria-label="Discord"
-      />
-      <UButton
-        icon="i-simple-icons-x"
-        color="neutral"
-        variant="ghost"
-        to="https://go.nuxt.com/x"
-        target="_blank"
-        aria-label="X"
-      />
-      <UButton
-        icon="i-simple-icons-github"
-        color="neutral"
-        variant="ghost"
-        to="https://github.com/nuxt/nuxt"
-        target="_blank"
-        aria-label="GitHub"
-      />
-    </template>
-  </UFooter> -->
+        class="text-primary underline font-semibold px-1 -tracking-tighter"
+        >developer</NuxtLink
+      >
+    </p>
+  </section>
 </template>
