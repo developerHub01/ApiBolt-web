@@ -28,6 +28,7 @@ export default defineEventHandler(async (event) => {
       version,
       install_count,
       profiles (
+        id,
         full_name,
         user_name
       )  
@@ -54,6 +55,7 @@ export default defineEventHandler(async (event) => {
 
   const sanitizedData = {
     ...data,
+    authorId: data.profiles?.id,
     author: data.profiles?.full_name,
     authorUsername: data.profiles?.user_name,
     profiles: undefined,

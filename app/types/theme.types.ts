@@ -22,7 +22,7 @@ export interface ThemeMetaInterface {
   description: string;
   type: TThemeType;
   thumbnail: string;
-  author?: string;
+  author: string;
 }
 
 export interface ThemeInterface extends ThemeMetaInterface {
@@ -30,5 +30,6 @@ export interface ThemeInterface extends ThemeMetaInterface {
   palette: Record<string, string>;
   version: string;
   install_count: number;
-  authorUsername?: string;
+  authorId: string;
+  authorUsername: string;
 }

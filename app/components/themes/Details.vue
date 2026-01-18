@@ -18,6 +18,7 @@ const { theme } = defineProps<{
 }>();
 
 const paletteList = computed(() => Object.entries(theme.palette));
+const authorProfileLink = computed(() => `/profile/${theme.authorId}`);
 </script>
 
 <template>
@@ -41,7 +42,7 @@ const paletteList = computed(() => Object.entries(theme.palette));
     <div class="flex flex-col gap-4">
       <div class="flex items-center gap-2 text-sm">
         <AuthorIcon :size="16" />
-        <NuxtLink to="/profile/1">
+        <NuxtLink :to="authorProfileLink" target="_blank">
           <Button variant="link" class="underline px-0 cursor-pointer">
             {{ theme.author }}
           </Button>
