@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
   const pageSize = Number(query.pageSize) || 6;
   const searchTerm = query.searchTerm as string | undefined;
   const searchFilter = query.searchFilter as string | undefined;
+  const byMe = Number(query.byMe) ? 1 : 0;
 
   const supabase = await serverSupabaseClient(event);
 
@@ -35,6 +36,11 @@ export default defineEventHandler(async (event) => {
 
   if (searchFilter && searchFilter !== "all")
     queryBuilder = queryBuilder.eq("type", searchFilter);
+
+  if (byMe) {
+    const user = await checkUser(event);
+    if (user?.id) queryBuilder = queryBuilder.eq("author", user.id);
+  }
 
   /* Pagination & Sorting */
   const from = (page - 1) * pageSize;

@@ -6,8 +6,6 @@ export default defineEventHandler(async (event) => {
     actionType: "install" | "un-install";
   }>(event);
 
-  console.log({ id, actionType });
-
   if (!id)
     return sendStandardResponse(event, {
       success: false,
@@ -36,15 +34,13 @@ export default defineEventHandler(async (event) => {
     0,
     themeData.install_count + (actionType === "install" ? +1 : -1)
   );
-  console.log({ updatedCount });
-  const { data, error } = await supabase
+
+  const { error } = await supabase
     .from("themes")
     .update({
       install_count: updatedCount,
     })
     .eq("id", id);
-
-  console.log({ data, error });
 
   if (error)
     return sendStandardResponse(event, {

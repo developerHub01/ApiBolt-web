@@ -6,7 +6,7 @@ import { Skeleton } from "~/components/ui/skeleton";
   <section class="w-full flex flex-col justify-center items-center">
     <AspectRatio
       :ratio="3 / 1"
-      class="bg-muted rounded-lg overflow-hidden max-w-4xl mx-auto"
+      class="bg-muted rounded-lg overflow-hidden w-full mx-auto"
     >
       <Skeleton class="w-full h-full" />
     </AspectRatio>

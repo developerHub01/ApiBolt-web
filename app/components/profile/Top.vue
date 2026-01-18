@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Github as GithubIcon } from "lucide-vue-next";
-import type { ProfileInterface } from "~/types/theme.types";
+import type { ProfileMetaInterface } from "~/types/theme.types";
 
 const { profile } = defineProps<{
-  profile: ProfileInterface;
+  profile: ProfileMetaInterface;
 }>();
 
 const coverUrl =

@@ -9,6 +9,7 @@ import {
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 import type { ThemeInterface } from "~/types/theme.types";
 import { cn } from "~/lib/utils";
+import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
 
 const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
 const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
@@ -18,7 +19,7 @@ const { theme } = defineProps<{
 }>();
 
 const paletteList = computed(() => Object.entries(theme.palette));
-const authorProfileLink = computed(() => `/profile/${theme.authorId}`);
+const authorProfileLink = userProfileLinkFromUserName(theme.authorId);
 </script>
 
 <template>
@@ -42,7 +43,11 @@ const authorProfileLink = computed(() => `/profile/${theme.authorId}`);
     <div class="flex flex-col gap-4">
       <div class="flex items-center gap-2 text-sm">
         <AuthorIcon :size="16" />
-        <NuxtLink :to="authorProfileLink" target="_blank">
+        <NuxtLink
+          v-if="authorProfileLink"
+          :to="authorProfileLink"
+          target="_blank"
+        >
           <Button variant="link" class="underline px-0 cursor-pointer">
             {{ theme.author }}
           </Button>

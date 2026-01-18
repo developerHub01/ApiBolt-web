@@ -51,6 +51,7 @@ export const getFullProfileById = async (
       version,
       description,
       install_count,
+      author,
       created_at
     )
     `

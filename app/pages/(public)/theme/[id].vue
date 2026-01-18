@@ -11,12 +11,6 @@ const { data, pending, error } = await useFetch<ApiResponse<ThemeInterface>>(
     key: () => `theme-${themeId.value}`,
   },
 );
-
-console.log({
-  data: data.value,
-  pending,
-  error,
-});
 </script>
 
 <template>

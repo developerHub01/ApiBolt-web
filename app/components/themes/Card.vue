@@ -18,12 +18,19 @@ import {
 import { ArrowUpRight, PencilRuler, Trash2, User } from "lucide-vue-next";
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 import type { ThemeMetaInterface } from "~/types/theme.types";
+import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
 
-const props = defineProps<
-  ThemeMetaInterface & {
-    canDelete?: boolean;
-  }
->();
+const props = withDefaults(
+  defineProps<
+    ThemeMetaInterface & {
+      canDelete?: boolean;
+      showAuthor?: boolean;
+    }
+  >(),
+  {
+    showAuthor: true,
+  },
+);
 
 const emit = defineEmits<{
   (e: "delete"): void;
@@ -33,10 +40,9 @@ const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
 const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
 
 const detailsUrl = computed(() => `/theme/${props.id}`);
-
-watch(detailsUrl, (value) => {
-  console.log({ value });
-});
+const authorUrl = computed(
+  () => userProfileLinkFromUserName(props.author).value ?? undefined,
+);
 </script>
 
 <template>
@@ -57,21 +63,24 @@ watch(detailsUrl, (value) => {
     </CardHeader>
     <CardContent class="px-0">
       <CardTitle class="pb-2">{{ name }}</CardTitle>
-      <CardDescription class="line-clamp-2 leading-relaxed pb-2">
+      <CardDescription
+        class="line-clamp-2 leading-relaxed mb-2 overflow-hidden"
+      >
         {{ description }}
       </CardDescription>
       <Button
+        v-if="showAuthor"
         variant="link"
         class="pl-0! text-sm text-accent-foreground underline"
       >
         <User :size="14" />
-        <NuxtLink to="/profile/1" target="_blank"> Username </NuxtLink>
+        <NuxtLink :to="authorUrl" target="_blank"> {{ author }} </NuxtLink>
       </Button>
     </CardContent>
     <CardFooter class="flex gap-2 px-0 justify-between flex-wrap">
       <div class="flex items-center gap-1">
         <span class="text-sm text-muted-foreground"> Theme Type: </span>
-        <Badge variant="secondary"> {{ type }} </Badge>
+        <Badge variant="secondary" class="capitalize"> {{ type }} </Badge>
       </div>
       <ButtonGroup
         class="ring ring-ring/50 rounded-md overflow-hidden divide-x"

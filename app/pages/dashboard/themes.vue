@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import type { SearchState, ThemeMetaInterface } from "~/types/theme.types";
+import type {
+  SearchState,
+  ThemeListThemeMetaInterface,
+  ThemeMetaInterface,
+} from "~/types/theme.types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,8 +16,7 @@ import {
 } from "~/components/ui/alert-dialog";
 import { toast } from "vue-sonner";
 import { Spinner } from "~/components/ui/spinner";
-
-const client = useSupabaseClient();
+import type { ApiResponse } from "~~/server/types";
 
 const themeList = ref<Array<ThemeMetaInterface>>([]);
 const currentPage = ref<number>(1);
@@ -31,31 +34,29 @@ const isDeleting = ref<boolean>(false);
 const handleFetchThemes = async () => {
   isLoading.value = true;
 
-  const from = (currentPage.value - 1) * pageSize;
-  const to = from + pageSize - 1;
+  try {
+    const response = await $fetch<ApiResponse<ThemeListThemeMetaInterface>>(
+      "/api/v1/client/themes/meta",
+      {
+        method: "GET",
+        query: {
+          page: currentPage.value,
+          pageSize: pageSize,
+          searchTerm: searchParams.searchTerm || undefined,
+          searchFilter: searchParams.themeType,
+        },
+      },
+    );
 
-  let query = client
-    .from("themes")
-    .select("*", {
-      count: "exact",
-    })
-    .range(from, to)
-    .order("created_at", {
-      ascending: false,
-    });
-
-  if (searchParams.searchTerm)
-    query.ilike("name", `%${searchParams.searchTerm.toLowerCase()}%`);
-  if (searchParams.themeType !== "all")
-    query = query.eq("type", searchParams.themeType);
-
-  const { data, count, error } = await query;
-
-  if (!error) {
-    themeList.value = (data || []) as Array<ThemeMetaInterface>;
-    totalCount.value = count || 0;
+    if (response.success) {
+      themeList.value = response.data?.data ?? [];
+      totalCount.value = response.data?.meta.total ?? 0;
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
   }
-  isLoading.value = false;
 };
 
 const handleSearch = (state: SearchState) => {
@@ -103,12 +104,12 @@ onMounted(() => handleFetchThemes());
         />
         <template v-else>
           <ThemesCard
-            v-if="themeList.length"
             v-for="theme in themeList"
             :key="theme.id"
             v-bind="theme"
             :isSelcted="selectedTheme === theme.id"
             :canDelete="true"
+            :showAuthor="false"
             @delete="() => handleChangedeleteCandidate(theme.id)"
           />
         </template>

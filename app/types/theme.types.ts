@@ -1,4 +1,4 @@
-export interface ProfileInterface {
+export interface ProfileMetaInterface {
   id: string;
   user_name: string;
   full_name: string;
@@ -22,7 +22,7 @@ export interface ThemeMetaInterface {
   description: string;
   type: TThemeType;
   thumbnail: string;
-  author: string;
+  author?: string;
 }
 
 export interface ThemeInterface extends ThemeMetaInterface {
@@ -32,4 +32,14 @@ export interface ThemeInterface extends ThemeMetaInterface {
   install_count: number;
   authorId: string;
   authorUsername: string;
+}
+
+export interface ThemeListThemeMetaInterface {
+  data: Array<ThemeMetaInterface>;
+  meta: {
+    total: number;
+    page: number;
+    pageSize: number;
+    totalPages: number;
+  };
 }
