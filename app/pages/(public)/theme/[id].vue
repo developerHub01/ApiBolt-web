@@ -21,7 +21,9 @@ console.log({
 
 <template>
   <template v-if="pending">pending</template>
-  <template v-else-if="error || !data?.success || !data.data">error</template>
+  <template v-else-if="error || !data?.success || !data.data">
+    <ThemesNotFound />
+  </template>
   <template v-else>
     <ThemesDetails :theme="data.data" />
   </template>
