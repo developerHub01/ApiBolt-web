@@ -8,10 +8,11 @@ import { isValidColor } from "~/utils/color.utils";
 import { useThemeAssets } from "~/composable/useThemeAssets";
 import { toast } from "vue-sonner";
 import { FetchError } from "ofetch";
+import type { TThemeType } from "~/types/theme.types";
 
 interface ThemeState {
   name: string;
-  themeType: "dark" | "light" | "custom";
+  themeType: TThemeType;
   palette: Record<string, string>;
   description: string;
   preview: File | null;
@@ -32,15 +33,15 @@ const isSubmitting = ref<boolean>(false);
 const isNameValid = computed(
   () =>
     themeState.name.trim().length &&
-    themeState.name.length <= THEME_PAYLOAD_SIZE.MAX_NAME
+    themeState.name.length <= THEME_PAYLOAD_SIZE.MAX_NAME,
 );
 const isDescriptionValid = computed(
   () =>
     themeState.description.trim().length &&
-    themeState.description.length <= THEME_PAYLOAD_SIZE.MAX_DESCRIPTION
+    themeState.description.length <= THEME_PAYLOAD_SIZE.MAX_DESCRIPTION,
 );
 const isPaletteValid = computed(() =>
-  Object.values(themeState.palette).every((c) => isValidColor(c))
+  Object.values(themeState.palette).every((c) => isValidColor(c)),
 );
 const isPreviewValid = computed(() => Boolean(themeState.preview));
 
@@ -49,7 +50,7 @@ const isFormValid = computed(
     isNameValid.value &&
     isPreviewValid.value &&
     isDescriptionValid.value &&
-    isPaletteValid.value
+    isPaletteValid.value,
 );
 
 const isEnableSubmit = computed(() => isFormValid.value && !isSubmitting.value);
@@ -68,7 +69,7 @@ const handlePublish = async () => {
 
   try {
     const { preview, thumbnail } = await generateThemeAssets(
-      themeState.preview!
+      themeState.preview!,
     );
 
     const formData = new FormData();

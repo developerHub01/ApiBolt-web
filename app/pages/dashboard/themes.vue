@@ -23,7 +23,6 @@ const currentPage = ref<number>(1);
 const totalCount = ref<number>(0);
 const pageSize = 6;
 const isLoading = ref<boolean>(true);
-const selectedTheme = ref<string | null>(null);
 const searchParams = reactive<SearchState>({
   searchTerm: "",
   themeType: "all",
@@ -107,7 +106,6 @@ onMounted(() => handleFetchThemes());
             v-for="theme in themeList"
             :key="theme.id"
             v-bind="theme"
-            :isSelcted="selectedTheme === theme.id"
             :canDelete="true"
             :showAuthor="false"
             @delete="() => handleChangedeleteCandidate(theme.id)"

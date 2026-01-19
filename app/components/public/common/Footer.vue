@@ -3,7 +3,7 @@ const devLink = "https://shakil-five.vercel.app/";
 </script>
 
 <template>
-  <section class="flex justify-center items-center p-3">
+  <section class="flex justify-center items-center p-3 border-t">
     <p class="text-center text-sm">
       All right reserve for Shakil_lab by
       <NuxtLink

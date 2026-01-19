@@ -24,10 +24,13 @@ const props = withDefaults(
   defineProps<
     ThemeMetaInterface & {
       canDelete?: boolean;
+      canEdit?: boolean;
       showAuthor?: boolean;
     }
   >(),
   {
+    canDelete: false,
+    canEdit: false,
     showAuthor: true,
   },
 );
@@ -97,7 +100,7 @@ const authorUrl = computed(
             <p>See Details</p>
           </TooltipContent>
         </Tooltip>
-        <Tooltip>
+        <Tooltip v-if="canEdit">
           <NuxtLink :to="`/dashboard/update-theme/${id}`">
             <TooltipTrigger as-child>
               <Button
