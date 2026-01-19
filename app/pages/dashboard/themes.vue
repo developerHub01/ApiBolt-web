@@ -107,6 +107,7 @@ onMounted(() => handleFetchThemes());
             :key="theme.id"
             v-bind="theme"
             :canDelete="true"
+            :canEdit="true"
             :showAuthor="false"
             @delete="() => handleChangedeleteCandidate(theme.id)"
           />
