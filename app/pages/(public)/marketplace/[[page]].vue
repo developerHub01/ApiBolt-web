@@ -16,12 +16,14 @@ const isThemeType = (type: unknown): type is TThemeTypeSearch =>
 
 const currentPage = ref<number>(Number(route.query.page) || 1);
 const pageSize = 6;
+
 const searchParams = reactive<SearchState>({
   searchTerm: String(route.query.searchTerm || ""),
   themeType: isThemeType(route.query.searchFilter)
     ? route.query.searchFilter
     : "all",
 });
+
 
 useSeoMeta({
   title: () =>
@@ -80,6 +82,8 @@ const handleUpdatePage = (newPage: number) => {
     <h1 class="sr-only">Theme Gallery</h1>
     <ThemesSearch
       @search="handleSearch"
+      :searchTerm="searchParams.searchTerm"
+      :themeType="searchParams.themeType"
       :disabled="isLoading"
     />
     <template v-if="isLoading || themeList.length">

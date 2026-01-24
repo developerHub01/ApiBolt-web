@@ -12,6 +12,8 @@ import type { SearchState, TThemeTypeSearch } from "~/types/theme.types";
 
 const props = defineProps<{
   disabled: boolean;
+  searchTerm: string;
+  themeType: TThemeTypeSearch;
 }>();
 
 const themeTypeList: Array<{
@@ -37,16 +39,26 @@ const themeTypeList: Array<{
 ];
 
 const searchState = reactive<SearchState>({
-  searchTerm: "",
-  themeType: themeTypeList[0]?.id ?? "all",
+  searchTerm: props.searchTerm,
+  themeType: props.themeType,
 });
 
 const emit = defineEmits<{
   (e: "search", state: SearchState): void;
 }>();
 
+watch(
+  () => props.searchTerm,
+  (newValue) => (searchState.searchTerm = newValue),
+);
+watch(
+  () => props.themeType,
+  (newValue) => (searchState.themeType = newValue),
+);
+
 const showClearSearch = computed(
-  () => searchState.searchTerm || searchState.themeType !== themeTypeList[0]?.id
+  () =>
+    searchState.searchTerm || searchState.themeType !== themeTypeList[0]?.id,
 );
 
 const handleSubmit = () => emit("search", searchState);
