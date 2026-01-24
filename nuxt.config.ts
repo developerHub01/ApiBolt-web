@@ -4,13 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  css: ["~/assets/css/main.css"],
+  css: ["swiper/css", "swiper/css/effect-cards", "~/assets/css/main.css"],
   vite: {
     plugins: [tailwindcss()],
   },
   modules: [
     "@nuxtjs/tailwindcss",
-    "shadcn-nuxt",
     "shadcn-nuxt",
     "@nuxtjs/color-mode",
     "@nuxt/image",
@@ -43,9 +42,9 @@ export default defineNuxtConfig({
     types: "~/types/database.types.ts",
     redirectOptions: {
       login: "/login",
-      callback: "/",
+      callback: "/confirm",
       include: ["/dashboard"],
-      exclude: [],
+      exclude: ["/", "/marketplace"],
       saveRedirectToCookie: false,
     },
   },

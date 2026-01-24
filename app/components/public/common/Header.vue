@@ -12,11 +12,6 @@ const items = computed(() => [
     to: "/marketplace",
     active: route.path.startsWith("/marketplace"),
   },
-  {
-    label: "Developer",
-    to: "/developer",
-    active: route.path.startsWith("/developer"),
-  },
 ]);
 </script>
 

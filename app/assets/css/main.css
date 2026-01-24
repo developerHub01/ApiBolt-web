@@ -187,6 +187,7 @@
     @apply bg-background text-foreground;
     font-family: var(--font-display);
     font-weight: 400;
+    overflow-x: hidden
   }
   img {
     @apply select-none;
