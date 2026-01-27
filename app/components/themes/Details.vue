@@ -4,12 +4,15 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Badge from "@/components/ui/badge/Badge.vue";
 import {
   User as AuthorIcon,
+  CheckIcon,
+  CopyIcon,
   CloudDownload as DownloadIcon,
 } from "lucide-vue-next";
 import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
 import type { ThemeInterface } from "~/types/theme.types";
 import { cn } from "~/lib/utils";
 import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
+import { useClipboard } from "@vueuse/core";
 
 const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
 const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
@@ -20,6 +23,11 @@ const { theme } = defineProps<{
 
 const paletteList = computed(() => Object.entries(theme.palette));
 const authorProfileLink = userProfileLinkFromUserName(theme.authorId);
+
+const textToCopy = computed(() => theme.id);
+const { copy, copied } = useClipboard({ source: textToCopy });
+
+const handleIdCopy = () => copy(textToCopy.value);
 </script>
 
 <template>
@@ -62,12 +70,28 @@ const authorProfileLink = userProfileLinkFromUserName(theme.authorId);
           <p>Total install:</p>
           <Badge variant="secondary"><DownloadIcon />10k</Badge>
         </div>
+        <Button
+          @click="handleIdCopy"
+          size="sm"
+          class="rounde-sm cursor-pointer"
+        >
+          <span v-if="!copied" class="flex items-center">
+            <CopyIcon class="w-4 h-4 mr-2" />
+            Copy Id
+          </span>
+          <span v-else class="flex items-center">
+            <CheckIcon class="w-4 h-4 mr-2" />
+            Id Copied!
+          </span>
+        </Button>
       </div>
-      <Button
-        type="button"
-        class="self-start fixed bottom-4 right-3 shadow-2xl cursor-pointer"
-        >Install in app</Button
-      >
+      <!-- <a href="api-bolt://themes/marketplace">
+        <Button
+          type="button"
+          class="self-start fixed bottom-4 right-3 shadow-2xl cursor-pointer"
+          >Install in app</Button
+        >
+      </a> -->
     </div>
     <div class="flex flex-col gap-3">
       <h2 class="text-xl font-bold">Description:</h2>
