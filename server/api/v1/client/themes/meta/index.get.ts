@@ -22,20 +22,23 @@ export default defineEventHandler(async (event) => {
     profiles (
       full_name,
       user_name
-    )  
+    )
     `,
     {
       count: "exact",
     },
   );
 
-  if (searchTerm)
-    queryBuilder = queryBuilder.or(
-      `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`,
-    );
-
-  if (searchFilter && searchFilter !== "all")
-    queryBuilder = queryBuilder.eq("type", searchFilter);
+  if (searchFilter === "id" && searchTerm)
+    queryBuilder = queryBuilder.eq("id", searchTerm);
+  else {
+    if (searchTerm)
+      queryBuilder = queryBuilder.or(
+        `name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`,
+      );
+    if (searchFilter && searchFilter !== "all")
+      queryBuilder = queryBuilder.eq("type", searchFilter);
+  }
 
   if (byMe) {
     const user = await checkUser(event);
