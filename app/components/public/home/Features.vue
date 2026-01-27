@@ -32,7 +32,7 @@
         <!-- Image Placeholder -->
         <div
           :class="[
-            'aspect-video flex items-center justify-center',
+            'aspect-video flex items-center justify-center px-3',
             index % 2 ? 'md:order-1' : 'md:order-2',
           ]"
         >
