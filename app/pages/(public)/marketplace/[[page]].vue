@@ -24,7 +24,6 @@ const searchParams = reactive<SearchState>({
     : "all",
 });
 
-
 useSeoMeta({
   title: () =>
     searchParams.searchTerm
@@ -85,6 +84,7 @@ const handleUpdatePage = (newPage: number) => {
       :searchTerm="searchParams.searchTerm"
       :themeType="searchParams.themeType"
       :disabled="isLoading"
+      heading="Theme marketplace"
     />
     <template v-if="isLoading || themeList.length">
       <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -94,12 +94,19 @@ const handleUpdatePage = (newPage: number) => {
           :key="index"
         />
         <template v-else>
-          <ThemesCard
+          <NuxtLink
             v-for="theme in themeList"
             :key="theme.id"
-            v-bind="theme"
-            :canDelete="false"
-          />
+            :to="`/theme/${theme.id}`"
+            target="_blank"
+          >
+            <ThemesCard
+              v-bind="theme"
+              :canDelete="false"
+              :showLink="false"
+              class="pointer-events-none"
+            />
+          </NuxtLink>
         </template>
       </section>
     </template>

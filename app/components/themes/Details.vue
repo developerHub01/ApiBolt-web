@@ -22,7 +22,7 @@ const { theme } = defineProps<{
 }>();
 
 const paletteList = computed(() => Object.entries(theme.palette));
-const authorProfileLink = userProfileLinkFromUserName(theme.authorId);
+const authorProfileLink = userProfileLinkFromUserName(theme.authorUsername);
 
 const textToCopy = computed(() => theme.id);
 const { copy, copied } = useClipboard({ source: textToCopy });

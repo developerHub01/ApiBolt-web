@@ -96,12 +96,19 @@ const handleUpdatePage = (newPage: number) => {
           :key="index"
         />
         <template v-else>
-          <ThemesCard
+          <NuxtLink
             v-for="theme in themeList"
             :key="theme.id"
-            v-bind="theme"
-            :canDelete="false"
-          />
+            :to="`/theme/${theme.id}`"
+            target="_blank"
+          >
+            <ThemesCard
+              v-bind="theme"
+              :canDelete="false"
+              :showLink="false"
+              class="pointer-events-none"
+            />
+          </NuxtLink>
         </template>
       </section>
     </template>

@@ -26,12 +26,14 @@ const props = withDefaults(
       canDelete?: boolean;
       canEdit?: boolean;
       showAuthor?: boolean;
+      showLink?: boolean;
     }
   >(),
   {
     canDelete: false,
     canEdit: false,
     showAuthor: true,
+    showLink: true,
   },
 );
 
@@ -90,7 +92,7 @@ const authorUrl = computed(
       >
         <Tooltip>
           <TooltipTrigger as-child>
-            <NuxtLink :to="detailsUrl" target="_blank">
+            <NuxtLink v-if="showLink" :to="detailsUrl" target="_blank">
               <Button variant="secondary" size="icon-sm" aria-label="Go Back">
                 <ArrowUpRight />
               </Button>
