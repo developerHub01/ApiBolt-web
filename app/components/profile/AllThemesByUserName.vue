@@ -106,6 +106,7 @@ const handleUpdatePage = (newPage: number) => {
               v-bind="theme"
               :canDelete="false"
               :showLink="false"
+              :showAuthor="false"
               class="pointer-events-none"
             />
           </NuxtLink>
