@@ -33,7 +33,7 @@ const { user, avatar, name, handleLogout } = useAuth();
         </DropdownMenuContent>
       </DropdownMenu>
     </template>
-    <template else>
+    <template v-else>
       <NuxtLink to="/login">
         <Button>Login</Button>
       </NuxtLink>
