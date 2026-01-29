@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import NotFound from "~/components/ui/NotFound.vue";
 import type { ThemeInterface } from "~/types/theme.types";
 import type { ApiResponse } from "~~/server/types";
 
@@ -16,7 +17,9 @@ const { data, pending, error } = await useFetch<ApiResponse<ThemeInterface>>(
 <template>
   <template v-if="pending">pending</template>
   <template v-else-if="error || !data?.success || !data.data">
-    <ThemesNotFound />
+    <NotFound
+      description="This theme not found. Maybe these theme not exist or author may deleted the theme."
+    />
   </template>
   <template v-else>
     <ThemesDetails :theme="data.data" />

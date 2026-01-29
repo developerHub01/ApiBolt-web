@@ -5,8 +5,7 @@
         4<span class="text-primary text-[180px] rotate-12"> 0 </span>4
       </h1>
       <p class="text-sm leading-loose text-muted-foreground pb-5">
-        This theme not found. Maybe these theme not exist or author may deleted
-        the theme.
+        {{ description }}
       </p>
       <NuxtLink to="/">
         <Button class="self-center scale-125 cursor-pointer"
@@ -16,3 +15,9 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  description: string;
+}>();
+</script>
