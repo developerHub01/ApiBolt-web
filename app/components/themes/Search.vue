@@ -10,11 +10,17 @@ import {
 import { Label } from "@/components/ui/label";
 import type { SearchState, TThemeTypeSearch } from "~/types/theme.types";
 
-const props = defineProps<{
-  disabled: boolean;
-  searchTerm: string;
-  themeType: TThemeTypeSearch;
-}>();
+const props = withDefaults(
+  defineProps<{
+    disabled: boolean;
+    searchTerm: string;
+    themeType: TThemeTypeSearch;
+    heading?: string;
+  }>(),
+  {
+    heading: "My themes",
+  },
+);
 
 const themeTypeList: Array<{
   id: TThemeTypeSearch;
@@ -73,7 +79,7 @@ const handleClearFilter = () => {
 <template>
   <Card class="w-full py-8 border-0">
     <CardHeader>
-      <DashboardHeading>My themes</DashboardHeading>
+      <DashboardHeading>{{ heading }}</DashboardHeading>
     </CardHeader>
     <CardContent class="flex justify-center items-center">
       <form

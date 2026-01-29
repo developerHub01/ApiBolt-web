@@ -18,7 +18,7 @@ const avatarUrl = profile.avatar_url ?? DEFAULT_PROFILE_AVATAR;
   <section class="w-full flex flex-col justify-center items-center">
     <AspectRatio
       :ratio="3 / 1"
-      class="bg-muted rounded-lg overflow-hidden max-w-4xl mx-auto"
+      class="bg-muted rounded-lg overflow-hidden max-w-4xl mx-auto shadow-2xl"
     >
       <section
         class="w-full h-full"

@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
   const searchTerm = query.searchTerm as string | undefined;
   const searchFilter = query.searchFilter as string | undefined;
   const byMe = Number(query.byMe) ? 1 : 0;
+  const userName = query.userName as string | undefined;
 
   const supabase = await serverSupabaseClient(event);
 
@@ -40,9 +41,22 @@ export default defineEventHandler(async (event) => {
       queryBuilder = queryBuilder.eq("type", searchFilter);
   }
 
-  if (byMe) {
-    const user = await checkUser(event);
-    if (user?.id) queryBuilder = queryBuilder.eq("author", user.id);
+  if (byMe || userName) {
+    let searchByAuthorId = null;
+    if (byMe) {
+      const user = await checkUser(event);
+      searchByAuthorId = user?.id;
+    } else if (userName) {
+      const { data } = await supabase
+        .from("profiles")
+        .select(`id`)
+        .eq("user_name", userName)
+        .single();
+      searchByAuthorId = data?.id;
+    }
+
+    if (searchByAuthorId)
+      queryBuilder = queryBuilder.eq("author", searchByAuthorId);
   }
 
   /* Pagination & Sorting */
