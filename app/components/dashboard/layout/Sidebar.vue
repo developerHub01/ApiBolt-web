@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import {
   House,
-  UserRoundPen,
   Palette,
   PackagePlus,
   ArrowLeft,
-  CircleUser,
+  UserPen,
 } from "lucide-vue-next";
 import {
   Sidebar,
@@ -21,6 +20,11 @@ const navMain = [
     title: "Home",
     url: "/dashboard",
     icon: House,
+  },
+  {
+    title: "Update profile",
+    url: "/dashboard/update-profile",
+    icon: UserPen,
   },
   {
     title: "My Themes",

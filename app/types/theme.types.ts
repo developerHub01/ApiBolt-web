@@ -1,12 +1,4 @@
-export interface ProfileMetaInterface {
-  id: string;
-  user_name: string;
-  full_name: string;
-  bio: string | null;
-  avatar_url: string;
-  cover_url: string | null;
-  created_at: string;
-}
+
 
 export type TThemeType = "dark" | "light" | "custom";
 export type TThemeTypeSearch = "all" | TThemeType;

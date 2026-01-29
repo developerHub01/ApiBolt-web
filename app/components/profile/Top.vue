@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { Github as GithubIcon } from "lucide-vue-next";
-import type { ProfileMetaInterface } from "~/types/theme.types";
+import {
+  DEFAULT_PROFILE_AVATAR,
+  DEFAULT_PROFILE_COVER,
+} from "~/constant/profile.constant";
+import type { ProfileMetaInterface } from "~/types/profile.types";
 
 const { profile } = defineProps<{
   profile: ProfileMetaInterface;
 }>();
 
-const coverUrl =
-  profile.cover_url ??
-  "https://images.unsplash.com/photo-1493584753368-64a38a466b66?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-const avatarUrl =
-  profile.avatar_url ??
-  "https://images.unsplash.com/photo-1766548730089-e446483315b1?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const coverUrl = profile.cover_url ?? DEFAULT_PROFILE_COVER;
+const avatarUrl = profile.avatar_url ?? DEFAULT_PROFILE_AVATAR;
 </script>
 
 <template>

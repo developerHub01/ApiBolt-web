@@ -3,7 +3,7 @@ import { Database } from "~/types/database.types";
 
 export const getUserIdFromUserName = async (
   supabase: SupabaseClient<Database>,
-  userName: string
+  userName: string,
 ) => {
   const { data, error } = await supabase
     .from("profiles")
@@ -17,7 +17,7 @@ export const getUserIdFromUserName = async (
 
 export const getProfileByUserName = async (
   supabase: SupabaseClient<Database>,
-  userName: string
+  userName: string,
 ) => {
   const { data, error } = await supabase
     .from("profiles")
@@ -31,17 +31,13 @@ export const getProfileByUserName = async (
 
 export const getFullProfileById = async (
   supabase: SupabaseClient<Database>,
-  id: string
+  id: string,
 ) => {
   const { data, error } = await supabase
     .from("profiles")
     .select(
       `
     *,
-    social_links (
-      type,
-      link
-    ),
     themes (
       id,
       name,
@@ -54,7 +50,7 @@ export const getFullProfileById = async (
       author,
       created_at
     )
-    `
+    `,
     )
     .eq("id", id)
     .order("install_count", {
@@ -68,6 +64,21 @@ export const getFullProfileById = async (
     .limit(3, {
       foreignTable: "themes",
     })
+    .single();
+
+  if (error) return null;
+
+  return data;
+};
+
+export const getProfileMetaById = async (
+  supabase: SupabaseClient<Database>,
+  id: string,
+) => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select(`*`)
+    .eq("id", id)
     .single();
 
   if (error) return null;
