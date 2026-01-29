@@ -1,18 +1,38 @@
 <script setup>
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar } from "@/components/ui/avatar";
 import { useAuth } from "~/composable/useUserAuth";
 
-const { user, avatar, name } = useAuth();
+const { user, avatar, name, handleLogout } = useAuth();
 </script>
 
 <template>
-  <div class="flex flex-row flex-wrap items-center gap-12">
-    <NuxtLink :to="user ? '/dashboard' : '/login'">
-      <Avatar v-if="user" class="ring-2 ring-primary">
-        <AvatarImage :src="avatar" :alt="name" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <Button v-else class="cursor-pointer">Login</Button>
+  <template v-if="user">
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar class="ring-2 ring-primary">
+          <AvatarImage :src="avatar" :alt="name" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <NuxtLink to="/dashboard">
+          <DropdownMenuItem class="cursor-pointer"> Profile </DropdownMenuItem>
+        </NuxtLink>
+        <DropdownMenuItem variant="destructive" @click="handleLogout"
+          >Logout</DropdownMenuItem
+        >
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </template>
+  <template else>
+    <NuxtLink to="/login">
+      <Button>Login</Button>
     </NuxtLink>
-  </div>
+  </template>
 </template>

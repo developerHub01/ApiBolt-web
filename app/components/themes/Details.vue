@@ -27,7 +27,7 @@ const authorProfileLink = userProfileLinkFromUserName(theme.authorId);
 const textToCopy = computed(() => theme.id);
 const { copy, copied } = useClipboard({ source: textToCopy });
 
-const handleIdCopy = () => copy(textToCopy.value);
+const handleIdCopy = () => copy(textToCopy.value.trim());
 </script>
 
 <template>
@@ -72,7 +72,7 @@ const handleIdCopy = () => copy(textToCopy.value);
         </div>
         <Button
           @click="handleIdCopy"
-          size="sm"
+          size="xs"
           class="rounde-sm cursor-pointer"
         >
           <span v-if="!copied" class="flex items-center">

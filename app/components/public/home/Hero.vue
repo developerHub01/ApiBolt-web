@@ -4,7 +4,10 @@
   >
     <div class="max-w-4xl mx-auto text-center">
       <div class="mb-8">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
+        <h1
+          class="text-5xl md:text-7xl font-extrabold mb-4 flex justify-center items-center gap-2"
+        >
+          <NuxtImg src="/logo.svg" class="size-10 md:size-14" alt="api-bolt" />
           API<span class="text-primary">Bolt</span>
         </h1>
         <p class="text-xl md:text-2xl text-muted-foreground mb-2">
