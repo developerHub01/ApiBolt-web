@@ -8,7 +8,15 @@
         orientation="vertical"
         class="mx-2 data-[orientation=vertical]:h-4"
       />
-      <h1 class="text-base font-medium">Documents</h1>
+      <div v-if="showLogo" class="flex items-center gap-2 select-none">
+        <NuxtImg
+          src="/logo.svg"
+          :width="25"
+          :height="25"
+          class="object-contain"
+        />
+        <h1 class="text-base font-medium">APIBolt</h1>
+      </div>
       <div class="ml-auto flex items-center gap-2">
         <DashboardLayoutHeaderAvatar />
       </div>
@@ -18,5 +26,8 @@
 
 <script setup lang="ts">
 import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+
+const { state, isMobile } = useSidebar();
+const showLogo = computed(() => state.value === "collapsed" || isMobile.value);
 </script>

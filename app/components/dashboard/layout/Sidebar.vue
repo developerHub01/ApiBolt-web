@@ -7,7 +7,13 @@
             as-child
             class="data-[slot=sidebar-menu-button]:p-1.5!"
           >
-            <NuxtLink to="/dashboard">
+            <NuxtLink to="/dashboard" class="flex items-center">
+              <NuxtImg
+                src="/logo.svg"
+                :width="25"
+                :height="25"
+                class="object-contain"
+              />
               <span class="text-base font-semibold">APIBolt</span>
             </NuxtLink>
           </SidebarMenuButton>
