@@ -26,14 +26,6 @@ const searchParams = reactive<SearchState>({
     : "all",
 });
 
-useSeoMeta({
-  title: () =>
-    searchParams.searchTerm
-      ? `Results for "${searchParams.searchTerm}"`
-      : "Community Themes",
-  description: "Browse custom themes.",
-});
-
 const { data: response, status } = await useFetch<
   ApiResponse<ThemeListThemeMetaInterface>
 >("/api/v1/client/themes/meta", {

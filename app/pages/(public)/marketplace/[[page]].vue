@@ -24,12 +24,28 @@ const searchParams = reactive<SearchState>({
     : "all",
 });
 
-useSeoMeta({
-  title: () =>
-    searchParams.searchTerm
-      ? `Results for "${searchParams.searchTerm}"`
-      : "Community Themes",
-  description: "Browse custom themes.",
+/* SEO ================= */
+const seoTitle = computed(() =>
+  searchParams.searchTerm
+    ? `Results for "${searchParams.searchTerm}" - APIBolt`
+    : "Community Themes - APIBolt",
+);
+const seoDescription = computed(() => "Browse custom themes - APIBolt.");
+const seoImage = computed(() => "/logo.svg");
+
+useHead({
+  title: seoTitle,
+  meta: [
+    { name: "description", content: seoDescription },
+    { property: "og:title", content: seoTitle },
+    { property: "og:description", content: seoDescription },
+    { property: "og:image", content: seoImage },
+    { property: "og:type", content: "website" },
+
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: seoTitle },
+    { name: "twitter:image", content: seoImage },
+  ],
 });
 
 const { data: response, status } = await useFetch<

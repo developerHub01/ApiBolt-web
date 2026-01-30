@@ -79,7 +79,7 @@ const authorUrl = computed(
         class="pl-0! text-sm text-accent-foreground underline"
       >
         <User :size="14" />
-        <NuxtLink :to="authorUrl" target="_blank"> {{ author }} </NuxtLink>
+        {{ author }}
       </Button>
     </CardContent>
     <CardFooter class="flex gap-2 px-0 justify-between flex-wrap">

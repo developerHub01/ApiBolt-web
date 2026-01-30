@@ -40,6 +40,19 @@ import { useAuth } from "~/composable/useUserAuth";
 definePageMeta({
   middleware: ["prevent-if-auth"],
 });
+/* SEO ============= */
+const authTitle = "Sign in to APIBolt";
+const authDescription =
+  "Log in to your APIBolt account to manage your themes and accelerate your workflow.";
+  
+useSeoMeta({
+  title: authTitle,
+  ogTitle: authTitle,
+  description: authDescription,
+  ogDescription: authDescription,
+  ogImage: "/logo.svg",
+  twitterCard: "summary",
+});
 
 const { handleSignInWithGithub } = useAuth();
 </script>
