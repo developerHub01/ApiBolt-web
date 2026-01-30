@@ -13,12 +13,10 @@ definePageMeta({
 
 /* SEO ====================== */
 const seoTitle = computed(() => "ApiBolt - Industrial API Tester");
-
 const seoDescription = computed(
   () =>
     "Industrial-grade API management platform. Local-first. Zero cloud. Zero telemetry.",
 );
-
 useSeoMeta({
   title: seoTitle,
   ogTitle: seoTitle,

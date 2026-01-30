@@ -1,3 +1,17 @@
+<template>
+  <SidebarGroup>
+    <SidebarGroupContent>
+      <SidebarMenu>
+        <DashboardLayoutNavItem
+          v-for="item in items"
+          :key="item.title"
+          :item="item"
+        />
+      </SidebarMenu>
+    </SidebarGroupContent>
+  </SidebarGroup>
+</template>
+
 <script setup lang="ts">
 import type { Component } from "vue";
 
@@ -17,13 +31,3 @@ defineProps<{
   items: Array<NavItem>;
 }>();
 </script>
-
-<template>
-  <SidebarGroup>
-    <SidebarGroupContent>
-      <SidebarMenu>
-        <DashboardLayoutNavItem v-for="item in items" :key="item.title" :item="item" />
-      </SidebarMenu>
-    </SidebarGroupContent>
-  </SidebarGroup>
-</template>

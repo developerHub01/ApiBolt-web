@@ -1,3 +1,55 @@
+<template>
+  <section class="w-full h-full flex flex-col gap-8 container mx-auto pb-15">
+    <h1 class="sr-only">Theme Gallery</h1>
+    <ThemesSearch
+      @search="handleSearch"
+      :searchTerm="searchParams.searchTerm"
+      :themeType="searchParams.themeType"
+      :disabled="isLoading"
+      heading="Theme marketplace"
+    />
+    <template v-if="isLoading || themeList.length">
+      <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <ThemesCardSkeleton
+          v-if="isLoading"
+          v-for="(_, index) in pageSize"
+          :key="index"
+        />
+        <template v-else>
+          <NuxtLink
+            v-for="theme in themeList"
+            :key="theme.id"
+            :to="`/theme/${theme.id}`"
+            target="_blank"
+          >
+            <ThemesCard
+              v-bind="theme"
+              :canDelete="false"
+              :showLink="false"
+              class="pointer-events-none"
+            />
+          </NuxtLink>
+        </template>
+      </section>
+    </template>
+    <section
+      v-else
+      class="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96"
+    >
+      <div class="text-center">
+        <p class="text-xl font-semibold">No themes found</p>
+      </div>
+    </section>
+
+    <ThemesPagination
+      :total="totalCount"
+      :pageSize="pageSize"
+      :currentPage="currentPage"
+      @update:currentPage="handleUpdatePage"
+    />
+  </section>
+</template>
+
 <script setup lang="ts">
 import { SEARCH_THEME_TYPE_SET } from "~/constant/theme.constant";
 import type {
@@ -91,55 +143,3 @@ const handleUpdatePage = (newPage: number) => {
   });
 };
 </script>
-
-<template>
-  <section class="w-full h-full flex flex-col gap-8 container mx-auto pb-15">
-    <h1 class="sr-only">Theme Gallery</h1>
-    <ThemesSearch
-      @search="handleSearch"
-      :searchTerm="searchParams.searchTerm"
-      :themeType="searchParams.themeType"
-      :disabled="isLoading"
-      heading="Theme marketplace"
-    />
-    <template v-if="isLoading || themeList.length">
-      <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-        <ThemesCardSkeleton
-          v-if="isLoading"
-          v-for="(_, index) in pageSize"
-          :key="index"
-        />
-        <template v-else>
-          <NuxtLink
-            v-for="theme in themeList"
-            :key="theme.id"
-            :to="`/theme/${theme.id}`"
-            target="_blank"
-          >
-            <ThemesCard
-              v-bind="theme"
-              :canDelete="false"
-              :showLink="false"
-              class="pointer-events-none"
-            />
-          </NuxtLink>
-        </template>
-      </section>
-    </template>
-    <section
-      v-else
-      class="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96"
-    >
-      <div class="text-center">
-        <p class="text-xl font-semibold">No themes found</p>
-      </div>
-    </section>
-
-    <ThemesPagination
-      :total="totalCount"
-      :pageSize="pageSize"
-      :currentPage="currentPage"
-      @update:currentPage="handleUpdatePage"
-    />
-  </section>
-</template>

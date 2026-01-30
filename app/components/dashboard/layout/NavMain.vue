@@ -1,3 +1,17 @@
+<template>
+  <SidebarGroup>
+    <SidebarGroupContent class="flex flex-col gap-2">
+      <SidebarMenu>
+        <DashboardLayoutNavItem
+          v-for="item in items"
+          :key="item.title"
+          :item="item"
+        />
+      </SidebarMenu>
+    </SidebarGroupContent>
+  </SidebarGroup>
+</template>
+
 <script setup lang="ts">
 import type { Component } from "vue";
 import {
@@ -16,13 +30,3 @@ defineProps<{
   items: Array<NavItem>;
 }>();
 </script>
-
-<template>
-  <SidebarGroup>
-    <SidebarGroupContent class="flex flex-col gap-2">
-      <SidebarMenu>
-        <DashboardLayoutNavItem v-for="item in items" :key="item.title" :item="item" />
-      </SidebarMenu>
-    </SidebarGroupContent>
-  </SidebarGroup>
-</template>

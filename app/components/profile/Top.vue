@@ -1,19 +1,3 @@
-<script setup lang="ts">
-import { Github as GithubIcon } from "lucide-vue-next";
-import {
-  DEFAULT_PROFILE_AVATAR,
-  DEFAULT_PROFILE_COVER,
-} from "~/constant/profile.constant";
-import type { ProfileMetaInterface } from "~/types/profile.types";
-
-const { profile } = defineProps<{
-  profile: ProfileMetaInterface;
-}>();
-
-const coverUrl = profile.cover_url ?? DEFAULT_PROFILE_COVER;
-const avatarUrl = profile.avatar_url ?? DEFAULT_PROFILE_AVATAR;
-</script>
-
 <template>
   <section class="w-full flex flex-col justify-center items-center">
     <AspectRatio
@@ -63,3 +47,19 @@ const avatarUrl = profile.avatar_url ?? DEFAULT_PROFILE_AVATAR;
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { Github as GithubIcon } from "lucide-vue-next";
+import {
+  DEFAULT_PROFILE_AVATAR,
+  DEFAULT_PROFILE_COVER,
+} from "~/constant/profile.constant";
+import type { ProfileMetaInterface } from "~/types/profile.types";
+
+const { profile } = defineProps<{
+  profile: ProfileMetaInterface;
+}>();
+
+const coverUrl = profile.cover_url ?? DEFAULT_PROFILE_COVER;
+const avatarUrl = profile.avatar_url ?? DEFAULT_PROFILE_AVATAR;
+</script>

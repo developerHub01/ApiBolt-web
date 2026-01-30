@@ -1,20 +1,3 @@
-<script setup lang="ts">
-const route = useRoute();
-
-const items = computed(() => [
-  {
-    label: "Home",
-    to: "/",
-    active: route.path === "/",
-  },
-  {
-    label: "Marketplace",
-    to: "/marketplace",
-    active: route.path.startsWith("/marketplace"),
-  },
-]);
-</script>
-
 <template>
   <section class="w-full flex items-center justify-center py-2">
     <header class="container flex items-center justify-between gap-2 py-2">
@@ -38,3 +21,20 @@ const items = computed(() => [
     </header>
   </section>
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+
+const items = computed(() => [
+  {
+    label: "Home",
+    to: "/",
+    active: route.path === "/",
+  },
+  {
+    label: "Marketplace",
+    to: "/marketplace",
+    active: route.path.startsWith("/marketplace"),
+  },
+]);
+</script>

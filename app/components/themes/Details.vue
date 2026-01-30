@@ -1,35 +1,3 @@
-<script setup lang="ts">
-import { Button } from "@/components/ui/button";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import Badge from "@/components/ui/badge/Badge.vue";
-import {
-  User as AuthorIcon,
-  CheckIcon,
-  CopyIcon,
-  CloudDownload as DownloadIcon,
-} from "lucide-vue-next";
-import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
-import type { ThemeInterface } from "~/types/theme.types";
-import { cn } from "~/lib/utils";
-import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
-import { useClipboard } from "@vueuse/core";
-
-const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
-const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
-
-const { theme } = defineProps<{
-  theme: ThemeInterface;
-}>();
-
-const paletteList = computed(() => Object.entries(theme.palette));
-const authorProfileLink = userProfileLinkFromUserName(theme.authorUsername);
-
-const textToCopy = computed(() => theme.id);
-const { copy, copied } = useClipboard({ source: textToCopy });
-
-const handleIdCopy = () => copy(textToCopy.value.trim());
-</script>
-
 <template>
   <section
     class="w-full h-full py-10 flex flex-col gap-5 text-sm container mx-auto"
@@ -137,3 +105,35 @@ const handleIdCopy = () => copy(textToCopy.value.trim());
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { Button } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Badge from "@/components/ui/badge/Badge.vue";
+import {
+  User as AuthorIcon,
+  CheckIcon,
+  CopyIcon,
+  CloudDownload as DownloadIcon,
+} from "lucide-vue-next";
+import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
+import type { ThemeInterface } from "~/types/theme.types";
+import { cn } from "~/lib/utils";
+import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
+import { useClipboard } from "@vueuse/core";
+
+const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
+const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
+
+const { theme } = defineProps<{
+  theme: ThemeInterface;
+}>();
+
+const paletteList = computed(() => Object.entries(theme.palette));
+const authorProfileLink = userProfileLinkFromUserName(theme.authorUsername);
+
+const textToCopy = computed(() => theme.id);
+const { copy, copied } = useClipboard({ source: textToCopy });
+
+const handleIdCopy = () => copy(textToCopy.value.trim());
+</script>

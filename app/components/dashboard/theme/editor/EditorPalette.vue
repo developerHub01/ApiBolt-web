@@ -1,3 +1,33 @@
+<template>
+  <section
+    class="w-full h-100 bg-background rounded-md shadow-2xl flex flex-col p-5 gap-3"
+  >
+    <ButtonGroup class="self-end flex gap-2">
+      <Button
+        v-for="{ id, Icon } in ACTION_BUTTON_LIST"
+        :key="id"
+        variant="secondary"
+        size="icon"
+        @click="() => handlePaletteModifier(id)"
+      >
+        <component :is="Icon" />
+      </Button>
+    </ButtonGroup>
+
+    <ScrollArea class="w-full min-h-0 flex-1 bg-card p-3 rounded-md">
+      <section class="w-full h-full grid lg:grid-cols-2 gap-2">
+        <DashboardThemeEditorPaletteRow
+          v-for="(color, name) in props.palette"
+          :key="name"
+          :name="name"
+          :color="color"
+          v-model="props.palette[name]!"
+        />
+      </section>
+    </ScrollArea>
+  </section>
+</template>
+
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -55,12 +85,12 @@ const ACTION_BUTTON_LIST: Array<ActionButton> = [
   },
 ];
 const handlePaletteModifier = async (
-  type: ActionButton["id"]
+  type: ActionButton["id"],
 ): Promise<void> => {
   switch (type) {
     case "copy": {
       await navigator.clipboard.writeText(
-        JSON.stringify(props.palette, null, 2)
+        JSON.stringify(props.palette, null, 2),
       );
       toast.success("Copied success", {
         description: "Palette copied to clipboard",
@@ -155,33 +185,3 @@ const handlePaletteModifier = async (
   }
 };
 </script>
-
-<template>
-  <section
-    class="w-full h-100 bg-background rounded-md shadow-2xl flex flex-col p-5 gap-3"
-  >
-    <ButtonGroup class="self-end flex gap-2">
-      <Button
-        v-for="{ id, Icon } in ACTION_BUTTON_LIST"
-        :key="id"
-        variant="secondary"
-        size="icon"
-        @click="() => handlePaletteModifier(id)"
-      >
-        <component :is="Icon" />
-      </Button>
-    </ButtonGroup>
-
-    <ScrollArea class="w-full min-h-0 flex-1 bg-card p-3 rounded-md">
-      <section class="w-full h-full grid lg:grid-cols-2 gap-2">
-        <DashboardThemeEditorPaletteRow
-          v-for="(color, name) in props.palette"
-          :key="name"
-          :name="name"
-          :color="color"
-          v-model="props.palette[name]!"
-        />
-      </section>
-    </ScrollArea>
-  </section>
-</template>

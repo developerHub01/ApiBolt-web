@@ -1,55 +1,3 @@
-<script setup lang="ts">
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { ArrowUpRight, PencilRuler, Trash2, User } from "lucide-vue-next";
-import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
-import type { ThemeMetaInterface } from "~/types/theme.types";
-import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
-
-const props = withDefaults(
-  defineProps<
-    ThemeMetaInterface & {
-      canDelete?: boolean;
-      canEdit?: boolean;
-      showAuthor?: boolean;
-      showLink?: boolean;
-    }
-  >(),
-  {
-    canDelete: false,
-    canEdit: false,
-    showAuthor: true,
-    showLink: true,
-  },
-);
-
-const emit = defineEmits<{
-  (e: "delete"): void;
-}>();
-
-const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
-const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
-
-const detailsUrl = computed(() => `/theme/${props.id}`);
-const authorUrl = computed(
-  () => userProfileLinkFromUserName(props.author).value ?? undefined,
-);
-</script>
-
 <template>
   <Card
     class="w-full gap-4 p-4 rounded-md border-0 hover:shadow-2xl transition-all duration-100"
@@ -138,3 +86,55 @@ const authorUrl = computed(
     </CardFooter>
   </Card>
 </template>
+
+<script setup lang="ts">
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { ArrowUpRight, PencilRuler, Trash2, User } from "lucide-vue-next";
+import { THEME_PREVIEW_SIZE } from "~/constant/default-theme.constant";
+import type { ThemeMetaInterface } from "~/types/theme.types";
+import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
+
+const props = withDefaults(
+  defineProps<
+    ThemeMetaInterface & {
+      canDelete?: boolean;
+      canEdit?: boolean;
+      showAuthor?: boolean;
+      showLink?: boolean;
+    }
+  >(),
+  {
+    canDelete: false,
+    canEdit: false,
+    showAuthor: true,
+    showLink: true,
+  },
+);
+
+const emit = defineEmits<{
+  (e: "delete"): void;
+}>();
+
+const REQUIRED_WIDTH = THEME_PREVIEW_SIZE.REQUIRED_WIDTH;
+const REQUIRED_HEIGHT = THEME_PREVIEW_SIZE.REQUIRED_HEIGHT;
+
+const detailsUrl = computed(() => `/theme/${props.id}`);
+const authorUrl = computed(
+  () => userProfileLinkFromUserName(props.author).value ?? undefined,
+);
+</script>

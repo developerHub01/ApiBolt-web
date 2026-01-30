@@ -1,3 +1,15 @@
+<template>
+  <template v-if="pending">pending</template>
+  <template v-else-if="error || !data?.success || !data.data">
+    <NotFound
+      description="This theme not found. Maybe these theme not exist or author may deleted the theme."
+    />
+  </template>
+  <template v-else>
+    <ThemesDetails :theme="data.data" />
+  </template>
+</template>
+
 <script setup lang="ts">
 import NotFound from "~/components/ui/NotFound.vue";
 import type { ThemeInterface } from "~/types/theme.types";
@@ -44,15 +56,3 @@ useHead({
   ],
 });
 </script>
-
-<template>
-  <template v-if="pending">pending</template>
-  <template v-else-if="error || !data?.success || !data.data">
-    <NotFound
-      description="This theme not found. Maybe these theme not exist or author may deleted the theme."
-    />
-  </template>
-  <template v-else>
-    <ThemesDetails :theme="data.data" />
-  </template>
-</template>

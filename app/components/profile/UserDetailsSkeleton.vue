@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { Skeleton } from "~/components/ui/skeleton";
-</script>
-
 <template>
   <section class="w-full flex flex-col justify-center items-center">
     <AspectRatio
@@ -25,3 +21,7 @@ import { Skeleton } from "~/components/ui/skeleton";
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { Skeleton } from "~/components/ui/skeleton";
+</script>

@@ -1,13 +1,3 @@
-<script setup lang="ts">
-import type { ThemeMetaInterface } from "~/types/theme.types";
-import { Button } from "~/components/ui/button";
-
-const props = defineProps<{
-  themes: Array<ThemeMetaInterface>;
-  author: string;
-}>();
-</script>
-
 <template>
   <section class="w-full flex flex-col gap-5 py-15 items-center">
     <h2 class="text-2xl font-bold">My top themes:</h2>
@@ -24,3 +14,13 @@ const props = defineProps<{
     </NuxtLink>
   </section>
 </template>
+
+<script setup lang="ts">
+import type { ThemeMetaInterface } from "~/types/theme.types";
+import { Button } from "~/components/ui/button";
+
+const props = defineProps<{
+  themes: Array<ThemeMetaInterface>;
+  author: string;
+}>();
+</script>

@@ -1,27 +1,3 @@
-<script setup lang="ts">
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-
-const props = defineProps<{
-  total: number;
-  pageSize: number;
-  currentPage: number;
-}>();
-
-const emit = defineEmits<{
-  (e: "update:currentPage", page: number): void;
-}>();
-
-const handlePageChange = (newPage: number) =>
-  emit("update:currentPage", newPage);
-</script>
-
 <template>
   <div class="flex flex-col gap-6">
     <Pagination
@@ -48,3 +24,27 @@ const handlePageChange = (newPage: number) =>
     </Pagination>
   </div>
 </template>
+
+<script setup lang="ts">
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+const props = defineProps<{
+  total: number;
+  pageSize: number;
+  currentPage: number;
+}>();
+
+const emit = defineEmits<{
+  (e: "update:currentPage", page: number): void;
+}>();
+
+const handlePageChange = (newPage: number) =>
+  emit("update:currentPage", newPage);
+</script>

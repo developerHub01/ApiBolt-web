@@ -1,3 +1,37 @@
+<template>
+  <form
+    class="w-full h-full grid place-items-center"
+    @submit.prevent="handlePublish"
+  >
+    <Card class="w-full border-0 gap-6 py-8 items-center max-w-4xl">
+      <DashboardThemeEditorHeader />
+      <CardContent class="w-full flex flex-col gap-6">
+        <DashboardThemeEditorBasicInfo
+          v-model:name="themeState.name"
+          v-model:themeType="themeState.themeType"
+          :maxLength="THEME_PAYLOAD_SIZE.MAX_NAME"
+        />
+        <DashboardThemeEditorPreview v-model:modelValue="themeState.preview" />
+        <DashboardThemeEditorPalette v-model:palette="themeState.palette" />
+        <DashboardThemeEditorDescription
+          v-model:modelValue="themeState.description"
+          :maxLength="THEME_PAYLOAD_SIZE.MAX_DESCRIPTION"
+        />
+      </CardContent>
+
+      <CardFooter class="w-full flex gap-2 justify-end">
+        <Button type="submit" :disabled="!isEnableSubmit">
+          <Spinner v-if="isSubmitting" />
+          Publish</Button
+        >
+        <Button variant="outline" type="button" @click="handleReset"
+          >Reset</Button
+        >
+      </CardFooter>
+    </Card>
+  </form>
+</template>
+
 <script setup lang="ts">
 import {
   DEFAULT_THEME_PALETTE,
@@ -95,37 +129,3 @@ const handlePublish = async () => {
   }
 };
 </script>
-
-<template>
-  <form
-    class="w-full h-full grid place-items-center"
-    @submit.prevent="handlePublish"
-  >
-    <Card class="w-full border-0 gap-6 py-8 items-center max-w-4xl">
-      <DashboardThemeEditorHeader />
-      <CardContent class="w-full flex flex-col gap-6">
-        <DashboardThemeEditorBasicInfo
-          v-model:name="themeState.name"
-          v-model:themeType="themeState.themeType"
-          :maxLength="THEME_PAYLOAD_SIZE.MAX_NAME"
-        />
-        <DashboardThemeEditorPreview v-model:modelValue="themeState.preview" />
-        <DashboardThemeEditorPalette v-model:palette="themeState.palette" />
-        <DashboardThemeEditorDescription
-          v-model:modelValue="themeState.description"
-          :maxLength="THEME_PAYLOAD_SIZE.MAX_DESCRIPTION"
-        />
-      </CardContent>
-
-      <CardFooter class="w-full flex gap-2 justify-end">
-        <Button type="submit" :disabled="!isEnableSubmit">
-          <Spinner v-if="isSubmitting" />
-          Publish</Button
-        >
-        <Button variant="outline" type="button" @click="handleReset"
-          >Reset</Button
-        >
-      </CardFooter>
-    </Card>
-  </form>
-</template>

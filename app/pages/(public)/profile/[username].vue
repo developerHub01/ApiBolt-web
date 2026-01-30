@@ -1,3 +1,18 @@
+<template>
+  <section class="w-full container mx-auto flex flex-col">
+    <ProfileUserDetailsSkeleton v-if="pending" />
+    <NotFound
+      v-else-if="isNotFound"
+      :description="`User ${userName} not found`"
+      class="flex-1"
+    />
+    <template v-else>
+      <ProfileTop :profile="data!.data!" class="py-4" />
+      <ProfileAllThemesByUserName :username="userName" />
+    </template>
+  </section>
+</template>
+
 <script setup lang="ts">
 import NotFound from "~/components/ui/NotFound.vue";
 import type { ProfileInterface } from "~/types/profile.types";
@@ -48,18 +63,3 @@ useHead({
   ],
 });
 </script>
-
-<template>
-  <section class="w-full container mx-auto flex flex-col">
-    <ProfileUserDetailsSkeleton v-if="pending" />
-    <NotFound
-      v-else-if="isNotFound"
-      :description="`User ${userName} not found`"
-      class="flex-1"
-    />
-    <template v-else>
-      <ProfileTop :profile="data!.data!" class="py-4" />
-      <ProfileAllThemesByUserName :username="userName" />
-    </template>
-  </section>
-</template>

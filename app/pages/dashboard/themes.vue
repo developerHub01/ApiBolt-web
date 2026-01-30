@@ -1,3 +1,73 @@
+<template>
+  <section class="w-full h-full flex flex-col gap-8">
+    <ThemesSearch
+      :searchTerm="searchParams.searchTerm"
+      :themeType="searchParams.themeType"
+      @search="handleSearch"
+      :disabled="isLoading"
+    />
+    <template v-if="isLoading || themeList.length">
+      <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <ThemesCardSkeleton
+          v-if="isLoading"
+          v-for="value in Array.from({ length: pageSize })"
+        />
+        <template v-else>
+          <ThemesCard
+            v-for="theme in themeList"
+            :key="theme.id"
+            v-bind="theme"
+            :canDelete="true"
+            :canEdit="true"
+            :showAuthor="false"
+            @delete="() => handleChangedeleteCandidate(theme.id)"
+          />
+        </template>
+      </section>
+    </template>
+    <section
+      v-else
+      class="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96"
+    >
+      <div class="text-center">
+        <p class="text-xl font-semibold">No themes found</p>
+        <p class="text-muted-foreground">Adjust your filters and try again.</p>
+      </div>
+    </section>
+
+    <ThemesPagination
+      :total="totalCount"
+      :pageSize="pageSize"
+      :currentPage="currentPage"
+      @update:currentPage="handleUpdatePage"
+    />
+    <ClientOnly>
+      <AlertDialog :open="Boolean(deleteCandidate)">
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete this
+              theme and remove data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel @click="handleChangedeleteCandidate"
+              >Cancel</AlertDialogCancel
+            >
+            <AlertDialogAction
+              @click="handleDeleteTheme"
+              :disabled="isDeleting"
+            >
+              <Spinner v-if="isDeleting" /> Continue</AlertDialogAction
+            >
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </ClientOnly>
+  </section>
+</template>
+
 <script setup lang="ts">
 import type {
   SearchState,
@@ -91,68 +161,3 @@ const handleDeleteTheme = async () => {
 
 onMounted(() => handleFetchThemes());
 </script>
-
-<template>
-  <section class="w-full h-full flex flex-col gap-8">
-    <ThemesSearch @search="handleSearch" :disabled="isLoading" />
-    <template v-if="isLoading || themeList.length">
-      <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-        <ThemesCardSkeleton
-          v-if="isLoading"
-          v-for="value in Array.from({ length: pageSize })"
-        />
-        <template v-else>
-          <ThemesCard
-            v-for="theme in themeList"
-            :key="theme.id"
-            v-bind="theme"
-            :canDelete="true"
-            :canEdit="true"
-            :showAuthor="false"
-            @delete="() => handleChangedeleteCandidate(theme.id)"
-          />
-        </template>
-      </section>
-    </template>
-    <section
-      v-else
-      class="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96"
-    >
-      <div class="text-center">
-        <p class="text-xl font-semibold">No themes found</p>
-        <p class="text-muted-foreground">Adjust your filters and try again.</p>
-      </div>
-    </section>
-
-    <ThemesPagination
-      :total="totalCount"
-      :pageSize="pageSize"
-      :currentPage="currentPage"
-      @update:currentPage="handleUpdatePage"
-    />
-    <ClientOnly>
-      <AlertDialog :open="Boolean(deleteCandidate)">
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete this
-              theme and remove data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel @click="handleChangedeleteCandidate"
-              >Cancel</AlertDialogCancel
-            >
-            <AlertDialogAction
-              @click="handleDeleteTheme"
-              :disabled="isDeleting"
-            >
-              <Spinner v-if="isDeleting" /> Continue</AlertDialogAction
-            >
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </ClientOnly>
-  </section>
-</template>

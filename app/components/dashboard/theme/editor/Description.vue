@@ -1,22 +1,3 @@
-<script setup lang="ts">
-import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
-import { Textarea } from "@/components/ui/textarea";
-
-interface Props {
-  modelValue: string;
-  maxLength?: number;
-}
-
-const props = defineProps<Props>();
-const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void;
-}>();
-
-const handleInput = (value: string | number): void => {
-  emit("update:modelValue", String(value));
-};
-</script>
-
 <template>
   <FieldGroup>
     <FieldSet>
@@ -39,3 +20,22 @@ const handleInput = (value: string | number): void => {
     </FieldSet>
   </FieldGroup>
 </template>
+
+<script setup lang="ts">
+import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
+import { Textarea } from "@/components/ui/textarea";
+
+interface Props {
+  modelValue: string;
+  maxLength?: number;
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
+
+const handleInput = (value: string | number): void => {
+  emit("update:modelValue", String(value));
+};
+</script>

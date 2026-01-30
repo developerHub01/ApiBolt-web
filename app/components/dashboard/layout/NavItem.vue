@@ -1,21 +1,3 @@
-<script setup lang="ts">
-import type { Component } from "vue";
-import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-
-interface NavItem {
-  title: string;
-  url?: string;
-  icon?: Component;
-}
-
-const { item } = defineProps<{
-  item: NavItem;
-}>();
-
-const route = useRoute();
-const isActive = computed(() => (item.url ? route.path === item.url : false));
-</script>
-
 <template>
   <SidebarMenuItem class="select-none">
     <NuxtLink v-if="item.url" :to="item.url">
@@ -34,3 +16,21 @@ const isActive = computed(() => (item.url ? route.path === item.url : false));
     </SidebarMenuButton>
   </SidebarMenuItem>
 </template>
+
+<script setup lang="ts">
+import type { Component } from "vue";
+import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+
+interface NavItem {
+  title: string;
+  url?: string;
+  icon?: Component;
+}
+
+const { item } = defineProps<{
+  item: NavItem;
+}>();
+
+const route = useRoute();
+const isActive = computed(() => (item.url ? route.path === item.url : false));
+</script>

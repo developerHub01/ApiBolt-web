@@ -1,17 +1,3 @@
-<script setup lang="ts">
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { LogOut } from "lucide-vue-next";
-import { useAuth } from "~/composable/useUserAuth";
-
-const { handleLogout } = useAuth();
-</script>
-
 <template>
   <div class="flex flex-row flex-wrap items-center gap-12">
     <TooltipProvider>
@@ -28,3 +14,17 @@ const { handleLogout } = useAuth();
     </TooltipProvider>
   </div>
 </template>
+
+<script setup lang="ts">
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { LogOut } from "lucide-vue-next";
+import { useAuth } from "~/composable/useUserAuth";
+
+const { handleLogout } = useAuth();
+</script>

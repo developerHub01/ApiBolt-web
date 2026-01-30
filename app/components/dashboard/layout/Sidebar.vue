@@ -1,3 +1,26 @@
+<template>
+  <Sidebar collapsible="offcanvas">
+    <SidebarHeader>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton
+            as-child
+            class="data-[slot=sidebar-menu-button]:p-1.5!"
+          >
+            <NuxtLink to="/dashboard">
+              <span class="text-base font-semibold">APIBolt</span>
+            </NuxtLink>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarHeader>
+    <SidebarContent>
+      <DashboardLayoutNavMain :items="navMain" />
+      <DashboardLayoutNavSecondary :items="navSecondary" class="mt-auto" />
+    </SidebarContent>
+  </Sidebar>
+</template>
+
 <script setup lang="ts">
 import {
   House,
@@ -45,26 +68,3 @@ const navSecondary = [
   },
 ];
 </script>
-
-<template>
-  <Sidebar collapsible="offcanvas">
-    <SidebarHeader>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            as-child
-            class="data-[slot=sidebar-menu-button]:p-1.5!"
-          >
-            <NuxtLink to="/dashboard">
-              <span class="text-base font-semibold">APIBolt</span>
-            </NuxtLink>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarHeader>
-    <SidebarContent>
-      <DashboardLayoutNavMain :items="navMain" />
-      <DashboardLayoutNavSecondary :items="navSecondary" class="mt-auto" />
-    </SidebarContent>
-  </Sidebar>
-</template>

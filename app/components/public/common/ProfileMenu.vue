@@ -1,16 +1,3 @@
-<script setup>
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar } from "@/components/ui/avatar";
-import { useAuth } from "~/composable/useUserAuth";
-
-const { user, avatar, name, handleLogout } = useAuth();
-</script>
-
 <template>
   <ClientOnly>
     <template v-if="user">
@@ -40,3 +27,16 @@ const { user, avatar, name, handleLogout } = useAuth();
     </template>
   </ClientOnly>
 </template>
+
+<script setup>
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar } from "@/components/ui/avatar";
+import { useAuth } from "~/composable/useUserAuth";
+
+const { user, avatar, name, handleLogout } = useAuth();
+</script>

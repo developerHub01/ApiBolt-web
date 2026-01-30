@@ -1,15 +1,3 @@
-<script setup lang="ts">
-import type { ProfileInterface } from "~/types/profile.types";
-import type { ApiResponse } from "~~/server/types";
-
-const { data, pending } = await useFetch<ApiResponse<ProfileInterface>>(
-  "/api/v1/profile",
-  {
-    key: "my-profile",
-  },
-);
-</script>
-
 <template>
   <section class="max-w-4xl mx-auto">
     <ProfileUserDetailsSkeleton v-if="pending && !data?.data" />
@@ -22,3 +10,15 @@ const { data, pending } = await useFetch<ApiResponse<ProfileInterface>>(
     </template>
   </section>
 </template>
+
+<script setup lang="ts">
+import type { ProfileInterface } from "~/types/profile.types";
+import type { ApiResponse } from "~~/server/types";
+
+const { data, pending } = await useFetch<ApiResponse<ProfileInterface>>(
+  "/api/v1/profile",
+  {
+    key: "my-profile",
+  },
+);
+</script>
