@@ -1,5 +1,3 @@
-
-
 export type TThemeType = "dark" | "light" | "custom";
 export type TThemeTypeSearch = "all" | TThemeType;
 
@@ -20,7 +18,7 @@ export interface ThemeMetaInterface {
 export interface ThemeInterface extends ThemeMetaInterface {
   preview: string;
   palette: Record<string, string>;
-  version: string;
+  version: number;
   install_count: number;
   authorId: string;
   authorUsername: string;

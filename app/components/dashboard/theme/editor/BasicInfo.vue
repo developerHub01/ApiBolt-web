@@ -5,26 +5,20 @@
         <Field>
           <FieldLabel for="theme-name">
             Theme name
-            <span v-if="props.maxLength" class="text-xs text-muted-foreground">
-              ({{ props.name.length }}/{{ props.maxLength }})
+            <span v-if="maxLength" class="text-xs text-muted-foreground">
+              ({{ name.length }}/{{ maxLength }})
             </span>
           </FieldLabel>
           <Input
             id="theme-name"
             placeholder="Theme name"
-            :value="props.name"
-            @update:modelValue="handleNameInput"
-            :maxlength="props.maxLength"
+            v-model="name"
+            :maxlength="maxLength"
           />
         </Field>
-
         <Field orientation="horizontal">
           <FieldLabel>Theme type:</FieldLabel>
-          <Select
-            :value="props.themeType"
-            :default-value="THEME_TYPE_LIST[0].id"
-            @value-change="handleThemeTypeChange"
-          >
+          <Select v-model="themeType">
             <SelectTrigger class="w-45">
               <SelectValue placeholder="Select theme type" />
             </SelectTrigger>
@@ -72,25 +66,14 @@ const THEME_TYPE_LIST = [
 
 type ThemeType = (typeof THEME_TYPE_LIST)[number]["id"];
 
-interface Props {
-  name: string;
-  themeType: ThemeType;
+const name = defineModel<string>("name", {
+  default: "",
+});
+const themeType = defineModel<ThemeType>("themeType", {
+  default: "dark",
+});
+
+defineProps<{
   maxLength?: number;
-}
-
-interface Emits {
-  (e: "update:name", value: string): void;
-  (e: "update:themeType", value: ThemeType): void;
-}
-
-const props = defineProps<Props>();
-const emit = defineEmits<Emits>();
-
-const handleNameInput = (value: string | number) => {
-  emit("update:name", String(value));
-};
-
-const handleThemeTypeChange = (value: ThemeType) => {
-  emit("update:themeType", value);
-};
+}>();
 </script>

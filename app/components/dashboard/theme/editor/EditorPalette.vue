@@ -39,6 +39,7 @@ import {
   RotateCcw as ResetIcon,
   Import as ImportIcon,
 } from "lucide-vue-next";
+import type { LucideIcon } from "lucide-vue-next";
 import { toast } from "vue-sonner";
 import { DEFAULT_THEME_PALETTE } from "~/constant/default-theme.constant";
 
@@ -46,7 +47,7 @@ type Palette = Record<string, string>;
 
 interface ActionButton {
   id: "copy" | "paste" | "download" | "import" | "reset";
-  Icon: any;
+  Icon: LucideIcon;
   label: string;
 }
 

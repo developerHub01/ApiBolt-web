@@ -1,130 +1,187 @@
 <template>
   <form
+    @submit.prevent="handleUpdate"
     class="w-full h-full grid place-items-center"
-    @submit.prevent="handlePublish"
   >
-    <Card class="w-full border-0 gap-6 py-8 items-center max-w-4xl">
-      <DashboardThemeEditorHeader />
-      <CardContent class="w-full flex flex-col gap-6">
+    <Card class="w-full h-full border-0 gap-6 py-8 items-center max-w-4xl">
+      <DashboardThemeEditorHeader
+        heading="Edit Theme"
+        description="Modify your theme settings and save changes to the gallery."
+      />
+      <CardContent class="w-full flex flex-col gap-6 flex-1">
         <DashboardThemeEditorBasicInfo
           v-model:name="themeState.name"
           v-model:themeType="themeState.themeType"
-          :maxLength="THEME_PAYLOAD_SIZE.MAX_NAME"
         />
-        <DashboardThemeEditorPreview v-model:modelValue="themeState.preview" />
+        <DashboardThemeEditorPreview
+          :previewUrl="themeState.previewUrl"
+          @update:previewFile="handlePreviewChange"
+        />
         <DashboardThemeEditorPalette v-model:palette="themeState.palette" />
         <DashboardThemeEditorDescription
           v-model:modelValue="themeState.description"
-          :maxLength="THEME_PAYLOAD_SIZE.MAX_DESCRIPTION"
         />
       </CardContent>
-
       <CardFooter class="w-full flex gap-2 justify-end">
-        <Button type="submit" :disabled="!isEnableSubmit">
+        <Button
+          type="button"
+          variant="outline"
+          :disabled="isSubmitting || !hasUnsavedChanges"
+          @click="handleReset"
+        >
+          Reset
+        </Button>
+        <Button
+          type="submit"
+          :disabled="
+            isSubmitting ||
+            !themeState.description.trim() ||
+            !themeState.name.trim() ||
+            !hasUnsavedChanges
+          "
+        >
           <Spinner v-if="isSubmitting" />
-          Publish</Button
-        >
-        <Button variant="outline" type="button" @click="handleReset"
-          >Reset</Button
-        >
+          <span>{{ isSubmitting ? "Updating..." : "Update Theme" }}</span>
+        </Button>
       </CardFooter>
     </Card>
   </form>
 </template>
 
 <script setup lang="ts">
-import {
-  DEFAULT_THEME_PALETTE,
-  THEME_PAYLOAD_SIZE,
-} from "~/constant/default-theme.constant";
-import { Button } from "@/components/ui/button";
-import { isValidColor } from "~/utils/color.utils";
-import { useThemeAssets } from "~/composable/useThemeAssets";
 import { toast } from "vue-sonner";
-import { FetchError } from "ofetch";
-import type { TThemeType } from "~/types/theme.types";
+import { useThemeAssets } from "~/composable/useThemeAssets";
+import type { ApiResponse } from "~~/server/types";
+import type { ThemeInterface, TThemeType } from "~/types/theme.types";
 
-interface ThemeState {
+const route = useRoute();
+const themeId = route.params.id;
+const isSubmitting = ref(false);
+const { generateThemeAssets } = useThemeAssets();
+
+const serverBaseline = shallowRef<{
   name: string;
   themeType: TThemeType;
   palette: Record<string, string>;
   description: string;
-  preview: File | null;
-}
+  previewUrl: string;
+} | null>(null);
 
-const { generateThemeAssets } = useThemeAssets();
-
-const themeState = reactive<ThemeState>({
+const themeState = reactive({
   name: "",
-  themeType: "dark",
-  palette: { ...DEFAULT_THEME_PALETTE },
+  themeType: "dark" as TThemeType,
+  palette: {} as Record<string, string>,
   description: "",
-  preview: null,
+  previewUrl: "",
+  previewFile: null as File | null,
 });
 
-const isSubmitting = ref<boolean>(false);
-
-/* Compute validation states */
-const isNameValid = computed(
-  () =>
-    themeState.name.trim().length &&
-    themeState.name.length <= THEME_PAYLOAD_SIZE.MAX_NAME,
-);
-const isDescriptionValid = computed(
-  () =>
-    themeState.description.trim().length &&
-    themeState.description.length <= THEME_PAYLOAD_SIZE.MAX_DESCRIPTION,
-);
-const isPaletteValid = computed(() =>
-  Object.values(themeState.palette).every((c) => isValidColor(c)),
-);
-const isPreviewValid = computed(() => Boolean(themeState.preview));
-
-const isFormValid = computed(
-  () =>
-    isNameValid.value &&
-    isPreviewValid.value &&
-    isDescriptionValid.value &&
-    isPaletteValid.value,
+const { data: response } = await useFetch<ApiResponse<ThemeInterface>>(
+  `/api/v1/themes/${themeId}`,
 );
 
-const isEnableSubmit = computed(() => isFormValid.value && !isSubmitting.value);
+const syncFromResponse = (theme: ThemeInterface) => {
+  themeState.name = theme.name;
+  themeState.themeType = theme.type;
+  themeState.palette = {
+    ...theme.palette,
+  };
+  themeState.description = theme.description ?? "";
+  themeState.previewUrl = theme.preview;
 
-const handleReset = (): void => {
-  themeState.name = "";
-  themeState.themeType = "dark";
-  themeState.palette = { ...DEFAULT_THEME_PALETTE };
-  themeState.description = "";
-  themeState.preview = null;
+  serverBaseline.value = {
+    name: theme.name.trim(),
+    themeType: theme.type,
+    palette: {
+      ...theme.palette,
+    },
+    description: theme.description?.trim() ?? "",
+    previewUrl: theme.preview,
+  };
 };
 
-const handlePublish = async () => {
-  if (!isEnableSubmit) return;
+if (response.value?.data) syncFromResponse(response.value.data);
+
+const handleReset = () => {
+  if (!serverBaseline.value) return;
+
+  const base = serverBaseline.value;
+  themeState.name = base.name;
+  themeState.themeType = base.themeType;
+  themeState.palette = {
+    ...base.palette,
+  };
+  themeState.description = base.description;
+  themeState.previewUrl = base.previewUrl;
+
+  themeState.previewFile = null;
+
+  toast.info("Changes discarded");
+};
+
+const isPaletteDirty = computed(() => {
+  if (!serverBaseline.value) return false;
+  return Object.keys(themeState.palette).some(
+    (key) => themeState.palette[key] !== serverBaseline.value?.palette[key],
+  );
+});
+
+const hasUnsavedChanges = computed(() => {
+  if (!serverBaseline.value) return false;
+  const textChanged =
+    themeState.name.trim() !== serverBaseline.value.name ||
+    themeState.themeType !== serverBaseline.value.themeType ||
+    themeState.description.trim() !== serverBaseline.value.description;
+
+  return textChanged || isPaletteDirty.value || !!themeState.previewFile;
+});
+
+const handlePreviewChange = (file: File) => {
+  themeState.previewFile = file;
+  themeState.previewUrl = URL.createObjectURL(file);
+};
+
+const handleUpdate = async () => {
+  if (!hasUnsavedChanges.value || isSubmitting.value) return;
   isSubmitting.value = true;
 
   try {
-    const { preview, thumbnail } = await generateThemeAssets(
-      themeState.preview!,
+    const formData = new FormData();
+    const base = serverBaseline.value!;
+
+    if (themeState.name.trim() !== base.name)
+      formData.append("name", themeState.name.trim());
+    if (themeState.description.trim() !== base.description)
+      formData.append("description", themeState.description.trim());
+    if (themeState.themeType !== base.themeType)
+      formData.append("type", themeState.themeType);
+    if (isPaletteDirty.value)
+      formData.append("palette", JSON.stringify(themeState.palette));
+
+    if (themeState.previewFile) {
+      const { preview, thumbnail } = await generateThemeAssets(
+        themeState.previewFile,
+      );
+      formData.append("preview", preview);
+      formData.append("thumbnail", thumbnail);
+    }
+
+    const res = await $fetch<ApiResponse<ThemeInterface>>(
+      `/api/v1/themes/${themeId}`,
+      {
+        method: "PATCH",
+        body: formData,
+      },
     );
 
-    const formData = new FormData();
-    formData.append("preview", preview);
-    formData.append("thumbnail", thumbnail);
-    formData.append("name", themeState.name);
-    formData.append("description", themeState.description);
-    formData.append("themeType", themeState.themeType);
-    formData.append("palette", JSON.stringify(themeState.palette));
-
-    await $fetch("/api/v1/themes/publish", {
-      method: "POST",
-      body: formData,
-    });
-
-    toast.success("Theme Published!");
-    handleReset();
-  } catch (error) {
-    toast.error((error as FetchError).data?.message ?? "Publish failed");
-    console.error(error);
+    if (res.success && res.data) {
+      syncFromResponse(res.data);
+      themeState.previewUrl += `?t=${Date.now()}`;
+      themeState.previewFile = null;
+      toast.success("Theme Updated");
+    }
+  } catch (err) {
+    toast.error("Update Failed");
   } finally {
     isSubmitting.value = false;
   }
