@@ -40,6 +40,7 @@ const avatarUrl = profile.avatar_url ?? DEFAULT_PROFILE_AVATAR;
           width="300"
           height="300"
           class="size-full object-cover"
+          :alt="`${profile.full_name} ${profile.user_name} profile avatar`"
         />
       </div>
       <div

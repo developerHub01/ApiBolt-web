@@ -13,5 +13,6 @@ const devLink = "https://shakil-five.vercel.app/";
         >developer</NuxtLink
       >
     </p>
+    <a href="https://www.flaticon.com/free-icons/github" title="github icons" hidden="true">Github icons created by Freepik - Flaticon</a>
   </section>
 </template>
