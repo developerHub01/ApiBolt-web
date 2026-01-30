@@ -44,6 +44,29 @@ export type Database = {
         }
         Relationships: []
       }
+      theme_device_installs: {
+        Row: {
+          device_id: string
+          theme_id: string
+        }
+        Insert: {
+          device_id: string
+          theme_id?: string
+        }
+        Update: {
+          device_id?: string
+          theme_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "theme_device_install_theme_id_fkey"
+            columns: ["theme_id"]
+            isOneToOne: false
+            referencedRelation: "themes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       themes: {
         Row: {
           author: string
