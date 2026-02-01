@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import NotFound from "~/components/ui/NotFound.vue";
+import NotFound from "~/components/ui/not-found/NotFound.vue";
 </script>

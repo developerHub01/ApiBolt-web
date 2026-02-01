@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import NotFound from "~/components/ui/NotFound.vue";
+import NotFound from "~/components/ui/not-found/NotFound.vue";
 import type { ThemeInterface } from "~/types/theme.types";
 import type { ApiResponse } from "~~/server/types";
 
