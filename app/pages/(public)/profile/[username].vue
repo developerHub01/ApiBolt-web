@@ -7,8 +7,13 @@
       class="flex-1"
     />
     <template v-else>
-      <ProfileTop :profile="data!.data!" class="py-4" />
-      <ProfileAllThemesByUserName :username="userName" />
+      <div class="relative">
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/20 rounded-full blur-[150px] pointer-events-none opacity-50"
+        />
+        <ProfileTop :profile="data!.data!" class="p-4" />
+      </div>
+      <ProfileAllThemesByUserName :username="userName" class="px-4" />
     </template>
   </section>
 </template>

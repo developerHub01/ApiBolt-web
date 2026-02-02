@@ -1,16 +1,25 @@
 <template>
-  <section class="w-full flex flex-col gap-5 py-15 items-center">
-    <h2 class="text-2xl font-bold">My top themes:</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <section class="w-full flex flex-col gap-8 py-20 items-center">
+    <div class="text-center space-y-2">
+      <h2 class="text-3xl font-bold tracking-tight">Top Creations</h2>
+      <p class="text-muted-foreground text-lg">
+        Most popular themes by this author.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
       <ThemesCard
         v-for="theme in themes"
+        :key="theme.id"
         v-bind="theme"
         :author="author"
         :showAuthor="false"
+        class="h-full"
       />
     </div>
     <NuxtLink to="/dashboard/themes">
-      <Button class="self-center cursor-pointer">See All Themes</Button>
+      <Button variant="outline" class="rounded-full px-8">
+        Explore All Themes
+      </Button>
     </NuxtLink>
   </section>
 </template>

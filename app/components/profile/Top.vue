@@ -13,36 +13,57 @@
         }"
       />
     </AspectRatio>
-    <div
-      class="w-4/5 max-w-xl shadow-2xl rounded-lg bg-background p-5 flex justify-center items-center flex-col gap-4 -mt-10 md:-mt-25 lg:-mt-30 z-10"
-    >
+    <div class="w-full max-w-4xl -mt-16 md:-mt-24 lg:-mt-28 z-10 px-4">
       <div
-        class="size-30 md:size-40 lg:size-45 rounded-full overflow-hidden border-3"
+        class="bg-card/30 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-8"
       >
-        <NuxtImg
-          :src="avatarUrl"
-          width="300"
-          height="300"
-          class="size-full object-cover"
-          :alt="`${profile.full_name} ${profile.user_name} profile avatar`"
-        />
-      </div>
-      <div
-        class="flex flex-col justify-center items-center w-full max-w-lg text-center gap-2"
-      >
-        <h1 class="text-2xl font-bold line-clamp-1">{{ profile.full_name }}</h1>
-        <NuxtLink
-          :to="`https://github.com/${profile.user_name}`"
-          target="_blank"
+        <div
+          class="size-32 md:size-40 lg:size-48 rounded-full overflow-hidden border-4 border-primary/20 p-1 bg-linear-to-tr from-primary/50 to-transparent shadow-xl"
         >
-          <Button class="w-fit cursor-pointer">
-            <GithubIcon />
-            {{ profile.user_name }}
-          </Button>
-        </NuxtLink>
-        <p v-if="profile.bio">
-          {{ profile.bio }}
-        </p>
+          <NuxtImg
+            :src="avatarUrl"
+            width="300"
+            height="300"
+            class="size-full rounded-full object-cover bg-background"
+            :alt="`${profile.full_name} ${profile.user_name} profile avatar`"
+          />
+        </div>
+
+        <div
+          class="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-4 pb-2"
+        >
+          <div class="space-y-1">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+              {{ profile.full_name }}
+            </h1>
+            <p class="text-primary font-medium text-lg">
+              @{{ profile.user_name }}
+            </p>
+          </div>
+
+          <p
+            v-if="profile.bio"
+            class="text-muted-foreground max-w-2xl text-base md:text-lg leading-relaxed"
+          >
+            {{ profile.bio }}
+          </p>
+
+          <div class="flex items-center gap-3 pt-2">
+            <NuxtLink
+              :to="`https://github.com/${profile.user_name}`"
+              target="_blank"
+            >
+              <Button
+                class="rounded-full px-6 transition-all hover:scale-105 active:scale-95"
+              >
+                <GithubIcon class="mr-2 h-4 w-4" />
+                View on GitHub
+              </Button>
+            </NuxtLink>
+
+            <!-- Optional: Add more social links or actions here -->
+          </div>
+        </div>
       </div>
     </div>
   </section>
