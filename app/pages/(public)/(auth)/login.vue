@@ -1,33 +1,63 @@
 <template>
-  <div class="flex flex-1 w-full flex-col items-center justify-center py-12">
+  <div
+    class="relative flex flex-1 w-full flex-col items-center justify-center py-20 px-4 overflow-hidden"
+  >
+    <!-- Decorative Background Elements -->
+    <div
+      class="absolute top-1/4 -left-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
+    <div
+      class="absolute bottom-1/4 -right-20 size-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
+
     <Card
-      class="w-full max-w-100 h-full max-h-120 rounded-lg p-8 shadow-xl flex flex-col justify-center items-center"
+      class="w-full max-w-md bg-card/30 backdrop-blur-2xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] rounded-3xl md:p-12 flex flex-col items-center relative z-10"
     >
-      <div class="mb-8 flex flex-col items-center text-center">
-        <NuxtImg
-          src="/logo.svg"
-          class="size-12 object-contain mb-4 shadow-2xl"
-          alt="api-bolt login"
-        />
-        <h1 class="text-2xl font-bold tracking-tight text-foreground">
-          APIBolt
+      <div class="mb-5 flex flex-col items-center text-center">
+        <div
+          class="size-16 rounded-2xl bg-linear-to-tr from-primary/20 to-transparent p-3 border border-white/10 mb-6 shadow-2xl"
+        >
+          <NuxtImg
+            src="/logo.svg"
+            class="size-full object-contain"
+            alt="api-bolt logo"
+          />
+        </div>
+        <h1
+          class="text-3xl font-bold tracking-tight text-foreground bg-clip-text"
+        >
+          Welcome back
         </h1>
-        <p class="mt-1 text-sm text-muted-foreground">
-          Sign in to your dashboard
+        <p
+          class="mt-3 text-muted-foreground text-base leading-relaxed max-w-[280px]"
+        >
+          Sign in to your account and continue your masterpiece.
         </p>
       </div>
+
       <Button
         @click="handleSignInWithGithub"
-        class="flex h-12 w-full items-center justify-center gap-3 rounded-lg bg-white font-bold text-black transition-all hover:bg-zinc-200 active:scale-[0.98]"
+        class="flex h-14 w-full items-center justify-center gap-4 rounded-full bg-foreground text-background font-bold transition-all hover:bg-foreground/90 active:scale-[0.98] shadow-xl"
       >
         <NuxtImg
           src="/images/github.png"
-          alt="api-bolt github login"
-          :width="25"
-          :height="25"
+          alt="github logo"
+          class="size-6 invert dark:invert-0"
         />
         Continue with GitHub
       </Button>
+
+      <div class="mt-4 pt-4 border-t border-white/5 w-full text-center">
+        <NuxtLink to="/">
+          <Button
+            variant="link"
+            class="text-muted-foreground hover:text-primary transition-colors text-sm"
+          >
+            <ArrowLeft class="size-4 mr-2" />
+            Back to home
+          </Button>
+        </NuxtLink>
+      </div>
     </Card>
   </div>
 </template>
@@ -36,6 +66,7 @@
 import Button from "~/components/ui/button/Button.vue";
 import { Card } from "~/components/ui/card";
 import { useAuth } from "~/composable/useUserAuth";
+import { ArrowLeft } from "lucide-vue-next";
 
 definePageMeta({
   middleware: ["prevent-if-auth"],
@@ -44,7 +75,7 @@ definePageMeta({
 const authTitle = "Sign in to APIBolt";
 const authDescription =
   "Log in to your APIBolt account to manage your themes and accelerate your workflow.";
-  
+
 useSeoMeta({
   title: authTitle,
   ogTitle: authTitle,
