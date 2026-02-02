@@ -1,15 +1,17 @@
 <template>
-  <section class="w-full h-full flex flex-col gap-8 container mx-auto pb-15">
+  <section
+    class="w-full h-full flex flex-col gap-8 container mx-auto px-6 pt-15 pb-20"
+  >
     <h1 class="sr-only">Theme Gallery</h1>
     <ThemesSearch
       @search="handleSearch"
       :searchTerm="searchParams.searchTerm"
       :themeType="searchParams.themeType"
       :disabled="isLoading"
-      heading="Theme marketplace"
+      heading="Explore Themes"
     />
     <template v-if="isLoading || themeList.length">
-      <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <section class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <ThemesCardSkeleton
           v-if="isLoading"
           v-for="(_, index) in pageSize"
