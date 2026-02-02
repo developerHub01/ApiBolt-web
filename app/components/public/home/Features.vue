@@ -1,48 +1,62 @@
 <template>
   <section
-    v-for="(feature, index) in features"
-    :key="feature.id"
-    :class="[
-      'min-h-screen flex items-center border-b border-border px-6 py-20',
-      !(index % 2) ? 'bg-background' : 'bg-card/30',
-    ]"
+    class="py-32 px-6 bg-linear-to-b from-background to-muted/20 overflow-hidden"
   >
-    <div class="max-w-6xl mx-auto w-full">
-      <div
-        :class="[
-          'grid grid-cols-1 md:grid-cols-2 gap-15 items-center',
-          'md:grid-cols-2',
-        ]"
-      >
-        <!-- Content -->
-        <div :class="index % 2 ? 'md:order-2' : 'md:order-1'">
-          <div class="mb-4">
-            <span class="text-primary text-sm font-mono">
-              [{{ String(feature.id).padStart(2, "0") }}]
-            </span>
-          </div>
-          <h2 class="text-4xl md:text-5xl font-bold mb-4">
-            {{ feature.title }}
-          </h2>
-          <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
-            {{ feature.description }}
-          </p>
-        </div>
+    <div class="container mx-auto">
+      <!-- Section header -->
+      <SectionHeader
+        title="Power-Packed Features"
+        description="Every tool you need to master your API workflow"
+        class="text-center"
+      />
 
-        <!-- Image Placeholder -->
+      <!-- Features grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
-          :class="[
-            'aspect-video flex items-center justify-center px-3',
-            index % 2 ? 'md:order-1' : 'md:order-2',
-          ]"
+          v-for="feature in features"
+          :key="feature.id"
+          class="feature-card group relative flex flex-col gap-4 rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md overflow-hidden hover:border-primary/30 transition-colors duration-500 opacity-0 p-5"
+          @mousemove="handleMouseMove"
         >
-          <PublicHomePreviewSliders :images="feature.images" />
-          <div class="text-center" v-if="false" v-for="image in feature.images">
-            <div class="text-4xl text-primary mb-4 font-mono">
-              {{ index % 2 ? "◀" : "▶" }}
+          <div
+            class="absolute w-[500px] h-[500px] bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-50%] translate-y-[-50%] left-(--mouse-x) top-(--mouse-y) z-0"
+          />
+          <AspectRatio
+            :ratio="16 / 9"
+            class="relative w-full rounded-lg overflow-hidden bg-muted/20 border-2 border-white/5 z-10"
+          >
+            <template v-if="feature.image">
+              <NuxtImg
+                :src="feature.image"
+                :alt="feature.title"
+                class="w-full h-full object-cover transition-all duration-700 ease-out"
+                loading="lazy"
+              />
+            </template>
+            <div
+              v-else
+              class="w-full h-full flex items-center justify-center bg-muted transition-colors duration-500"
+            >
+              <component
+                :is="feature.icon"
+                class="w-12 h-12 text-muted-foreground/50 group-hover:text-primary group-hover:scale-110 transition-all duration-500"
+              />
             </div>
-            <p class="text-muted-foreground text-sm">
-              {{ image.alt }}
+          </AspectRatio>
+
+          <div class="relative flex-1 flex flex-col z-10">
+            <div
+              class="mb-4 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300"
+            >
+              <component :is="feature.icon" class="w-5 h-5" />
+            </div>
+            <h3
+              class="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-300"
+            >
+              {{ feature.title }}
+            </h3>
+            <p class="text-muted-foreground leading-relaxed text-sm">
+              {{ feature.description }}
             </p>
           </div>
         </div>
@@ -52,884 +66,322 @@
 </template>
 
 <script setup lang="ts">
-interface Feature {
-  id: number;
-  title: string;
-  description: string;
-  images: Array<{
-    alt: string;
-    src: string;
-  }>;
-}
+import {
+  Lock,
+  FolderTree,
+  Layers,
+  Code2,
+  Eye,
+  FileText,
+  Cookie,
+  Variable,
+  Key,
+  Download,
+  Upload,
+  Palette,
+  Keyboard,
+  Image as ImageIcon,
+  Settings,
+  HardDrive,
+  WifiOff,
+} from "lucide-vue-next";
+import SectionHeader from "@/components/public/home/SectionHeader.vue";
+import type { HomeFeatureInterface } from "~/types/public.types";
 
-const features: Array<Feature> = [
+const handleMouseMove = (e: MouseEvent) => {
+  const target = e.currentTarget as HTMLElement;
+  const rect = target.getBoundingClientRect();
+  target.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+  target.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+};
+
+onMounted(() => {
+  const { $gsap, $ScrollTrigger } = useNuxtApp();
+
+  if ($gsap && $ScrollTrigger) {
+    // Individual Card Animations using Batch
+    $ScrollTrigger.batch(".feature-card", {
+      onEnter: (elements) => {
+        $gsap.fromTo(
+          elements,
+          {
+            autoAlpha: 0,
+            y: 60,
+            scale: 0.9,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out",
+            overwrite: true,
+          },
+        );
+      },
+      onLeave: (elements) => {
+        $gsap.to(elements, {
+          autoAlpha: 0,
+          y: -60,
+          scale: 0.9,
+          stagger: 0.05,
+          duration: 0.6,
+          ease: "power2.in",
+          overwrite: true,
+        });
+      },
+      onEnterBack: (elements) => {
+        $gsap.to(elements, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+          overwrite: true,
+        });
+      },
+      onLeaveBack: (elements) => {
+        $gsap.to(elements, {
+          autoAlpha: 0,
+          y: 60,
+          scale: 0.9,
+          stagger: 0.05,
+          duration: 0.6,
+          ease: "power2.in",
+          overwrite: true,
+        });
+      },
+      start: "top 85%",
+      end: "bottom 15%",
+    });
+  }
+});
+
+const features: Array<HomeFeatureInterface> = [
   {
     id: 1,
-    title: "Local Password Protection",
+    title: "Password Protection",
     description:
-      "ApiBolt provides an optional local password lock that secures the entire application. All projects, requests, tokens, cookies, and configurations are blocked until the correct password is entered. Fully offline and self-contained.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Secure your app with local password protection. All data stays encrypted on your machine.",
+    image: "/images/home/app-preview/password_protection.png",
+    icon: Lock,
   },
   {
     id: 2,
-    title: "Offline-First Architecture",
+    title: "Works Offline",
     description:
-      "Every feature of ApiBolt works offline without requiring an account or cloud sync. Projects, requests, themes, and exports function entirely locally with zero telemetry.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "No internet required. Everything runs locally on your desktop.",
+    image: null,
+    icon: WifiOff,
   },
   {
     id: 3,
-    title: "Isolated Multi-Project System",
+    title: "Project Management",
     description:
-      "Each project operates in complete isolation. Cookies, environments, requests, and themes from one project never affect another, allowing parallel work safely.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Organize your work into separate projects. Each project is completely isolated.",
+    image: "/images/home/app-preview/project_management.png",
+    icon: FolderTree,
   },
   {
     id: 4,
-    title: "Multiple Project Windows",
+    title: "Request Collections",
     description:
-      "Open multiple projects simultaneously, each with its own independent window and workspace context, without shared state.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Group related requests into folders and collections for better organization.",
+    image: "/images/home/app-preview/request_collections.png",
+    icon: FolderTree,
   },
   {
     id: 5,
-    title: "Request Collections & Folder Structure",
+    title: "Tab Management",
     description:
-      "Organize API requests into folders and collections for clean, scalable project organization, ideal for large APIs or enterprise projects.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Open multiple requests in tabs. Switch between them without losing your work.",
+    image: "/images/home/app-preview/tab_management.png",
+    icon: Layers,
   },
   {
     id: 6,
-    title: "Advanced Tab Management",
+    title: "Session Persistence",
     description:
-      "Open each request in a tab. Switch between multiple requests without losing state, making testing fast and efficient.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Your tabs and work are saved automatically. Pick up right where you left off.",
+    image: null,
+    icon: HardDrive,
   },
   {
     id: 7,
-    title: "Tab Session Persistence",
-    description:
-      "All open tabs and their states are restored after app restart. No context or work is lost between sessions.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "HTTP Methods",
+    description: "Full support for GET, POST, PUT, PATCH, DELETE requests.",
+    image: "/images/home/app-preview/http_methods.png",
+    icon: Code2,
   },
   {
     id: 8,
-    title: "HTTP Method Support",
+    title: "Request Editor",
     description:
-      "Full support for GET, POST, PUT, PATCH, DELETE, OPTIONS, and HEAD requests for complete API testing.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Clean editor for request bodies. Supports JSON, text, and custom payloads.",
+    image: "/images/home/app-preview/request_editor.png",
+    icon: FileText,
   },
   {
     id: 9,
-    title: "Request Body Editor",
+    title: "Response Viewer",
     description:
-      "Raw request editor with adjustable font size and layout density. Handles JSON, text, and custom payloads comfortably.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "View formatted or raw responses. Adjust font size for better readability.",
+    image: "/images/home/app-preview/response_viewer.png",
+    icon: Eye,
   },
   {
     id: 10,
-    title: "Response Viewer",
-    description:
-      "Displays formatted responses with optional raw view. Font size and layout adjustable for readability.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Raw Response",
+    description: "Inspect unformatted response data for debugging.",
+    image: "/images/home/app-preview/raw_response.png",
+    icon: Code2,
   },
   {
     id: 11,
-    title: "Raw Response Inspection",
-    description:
-      "Inspect unformatted raw response data for debugging and protocol-level analysis.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Header Management",
+    description: "Add, edit, or disable request headers with full control.",
+    image: "/images/home/app-preview/header_management.png",
+    icon: Settings,
   },
   {
     id: 12,
-    title: "Request Header Management",
+    title: "Response Headers",
     description:
-      "Add, edit, enable, or disable individual request headers for precise control over API calls.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "View all headers returned by the server including cookies and metadata.",
+    image: "/images/home/app-preview/response_headers.png",
+    icon: Eye,
   },
   {
     id: 13,
-    title: "Response Header Viewer",
+    title: "Request History",
     description:
-      "View all response headers returned by the server, including cookies, auth, caching, and transport metadata.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "View all headers returned by the server including cookies and metadata.",
+    image: "/images/home/app-preview/request_history.png",
+    icon: Eye,
   },
   {
     id: 14,
-    title: "Cookie Management System",
-    description:
-      "Automatically captures and manages cookies per project. Manual editing and full CRUD operations are supported.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Cookie Management",
+    description: "Automatically captures and manages cookies per project.",
+    image: "/images/home/app-preview/cookie_management.png",
+    icon: Cookie,
   },
   {
     id: 15,
     title: "Environment Variables",
-    description:
-      "Supports variables that can only be injected into request parameters. Scoped per project and resolved at execution time.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    description: "Use variables in your requests. Scoped per project.",
+    image: "/images/home/app-preview/environment_variables.png",
+    icon: Variable,
   },
   {
     id: 16,
-    title: "Execution-Time Variable Resolution",
+    title: "Variable Resolution",
     description:
-      "Variables and request data resolve during request execution, ensuring predictable and debuggable behavior.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Variables resolve when you send the request for predictable behavior.",
+    image: "/images/home/app-preview/variable_resolution.png",
+    icon: Variable,
   },
   {
     id: 17,
-    title: "Authentication Handling",
-    description:
-      "Supports API Key, Bearer, Basic, JWT, and no-auth modes, with project-level configuration and inheritance.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Authentication",
+    description: "Supports API Key, Bearer, Basic, JWT, and no-auth modes.",
+    image: "/images/home/app-preview/authentication.png",
+    icon: Key,
   },
   {
     id: 18,
-    title: "Automatic Code Snippet Generation",
+    title: "Code Generation",
     description:
-      "Generates client code snippets in multiple languages based on the current request, including headers, parameters, and body.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Generate code snippets in multiple languages from your requests.",
+    image: "/images/home/app-preview/code_generation.png",
+    icon: Code2,
   },
   {
     id: 19,
-    title: "Client Code Generator",
+    title: "Import System",
     description:
-      "Generates full client request templates for different languages and frameworks based on request configuration.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+      "Import requests, folders, or entire projects without overwriting data.",
+    image: null,
+    icon: Download,
   },
   {
     id: 20,
-    title: "Import System",
-    description:
-      "Import individual requests, folders, collections, or entire projects into the workspace without overwriting existing data.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Export System",
+    description: "Export your work as files for backup or sharing.",
+    image: null,
+    icon: Upload,
   },
   {
     id: 21,
-    title: "Export System",
-    description:
-      "Export requests, folders, collections, or entire projects as local files for backup, sharing, or migration.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Documentation",
+    description: "Write markdown notes for each folder to document your APIs.",
+    image: "/images/home/app-preview/documentation.png",
+    icon: FileText,
   },
   {
     id: 22,
-    title: "Folder Documentation Editor",
-    description:
-      "Write markdown-based notes for each folder to document API endpoints, workflows, or instructions.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Layout Customization",
+    description: "Resize panels and adjust UI density to match your workflow.",
+    image: "/images/home/app-preview/layout_customization.png",
+    icon: Settings,
   },
   {
     id: 23,
-    title: "Deep Layout Customization",
-    description:
-      "Resize and rearrange panels, adjust UI density, and configure panel visibility for a personalized workflow.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Font Controls",
+    description: "Adjust font size separately for editors and viewers.",
+    image: "/images/home/app-preview/font_controls.png",
+    icon: Settings,
   },
   {
     id: 24,
-    title: "Independent Font Size Controls",
-    description:
-      "Adjust font size for request body editors and response viewers separately to enhance readability.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Keyboard Shortcuts",
+    description: "Customize shortcuts for every action to work faster.",
+    image: "/images/home/app-preview/keyboard_shortcuts.png",
+    icon: Keyboard,
   },
   {
     id: 25,
-    title: "Custom Keyboard Shortcuts",
-    description:
-      "Every major action can have a custom keyboard shortcut, allowing personalized high-speed workflows.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Custom Wallpapers",
+    description: "Set background images to personalize your workspace.",
+    image: "/images/home/app-preview/custom_wallpapers.png",
+    icon: ImageIcon,
   },
   {
     id: 26,
-    title: "Background Wallpaper Support",
-    description:
-      "Set custom wallpapers behind panels to personalize the workspace, similar to advanced code editor extensions.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Theme Builder",
+    description: "Customize colors for every UI element.",
+    image: "/images/home/app-preview/theme_builder.png",
+    icon: Palette,
   },
   {
     id: 27,
-    title: "Color-Based Theme Builder",
-    description:
-      "Strictly color customization for UI elements, request types, response states, and environment indicators. Typography and layout are unaffected.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Theme Marketplace",
+    description: "Download and share color themes with other users.",
+    image: "/images/home/app-preview/theme_marketplace.png",
+    icon: Palette,
   },
   {
     id: 28,
-    title: "Theme Marketplace",
-    description:
-      "Publish and download color themes from the integrated marketplace. Share visual styles across machines or teams.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Project Themes",
+    description: "Different themes for different projects.",
+    image: "/images/home/app-preview/project_themes.png",
+    icon: Palette,
   },
   {
     id: 29,
-    title: "Theme Isolation Per Project",
-    description:
-      "Themes applied in one project do not affect other projects, keeping visual separation intact.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "Auto-Save",
+    description: "All settings and states are saved automatically.",
+    image: null,
+    icon: HardDrive,
   },
   {
     id: 30,
-    title: "Session Persistence",
-    description:
-      "All user settings, open tabs, layout, and project states are saved and restored across restarts.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
-  },
-  {
-    id: 31,
-    title: "No Vendor Lock-In",
-    description:
-      "All project data is stored locally. Users have full export and backup options with zero cloud dependency.",
-    images: [
-      {
-        alt: "api-bolt set local password",
-        src: "/images/home/password/local-password-1.png",
-      },
-      {
-        alt: "api-bolt change or disable local passowrd",
-        src: "/images/home/password/local-password-2.png",
-      },
-      {
-        alt: "api-bolt disable local password",
-        src: "/images/home/password/local-password-3.png",
-      },
-      {
-        alt: "api-bolt protection to modify or access local password",
-        src: "/images/home/password/local-password-4.png",
-      },
-      {
-        alt: "api-bolt local password to open the app",
-        src: "/images/home/password/local-password-5.png",
-      },
-    ],
+    title: "No Lock-In",
+    description: "Your data is yours. Export everything anytime.",
+    image: null,
+    icon: Download,
   },
 ];
 </script>

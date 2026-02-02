@@ -192,6 +192,9 @@
   img {
     @apply select-none;
   }
+  button {
+    @apply cursor-pointer;
+  }
   [data-slot="badge"] {
     @apply select-none;
   }

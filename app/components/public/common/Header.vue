@@ -1,28 +1,108 @@
 <template>
-  <section class="w-full flex items-center justify-center py-2">
-    <header class="container flex items-center justify-between gap-2 py-2">
+  <section
+    class="sticky top-0 w-full flex items-center justify-center py-4 z-50 border-white/5"
+  >
+    <header class="container flex items-center justify-between gap-6 px-4">
       <NuxtLink
         to="/"
-        class="text-lg font-bold select-none flex items-center gap-2"
+        class="text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95"
       >
-        <NuxtImg src="/logo.svg" class="size-7" alt="api-bolt" />
-        APIBolt
+        <NuxtImg src="/logo.svg" class="size-8" alt="api-bolt" />
+        <span class="tracking-tighter">APIBolt</span>
       </NuxtLink>
-      <div class="flex items-center gap-4">
-        <template v-for="{ to, label } in items">
-          <NuxtLink :to="to">
-            <Button variant="link" size="lg" class="px-1 cursor-pointer">
-              {{ label }}
-            </Button>
-          </NuxtLink>
-        </template>
+
+      <div class="flex items-center gap-2">
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1 mr-4">
+          <template v-for="{ to, label, active } in items">
+            <NuxtLink :to="to">
+              <Button
+                variant="ghost"
+                class="px-4 rounded-full font-medium transition-all"
+                :class="
+                  active
+                    ? 'bg-primary/10 text-primary hover:bg-primary/20'
+                    : 'text-muted-foreground hover:text-foreground'
+                "
+              >
+                {{ label }}
+              </Button>
+            </NuxtLink>
+          </template>
+        </nav>
+
+        <!-- Profile Menu -->
         <PublicCommonProfileMenu />
+
+        <!-- Mobile Nav Menu -->
+        <Sheet>
+          <SheetTrigger as-child>
+            <Button
+              variant="ghost"
+              size="icon"
+              class="md:hidden rounded-full hover:bg-primary/10 hover:text-primary"
+            >
+              <Menu class="size-6" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent
+            side="right"
+            class="w-[300px] bg-card/80 backdrop-blur-xl border-white/5 p-8 flex flex-col gap-8"
+          >
+            <SheetHeader class="text-left">
+              <SheetTitle class="flex items-center gap-2">
+                <NuxtImg src="/logo.svg" class="size-6" alt="api-bolt" />
+                <span class="font-black tracking-tighter">APIBolt</span>
+              </SheetTitle>
+              <SheetDescription class="text-xs">
+                Accelerate your workflow with premium API themes.
+              </SheetDescription>
+            </SheetHeader>
+
+            <nav class="flex flex-col gap-2 mt-4">
+              <template v-for="{ to, label, active } in items">
+                <NuxtLink :to="to">
+                  <SheetClose as-child>
+                    <Button
+                      variant="ghost"
+                      class="w-full justify-start h-12 rounded-xl text-base font-medium transition-all"
+                      :class="
+                        active
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-muted-foreground hover:bg-white/5'
+                      "
+                    >
+                      {{ label }}
+                    </Button>
+                  </SheetClose>
+                </NuxtLink>
+              </template>
+            </nav>
+
+            <div class="mt-auto pt-8 border-t border-white/5">
+              <p class="text-xs text-muted-foreground">
+                © {{ new Date().getFullYear() }} APIBolt
+              </p>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   </section>
 </template>
 
 <script setup lang="ts">
+import { Menu } from "lucide-vue-next";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 const route = useRoute();
 
 const items = computed(() => [

@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import "vue-sonner/style.css";
-import { Toaster } from "@/components/ui/sonner";
-</script>
-
 <template>
   <NuxtRouteAnnouncer />
   <section class="w-full h-full min-h-screen flex flex-col">
@@ -14,3 +9,8 @@ import { Toaster } from "@/components/ui/sonner";
     <Toaster />
   </section>
 </template>
+
+<script setup lang="ts">
+import "vue-sonner/style.css";
+import { Toaster } from "@/components/ui/sonner";
+</script>

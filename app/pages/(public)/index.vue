@@ -1,8 +1,11 @@
 <template>
-  <main class="min-h-screen bg-background text-foreground font-sans mx-auto">
+  <main
+    class="min-h-screen w-full bg-background text-foreground font-sans mx-auto"
+  >
     <PublicHomeHero />
-    <!-- Feature Sections -->
+    <PublicHomeVideoSection />
     <PublicHomeFeatures />
+    <PublicHomeCallToAction />
   </main>
 </template>
 
@@ -12,10 +15,10 @@ definePageMeta({
 });
 
 /* SEO ====================== */
-const seoTitle = computed(() => "ApiBolt - Industrial API Tester");
+const seoTitle = computed(() => "ApiBolt - Industrial API Testing Desktop App");
 const seoDescription = computed(
   () =>
-    "Industrial-grade API management platform. Local-first. Zero cloud. Zero telemetry.",
+    "Powerful desktop application for API development, testing, and debugging. Local-first. Zero cloud. Zero telemetry. Available for Windows, macOS, and Linux.",
 );
 useSeoMeta({
   title: seoTitle,
@@ -23,6 +26,6 @@ useSeoMeta({
   description: seoDescription,
   ogDescription: seoDescription,
   ogImage: "/logo.svg",
-  twitterCard: "summary",
+  twitterCard: "summary_large_image",
 });
 </script>

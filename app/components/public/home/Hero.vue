@@ -1,47 +1,84 @@
 <template>
   <section
-    class="min-h-screen flex items-center justify-center border-b border-border px-6 py-20"
+    class="relative min-h-screen flex items-center justify-center px-6 pt-45 pb-20 -mt-24 overflow-hidden"
   >
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="mb-8">
-        <h1
-          class="text-5xl md:text-7xl font-extrabold mb-4 flex justify-center items-center gap-2"
+    <PublicHomeHeroAnimatedBg />
+    <div class="relative z-10 container mx-auto text-center">
+      <div ref="logoRef" class="mb-6 opacity-0 translate-y-8">
+        <NuxtImg
+          src="/logo.svg"
+          class="w-24 h-24 mx-auto drop-shadow-2xl"
+          alt="ApiBolt"
+        />
+      </div>
+      <h1
+        ref="headingRef"
+        class="text-7xl md:text-9xl font-black tracking-tighter mb-8 opacity-0 translate-y-8"
+      >
+        <span
+          class="inline-block bg-linear-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent"
         >
-          <NuxtImg src="/logo.svg" class="size-10 md:size-14" alt="api-bolt" />
           API<span class="text-primary">Bolt</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-muted-foreground mb-2">
-          Industrial-Grade API Management Platform
-        </p>
-      </div>
-      <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-        The complete toolkit for API development, testing, and debugging.
-        Local-first. Zero cloud. Zero telemetry.
+        </span>
+      </h1>
+      <p
+        ref="subtitleRef"
+        class="text-3xl md:text-4xl text-muted-foreground font-bold mb-6 opacity-0 translate-y-8"
+      >
+        Desktop API Testing
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button
-          class="bg-primary text-primary-foreground px-8 py-3 text-lg hover:bg-opacity-90 transition-all"
+      <p
+        ref="descRef"
+        class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 opacity-0 translate-y-8"
+      >
+        Test and debug APIs on your machine. No cloud, no tracking, no BS.<br
+          class="hidden md:block"
+        />
+        Just a powerful desktop app that respects your privacy.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div
+        ref="ctaRef"
+        class="flex flex-col sm:flex-row gap-6 justify-center mb-20 opacity-0 scale-90"
+      >
+        <NuxtLink
+          v-for="{ id, label, href } in ctaButtonList"
+          :key="id"
+          :to="href"
+          target="_blank"
         >
-          Start Building
-        </button>
-        <button
-          class="px-8 py-3 text-lg border border-border text-foreground hover:bg-accent/10 transition-colors"
-        >
-          View Docs
-        </button>
-      </div>
-      <div class="mt-12 pt-8 border-t border-border">
-        <p class="text-sm text-muted-foreground mb-4">
-          Enterprise-Grade Features
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span
-            v-for="badge in badges"
-            :key="badge"
-            class="px-4 py-2 border border-border text-sm"
+          <button
+            class="group relative px-12 py-5 bg-primary text-primary-foreground rounded-2xl font-bold text-lg overflow-hidden shadow-[0_0_40px_-10px] hover:shadow-primary/50 hover:scale-105 transition-all duration-300 cursor-pointer"
           >
-            {{ badge }}
-          </span>
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              <Download class="w-6 h-6" />
+              {{ label }}
+            </span>
+            <div
+              class="absolute inset-0 bg-linear-to-r from-primary to-primary/80 group-hover:scale-105 transition-transform"
+            />
+          </button>
+        </NuxtLink>
+      </div>
+
+      <!-- Feature highlights -->
+      <div
+        ref="featuresRef"
+        class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto opacity-0 translate-y-8"
+      >
+        <div
+          v-for="{ id, title, icon, description } in featureList"
+          :key="id"
+          class="group p-8 rounded-3xl border-2 border-border/50 bg-card/50 backdrop-blur-xl hover:border-primary/50 hover:bg-card transition-all duration-300 hover:scale-105"
+        >
+          <div
+            class="mb-4 p-4 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 inline-block"
+          >
+            <component :is="icon" class="w-8 h-8 text-primary" />
+          </div>
+          <h3 class="font-bold text-lg mb-1">{{ title }}</h3>
+          <p class="text-sm text-muted-foreground">{{ description }}</p>
         </div>
       </div>
     </div>
@@ -49,10 +86,130 @@
 </template>
 
 <script setup lang="ts">
-const badges = [
-  "31 Core Features",
-  "AES-256 Encryption",
-  "Zero Telemetry",
-  "Local-First",
+import { Download, Lock, ShieldOff, HardDrive, WifiOff } from "lucide-vue-next";
+
+const ctaButtonList = [
+  {
+    id: "windows",
+    label: "Windows",
+    icon: "Download",
+    href: "https://github.com/api-bolt/api-bolt/releases/download/v1.0.0/api-bolt-1.0.0-win-x64.exe",
+  },
+  {
+    id: "linux",
+    label: "Linux",
+    icon: "Download",
+    href: "https://github.com/api-bolt/api-bolt/releases/download/v1.0.0/api-bolt-1.0.0-linux-x64.AppImage",
+  },
 ];
+
+const featureList = [
+  {
+    id: "encrypted",
+    title: "Encrypted",
+    description: "AES-256",
+    icon: Lock,
+  },
+  {
+    id: "private",
+    title: "Private",
+    description: "Zero tracking",
+    icon: ShieldOff,
+  },
+  {
+    id: "local",
+    title: "Local",
+    description: "100% offline",
+    icon: HardDrive,
+  },
+  {
+    id: "offline",
+    title: "Offline",
+    description: "No internet needed",
+    icon: WifiOff,
+  },
+];
+
+// Element refs
+const logoRef = ref<HTMLElement | null>(null);
+const headingRef = ref<HTMLElement | null>(null);
+const subtitleRef = ref<HTMLElement | null>(null);
+const descRef = ref<HTMLElement | null>(null);
+const ctaRef = ref<HTMLElement | null>(null);
+const featuresRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  const { $gsap } = useNuxtApp();
+
+  if ($gsap) {
+    const tl = $gsap.timeline({
+      defaults: {
+        ease: "power4.out",
+      },
+    });
+
+    if (
+      logoRef.value &&
+      headingRef.value &&
+      subtitleRef.value &&
+      descRef.value &&
+      ctaRef.value &&
+      featuresRef.value
+    ) {
+      tl.to(logoRef.value, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "back.out(1.7)",
+      })
+        .to(
+          headingRef.value,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.6",
+        )
+        .to(
+          subtitleRef.value,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+          },
+          "-=0.8",
+        )
+        .to(
+          descRef.value,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+          },
+          "-=0.6",
+        )
+        .to(
+          ctaRef.value,
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.2)",
+          },
+          "-=0.4",
+        )
+        .to(
+          featuresRef.value,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+          },
+          "-=0.6",
+        );
+    }
+  }
+});
 </script>
