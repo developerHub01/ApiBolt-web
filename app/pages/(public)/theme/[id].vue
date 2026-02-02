@@ -1,13 +1,15 @@
 <template>
-  <template v-if="pending">pending</template>
-  <template v-else-if="error || !data?.success || !data.data">
-    <NotFound
-      description="This theme not found. Maybe these theme not exist or author may deleted the theme."
-    />
-  </template>
-  <template v-else>
-    <ThemesDetails :theme="data.data" />
-  </template>
+  <div class="w-full mx-auto">
+    <template v-if="pending">pending</template>
+    <template v-else-if="error || !data?.success || !data.data">
+      <NotFound
+        description="This theme not found. Maybe these theme not exist or author may deleted the theme."
+      />
+    </template>
+    <template v-else>
+      <ThemesDetails :theme="data.data" />
+    </template>
+  </div>
 </template>
 
 <script setup lang="ts">
