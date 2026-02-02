@@ -1,45 +1,53 @@
 <template>
-  <FieldGroup>
-    <FieldSet>
-      <FieldGroup>
-        <Field>
-          <FieldLabel for="theme-name">
-            Theme name
-            <span v-if="maxLength" class="text-xs text-muted-foreground">
-              ({{ name.length }}/{{ maxLength }})
-            </span>
-          </FieldLabel>
-          <Input
-            id="theme-name"
-            placeholder="Theme name"
-            v-model="name"
-            :maxlength="maxLength"
-          />
-        </Field>
-        <Field orientation="horizontal">
-          <FieldLabel>Theme type:</FieldLabel>
-          <Select v-model="themeType">
-            <SelectTrigger class="w-45">
-              <SelectValue placeholder="Select theme type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                v-for="{ id, label } in THEME_TYPE_LIST"
-                :key="id"
-                :value="id"
-              >
-                {{ label }}
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </Field>
-      </FieldGroup>
-    </FieldSet>
-  </FieldGroup>
+  <div class="grid gap-6">
+    <Field>
+      <FieldLabel for="theme-name" class="text-base font-medium">
+        Theme Name
+        <span
+          v-if="maxLength"
+          class="text-xs text-muted-foreground ml-2 font-normal"
+        >
+          ({{ name.length }}/{{ maxLength }} characters)
+        </span>
+      </FieldLabel>
+      <Input
+        id="theme-name"
+        placeholder="e.g. Neon Horizon"
+        v-model="name"
+        :maxlength="maxLength"
+        class="bg-muted/20 border-white/5 focus-visible:ring-primary/50 transition-all"
+      />
+    </Field>
+
+    <Field>
+      <FieldLabel class="text-base font-medium">Category</FieldLabel>
+      <Select v-model="themeType">
+        <SelectTrigger
+          class="h-12 bg-muted/20 border-white/5 focus-visible:ring-primary/50 transition-all"
+        >
+          <SelectValue placeholder="Select theme type" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem
+            v-for="{ id, label } in THEME_TYPE_LIST"
+            :key="id"
+            :value="id"
+          >
+            {{ label }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
+      <p
+        class="text-[10px] text-muted-foreground mt-1.5 uppercase tracking-wider"
+      >
+        Helps users find your theme in the marketplace
+      </p>
+    </Field>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
   Select,

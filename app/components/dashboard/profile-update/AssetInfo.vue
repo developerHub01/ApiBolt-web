@@ -1,23 +1,28 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-6">
     <FieldGroup>
       <Field>
-        <FieldLabel>Profile Cover</FieldLabel>
+        <FieldLabel class="text-lg font-semibold mb-3"
+          >Profile Identity Assets</FieldLabel
+        >
+
+        <!-- Cover Upload -->
         <div
-          class="relative group cursor-pointer overflow-hidden rounded-lg border-4"
+          class="relative group cursor-pointer overflow-hidden rounded-2xl border-2 border-white/5 shadow-xl bg-muted/30"
           @click="coverInput?.click()"
         >
-          <AspectRatio :ratio="16 / 5">
+          <AspectRatio :ratio="16 / 4">
             <NuxtImg
               :src="coverUrl"
               alt="profile cover"
-              class="object-cover w-full h-full"
+              class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
             />
           </AspectRatio>
           <div
-            class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            class="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
           >
-            <span class="text-white text-sm font-medium">Change Cover</span>
+            <CameraIcon class="size-8 text-white mb-2" />
+            <span class="text-white text-sm font-medium">Change Cover Art</span>
           </div>
         </div>
         <input
@@ -27,29 +32,32 @@
           accept="image/*"
           @change="(e) => onFileSelect(e, 'cover')"
         />
+
+        <!-- Avatar Upload Overflow -->
+        <div
+          class="relative flex justify-center -mt-16 md:-mt-20 lg:-mt-24 z-20"
+        >
+          <div
+            class="relative size-32 md:size-40 lg:size-48 rounded-full border-4 border-background bg-muted overflow-hidden group cursor-pointer shadow-2xl transition-transform hover:scale-105"
+            @click="avatarInput?.click()"
+          >
+            <NuxtImg :src="avatarUrl" class="size-full object-cover" />
+            <div
+              class="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+            >
+              <CameraIcon class="size-8 text-white" />
+            </div>
+          </div>
+          <input
+            type="file"
+            ref="avatarInput"
+            class="hidden"
+            accept="image/*"
+            @change="(e) => onFileSelect(e, 'avatar')"
+          />
+        </div>
       </Field>
     </FieldGroup>
-
-    <div class="flex items-center gap-4 -translate-y-1/2 px-6 mx-auto">
-      <div
-        class="relative size-30 md:size-40 lg:size-45 rounded-full border-4 bg-muted overflow-hidden group cursor-pointer"
-        @click="avatarInput?.click()"
-      >
-        <NuxtImg :src="avatarUrl" class="size-full object-cover" />
-        <div
-          class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <CameraIcon class="size-5 text-white" />
-        </div>
-      </div>
-      <input
-        type="file"
-        ref="avatarInput"
-        class="hidden"
-        accept="image/*"
-        @change="(e) => onFileSelect(e, 'avatar')"
-      />
-    </div>
   </div>
 </template>
 

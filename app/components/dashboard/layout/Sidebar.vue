@@ -1,5 +1,5 @@
 <template>
-  <Sidebar collapsible="offcanvas">
+  <Sidebar collapsible="offcanvas" data-lenis-prevent>
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>

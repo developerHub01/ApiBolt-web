@@ -27,12 +27,24 @@
     </template>
     <section
       v-else
-      class="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96"
+      class="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96 gap-6"
     >
-      <div class="text-center">
+      <div class="text-center space-y-2">
         <p class="text-xl font-semibold">No themes found</p>
-        <p class="text-muted-foreground">Adjust your filters and try again.</p>
+        <p class="text-muted-foreground">
+          {{
+            searchParams.searchTerm || searchParams.themeType !== "all"
+              ? "Adjust your filters and try again."
+              : "You haven't created any themes yet. Start by creating your first one!"
+          }}
+        </p>
       </div>
+      <NuxtLink
+        v-if="!searchParams.searchTerm && searchParams.themeType === 'all'"
+        to="/dashboard/create-theme"
+      >
+        <Button class="rounded-full px-8"> Create Your First Theme </Button>
+      </NuxtLink>
     </section>
 
     <ThemesPagination

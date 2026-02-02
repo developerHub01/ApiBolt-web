@@ -1,11 +1,13 @@
 <template>
   <form
     @submit.prevent="handleUpdate"
-    class="w-full h-full grid place-items-center"
+    class="w-full h-full flex flex-col items-center py-10"
   >
-    <Card class="w-full h-full border-0 gap-6 py-8 items-center max-w-4xl">
+    <Card
+      class="w-full max-w-4xl border border-white/10 bg-card/40 backdrop-blur-xl shadow-2xl rounded-3xl p-4 md:p-8 flex flex-col gap-8"
+    >
       <DashboardProfileUpdateHeader />
-      <CardContent class="w-full flex flex-col gap-6 flex-1">
+      <CardContent class="w-full flex flex-col gap-2 p-0">
         <DashboardProfileUpdateAssetInfo
           :avatarUrl="profileData.avatarUrl"
           :coverUrl="profileData.coverUrl"
@@ -17,16 +19,18 @@
           v-model:bio="profileData.bio"
         />
       </CardContent>
-      <CardFooter class="w-full flex gap-2 justify-end">
+      <CardFooter
+        class="w-full flex gap-4 justify-end pt-6 border-t border-white/5 p-0"
+      >
         <Button
           type="submit"
+          class="min-w-32 rounded-full py-6 text-base font-semibold shadow-lg transition-all hover:scale-105 active:scale-95"
           :disabled="
             isSubmitting || !profileData.fullName.trim() || !hasUnsavedChanges
           "
         >
-          <Spinner v-if="isSubmitting" />
-          <span v-if="isSubmitting">Updating...</span>
-          <span v-else>Update</span>
+          <Spinner v-if="isSubmitting" class="mr-2" />
+          <span>{{ isSubmitting ? "Saving..." : "Save Changes" }}</span>
         </Button>
       </CardFooter>
     </Card>

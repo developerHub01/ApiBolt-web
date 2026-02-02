@@ -1,21 +1,36 @@
 <template>
-  <section
-    class="w-full h-100 bg-background rounded-md shadow-2xl flex flex-col p-5 gap-3"
-  >
-    <ButtonGroup class="self-end flex gap-2">
-      <Button
-        v-for="{ id, Icon } in ACTION_BUTTON_LIST"
-        :key="id"
-        variant="secondary"
-        size="icon"
-        @click="() => handlePaletteModifier(id)"
-      >
-        <component :is="Icon" />
-      </Button>
-    </ButtonGroup>
+  <section class="w-full flex flex-col gap-4">
+    <div class="flex items-center justify-between">
+      <FieldLabel class="text-base font-semibold">Color Palette</FieldLabel>
+      <div class="flex gap-2">
+        <TooltipProvider
+          v-for="{ id, Icon, label } in ACTION_BUTTON_LIST"
+          :key="id"
+        >
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <Button
+                variant="outline"
+                size="icon"
+                class="size-9 rounded-full bg-muted/20 border-white/5 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                @click="() => handlePaletteModifier(id)"
+              >
+                <component :is="Icon" class="size-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent align="end">
+              <p>{{ label }}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+    </div>
 
-    <ScrollArea class="w-full min-h-0 flex-1 bg-card p-3 rounded-md">
-      <section class="w-full h-full grid lg:grid-cols-2 gap-2">
+    <ScrollArea
+      data-lenis-prevent
+      class="w-full h-[400px] bg-muted/20 border border-white/5 p-4 rounded-2xl shadow-inner overflow-hidden"
+    >
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-3 pr-2">
         <DashboardThemeEditorPaletteRow
           v-for="(color, name) in props.palette"
           :key="name"
@@ -30,8 +45,14 @@
 
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
 import ScrollArea from "@/components/ui/scroll-area/ScrollArea.vue";
+import { FieldLabel } from "@/components/ui/field";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Copy as CopyIcon,
   ClipboardPaste as PasteIcon,
