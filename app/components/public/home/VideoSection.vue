@@ -6,7 +6,7 @@
     <div class="container mx-auto relative perspective-1000">
       <div ref="titleRef" class="opacity-0 translate-y-8">
         <SectionHeader
-          title="See ApiBolt in Action"
+          title="See APIBolt in Action"
           description="Watch how fast you can build and test APIs"
         />
       </div>
