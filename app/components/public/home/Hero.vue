@@ -1,14 +1,14 @@
 <template>
   <section
-    class="relative min-h-screen flex items-center justify-center px-6 pt-45 pb-20 -mt-24 overflow-hidden"
+    class="relative min-h-screen flex items-center justify-center px-6 pt-45 pb-20 -mt-24"
   >
     <PublicHomeHeroAnimatedBg />
-    <div class="relative z-10 container mx-auto text-center">
+    <div class="relative z-10 container mx-auto text-center flex flex-col items-center">
       <Badge
-        class="mb-8 text-sm gap-2 shadow-2xl px-4 py-1.5 bg-primary/10 border-primary/20 text-primary animate-pulse"
+        class="mb-8 text-sm gap-2 shadow-2xl px-4 py-1.5 bg-primary/10 border-primary/20 text-primary animate-pulse scale-75 sm:scale-100"
         variant="outline"
       >
-        <span> From the River to the Sea Palestine Will be Free </span>
+        From the River to the Sea, Palestine Will be Free
         <NuxtImg
           src="/icons/palestine.png"
           alt="Palestine Flag"
