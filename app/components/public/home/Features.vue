@@ -164,7 +164,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 1,
     title: "Password Protection",
     description:
-      "Secure your app with local password protection. All data stays encrypted on your machine.",
+      "Secure your workspace with local password encryption. Your sensitive API data stays private and protected on your machine.",
     image: "/images/home/app-preview/password_protection.png",
     icon: Lock,
   },
@@ -172,7 +172,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 2,
     title: "Works Offline",
     description:
-      "No internet required. Everything runs locally on your desktop.",
+      "Experience complete freedom with a 100% offline-first architecture. No internet connection is required for any of your core workflows.",
     image: null,
     icon: WifiOff,
   },
@@ -180,7 +180,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 3,
     title: "Project Management",
     description:
-      "Organize your work into separate projects. Each project is completely isolated.",
+      "Seamlessly toggle between multiple projects. Keep your API environments, headers, and collections perfectly isolated and organized.",
     image: "/images/home/app-preview/project_management.png",
     icon: FolderTree,
   },
@@ -188,7 +188,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 4,
     title: "Request Collections",
     description:
-      "Group related requests into folders and collections for better organization.",
+      "Build hierarchical structures with folders and collections. Organize thousands of requests into a workflow that makes sense for you.",
     image: "/images/home/app-preview/request_collections.png",
     icon: FolderTree,
   },
@@ -196,7 +196,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 5,
     title: "Tab Management",
     description:
-      "Open multiple requests in tabs. Switch between them without losing your work.",
+      "Work on multiple requests simultaneously with a robust tab system. Effortlessly switch contexts without losing your progress.",
     image: "/images/home/app-preview/tab_management.png",
     icon: Layers,
   },
@@ -204,14 +204,15 @@ const features: Array<HomeFeatureInterface> = [
     id: 6,
     title: "Session Persistence",
     description:
-      "Your tabs and work are saved automatically. Pick up right where you left off.",
+      "Never lose your place. Your entire workspace state—including open tabs and scroll positions—is automatically restored on launch.",
     image: null,
     icon: HardDrive,
   },
   {
     id: 7,
     title: "HTTP Methods",
-    description: "Full support for GET, POST, PUT, PATCH, DELETE requests.",
+    description:
+      "Comprehensive support for all standard HTTP verbs, including GET, POST, PUT, DELETE, PATCH, and more for complete API interaction.",
     image: "/images/home/app-preview/http_methods.png",
     icon: Code2,
   },
@@ -219,7 +220,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 8,
     title: "Request Editor",
     description:
-      "Clean editor for request bodies. Supports JSON, text, and custom payloads.",
+      "A sophisticated multi-mode editor for crafting precise payloads. Features intelligent syntax highlighting for JSON, XML, Form-data, Binary, and URL-encoded data.",
     image: "/images/home/app-preview/request_editor.png",
     icon: FileText,
   },
@@ -227,21 +228,23 @@ const features: Array<HomeFeatureInterface> = [
     id: 9,
     title: "Response Viewer",
     description:
-      "View formatted or raw responses. Adjust font size for better readability.",
+      "Examine API responses with beautiful syntax highlighting and pretty-printing. Toggle between JSON, HTML, and Preview modes.",
     image: "/images/home/app-preview/response_viewer.png",
     icon: Eye,
   },
   {
     id: 10,
     title: "Raw Response",
-    description: "Inspect unformatted response data for debugging.",
+    description:
+      "Dive into the raw byte-stream for deep debugging. Inspect exact server outputs without any formatting or processing.",
     image: "/images/home/app-preview/raw_response.png",
     icon: Code2,
   },
   {
     id: 11,
     title: "Header Management",
-    description: "Add, edit, or disable request headers with full control.",
+    description:
+      "Fine-grained control over request headers. Easily toggle, bulk-edit, and manage custom headers for every request.",
     image: "/images/home/app-preview/header_management.png",
     icon: Settings,
   },
@@ -249,7 +252,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 12,
     title: "Response Headers",
     description:
-      "View all headers returned by the server including cookies and metadata.",
+      "Inspect deep metadata with a dedicated header viewer. Perfect for debugging CORS issues, cache policies, and server signatures.",
     image: "/images/home/app-preview/response_headers.png",
     icon: Eye,
   },
@@ -257,21 +260,23 @@ const features: Array<HomeFeatureInterface> = [
     id: 13,
     title: "Request History",
     description:
-      "View all headers returned by the server including cookies and metadata.",
+      "A comprehensive log of every request sent. Quickly search, filter, and replay past interactions with full state recovery.",
     image: "/images/home/app-preview/request_history.png",
     icon: Eye,
   },
   {
     id: 14,
     title: "Cookie Management",
-    description: "Automatically captures and manages cookies per project.",
+    description:
+      "Automated cookie handling scoped to your projects. Inspect, edit, and clear cookies with an intuitive management interface.",
     image: "/images/home/app-preview/cookie_management.png",
     icon: Cookie,
   },
   {
     id: 15,
     title: "Environment Variables",
-    description: "Use variables in your requests. Scoped per project.",
+    description:
+      "Dynamically inject values into your requests. Use project-scoped variables for URLs, tokens, and sensitive keys.",
     image: "/images/home/app-preview/environment_variables.png",
     icon: Variable,
   },
@@ -279,14 +284,15 @@ const features: Array<HomeFeatureInterface> = [
     id: 16,
     title: "Variable Resolution",
     description:
-      "Variables resolve when you send the request for predictable behavior.",
+      "Real-time variable resolution with hover previews. Ensure your payloads are correct before hitting the send button.",
     image: "/images/home/app-preview/variable_resolution.png",
     icon: Variable,
   },
   {
     id: 17,
     title: "Authentication",
-    description: "Supports API Key, Bearer, Basic, JWT, and no-auth modes.",
+    description:
+      "Built-in support for essential authentication protocols. Effortlessly configure Basic Auth, Bearer Tokens, JWT, and API Keys for secure requests.",
     image: "/images/home/app-preview/authentication.png",
     icon: Key,
   },
@@ -294,7 +300,7 @@ const features: Array<HomeFeatureInterface> = [
     id: 18,
     title: "Code Generation",
     description:
-      "Generate code snippets in multiple languages from your requests.",
+      "Generate production-ready code snippets in 38+ languages and frameworks. Instantly export your requests for Fetch, Axios, cURL, and beyond.",
     image: "/images/home/app-preview/code_generation.png",
     icon: Code2,
   },
@@ -302,84 +308,95 @@ const features: Array<HomeFeatureInterface> = [
     id: 19,
     title: "Import System",
     description:
-      "Import requests, folders, or entire projects without overwriting data.",
+      "Seamlessly migrate your workflow by importing full projects, folders, or individual requests. Sync data from other devices or shared team resources with ease.",
     image: null,
     icon: Download,
   },
   {
     id: 20,
     title: "Export System",
-    description: "Export your work as files for backup or sharing.",
+    description:
+      "Prioritize portability with deep export options. Save your projects, folders, or requests into open formats for effortless backup, sharing, and version control.",
     image: null,
     icon: Upload,
   },
   {
     id: 21,
     title: "Documentation",
-    description: "Write markdown notes for each folder to document your APIs.",
+    description:
+      "Rich Markdown support for every collection. Document your API's behavior, edge cases, and usage examples right where they live.",
     image: "/images/home/app-preview/documentation.png",
     icon: FileText,
   },
   {
     id: 22,
     title: "Layout Customization",
-    description: "Resize panels and adjust UI density to match your workflow.",
+    description:
+      "Tailor the workspace to your exact needs with a flexible interface. Customize your panels and sidebars with a fluid, VS Code-inspired layout.",
     image: "/images/home/app-preview/layout_customization.png",
     icon: Settings,
   },
   {
     id: 23,
     title: "Font Controls",
-    description: "Adjust font size separately for editors and viewers.",
+    description:
+      "Optimized for visual comfort. Take full control over typography with independent font sizes and indentation settings for the editor and viewers.",
     image: "/images/home/app-preview/font_controls.png",
     icon: Settings,
   },
   {
     id: 24,
     title: "Keyboard Shortcuts",
-    description: "Customize shortcuts for every action to work faster.",
+    description:
+      "Become a power user with customizable keybindings. Map every action to your favorite shortcuts for a mouse-free workflow.",
     image: "/images/home/app-preview/keyboard_shortcuts.png",
     icon: Keyboard,
   },
   {
     id: 25,
     title: "Custom Wallpapers",
-    description: "Set background images to personalize your workspace.",
+    description:
+      "Make your workspace your own by personalizing your environment. Choose from high-quality wallpapers to create a development atmosphere that feels like home.",
     image: "/images/home/app-preview/custom_wallpapers.png",
     icon: ImageIcon,
   },
   {
     id: 26,
     title: "Theme Builder",
-    description: "Customize colors for every UI element.",
+    description:
+      "Design your perfect development aesthetic. Our powerful theme engine gives you the freedom to customize every color across the entire application interface.",
     image: "/images/home/app-preview/theme_builder.png",
     icon: Palette,
   },
   {
     id: 27,
     title: "Theme Marketplace",
-    description: "Download and share color themes with other users.",
+    description:
+      "Explore a world of community-created styles. Browse, preview, and apply premium themes with a single click.",
     image: "/images/home/app-preview/theme_marketplace.png",
     icon: Palette,
   },
   {
     id: 28,
     title: "Project Themes",
-    description: "Different themes for different projects.",
+    description:
+      "Visual separation for mental clarity. Assign unique themes to different projects to avoid sending requests to the wrong environment.",
     image: "/images/home/app-preview/project_themes.png",
     icon: Palette,
   },
   {
     id: 29,
     title: "Auto-Save",
-    description: "All settings and states are saved automatically.",
+    description:
+      "Peace of mind by default. Every change you make is instantly committed to local storage, ensuring zero data loss.",
     image: null,
     icon: HardDrive,
   },
   {
     id: 30,
     title: "No Lock-In",
-    description: "Your data is yours. Export everything anytime.",
+    description:
+      "Your data belongs to you. We believe in open standards and provide simple tools to take your data anywhere, anytime.",
     image: null,
     icon: Download,
   },
