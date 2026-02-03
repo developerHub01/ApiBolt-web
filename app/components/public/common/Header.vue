@@ -8,7 +8,7 @@
         class="text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95"
       >
         <NuxtImg src="/logo.svg" class="size-8" alt="api-bolt" />
-        <span class="tracking-tighter">APIBolt</span>
+        <span class="tracking-tighter">APIBolt.</span>
       </NuxtLink>
 
       <div class="flex items-center gap-2">
