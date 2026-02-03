@@ -67,14 +67,12 @@
             <div
               class="relative w-full max-w-7xl max-h-[90vh] aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black"
             >
-              <Button
+              <button
+                class="absolute top-6 right-6 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors z-101 cursor-pointer"
                 @click="isOpen = false"
-                class="absolute top-4 right-4 z-50 p-2 text-white/70 hover:text-white bg-black/50 hover:bg-black/70 rounded-full backdrop-blur-sm transition-all h-auto w-auto"
-                variant="ghost"
-                size="icon"
               >
                 <X class="w-6 h-6" />
-              </Button>
+              </button>
               <iframe
                 width="100%"
                 height="100%"

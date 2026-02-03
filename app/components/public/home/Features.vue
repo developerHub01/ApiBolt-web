@@ -82,7 +82,8 @@
       <div
         v-if="isPreviewOpen"
         ref="overlayRef"
-        class="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-12 bg-background/50 backdrop-blur-sm opacity-0"
+        class="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        style="opacity: 0"
         @click.self="closePreview"
       >
         <button
@@ -91,17 +92,13 @@
         >
           <X class="w-6 h-6" />
         </button>
-
-        <div
+        <img
           ref="popupRef"
-          class="relative max-w-[80vw] max-h-[90vh] w-auto h-auto"
-        >
-          <NuxtImg
-            :src="selectedImage"
-            class="block w-full h-auto max-h-[90vh] object-contain rounded-lg overflow-hidden border-4 sm:border-8 border-white/10 shadow-[0_0_100px_-20px_rgba(0,0,0,0.8)] bg-black/60 scale-90"
-            alt="Feature Preview"
-          />
-        </div>
+          :src="selectedImage"
+          class="block w-[85vw] md:w-auto md:max-w-[85vw] h-auto max-h-[85vh] rounded-xl border-4 md:border-8 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/50 select-none"
+          style="opacity: 0"
+          alt="Feature Preview"
+        />
       </div>
     </Teleport>
   </section>
@@ -143,30 +140,46 @@ const selectedImage = ref("");
 const overlayRef = ref<HTMLElement | null>(null);
 const popupRef = ref<HTMLElement | null>(null);
 
+watch(isPreviewOpen, (val) => {
+  if (val) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
 const openPreview = (image: string) => {
   selectedImage.value = image;
   isPreviewOpen.value = true;
 
   const { $gsap } = useNuxtApp();
-  nextTick(() => {
+
+  // Use a longer delay to ensure Teleport has rendered the refs reliably
+  setTimeout(() => {
     if ($gsap && overlayRef.value && popupRef.value) {
       const tl = $gsap.timeline();
-      tl.to(overlayRef.value, {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      }).to(
+
+      tl.fromTo(
+        overlayRef.value,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.out",
+        },
+      ).fromTo(
         popupRef.value,
+        { scale: 0.7, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.5,
           ease: "back.out(1.2)",
         },
-        "-=0.2",
+        "-=0.1",
       );
     }
-  });
+  }, 150);
 };
 
 const closePreview = () => {
