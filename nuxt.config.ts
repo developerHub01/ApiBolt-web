@@ -33,6 +33,34 @@ export default defineNuxtConfig({
           content:
             "APIBolt is a progressive API testing platform. It provide desktop app for windows, mac and linux. It is alternative of postman but opensource and provide feature to test REST API project wise and management.",
         },
+        // Open Graph Tags
+        {
+          property: "og:title",
+          content: "APIBolt - Progressive API Testing Platform",
+        },
+        {
+          property: "og:description",
+          content:
+            "Alternative to Postman, open-source and built for modern API management.",
+        },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://api-bolt-web.vercel.app/" },
+        {
+          property: "og:image",
+          content: "https://api-bolt-web.vercel.app/og.png",
+        },
+
+        // Twitter Tags
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: "APIBolt" },
+        {
+          name: "twitter:description",
+          content: "APIBolt is a progressive API testing platform.",
+        },
+        {
+          name: "twitter:image",
+          content: "https://api-bolt-web.vercel.app/og.png",
+        },
       ],
     },
   },

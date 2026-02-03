@@ -81,7 +81,7 @@ useSeoMeta({
   ogTitle: authTitle,
   description: authDescription,
   ogDescription: authDescription,
-  ogImage: "/logo.svg",
+  ogImage: "/og.png",
   twitterCard: "summary",
 });
 
