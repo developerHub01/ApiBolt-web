@@ -71,18 +71,26 @@ import { ArrowLeft } from "lucide-vue-next";
 definePageMeta({
   middleware: ["prevent-if-auth"],
 });
+
 /* SEO ============= */
-const authTitle = "Sign in to APIBolt";
+const config = useRuntimeConfig();
+const siteUrl = config.public.siteUrl as string;
+
+const authTitle = "Sign in to ApiBolt | Industrial API Testing Desktop App";
 const authDescription =
-  "Log in to your APIBolt account to manage your themes and accelerate your workflow.";
+  "Log in to your ApiBolt account to manage your projects, themes, and accelerate your API development workflow with speed and privacy.";
 
 useSeoMeta({
   title: authTitle,
   ogTitle: authTitle,
   description: authDescription,
   ogDescription: authDescription,
-  ogImage: "/og.png",
-  twitterCard: "summary",
+  ogImage: `${siteUrl}/og.png`,
+  ogUrl: `${siteUrl}/login`,
+  twitterTitle: authTitle,
+  twitterDescription: authDescription,
+  twitterImage: `${siteUrl}/og.png`,
+  twitterCard: "summary_large_image",
 });
 
 const { handleSignInWithGithub } = useAuth();

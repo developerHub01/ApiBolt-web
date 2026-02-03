@@ -79,27 +79,32 @@ const searchParams = reactive<SearchState>({
 });
 
 /* SEO ================= */
+const config = useRuntimeConfig();
+const siteUrl = config.public.siteUrl as string;
+
 const seoTitle = computed(() =>
   searchParams.searchTerm
-    ? `Results for "${searchParams.searchTerm}" - APIBolt`
-    : "Community Themes - APIBolt",
+    ? `Results for "${searchParams.searchTerm}" | ApiBolt Theme Marketplace`
+    : "Explore ApiBolt Community Themes | Professional UI Theme Marketplace",
 );
-const seoDescription = computed(() => "Browse custom themes - APIBolt.");
-const seoImage = computed(() => "/og.png");
+const seoDescription = computed(() =>
+  searchParams.searchTerm
+    ? `Browse themes matching "${searchParams.searchTerm}" for the ApiBolt desktop app. Find the perfect style for your API development workflow.`
+    : "Explore and download custom themes for ApiBolt, the industrial API testing desktop app. Personalize your workspace with community-crafted designs built for speed and clarity.",
+);
+const seoImage = computed(() => `${siteUrl}/og.png`);
 
-useHead({
+useSeoMeta({
   title: seoTitle,
-  meta: [
-    { name: "description", content: seoDescription },
-    { property: "og:title", content: seoTitle },
-    { property: "og:description", content: seoDescription },
-    { property: "og:image", content: seoImage },
-    { property: "og:type", content: "website" },
-
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: seoTitle },
-    { name: "twitter:image", content: seoImage },
-  ],
+  ogTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
+  ogImage: seoImage,
+  ogUrl: computed(() => `${siteUrl}${route.path}`),
+  twitterTitle: seoTitle,
+  twitterDescription: seoDescription,
+  twitterImage: seoImage,
+  twitterCard: "summary_large_image",
 });
 
 const { data: response, status } = await useFetch<

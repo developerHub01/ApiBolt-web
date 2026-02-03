@@ -15,17 +15,24 @@ definePageMeta({
 });
 
 /* SEO ====================== */
-const seoTitle = computed(() => "ApiBolt - Industrial API Testing Desktop App");
-const seoDescription = computed(
-  () =>
-    "Powerful desktop application for API development, testing, and debugging. Local-first. Zero cloud. Zero telemetry. Available for Windows, macOS, and Linux.",
-);
+const config = useRuntimeConfig();
+const siteUrl = config.public.siteUrl as string;
+
+const seoTitle =
+  "ApiBolt - Industrial API Testing Desktop App | Open Source Postman Alternative";
+const seoDescription =
+  "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows, macOS, and Linux.";
+
 useSeoMeta({
   title: seoTitle,
   ogTitle: seoTitle,
   description: seoDescription,
   ogDescription: seoDescription,
-  ogImage: "/og.png",
+  ogImage: `${siteUrl}/og.png`,
+  ogUrl: siteUrl,
+  twitterTitle: seoTitle,
+  twitterDescription: seoDescription,
+  twitterImage: `${siteUrl}/og.png`,
   twitterCard: "summary_large_image",
 });
 </script>

@@ -28,33 +28,41 @@ const { data, pending, error } = await useFetch<ApiResponse<ThemeInterface>>(
 );
 
 /* SEO ====================== */
+const config = useRuntimeConfig();
+const siteUrl = config.public.siteUrl as string;
+
 const seoTitle = computed(() => {
   if (pending.value) return "Loading theme...";
   return data.value?.data?.name
-    ? `${data.value.data.name} Theme - APIBolt`
-    : "Theme not found - APIBolt";
+    ? `${data.value.data.name} Theme for ApiBolt | Industrial UI Style`
+    : "Theme not found | ApiBolt Marketplace";
 });
 
 const seoDescription = computed(() => {
-  if (pending.value) return "Loading... - APIBolt";
-  return data.value?.data?.name
-    ? `${data.value.data.name} theme, author ${data.value.data.authorUsername} named ${data.value.data.author} - APIBolt.`
-    : "Following theme not found - APIBolt.";
+  if (pending.value) return "Loading theme details...";
+  if (data.value?.data) {
+    const theme = data.value.data;
+    return `Check out the "${theme.name}" theme created by ${theme.author} (@${theme.authorUsername}) for ApiBolt. Enhance your industrial API testing experience with this professional custom styling.`;
+  }
+  return "The requested theme could not be found in the ApiBolt community marketplace.";
 });
-const seoImage = computed(() => data.value?.data?.thumbnail || "/logo.svg");
 
-useHead({
+const seoImage = computed(() => {
+  const thumbnail = data.value?.data?.thumbnail;
+  if (!thumbnail) return `${siteUrl}/og.png`;
+  return thumbnail.startsWith("http") ? thumbnail : `${siteUrl}${thumbnail}`;
+});
+
+useSeoMeta({
   title: seoTitle,
-  meta: [
-    { name: "description", content: seoDescription },
-    { property: "og:title", content: seoTitle },
-    { property: "og:description", content: seoDescription },
-    { property: "og:image", content: seoImage },
-    { property: "og:type", content: "website" },
-
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: seoTitle },
-    { name: "twitter:image", content: seoImage },
-  ],
+  ogTitle: seoTitle,
+  description: seoDescription,
+  ogDescription: seoDescription,
+  ogImage: seoImage,
+  ogUrl: computed(() => `${siteUrl}${route.path}`),
+  twitterTitle: seoTitle,
+  twitterDescription: seoDescription,
+  twitterImage: seoImage,
+  twitterCard: "summary_large_image",
 });
 </script>

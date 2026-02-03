@@ -1,5 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
+const SITE_URL = "https://apibolt.vercel.app";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -15,12 +17,21 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@pinia/nuxt",
   ],
+  runtimeConfig: {
+    public: {
+      siteUrl: SITE_URL,
+    },
+  },
   app: {
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      title: "APIBolt",
+      title: "ApiBolt - Industrial API Testing Desktop App",
       link: [
+        {
+          rel: "canonical",
+          href: SITE_URL,
+        },
         {
           rel: "icon",
           type: "image/ico",
@@ -29,37 +40,87 @@ export default defineNuxtConfig({
       ],
       meta: [
         {
+          charset: "utf-8",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+        {
           name: "description",
           content:
-            "APIBolt is a progressive API testing platform. It provide desktop app for windows, mac and linux. It is alternative of postman but opensource and provide feature to test REST API project wise and management.",
+            "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows, macOS, and Linux.",
         },
-        // Open Graph Tags
+
+        // --- Open Graph (Facebook / WhatsApp / Messenger) ---
+        {
+          property: "og:type",
+          content: "website",
+        },
+        {
+          property: "og:url",
+          content: SITE_URL,
+        },
         {
           property: "og:title",
-          content: "APIBolt - Progressive API Testing Platform",
+          content:
+            "ApiBolt - Industrial API Testing Desktop App | Open Source Postman Alternative",
         },
         {
           property: "og:description",
           content:
-            "Alternative to Postman, open-source and built for modern API management.",
+            "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. Optimized for speed and privacy.",
         },
-        { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://api-bolt-web.vercel.app/" },
         {
           property: "og:image",
-          content: "https://api-bolt-web.vercel.app/og.png",
+          content: `${SITE_URL}/og.png`,
         },
-
-        // Twitter Tags
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "APIBolt" },
+        {
+          property: "og:image:secure_url",
+          content: `${SITE_URL}/og.png`,
+        },
+        {
+          property: "og:image:type",
+          content: "image/png",
+        },
+        {
+          property: "og:image:width",
+          content: "1200",
+        },
+        {
+          property: "og:image:height",
+          content: "630",
+        },
+        {
+          property: "og:image:alt",
+          content: "ApiBolt Desktop App Interface",
+        },
+        // --- Twitter / X ---
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          name: "twitter:site",
+          content: "@apibolt",
+        },
+        {
+          name: "twitter:url",
+          content: SITE_URL,
+        },
+        {
+          name: "twitter:title",
+          content:
+            "ApiBolt - Industrial API Testing Desktop App | Open Source Postman Alternative",
+        },
         {
           name: "twitter:description",
-          content: "APIBolt is a progressive API testing platform.",
+          content:
+            "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. Optimized for speed and privacy.",
         },
         {
           name: "twitter:image",
-          content: "https://api-bolt-web.vercel.app/og.png",
+          content: `${SITE_URL}/og.png`,
         },
       ],
     },
