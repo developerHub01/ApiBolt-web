@@ -28,7 +28,7 @@ onMounted(() => {
       $gsap.to(el, {
         x: "random(-60, 60)vw",
         y: "random(-60, 60)vh",
-        scale: "random(1.2, 2.5)",
+        scale: "random(0.8, 2.2)",
         duration: "random(10, 20)",
         ease: "sine.inOut",
         onComplete: () => animateBlob(el),
