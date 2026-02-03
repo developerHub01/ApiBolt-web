@@ -130,8 +130,17 @@ export default defineNuxtConfig({
     "/api/**": {
       cors: true,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:5173",
+        // "Access-Control-Allow-Origin": "http://localhost:5173",
       },
+    },
+    "/marketplace": {
+      swr: true,
+    },
+    "/": {
+      isr: true,
+    },
+    "/login": {
+      isr: true,
     },
   },
   supabase: {
