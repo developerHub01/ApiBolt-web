@@ -16,6 +16,7 @@
     "@pinia/nuxt": "^0.11.3",
     "@studio-freight/lenis": "^1.0.42",
     "@tabler/icons-vue": "^3.36.0",
+    "@tailwindcss/vite": "^4.1.18",
     "@tanstack/vue-table": "^8.21.3",
     "@unovis/ts": "^1.6.2",
     "@unovis/vue": "^1.6.2",
@@ -41,7 +42,6 @@
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^4.0.0",
-    "@nuxtjs/tailwindcss": "^7.0.0-beta.1",
     "dotenv-cli": "^11.0.0",
     "supabase": "^2.72.1",
     "tailwindcss": "^4.1.18",
