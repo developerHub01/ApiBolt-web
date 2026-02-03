@@ -4,6 +4,18 @@
   >
     <PublicHomeHeroAnimatedBg />
     <div class="relative z-10 container mx-auto text-center">
+      <Badge
+        class="mb-8 text-sm gap-2 shadow-2xl px-4 py-1.5 bg-primary/10 border-primary/20 text-primary animate-pulse"
+        variant="outline"
+      >
+        <span> From the River to the Sea Palestine Will be Free </span>
+        <NuxtImg
+          src="/icons/palestine.png"
+          alt="Palestine Flag"
+          class="w-6 h-6"
+        />
+      </Badge>
+
       <div ref="logoRef" class="mb-6 opacity-0 translate-y-8">
         <NuxtImg
           src="/logo.svg"
