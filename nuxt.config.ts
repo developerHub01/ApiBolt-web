@@ -21,6 +21,13 @@ export default defineNuxtConfig({
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       title: "APIBolt",
+      link: [
+        {
+          rel: "icon",
+          type: "image/ico",
+          href: "/favicon.ico",
+        },
+      ],
       meta: [
         {
           name: "description",
