@@ -85,7 +85,7 @@ import {
   HardDrive,
   WifiOff,
 } from "lucide-vue-next";
-import SectionHeader from "@/components/public/home/SectionHeader.vue";
+import SectionHeader from "@/components/public/common/SectionHeader.vue";
 import type { HomeFeatureInterface } from "~/types/public.types";
 
 const handleMouseMove = (e: MouseEvent) => {

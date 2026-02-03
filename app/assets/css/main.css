@@ -187,13 +187,13 @@
     @apply bg-background text-foreground;
     font-family: var(--font-display);
     font-weight: 400;
-    overflow-x: hidden
+    overflow-x: hidden;
   }
   img {
     @apply select-none;
   }
   button {
-    @apply cursor-pointer;
+    @apply cursor-pointer select-none;
   }
   [data-slot="badge"] {
     @apply select-none;

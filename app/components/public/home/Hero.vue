@@ -23,13 +23,13 @@
       </h1>
       <p
         ref="subtitleRef"
-        class="text-3xl md:text-4xl text-muted-foreground font-bold mb-6 opacity-0 translate-y-8"
+        class="text-2xl sm:text-3xl md:text-4xl text-muted-foreground font-bold mb-6 opacity-0 translate-y-8"
       >
         Desktop API Testing
       </p>
       <p
         ref="descRef"
-        class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 opacity-0 translate-y-8"
+        class="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 opacity-0 translate-y-8"
       >
         Test and debug APIs on your machine. No cloud, no tracking, no BS.<br
           class="hidden md:block"
@@ -70,15 +70,17 @@
         <div
           v-for="{ id, title, icon, description } in featureList"
           :key="id"
-          class="group p-8 rounded-3xl border-2 border-border/50 bg-card/50 backdrop-blur-xl hover:border-primary/50 hover:bg-card transition-all duration-300 hover:scale-105"
+          class="group p-4 sm:p-8 rounded-3xl border-2 border-border/50 bg-card/50 backdrop-blur-xl text-center hover:border-primary/50 hover:bg-card transition-all duration-300 hover:scale-105"
         >
           <div
             class="mb-4 p-4 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 inline-block"
           >
-            <component :is="icon" class="w-8 h-8 text-primary" />
+            <component :is="icon" class="size-5 md:size-8 text-primary" />
           </div>
-          <h3 class="font-bold text-lg mb-1">{{ title }}</h3>
-          <p class="text-sm text-muted-foreground">{{ description }}</p>
+          <h3 class="font-bold text-base md:text-lg mb-1">{{ title }}</h3>
+          <p class="text-xs md:text-sm text-muted-foreground">
+            {{ description }}
+          </p>
         </div>
       </div>
     </div>

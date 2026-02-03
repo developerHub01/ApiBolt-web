@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { Download, Github, User } from "lucide-vue-next";
-import SectionHeader from "@/components/public/home/SectionHeader.vue";
+import SectionHeader from "@/components/public/common/SectionHeader.vue";
 
 const downloadButtons = [
   {

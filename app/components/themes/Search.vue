@@ -72,7 +72,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search, X } from "lucide-vue-next";
-import SectionHeader from "@/components/public/home/SectionHeader.vue";
+import SectionHeader from "@/components/public/common/SectionHeader.vue";
 import type { SearchState, TThemeTypeSearch } from "~/types/theme.types";
 
 const props = withDefaults(

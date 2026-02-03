@@ -1,6 +1,6 @@
 <template>
   <main
-    class="min-h-screen flex flex-col font-sans text-foreground bg-background"
+    class="min-h-screen flex flex-col font-sans text-foreground bg-background overflow-x-clip"
   >
     <Header />
     <section class="flex-1 w-full flex flex-col">

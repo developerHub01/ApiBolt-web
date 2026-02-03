@@ -1,6 +1,7 @@
 <template>
   <section
-    class="sticky top-0 w-full flex items-center justify-center py-4 z-50 border-white/5"
+    ref="headerRef"
+    class="sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300"
   >
     <header class="container flex items-center justify-between gap-6 px-4">
       <NuxtLink
@@ -103,7 +104,9 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+
 const route = useRoute();
+const headerRef = ref<HTMLElement | null>(null);
 
 const items = computed(() => [
   {
@@ -117,4 +120,20 @@ const items = computed(() => [
     active: route.path.startsWith("/marketplace"),
   },
 ]);
+
+onMounted(() => {
+  const { $gsap, $ScrollTrigger } = useNuxtApp();
+  if ($gsap && $ScrollTrigger && headerRef.value) {
+    $gsap.to(headerRef.value, {
+      background:
+        "linear-gradient(to bottom, rgba(21, 27, 37, 0.9) 0%, rgba(21, 27, 37, 0.5) 50%, rgba(21, 27, 37, 0) 100%)",
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "+=100",
+        scrub: true,
+      },
+    });
+  }
+});
 </script>

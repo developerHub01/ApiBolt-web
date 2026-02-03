@@ -32,7 +32,7 @@
           <div class="absolute inset-0 flex items-center justify-center">
             <button
               @click="isOpen = true"
-              class="relative group/btn flex items-center gap-3 px-8 py-4 bg-background/10 hover:bg-background/90 backdrop-blur-md rounded-full border border-white/10 hover:border-primary/20 shadow-[0_0_200px_50px] shadow-transparent group-hover:shadow-accent group-hover:scale-105 hover:scale-110 transition-all duration-300"
+              class="relative group/btn flex items-center gap-3 px-8 py-4 bg-background/10 hover:bg-background/90 backdrop-blur-md rounded-full border border-white/10 hover:border-primary/20 shadow-[0_0_200px_50px] shadow-transparent group-hover:shadow-accent hover:shadow-[0_0_200px_150px] group-hover:scale-105 hover:scale-120 transition-all duration-300"
             >
               <div
                 class="w-10 h-10 rounded-full bg-primary flex items-center justify-center"
@@ -101,7 +101,7 @@
 
 <script setup lang="ts">
 import { Play, X } from "lucide-vue-next";
-import SectionHeader from "@/components/public/home/SectionHeader.vue";
+import SectionHeader from "@/components/public/common/SectionHeader.vue";
 
 const isOpen = ref(false);
 const videoContainerRef = ref<HTMLElement | null>(null);

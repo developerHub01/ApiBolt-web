@@ -56,15 +56,39 @@ const seoImage = computed(() => data.value?.data?.avatar_url || "/logo.svg");
 useHead({
   title: seoTitle,
   meta: [
-    { name: "description", content: seoDescription },
-    { property: "og:title", content: seoTitle },
-    { property: "og:description", content: seoDescription },
-    { property: "og:image", content: seoImage },
-    { property: "og:type", content: "website" },
+    {
+      name: "description",
+      content: seoDescription,
+    },
+    {
+      property: "og:title",
+      content: seoTitle,
+    },
+    {
+      property: "og:description",
+      content: seoDescription,
+    },
+    {
+      property: "og:image",
+      content: seoImage,
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
 
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: seoTitle },
-    { name: "twitter:image", content: seoImage },
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:title",
+      content: seoTitle,
+    },
+    {
+      name: "twitter:image",
+      content: seoImage,
+    },
   ],
 });
 </script>
