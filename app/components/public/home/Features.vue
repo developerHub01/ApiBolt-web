@@ -15,27 +15,41 @@
         <div
           v-for="feature in features"
           :key="feature.id"
-          class="feature-card group relative flex flex-col gap-4 rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md overflow-hidden hover:border-primary/30 transition-colors duration-500 opacity-0 p-5"
+          class="feature-card group relative flex flex-col gap-4 rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md shadow-xl overflow-hidden hover:border-primary/30 transition-colors duration-500 opacity-0 p-5"
           @mousemove="handleMouseMove"
         >
           <div
-            class="absolute w-[500px] h-[500px] bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-50%] translate-y-[-50%] left-(--mouse-x) top-(--mouse-y) z-0"
+            class="absolute w-[400px] h-[400px] bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-50%] translate-y-[-50%] left-(--mouse-x) top-(--mouse-y) z-0"
           />
           <AspectRatio
             :ratio="16 / 9"
-            class="relative w-full rounded-lg overflow-hidden bg-muted/20 border-2 border-white/5 z-10"
+            :class="[
+              'relative w-full rounded-lg overflow-hidden bg-muted/20 border border-white/10 z-20',
+              feature.image && 'cursor-pointer',
+            ]"
+            @click="feature.image && openPreview(feature.image)"
           >
             <template v-if="feature.image">
               <NuxtImg
                 :src="feature.image"
                 :alt="feature.title"
-                class="w-full h-full object-cover transition-all duration-700 ease-out"
+                class="w-full h-full object-cover"
                 loading="lazy"
               />
+              <!-- Hover Overlay with Eye Icon -->
+              <div
+                class="absolute inset-0 bg-primary/10 rounded-lg backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
+              >
+                <div
+                  class="p-3 rounded-full bg-white/10 border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-500"
+                >
+                  <Eye class="w-6 h-6 text-white" />
+                </div>
+              </div>
             </template>
             <div
               v-else
-              class="w-full h-full flex items-center justify-center bg-muted transition-colors duration-500"
+              class="w-full h-full flex items-center justify-center bg-muted transition-colors duration-500 z-10"
             >
               <component
                 :is="feature.icon"
@@ -44,7 +58,7 @@
             </div>
           </AspectRatio>
 
-          <div class="relative flex-1 flex flex-col z-10">
+          <div class="flex-1 flex flex-col z-20">
             <div
               class="mb-4 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300"
             >
@@ -62,6 +76,34 @@
         </div>
       </div>
     </div>
+
+    <!-- Image Preview Popup -->
+    <Teleport to="body">
+      <div
+        v-if="isPreviewOpen"
+        ref="overlayRef"
+        class="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-12 bg-background/50 backdrop-blur-sm opacity-0"
+        @click.self="closePreview"
+      >
+        <button
+          class="absolute top-6 right-6 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors z-101 cursor-pointer"
+          @click="closePreview"
+        >
+          <X class="w-6 h-6" />
+        </button>
+
+        <div
+          ref="popupRef"
+          class="relative max-w-[80vw] max-h-[90vh] w-auto h-auto"
+        >
+          <NuxtImg
+            :src="selectedImage"
+            class="block w-full h-auto max-h-[90vh] object-contain rounded-lg overflow-hidden border-4 sm:border-8 border-white/10 shadow-[0_0_100px_-20px_rgba(0,0,0,0.8)] bg-black/60 scale-90"
+            alt="Feature Preview"
+          />
+        </div>
+      </div>
+    </Teleport>
   </section>
 </template>
 
@@ -84,6 +126,7 @@ import {
   Settings,
   HardDrive,
   WifiOff,
+  X,
 } from "lucide-vue-next";
 import SectionHeader from "@/components/public/common/SectionHeader.vue";
 import type { HomeFeatureInterface } from "~/types/public.types";
@@ -95,11 +138,68 @@ const handleMouseMove = (e: MouseEvent) => {
   target.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
 };
 
+const isPreviewOpen = ref(false);
+const selectedImage = ref("");
+const overlayRef = ref<HTMLElement | null>(null);
+const popupRef = ref<HTMLElement | null>(null);
+
+const openPreview = (image: string) => {
+  selectedImage.value = image;
+  isPreviewOpen.value = true;
+
+  const { $gsap } = useNuxtApp();
+  nextTick(() => {
+    if ($gsap && overlayRef.value && popupRef.value) {
+      const tl = $gsap.timeline();
+      tl.to(overlayRef.value, {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      }).to(
+        popupRef.value,
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.2)",
+        },
+        "-=0.2",
+      );
+    }
+  });
+};
+
+const closePreview = () => {
+  const { $gsap } = useNuxtApp();
+  if ($gsap && overlayRef.value && popupRef.value) {
+    const tl = $gsap.timeline({
+      onComplete: () => {
+        isPreviewOpen.value = false;
+        selectedImage.value = "";
+      },
+    });
+
+    tl.to(popupRef.value, {
+      scale: 0.9,
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in",
+    }).to(
+      overlayRef.value,
+      {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+      },
+      "-=0.1",
+    );
+  } else isPreviewOpen.value = false;
+};
+
 onMounted(() => {
   const { $gsap, $ScrollTrigger } = useNuxtApp();
 
   if ($gsap && $ScrollTrigger) {
-    // Individual Card Animations using Batch
     $ScrollTrigger.batch(".feature-card", {
       onEnter: (elements) => {
         $gsap.fromTo(
