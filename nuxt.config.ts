@@ -133,9 +133,6 @@ export default defineNuxtConfig({
         // "Access-Control-Allow-Origin": "http://localhost:5173",
       },
     },
-    "/marketplace": {
-      swr: true,
-    },
     "/": {
       isr: true,
     },
