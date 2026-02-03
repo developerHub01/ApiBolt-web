@@ -11,7 +11,7 @@
     ></div>
 
     <Card
-      class="w-full max-w-md bg-card/30 backdrop-blur-2xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] rounded-3xl md:p-12 flex flex-col items-center relative z-10"
+      class="w-full max-w-md bg-card/30 backdrop-blur-2xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] rounded-2xl px-6 md:p-12 flex flex-col items-center relative z-10"
     >
       <div class="mb-5 flex flex-col items-center text-center">
         <div
@@ -24,7 +24,7 @@
           />
         </div>
         <h1
-          class="text-3xl font-bold tracking-tight text-foreground bg-clip-text"
+          class="text-3xl font-bold tracking-tight text-foreground"
         >
           Welcome back
         </h1>
@@ -37,7 +37,7 @@
 
       <Button
         @click="handleSignInWithGithub"
-        class="flex h-14 w-full items-center justify-center gap-4 rounded-full bg-foreground text-background font-bold transition-all hover:bg-foreground/90 active:scale-[0.98] shadow-xl"
+        class="flex h-14 w-full max-w-xs items-center justify-center gap-4 rounded-full bg-foreground text-background font-bold transition-all hover:bg-foreground/90 active:scale-[0.98] shadow-xl"
       >
         <NuxtImg
           src="/images/github.png"

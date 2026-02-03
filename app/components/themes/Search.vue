@@ -19,7 +19,7 @@
           type="text"
           placeholder="Search themes..."
           v-model="searchState.searchTerm"
-          class="pl-10 bg-transparent border-transparent ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground/50 hover:bg-muted/10 transition-colors"
+          class="pl-10 border-transparent ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground/50 hover:bg-muted/50 transition-colors"
         />
       </div>
 

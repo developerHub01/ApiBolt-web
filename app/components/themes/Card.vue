@@ -1,6 +1,6 @@
 <template>
   <div
-    class="theme-card group relative flex flex-col rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md overflow-hidden hover:border-primary/30 transition-colors duration-500 p-3 h-full"
+    class="theme-card group relative flex flex-col rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md overflow-hidden hover:border-primary/30 transition-colors duration-500 p-5 h-full"
     :data-theme-id="id"
   >
     <!-- Hover Effect - Gradient Glow -->
@@ -44,7 +44,7 @@
         <Button
           v-if="showAuthor"
           variant="link"
-          class="p-0 h-auto text-xs text-muted-foreground hover:text-foreground/80 no-underline hover:underline"
+          class="p-0 has-[>svg]:px-0 h-auto text-xs text-muted-foreground hover:text-foreground/80 no-underline hover:underline"
         >
           <User class="w-3 h-3 mr-1" />
           {{ author }}
@@ -63,7 +63,7 @@
                 </Button>
               </NuxtLink>
             </TooltipTrigger>
-            <TooltipContent> View Details </TooltipContent>
+            <TooltipContent side="bottom"> View Details </TooltipContent>
           </Tooltip>
 
           <template v-if="canEdit">
@@ -79,7 +79,7 @@
                   </Button>
                 </NuxtLink>
               </TooltipTrigger>
-              <TooltipContent> Update </TooltipContent>
+              <TooltipContent side="bottom"> Update </TooltipContent>
             </Tooltip>
           </template>
 
@@ -95,7 +95,7 @@
                   <Trash2 class="w-4 h-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent> Delete </TooltipContent>
+              <TooltipContent side="bottom"> Delete </TooltipContent>
             </Tooltip>
           </template>
         </div>
