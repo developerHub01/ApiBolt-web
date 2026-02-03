@@ -85,7 +85,7 @@ const seoTitle = computed(() =>
     : "Community Themes - APIBolt",
 );
 const seoDescription = computed(() => "Browse custom themes - APIBolt.");
-const seoImage = computed(() => "/logo.svg");
+const seoImage = computed(() => "/og.png");
 
 useHead({
   title: seoTitle,
