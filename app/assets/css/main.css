@@ -199,3 +199,21 @@
     @apply select-none;
   }
 }
+
+/* Page Transitions */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.page-enter-from {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateX(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateX(-20px);
+}
