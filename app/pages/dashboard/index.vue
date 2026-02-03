@@ -15,9 +15,10 @@
 import type { ProfileInterface } from "~/types/profile.types";
 import type { ApiResponse } from "~~/server/types";
 
-const { data, pending } = await useFetch<ApiResponse<ProfileInterface>>(
+const { data, pending } = useFetch<ApiResponse<ProfileInterface>>(
   "/api/v1/profile",
   {
+    lazy: true,
     key: "my-profile",
   },
 );

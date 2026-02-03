@@ -20,10 +20,11 @@ import type { ApiResponse } from "~~/server/types";
 const route = useRoute();
 const themeId = computed(() => route.params.id);
 
-const { data, pending, error } = await useFetch<ApiResponse<ThemeInterface>>(
+const { data, pending, error } = useFetch<ApiResponse<ThemeInterface>>(
   () => `/api/v1/client/themes/details/${themeId.value}`,
   {
-    key: () => `theme-${themeId.value}`,
+    lazy: true,
+    key: `theme-${themeId.value}`,
   },
 );
 

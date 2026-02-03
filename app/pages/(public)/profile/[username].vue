@@ -26,9 +26,10 @@ import type { ApiResponse } from "~~/server/types";
 const route = useRoute();
 const userName = computed(() => route.params["username"] as string);
 
-const { data, pending, error } = await useFetch<ApiResponse<ProfileInterface>>(
+const { data, pending, error } = useFetch<ApiResponse<ProfileInterface>>(
   () => `/api/v1/profile/${userName.value}`,
   {
+    lazy: true,
     key: `profile-${userName.value}`,
   },
 );

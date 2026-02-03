@@ -107,9 +107,10 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
-const { data: response, status } = await useFetch<
+const { data: response, status } = useFetch<
   ApiResponse<ThemeListThemeMetaInterface>
 >("/api/v1/client/themes/meta", {
+  lazy: true,
   query: {
     page: currentPage,
     pageSize,
