@@ -1,75 +1,11 @@
-# Nuxt Minimal Starter
+# APIBolt
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Api bolt is a open-source REST API testing platform light alternative of Postman, though still progressing with more features.
 
-## Setup
+Currently it is limited with REST API testing and manual testing, but it is planned to support GraphQL, gRPC, and other protocols.
 
-Make sure to install dependencies:
+But still have module based testing and automatic code generation for almost 25+ languages. And most interesting part is, it is highly inspired from Postman and VS-code with my own creativity. So as inspired from VS-code so I tried to implement some of the customization options like themes, shortcuts mapping, layout customization, etc. Even we have a separate theme marketplace offered by many developers who are contributing their themes for free.
 
-```bash
-# npm
-npm install
+[![Website](https://raw.githubusercontent.com/developerHub01/ApiBolt-web/refs/heads/development/preview/website.png)](https://apibolt.vercel.app/)
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+[![OG Image](https://raw.githubusercontent.com/developerHub01/ApiBolt-web/refs/heads/development/preview/og.png)](https://apibolt.vercel.app/)
