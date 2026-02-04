@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@pinia/nuxt",
     "@nuxtjs/sitemap",
+    "@nuxtjs/robots",
   ],
   runtimeConfig: {
     public: {
@@ -195,4 +196,15 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  site: {
+    url: "https://apibolt.vercel.app",
+    sitemap: true,
+  },
+  sitemap: {
+    exclude: ["/confirm", "/dashboard/**", "/not-found"],
+    urls: async () => ["/marketplace", "/profile/developerHub01"],
+  },
+  robots: {
+    disallow: ["/confirm", "/dashboard/**", "/not-found"],
+  },
 });
