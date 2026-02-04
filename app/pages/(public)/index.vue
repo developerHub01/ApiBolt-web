@@ -13,7 +13,6 @@
 definePageMeta({
   layout: "default",
 });
-
 /* SEO ====================== */
 const config = useRuntimeConfig();
 const siteUrl = config.public.siteUrl as string;
