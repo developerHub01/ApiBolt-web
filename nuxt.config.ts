@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/supabase",
     "@pinia/nuxt",
+    "@nuxtjs/sitemap",
   ],
   runtimeConfig: {
     public: {
@@ -45,6 +46,11 @@ export default defineNuxtConfig({
         {
           name: "viewport",
           content: "width=device-width, initial-scale=1",
+        },
+        {
+          name: "title",
+          content:
+            "ApiBolt - API Testing Open Source Desktop App | Postman Alternative",
         },
         {
           name: "description",
@@ -136,6 +142,7 @@ export default defineNuxtConfig({
 
             gtag('config', 'G-3YN6EV9VD9');
           `,
+          type: "text/javascript",
         },
       ],
     },
