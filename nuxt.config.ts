@@ -123,6 +123,21 @@ export default defineNuxtConfig({
           content: `${SITE_URL}/og.png`,
         },
       ],
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-3YN6EV9VD9",
+          async: true,
+        },
+        {
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-3YN6EV9VD9');
+          `,
+        },
+      ],
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
