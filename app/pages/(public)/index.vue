@@ -18,9 +18,9 @@ const config = useRuntimeConfig();
 const siteUrl = config.public.siteUrl as string;
 
 const seoTitle =
-  "ApiBolt - Industrial API Testing Desktop App | Open Source Postman Alternative";
+  "APIBolt - Industrial API Testing Desktop App";
 const seoDescription =
-  "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows, macOS, and Linux.";
+  "APIBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows and Linux.";
 
 useSeoMeta({
   title: seoTitle,

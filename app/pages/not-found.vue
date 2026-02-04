@@ -11,7 +11,7 @@
 import { NotFound } from "~/components/ui/not-found";
 
 useSeoMeta({
-  title: "Page Not Found | ApiBolt",
-  description: "The requested page could not be found on ApiBolt.",
+  title: "Page Not Found | APIBolt",
+  description: "The requested page could not be found on APIBolt.",
 });
 </script>

@@ -26,6 +26,9 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      htmlAttrs: {
+        lang: "en",
+      },
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       title: "ApiBolt - Industrial API Testing Desktop App",
@@ -51,12 +54,12 @@ export default defineNuxtConfig({
         {
           name: "title",
           content:
-            "ApiBolt - API Testing Open Source Desktop App | Postman Alternative",
+            "APIBolt - API Testing Open Source Desktop App | Postman Alternative",
         },
         {
           name: "description",
           content:
-            "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows, macOS, and Linux.",
+            "APIBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows, macOS, and Linux.",
         },
 
         // --- Open Graph (Facebook / WhatsApp / Messenger) ---
@@ -71,12 +74,12 @@ export default defineNuxtConfig({
         {
           property: "og:title",
           content:
-            "ApiBolt - Industrial API Testing Desktop App | Open Source Postman Alternative",
+            "APIBolt - Industrial API Testing Desktop App | Open Source Postman Alternative",
         },
         {
           property: "og:description",
           content:
-            "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. Optimized for speed and privacy.",
+            "APIBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. Optimized for speed and privacy.",
         },
         {
           property: "og:image",
@@ -100,7 +103,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:image:alt",
-          content: "ApiBolt Desktop App Interface",
+          content: "APIBolt Desktop App Interface",
         },
         // --- Twitter / X ---
         {
@@ -118,12 +121,12 @@ export default defineNuxtConfig({
         {
           name: "twitter:title",
           content:
-            "ApiBolt - Industrial API Testing Desktop App | Open Source Postman Alternative",
+            "APIBolt - Industrial API Testing Desktop App | Open Source Postman Alternative",
         },
         {
           name: "twitter:description",
           content:
-            "ApiBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. Optimized for speed and privacy.",
+            "APIBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. Optimized for speed and privacy.",
         },
         {
           name: "twitter:image",

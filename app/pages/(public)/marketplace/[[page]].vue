@@ -84,13 +84,13 @@ const siteUrl = config.public.siteUrl as string;
 
 const seoTitle = computed(() =>
   searchParams.searchTerm
-    ? `Results for "${searchParams.searchTerm}" | ApiBolt Theme Marketplace`
-    : "Explore ApiBolt Community Themes | Professional UI Theme Marketplace",
+    ? `Results for "${searchParams.searchTerm}" | APIBolt Theme Marketplace`
+    : "Explore APIBolt Community Themes | Professional UI Theme Marketplace",
 );
 const seoDescription = computed(() =>
   searchParams.searchTerm
-    ? `Browse themes matching "${searchParams.searchTerm}" for the ApiBolt desktop app. Find the perfect style for your API development workflow.`
-    : "Explore and download custom themes for ApiBolt, the industrial API testing desktop app. Personalize your workspace with community-crafted designs built for speed and clarity.",
+    ? `Browse themes matching "${searchParams.searchTerm}" for the APIBolt desktop app. Find the perfect style for your API development workflow.`
+    : "Explore and download custom themes for APIBolt, the industrial API testing desktop app. Personalize your workspace with community-crafted designs built for speed and clarity.",
 );
 const seoImage = computed(() => `${siteUrl}/og.png`);
 

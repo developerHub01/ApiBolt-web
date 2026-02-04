@@ -35,17 +35,17 @@ const siteUrl = config.public.siteUrl as string;
 const seoTitle = computed(() => {
   if (pending.value) return "Loading theme...";
   return data.value?.data?.name
-    ? `${data.value.data.name} Theme for ApiBolt | Industrial UI Style`
-    : "Theme not found | ApiBolt Marketplace";
+    ? `${data.value.data.name} Theme for APIBolt | Industrial UI Style`
+    : "Theme not found | APIBolt Marketplace";
 });
 
 const seoDescription = computed(() => {
   if (pending.value) return "Loading theme details...";
   if (data.value?.data) {
     const theme = data.value.data;
-    return `Check out the "${theme.name}" theme created by ${theme.author} (@${theme.authorUsername}) for ApiBolt. Enhance your industrial API testing experience with this professional custom styling.`;
+    return `Check out the "${theme.name}" theme created by ${theme.author} (@${theme.authorUsername}) for APIBolt. Enhance your industrial API testing experience with this professional custom styling.`;
   }
-  return "The requested theme could not be found in the ApiBolt community marketplace.";
+  return "The requested theme could not be found in the APIBolt community marketplace.";
 });
 
 const seoImage = computed(() => {
