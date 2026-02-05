@@ -14,12 +14,16 @@
       class="relative w-full rounded-lg overflow-hidden bg-muted/20 border-2 border-white/5 z-10"
     >
       <NuxtImg
-        :width="REQUIRED_WIDTH / 4"
-        :height="REQUIRED_HEIGHT / 4"
         :src="thumbnail"
-        alt="Theme Preview"
+        :alt="name"
         class="w-full h-full object-cover transition-all duration-700 ease-out"
         loading="lazy"
+        format="webp"
+        :sizes="{
+          sm: '100vw',
+          md: '320',
+          lg: '450',
+        }"
       />
     </AspectRatio>
 

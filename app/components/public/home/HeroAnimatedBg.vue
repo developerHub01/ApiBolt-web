@@ -6,11 +6,11 @@
     <div class="relative w-full h-full">
       <div
         ref="blob1Ref"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full opacity-50 blur-[120px]"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-primary/20 rounded-full opacity-50 blur-[120px]"
       />
       <div
         ref="blob2Ref"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 rounded-full opacity-50 blur-[100px]"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 h-100 bg-primary/10 rounded-full opacity-50 blur-[100px]"
       />
     </div>
   </div>

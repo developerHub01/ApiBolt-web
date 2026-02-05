@@ -19,7 +19,7 @@
           @mousemove="handleMouseMove"
         >
           <div
-            class="absolute w-[400px] h-[400px] bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-50%] translate-y-[-50%] left-(--mouse-x) top-(--mouse-y) z-0"
+            class="absolute w-100 h-100 bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-50%] translate-y-[-50%] left-(--mouse-x) top-(--mouse-y) z-0"
           />
           <AspectRatio
             :ratio="16 / 9"
@@ -37,8 +37,12 @@
                 :alt="feature.title"
                 class="w-full h-full object-cover"
                 loading="lazy"
-                :width="600"
-                :height="337"
+                format="webp"
+                :sizes="{
+                  sm: '100vw',
+                  md: '320',
+                  lg: '450',
+                }"
               />
               <!-- Hover Overlay with Eye Icon -->
               <div
@@ -96,11 +100,17 @@
         >
           <X class="w-6 h-6" />
         </button>
-        <img
+        <NuxtImg
           ref="popupRef"
           :src="selectedImage"
           class="block w-[85vw] md:w-auto md:max-w-[85vw] h-auto max-h-[85vh] rounded-xl border-4 md:border-8 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/50 select-none"
           style="opacity: 0"
+          format="webp"
+          :sizes="{
+            sm: '100vw',
+            md: '100vw',
+            lg: '1040px',
+          }"
           alt="Feature Preview"
         />
       </div>
@@ -143,14 +153,6 @@ const isPreviewOpen = ref(false);
 const selectedImage = ref("");
 const overlayRef = ref<HTMLElement | null>(null);
 const popupRef = ref<HTMLElement | null>(null);
-
-watch(isPreviewOpen, (val) => {
-  if (val) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
-});
 
 const openPreview = (image: string) => {
   selectedImage.value = image;

@@ -9,7 +9,7 @@
     <template v-else>
       <div class="relative">
         <div
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/20 rounded-full blur-[150px] pointer-events-none opacity-50"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 bg-primary/20 rounded-full blur-[150px] pointer-events-none opacity-50"
         />
         <ProfileTop :profile="data!.data!" class="p-4" />
       </div>

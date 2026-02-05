@@ -24,6 +24,8 @@
             :src="avatarUrl"
             width="300"
             height="300"
+            loading="lazy"
+            format="webp"
             class="size-full rounded-full object-cover bg-background"
             :alt="`${profile.full_name} ${profile.user_name} profile avatar`"
           />

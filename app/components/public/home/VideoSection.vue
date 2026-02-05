@@ -1,7 +1,7 @@
 <template>
   <section class="py-32 px-6 relative">
     <div
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none opacity-50"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-primary/20 rounded-full blur-[120px] pointer-events-none opacity-50"
     />
     <div class="container mx-auto relative perspective-1000">
       <div ref="titleRef" class="opacity-0 translate-y-8">
@@ -25,6 +25,13 @@
           <NuxtImg
             src="/images/home/app_video_thumbnail.png"
             alt="ApiBolt Demo"
+            loading="lazy"
+            format="webp"
+            :sizes="{
+              sm: '100vw',
+              md: '100vw',
+              lg: '1040px',
+            }"
             class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 ease-out"
           />
 
