@@ -1,12 +1,12 @@
 <template>
   <section
     ref="headerRef"
-    class="sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300"
+    class="sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none"
   >
     <header class="container flex items-center justify-between gap-6 px-4">
       <NuxtLink
         to="/"
-        class="text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95"
+        class="text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 pointer-events-auto"
       >
         <NuxtImg src="/logo.svg" class="size-8" alt="api-bolt" />
         <span class="tracking-tighter">APIBolt</span>
@@ -16,7 +16,7 @@
         <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center gap-1 mr-4">
           <template v-for="{ to, label, active } in items">
-            <NuxtLink :to="to">
+            <NuxtLink :to="to" class="pointer-events-auto">
               <Button
                 variant="ghost"
                 class="px-4 rounded-full font-medium transition-all"
@@ -33,7 +33,7 @@
         </nav>
 
         <!-- Profile Menu -->
-        <PublicCommonProfileMenu />
+        <PublicCommonProfileMenu class="pointer-events-auto" />
 
         <!-- Mobile Nav Menu -->
         <Sheet>
@@ -41,7 +41,7 @@
             <Button
               variant="ghost"
               size="icon"
-              class="md:hidden rounded-full hover:bg-primary/10 hover:text-primary"
+              class="md:hidden rounded-full hover:bg-primary/10 hover:text-primary pointer-events-auto"
             >
               <Menu class="size-6" />
             </Button>
