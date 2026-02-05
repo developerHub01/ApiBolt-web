@@ -3,5 +3,6 @@ export interface HomeFeatureInterface {
   title: string;
   description: string;
   image: string | null;
+  thumbnail: string | null;
   icon: Component;
 }
