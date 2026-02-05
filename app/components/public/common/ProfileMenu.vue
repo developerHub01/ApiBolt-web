@@ -2,7 +2,7 @@
   <ClientOnly>
     <template v-if="user">
       <DropdownMenu>
-        <DropdownMenuTrigger class="outline-none">
+        <DropdownMenuTrigger class="outline-none pointer-events-auto">
           <Avatar
             class="size-9 ring-2 ring-primary/20 hover:ring-primary transition-all cursor-pointer"
           >

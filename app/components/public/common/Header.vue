@@ -33,7 +33,7 @@
         </nav>
 
         <!-- Profile Menu -->
-        <PublicCommonProfileMenu class="pointer-events-auto" />
+        <PublicCommonProfileMenu />
 
         <!-- Mobile Nav Menu -->
         <Sheet>
