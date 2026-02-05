@@ -6,17 +6,17 @@
     <header class="container flex items-center justify-between gap-6 px-4">
       <NuxtLink
         to="/"
-        class="text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 pointer-events-auto"
+        class="text-lg sm:text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 pointer-events-auto"
       >
-        <NuxtImg src="/logo.svg" class="size-8" alt="api-bolt" />
+        <NuxtImg src="/logo.svg" class="size-6 sm:size-8" alt="api-bolt" />
         <span class="tracking-tighter">APIBolt</span>
       </NuxtLink>
 
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 pointer-events-auto">
         <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center gap-1 mr-4">
           <template v-for="{ to, label, active } in items">
-            <NuxtLink :to="to" class="pointer-events-auto">
+            <NuxtLink :to="to">
               <Button
                 variant="ghost"
                 class="px-4 rounded-full font-medium transition-all"
@@ -43,12 +43,12 @@
               size="icon"
               class="md:hidden rounded-full hover:bg-primary/10 hover:text-primary pointer-events-auto"
             >
-              <Menu class="size-6" />
+              <Menu class="size-5 sm:size-6" />
             </Button>
           </SheetTrigger>
           <SheetContent
             side="right"
-            class="w-[300px] bg-card/80 backdrop-blur-xl border-white/5 p-8 flex flex-col gap-8"
+            class="w-75 bg-card/80 backdrop-blur-xl border-white/5 p-8 flex flex-col gap-8"
           >
             <SheetHeader class="text-left">
               <SheetTitle class="flex items-center gap-2">

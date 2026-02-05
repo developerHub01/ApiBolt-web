@@ -39,10 +39,10 @@
           <div class="absolute inset-0 flex items-center justify-center">
             <button
               @click="isOpen = true"
-              class="relative group/btn flex items-center gap-3 px-8 py-4 bg-background/10 hover:bg-background/90 backdrop-blur-md rounded-full border border-white/10 hover:border-primary/20 shadow-[0_0_200px_50px] shadow-transparent group-hover:shadow-accent hover:shadow-[0_0_200px_150px] group-hover:scale-105 hover:scale-120 transition-all duration-300"
+              class="relative group/btn flex items-center gap-3 px-4 py-2 sm:px-8 sm:py-4 bg-background/10 hover:bg-background/90 backdrop-blur-md rounded-full border border-white/10 hover:border-primary/20 shadow-[0_0_200px_50px] shadow-transparent group-hover:shadow-accent hover:shadow-[0_0_200px_150px] group-hover:scale-105 hover:scale-120 transition-all duration-300"
             >
               <div
-                class="w-10 h-10 rounded-full bg-primary flex items-center justify-center"
+                class="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center"
               >
                 <Play
                   class="w-5 h-5 text-primary-foreground fill-current ml-0.5"

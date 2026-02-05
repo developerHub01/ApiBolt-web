@@ -54,7 +54,7 @@
       <NuxtLink to="/login">
         <Button
           variant="default"
-          class="rounded-full px-6 font-semibold shadow-lg hover:scale-105 transition-transform active:scale-95"
+          class="rounded-full h-8 sm:h-9 px-4 sm:px-6 text-xs sm:text-sm font-semibold shadow-lg hover:scale-105 transition-transform active:scale-95"
         >
           Get Started
         </Button>

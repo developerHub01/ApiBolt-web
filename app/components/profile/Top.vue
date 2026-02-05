@@ -13,7 +13,7 @@
         }"
       />
     </AspectRatio>
-    <div class="w-full max-w-4xl -mt-16 md:-mt-24 lg:-mt-28 z-10 px-4">
+    <div class="w-full max-w-4xl -mt-6 md:-mt-18 lg:-mt-28 z-10 px-4">
       <div
         class="bg-card/30 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-8"
       >
@@ -35,10 +35,10 @@
           class="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-4 pb-2"
         >
           <div class="space-y-1">
-            <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+            <h1 class="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight">
               {{ profile.full_name }}
             </h1>
-            <p class="text-primary font-medium text-lg">
+            <p class="text-primary font-medium text-base md:text-lg">
               @{{ profile.user_name }}
             </p>
           </div>

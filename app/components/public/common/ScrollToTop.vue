@@ -12,7 +12,7 @@
       @click="scrollToTop"
       variant="secondary"
       size="icon"
-      class="fixed bottom-8 right-8 z-50 size-12 rounded-full bg-card/40 backdrop-blur-xl border-white/10 shadow-2xl hover:bg-primary! hover:text-primary-foreground hover:scale-110 active:scale-95 transition-all group"
+      class="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 size-10 md:size-12 rounded-full bg-card/40 backdrop-blur-xl border-white/10 shadow-2xl hover:bg-primary! hover:text-primary-foreground hover:scale-110 active:scale-95 transition-all group"
       aria-label="Scroll to top"
     >
       <ChevronUp
