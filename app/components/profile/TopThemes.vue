@@ -1,7 +1,7 @@
 <template>
   <section class="w-full flex flex-col gap-8 py-20 items-center">
     <div class="text-center space-y-2">
-      <h2 class="text-3xl font-bold tracking-tight">Top Creations</h2>
+      <h2 class="text-3xl font-bold tracking-tight font-brand">Top Creations</h2>
       <p class="text-muted-foreground text-lg">
         Most popular themes by this author.
       </p>
