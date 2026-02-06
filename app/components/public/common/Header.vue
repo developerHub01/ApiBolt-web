@@ -6,7 +6,7 @@
     <header class="container flex items-center justify-between gap-6 px-4">
       <NuxtLink
         to="/"
-        class="text-lg sm:text-xl font-black select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 pointer-events-auto"
+        class="text-lg sm:text-2xl font-black font-brand select-none flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 pointer-events-auto"
       >
         <NuxtImg src="/logo.svg" class="size-6 sm:size-8" alt="api-bolt" />
         <span class="tracking-tighter">APIBolt</span>

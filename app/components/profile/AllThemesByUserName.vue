@@ -5,8 +5,14 @@
       :searchTerm="searchParams.searchTerm"
       :themeType="searchParams.themeType"
       :disabled="isLoading"
-      :heading="`All themes by ${userName}`"
-    />
+    >
+      <template #title>
+        All themes by
+        <span class="border-b-2 border-primary text-primary">
+          {{ userName }}
+        </span>
+      </template>
+    </ThemesSearch>
     <template v-if="isLoading || themeList.length">
       <section class="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
         <ThemesCardSkeleton

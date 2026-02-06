@@ -4,11 +4,12 @@
   >
     <div class="container mx-auto">
       <!-- Section header -->
-      <SectionHeader
-        title="Power-Packed Features"
-        description="Every tool you need to master your API workflow"
-        class="text-center"
-      />
+      <SectionHeader class="text-center">
+        <template #title> Power-Packed Features </template>
+        <template #description>
+          Every tool you need to master your API workflow
+        </template>
+      </SectionHeader>
 
       <!-- Features grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

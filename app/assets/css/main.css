@@ -147,25 +147,10 @@
   --sidebar-ring: oklch(0.556 0 0);
 } */
 
-@font-face {
-  font-family: "Roboto";
-  src: url("./fonts/roboto/Roboto.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("./fonts/roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-
 @theme {
-  --font-display: "Roboto", sans-serif;
-  --font-sans: "Roboto", sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-brand: "Zen Dots", sans-serif;
 }
 
 @layer base {

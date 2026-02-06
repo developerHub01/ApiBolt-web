@@ -3,13 +3,15 @@
     class="py-32 px-6 border-t bg-linear-to-b from-muted/20 to-background relative"
   >
     <div
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none opacity-50"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-primary/20 rounded-full blur-[120px] pointer-events-none opacity-50"
     />
     <div class="container mx-auto text-center">
-      <SectionHeader
-        title="Ready to get started?"
-        description="Download ApiBolt for free. No account, no credit card, no tracking."
-      />
+      <SectionHeader class="text-center">
+        <template #title>Ready to get started? </template>
+        <template #description>
+          Download ApiBolt for free. No account, no credit card, no tracking.
+        </template>
+      </SectionHeader>
 
       <!-- Download buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">

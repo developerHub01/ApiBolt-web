@@ -18,11 +18,22 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
+    "@nuxtjs/google-fonts",
   ],
   runtimeConfig: {
     public: {
       siteUrl: SITE_URL,
     },
+  },
+  googleFonts: {
+    display: "swap",
+    families: {
+      Inter: "100..700",
+      "Zen Dots": [400],
+    },
+    download: true,
+    inject: true,
+    useStylesheet: true,
   },
   app: {
     head: {

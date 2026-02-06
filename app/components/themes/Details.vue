@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="space-y-2">
       <h1
-        class="text-4xl md:text-5xl font-black bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent"
+        class="text-4xl md:text-5xl font-black bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-brand"
       >
         {{ theme?.name }}
       </h1>

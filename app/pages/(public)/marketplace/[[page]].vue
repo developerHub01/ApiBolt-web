@@ -8,8 +8,9 @@
       :searchTerm="searchParams.searchTerm"
       :themeType="searchParams.themeType"
       :disabled="isLoading"
-      heading="Explore Themes"
-    />
+    >
+      <template #heading> Explore Themes </template>
+    </ThemesSearch>
     <template v-if="isLoading || themeList.length">
       <section class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <ThemesCardSkeleton

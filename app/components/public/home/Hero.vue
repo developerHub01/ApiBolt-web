@@ -27,7 +27,7 @@
       </div>
       <h1
         ref="headingRef"
-        class="text-7xl md:text-9xl font-black tracking-tighter mb-8 opacity-0 translate-y-8"
+        class="text-7xl md:text-9xl font-black font-brand not-italic tracking-tighter mb-8 opacity-0 translate-y-8"
       >
         <span
           class="inline-block bg-linear-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent"

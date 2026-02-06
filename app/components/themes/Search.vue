@@ -1,10 +1,13 @@
 <template>
   <div class="w-full flex flex-col items-center gap-8 py-10">
-    <SectionHeader
-      v-if="heading"
-      :title="heading"
-      description="Discover and share custom themes to personalize your workspace"
-    />
+    <SectionHeader>
+      <template #title>
+        <slot name="title"> My themes </slot>
+      </template>
+      <template #description>
+        Discover and share custom themes to personalize your workspace
+      </template>
+    </SectionHeader>
 
     <form
       class="w-full max-w-2xl bg-card/40 backdrop-blur-md rounded-2xl border-2 border-white/10 p-2 flex flex-col sm:flex-row gap-2 shadow-2xl"
@@ -26,7 +29,7 @@
       <div class="flex items-center gap-2 border-white/5">
         <Select v-model="searchState.themeType">
           <SelectTrigger
-            class="flex-1 sm:w-[130px] border-0 bg-transparent focus:ring-0 shadow-none hover:bg-muted/20"
+            class="flex-1 sm:w-32.5 border-0 bg-transparent focus:ring-0 shadow-none hover:bg-muted/20"
           >
             <SelectValue placeholder="Type" />
           </SelectTrigger>
@@ -75,17 +78,11 @@ import { Search, X } from "lucide-vue-next";
 import SectionHeader from "@/components/public/common/SectionHeader.vue";
 import type { SearchState, TThemeTypeSearch } from "~/types/theme.types";
 
-const props = withDefaults(
-  defineProps<{
-    disabled: boolean;
-    searchTerm: string;
-    themeType: TThemeTypeSearch;
-    heading?: string;
-  }>(),
-  {
-    heading: "My themes",
-  },
-);
+const props = defineProps<{
+  disabled: boolean;
+  searchTerm: string;
+  themeType: TThemeTypeSearch;
+}>();
 
 const themeTypeList: Array<{
   id: TThemeTypeSearch;

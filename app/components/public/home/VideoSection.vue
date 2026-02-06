@@ -5,10 +5,12 @@
     />
     <div class="container mx-auto relative perspective-1000">
       <div ref="titleRef" class="opacity-0 translate-y-8">
-        <SectionHeader
-          title="See APIBolt in Action"
-          description="Watch how fast you can build and test APIs"
-        />
+        <SectionHeader class="text-center">
+          <template #title>See APIBolt in Action </template>
+          <template #description>
+            Watch how fast you can build and test APIs
+          </template>
+        </SectionHeader>
       </div>
 
       <!-- Video Container -->

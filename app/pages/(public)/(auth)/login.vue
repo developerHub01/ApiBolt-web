@@ -24,12 +24,12 @@
           />
         </div>
         <h1
-          class="text-3xl font-bold tracking-tight text-foreground"
+          class="text-3xl font-bold tracking-tight text-foreground font-brand"
         >
           Welcome back
         </h1>
         <p
-          class="mt-3 text-muted-foreground text-base leading-relaxed max-w-[280px]"
+          class="mt-3 text-muted-foreground text-base leading-relaxed max-w-70"
         >
           Sign in to your account and continue your masterpiece.
         </p>
