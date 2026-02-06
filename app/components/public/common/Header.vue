@@ -50,10 +50,10 @@
             side="right"
             class="w-75 bg-card/80 backdrop-blur-xl border-white/5 p-8 flex flex-col gap-8"
           >
-            <SheetHeader class="text-left">
+            <SheetHeader class="text-left gap-3">
               <SheetTitle class="flex items-center gap-2">
                 <NuxtImg src="/logo.svg" class="size-6" alt="api-bolt" />
-                <span class="font-black tracking-tighter">APIBolt</span>
+                <span class="font-black tracking-tighter font-brand">APIBolt</span>
               </SheetTitle>
               <SheetDescription class="text-xs">
                 Accelerate your workflow with premium API themes.

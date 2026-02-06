@@ -27,7 +27,7 @@
       </div>
       <h1
         ref="headingRef"
-        class="text-7xl md:text-9xl font-black font-brand not-italic tracking-tighter mb-8 opacity-0 translate-y-8"
+        class="text-5xl sm:text-7xl md:text-9xl font-black font-brand not-italic tracking-tighter mb-8 opacity-0 translate-y-8"
       >
         <span
           class="inline-block bg-linear-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent"
@@ -37,13 +37,13 @@
       </h1>
       <p
         ref="subtitleRef"
-        class="text-2xl sm:text-3xl md:text-4xl text-muted-foreground font-bold mb-6 opacity-0 translate-y-8"
+        class="text-xl sm:text-3xl md:text-4xl text-muted-foreground font-bold mb-6 opacity-0 translate-y-8"
       >
         Desktop API Testing
       </p>
       <p
         ref="descRef"
-        class="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 opacity-0 translate-y-8"
+        class="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12 opacity-0 translate-y-8"
       >
         Test and debug APIs on your machine. No cloud, no tracking, no BS.<br
           class="hidden md:block"
@@ -79,12 +79,12 @@
       <!-- Feature highlights -->
       <div
         ref="featuresRef"
-        class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto opacity-0 translate-y-8"
+        class="w-full sm:w-fit grid sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto opacity-0 translate-y-8"
       >
         <div
           v-for="{ id, title, icon, description } in featureList"
           :key="id"
-          class="group p-4 sm:p-8 rounded-3xl border-2 border-border/50 bg-card/50 backdrop-blur-xl text-center hover:border-primary/50 hover:bg-card transition-all duration-300 hover:scale-105"
+          class="group p-4 py-8 sm:p-8 md:px-4 lg:px-8 rounded-3xl border-2 border-border/50 bg-card/50 backdrop-blur-xl text-center hover:border-primary/50 hover:bg-card transition-all duration-300 hover:scale-105"
         >
           <div
             class="mb-4 p-4 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 inline-block"
