@@ -22,6 +22,7 @@ export interface ThemeInterface extends ThemeMetaInterface {
   install_count: number;
   authorId: string;
   authorUsername: string;
+  updated_at: string;
 }
 
 export interface ThemeListThemeMetaInterface {

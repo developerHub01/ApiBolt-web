@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
 
   const { data, error, count } = await queryBuilder
     .range(from, to)
-    .order("created_at", { ascending: false });
+    .order("updated_at", { ascending: false });
 
   if (error)
     return sendStandardResponse(event, {

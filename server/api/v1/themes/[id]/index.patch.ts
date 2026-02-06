@@ -17,6 +17,7 @@ interface ThemeUpdatePayload extends Partial<
     | "thumbnail"
     | "palette"
     | "version"
+    | "updated_at"
   >
 > {}
 
@@ -105,6 +106,8 @@ export default defineEventHandler(async (event) => {
         .from(SUPABSE_STORAGE_BUCKET_NAME.theme.theme_thumbnail)
         .getPublicUrl(assetPath).data.publicUrl;
     }
+
+    updatePayload.updated_at = new Date().toISOString();
 
     const { data, error } = await client
       .from("themes")
