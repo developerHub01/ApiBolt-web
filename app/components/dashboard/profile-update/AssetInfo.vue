@@ -15,7 +15,7 @@
             <NuxtImg
               :src="coverUrl"
               alt="profile cover"
-              class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+              class="object-cover w-full h-full transition-transform duration-500"
             />
           </AspectRatio>
           <div
@@ -35,26 +35,28 @@
 
         <!-- Avatar Upload Overflow -->
         <div
-          class="relative flex justify-center -mt-16 md:-mt-20 lg:-mt-24 z-20"
+          class="relative flex justify-center -mt-16 md:-mt-20 lg:-mt-24 z-20 pointer-events-none"
         >
-          <div
-            class="relative size-32 md:size-40 lg:size-48 rounded-full border-4 border-background bg-muted overflow-hidden group cursor-pointer shadow-2xl transition-transform hover:scale-105"
-            @click="avatarInput?.click()"
-          >
-            <NuxtImg :src="avatarUrl" class="size-full object-cover" />
+          <div class="pointer-events-auto">
             <div
-              class="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+              class="relative size-32 md:size-40 lg:size-48 rounded-full border-4 border-background bg-muted overflow-hidden group cursor-pointer shadow-2xl transition-transform"
+              @click="avatarInput?.click()"
             >
-              <CameraIcon class="size-8 text-white" />
+              <NuxtImg :src="avatarUrl" class="size-full object-cover" />
+              <div
+                class="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+              >
+                <CameraIcon class="size-8 text-white" />
+              </div>
             </div>
+            <input
+              type="file"
+              ref="avatarInput"
+              class="hidden"
+              accept="image/*"
+              @change="(e) => onFileSelect(e, 'avatar')"
+            />
           </div>
-          <input
-            type="file"
-            ref="avatarInput"
-            class="hidden"
-            accept="image/*"
-            @change="(e) => onFileSelect(e, 'avatar')"
-          />
         </div>
       </Field>
     </FieldGroup>

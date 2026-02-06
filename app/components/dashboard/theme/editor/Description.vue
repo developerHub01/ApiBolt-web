@@ -17,11 +17,6 @@
         :maxlength="maxLength"
         class="resize-none min-h-40 bg-muted/20 border-white/5 focus-visible:ring-primary/50 transition-all p-4 leading-relaxed"
       />
-      <p
-        class="text-[10px] text-muted-foreground mt-1.5 uppercase tracking-wider"
-      >
-        Markdown supported (Coming soon)
-      </p>
     </Field>
   </div>
 </template>

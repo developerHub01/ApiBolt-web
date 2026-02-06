@@ -6,7 +6,6 @@
         Recommend: 1920x1080 (16:9) | Max 2MB
       </p>
     </div>
-
     <FieldGroup>
       <Field>
         <div
@@ -18,7 +17,7 @@
               <NuxtImg
                 :src="previewUrl"
                 alt="theme preview"
-                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                class="object-cover w-full h-full"
               />
             </template>
             <div
@@ -78,6 +77,7 @@ const REQUIRED_RATIO = (
 
 const props = defineProps<{
   previewUrl: string;
+  previewFile: File | null;
 }>();
 
 const emit = defineEmits<{
@@ -85,6 +85,13 @@ const emit = defineEmits<{
 }>();
 
 const fileInput = ref<HTMLInputElement | null>(null);
+
+watch(
+  () => props.previewFile,
+  (newFile) => {
+    if (!newFile && fileInput.value) fileInput.value.value = "";
+  },
+);
 
 const onFileSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;

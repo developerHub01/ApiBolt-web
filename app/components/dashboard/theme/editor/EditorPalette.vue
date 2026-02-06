@@ -12,6 +12,7 @@
               <Button
                 variant="outline"
                 size="icon"
+                type="button"
                 class="size-9 rounded-full bg-muted/20 border-white/5 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 @click="() => handlePaletteModifier(id)"
               >

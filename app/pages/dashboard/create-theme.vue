@@ -17,6 +17,7 @@
         />
         <DashboardThemeEditorPreview
           :previewUrl="themeState.previewUrl"
+          :previewFile="themeState.previewFile"
           @update:previewFile="handlePreviewChange"
         />
         <DashboardThemeEditorPalette v-model:palette="themeState.palette" />
@@ -46,6 +47,8 @@
 import { toast } from "vue-sonner";
 import { useThemeAssets } from "~/composable/useThemeAssets";
 import { DEFAULT_THEME_PALETTE } from "~/constant/default-theme.constant";
+import type { ApiResponse } from "~~/server/types";
+import { FetchError } from "ofetch";
 
 const isSubmitting = ref(false);
 const { generateThemeAssets } = useThemeAssets();
@@ -90,10 +93,28 @@ const handlePublish = async () => {
     formData.append("preview", preview);
     formData.append("thumbnail", thumbnail);
 
-    await $fetch("/api/v1/themes/publish", { method: "POST", body: formData });
+    await $fetch("/api/v1/themes/publish", {
+      method: "POST",
+      body: formData,
+    });
+
     toast.success("Theme Published");
+
+    Object.assign(themeState, {
+      name: "",
+      description: "",
+      previewUrl: "",
+      previewFile: null,
+      themeType: "dark",
+      palette: {
+        ...DEFAULT_THEME_PALETTE,
+      },
+    });
   } catch (err) {
-    toast.error("Failed to publish");
+    if (err instanceof FetchError) {
+      const errorData = err.data as ApiResponse<null>;
+      toast.error(errorData?.message || "Failed to publish");
+    } else toast.error("An unexpected error occurred");
   } finally {
     isSubmitting.value = false;
   }
