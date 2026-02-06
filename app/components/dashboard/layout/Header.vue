@@ -15,7 +15,7 @@
           :height="25"
           class="object-contain"
         />
-        <h1 class="text-base font-medium font-brand">APIBolt</h1>
+        <h1 class="text-base font-bold font-brand">APIBolt</h1>
       </div>
       <div class="ml-auto flex items-center gap-2">
         <DashboardLayoutHeaderAvatar />
