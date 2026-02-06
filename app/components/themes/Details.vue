@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="space-y-2">
       <h1
-        class="text-4xl md:text-5xl font-black bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-brand"
+        class="text-4xl md:text-5xl font-black bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-brand first-letter:uppercase"
       >
         {{ theme?.name }}
       </h1>
@@ -91,7 +91,7 @@
     <div class="space-y-4">
       <h2 class="text-xl font-bold flex items-center gap-2">Description</h2>
       <div
-        class="prose prose-invert max-w-none text-muted-foreground leading-relaxed"
+        class="prose prose-invert max-w-none text-muted-foreground leading-relaxed first-letter:uppercase"
       >
         <p>{{ theme.description }}</p>
       </div>

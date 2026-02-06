@@ -31,7 +31,7 @@
     <div class="relative pt-4 flex-1 flex flex-col z-10 gap-2">
       <div class="flex justify-between items-start gap-2">
         <h3
-          class="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-1"
+          class="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-1 first-letter:uppercase"
         >
           {{ name }}
         </h3>
@@ -40,7 +40,7 @@
         </Badge>
       </div>
 
-      <p class="text-muted-foreground text-sm line-clamp-2 leading-relaxed">
+      <p class="text-muted-foreground text-sm line-clamp-2 leading-relaxed first-letter:uppercase">
         {{ description }}
       </p>
 
