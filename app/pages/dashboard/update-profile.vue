@@ -24,7 +24,7 @@
       >
         <Button
           type="submit"
-          class="min-w-32 rounded-full py-6 text-base font-semibold shadow-lg transition-all hover:scale-105 active:scale-95"
+          class="rounded-full shadow-xl"
           :disabled="
             isSubmitting || !profileData.fullName.trim() || !hasUnsavedChanges
           "

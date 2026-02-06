@@ -29,7 +29,7 @@
       >
         <Button
           type="submit"
-          class="min-w-32 rounded-full py-6 text-base font-semibold shadow-xl transition-all hover:scale-105 active:scale-95 px-8"
+          class="rounded-full shadow-xl"
           :disabled="isSubmitting || !isFormValid"
         >
           <Spinner v-if="isSubmitting" class="mr-2" />

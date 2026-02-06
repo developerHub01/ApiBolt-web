@@ -26,6 +26,7 @@
         <Button
           type="button"
           variant="outline"
+          class="rounded-full shadow-xl"
           :disabled="isSubmitting || !hasUnsavedChanges"
           @click="handleReset"
         >
@@ -33,6 +34,7 @@
         </Button>
         <Button
           type="submit"
+          class="rounded-full shadow-xl"
           :disabled="
             isSubmitting ||
             !themeState.description.trim() ||
