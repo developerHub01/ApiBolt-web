@@ -105,7 +105,6 @@
           ref="popupRef"
           :src="selectedImage"
           class="block w-[85vw] md:w-auto md:max-w-[85vw] h-auto max-h-[85vh] rounded-xl border-4 md:border-8 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/50 select-none"
-          style="opacity: 0"
           format="webp"
           :sizes="{
             sm: '100vw',
@@ -161,14 +160,15 @@ const openPreview = (image: string) => {
 
   const { $gsap } = useNuxtApp();
 
-  // Use a longer delay to ensure Teleport has rendered the refs reliably
   setTimeout(() => {
     if ($gsap && overlayRef.value && popupRef.value) {
       const tl = $gsap.timeline();
 
       tl.fromTo(
         overlayRef.value,
-        { opacity: 0 },
+        {
+          opacity: 0,
+        },
         {
           opacity: 1,
           duration: 0.3,
@@ -176,7 +176,10 @@ const openPreview = (image: string) => {
         },
       ).fromTo(
         popupRef.value,
-        { scale: 0.7, opacity: 0 },
+        {
+          scale: 0.7,
+          opacity: 0,
+        },
         {
           scale: 1,
           opacity: 1,
