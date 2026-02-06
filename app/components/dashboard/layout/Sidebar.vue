@@ -14,7 +14,7 @@
                 :height="25"
                 class="object-contain"
               />
-              <span class="text-base font-semibold">APIBolt</span>
+              <span class="text-base font-semibold font-brand">APIBolt</span>
             </NuxtLink>
           </SidebarMenuButton>
         </SidebarMenuItem>
