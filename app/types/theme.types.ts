@@ -32,5 +32,6 @@ export interface ThemeListThemeMetaInterface {
     page: number;
     pageSize: number;
     totalPages: number;
+    totalThemeCount: number;
   };
 }
