@@ -125,6 +125,7 @@ const handleFetchThemes = async () => {
           pageSize: pageSize,
           searchTerm: searchParams.searchTerm || undefined,
           searchFilter: searchParams.themeType,
+          byMe: true,
         },
       },
     );

@@ -15,6 +15,7 @@
         />
         <DashboardThemeEditorPreview
           :previewUrl="themeState.previewUrl"
+          :previewFile="themeState.previewFile"
           @update:previewFile="handlePreviewChange"
         />
         <DashboardThemeEditorPalette v-model:palette="themeState.palette" />

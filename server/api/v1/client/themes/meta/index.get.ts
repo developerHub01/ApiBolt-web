@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const pageSize = Number(query.pageSize) || 6;
   const searchTerm = query.searchTerm as string | undefined;
   const searchFilter = query.searchFilter as string | undefined;
-  const byMe = Number(query.byMe) ? 1 : 0;
+  const byMe = ["true", "1"].includes((query.byMe as string)?.trim()) ? 1 : 0;
   const userName = query.userName as string | undefined;
 
   const supabase = await serverSupabaseClient(event);
