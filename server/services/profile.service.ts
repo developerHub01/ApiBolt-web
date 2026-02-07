@@ -1,8 +1,7 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "~/types/database.types";
+import { TSupabaseClient } from "~~/server/types";
 
 export const getUserIdFromUserName = async (
-  supabase: SupabaseClient<Database>,
+  supabase: TSupabaseClient,
   userName: string,
 ) => {
   const { data, error } = await supabase
@@ -16,7 +15,7 @@ export const getUserIdFromUserName = async (
 };
 
 export const getProfileByUserName = async (
-  supabase: SupabaseClient<Database>,
+  supabase: TSupabaseClient,
   userName: string,
 ) => {
   const { data, error } = await supabase
@@ -30,7 +29,7 @@ export const getProfileByUserName = async (
 };
 
 export const getFullProfileById = async (
-  supabase: SupabaseClient<Database>,
+  supabase: TSupabaseClient,
   id: string,
 ) => {
   const { data, error } = await supabase
@@ -72,7 +71,7 @@ export const getFullProfileById = async (
 };
 
 export const getProfileMetaById = async (
-  supabase: SupabaseClient<Database>,
+  supabase: TSupabaseClient,
   id: string,
 ) => {
   const { data, error } = await supabase

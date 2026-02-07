@@ -1,5 +1,4 @@
 import { serverSupabaseServiceRole } from "#supabase/server";
-import type { PostgrestError } from "@supabase/postgrest-js";
 
 const ACTION_TYPE = new Set(["install", "uninstall"]);
 
@@ -24,7 +23,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    let error: PostgrestError | null = null;
+    let error = null;
 
     if (actionType === "install") {
       const { error: upsertError } = await client
