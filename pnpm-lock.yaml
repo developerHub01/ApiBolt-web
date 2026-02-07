@@ -29,6 +29,9 @@ importers:
       '@studio-freight/lenis':
         specifier: ^1.0.42
         version: 1.0.42
+      '@supabase/supabase-js':
+        specifier: ^2.95.3
+        version: 2.95.3
       '@tabler/icons-vue':
         specifier: ^3.36.0
         version: 3.36.1(vue@3.5.27(typescript@5.9.3))
