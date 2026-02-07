@@ -9,7 +9,21 @@
       :themeType="searchParams.themeType"
       :disabled="isLoading"
     >
-      <template #heading> Explore Themes </template>
+      <template #title> Theme Market </template>
+
+      <template #description>
+        <template v-if="totalThemeCount && totalThemeCount > 0">
+          Explore and share
+          <span
+            class="inline-block bg-primary text-primary-foreground rounded-full px-3 py-1 mx-0.5 text-sm font-bold ring-1 ring-primary/30 backdrop-blur-sm shadow-[0_0_80px_0px] shadow-primary animate-pulse"
+            >{{ totalThemeCount }}+</span
+          >
+          custom themes to make your workspace truly yours.
+        </template>
+        <template v-else>
+          Explore and share custom themes to make your workspace truly yours.
+        </template>
+      </template>
     </ThemesSearch>
     <template v-if="isLoading || themeList.length">
       <section class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -70,6 +84,9 @@ const isThemeType = (type: unknown): type is TThemeTypeSearch =>
   SEARCH_THEME_TYPE_SET.has(type as TThemeTypeSearch);
 
 const currentPage = ref<number>(Number(route.query.page) || 1);
+const totalThemeCount = computed(
+  () => response.value?.data?.meta.totalThemeCount ?? 0,
+);
 const pageSize = 6;
 
 const searchParams = reactive<SearchState>({

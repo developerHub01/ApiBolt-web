@@ -5,7 +5,9 @@
         <slot name="title"> My themes </slot>
       </template>
       <template #description>
-        Discover and share custom themes to personalize your workspace
+        <slot name="description">
+          Discover and share custom themes to personalize your workspace
+        </slot>
       </template>
     </SectionHeader>
 

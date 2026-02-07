@@ -67,6 +67,11 @@ export default defineEventHandler(async (event) => {
     .range(from, to)
     .order("updated_at", { ascending: false });
 
+  const { count: totalThemeCount } = await supabase.from("themes").select("*", {
+    count: "exact",
+    head: true,
+  });
+
   if (error)
     return sendStandardResponse(event, {
       success: false,
@@ -101,6 +106,7 @@ export default defineEventHandler(async (event) => {
         page,
         pageSize,
         totalPages: Math.ceil((count || 0) / pageSize),
+        totalThemeCount,
       },
     },
   });
