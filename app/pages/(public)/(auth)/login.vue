@@ -39,11 +39,7 @@
         @click="handleSignInWithGithub"
         class="flex h-14 w-full max-w-xs items-center justify-center gap-4 rounded-full bg-foreground text-background font-bold transition-all hover:bg-foreground/90 active:scale-[0.98] shadow-xl"
       >
-        <NuxtImg
-          src="/images/github.png"
-          alt="github logo"
-          class="size-6 invert dark:invert-0"
-        />
+        <NuxtImg src="/images/github.png" alt="github logo" class="size-6" />
         Continue with GitHub
       </Button>
 
