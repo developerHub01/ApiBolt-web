@@ -38,15 +38,6 @@
               <span>Settings</span>
             </DropdownMenuItem>
           </NuxtLink>
-          <div class="my-1 border-t border-white/5"></div>
-          <DropdownMenuItem
-            variant="destructive"
-            @click="handleLogout"
-            class="cursor-pointer rounded-lg gap-3 py-2.5"
-          >
-            <LogOut class="size-4" />
-            <span>Sign Out</span>
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </template>
