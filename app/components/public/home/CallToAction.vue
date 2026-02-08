@@ -72,7 +72,7 @@ const downloadButtons = [
   },
   {
     id: "all-release",
-    label: "View All Release",
+    label: "View All Releases",
     href: "https://github.com/developerHub01/ApiBolt/releases",
   },
 ];
