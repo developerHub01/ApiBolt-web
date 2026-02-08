@@ -57,16 +57,22 @@
         class="flex flex-col sm:flex-row gap-6 justify-center mb-20 opacity-0 scale-90"
       >
         <NuxtLink
-          v-for="{ id, label, href } in ctaButtonList"
+          v-for="{ id, label, href, icon, isDownloadable } in ctaButtonList"
           :key="id"
           :to="href"
-          target="_blank"
+          :target="isDownloadable ? `_self` : `_blank`"
+          :download="isDownloadable"
         >
           <button
             class="group relative px-12 py-5 bg-primary text-primary-foreground rounded-2xl font-bold text-lg overflow-hidden shadow-[0_0_40px_-10px] hover:shadow-primary/50 hover:scale-105 transition-all duration-300 cursor-pointer"
           >
             <span class="relative z-10 flex items-center justify-center gap-3">
-              <Download class="w-6 h-6" />
+              <template v-if="icon">
+                <component
+                  :is="icon"
+                  class="w-5 h-5 group-hover:translate-y-0.5 transition-transform"
+                />
+              </template>
               {{ label }}
             </span>
             <div
@@ -102,27 +108,20 @@
 </template>
 
 <script setup lang="ts">
-import {
-  Download,
-  Lock,
-  ShieldOff,
-  HardDrive,
-  WifiOff,
-  Settings2,
-} from "lucide-vue-next";
+import { Download, Lock, ShieldOff, WifiOff, Settings2 } from "lucide-vue-next";
 
 const ctaButtonList = [
   {
     id: "windows",
     label: "Windows",
-    icon: "Download",
-    href: "https://github.com/api-bolt/api-bolt/releases/download/v1.0.0/api-bolt-1.0.0-win-x64.exe",
+    icon: Download,
+    href: "https://github.com/developerHub01/ApiBolt/releases/latest/download/api-bolt-setup.exe",
+    isDownloadable: true,
   },
   {
-    id: "linux",
-    label: "Linux",
-    icon: "Download",
-    href: "https://github.com/api-bolt/api-bolt/releases/download/v1.0.0/api-bolt-1.0.0-linux-x64.AppImage",
+    id: "all-release",
+    label: "View All Release",
+    href: "https://github.com/developerHub01/ApiBolt/releases",
   },
 ];
 

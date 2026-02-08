@@ -15,17 +15,25 @@
 
       <!-- Download buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-        <button
-          v-for="{ id, label, icon } in downloadButtons"
+        <NuxtLink
+          v-for="{ id, label, icon, href, isDownloadable } in downloadButtons"
           :key="id"
-          class="group inline-flex items-center justify-center gap-2 px-10 py-5 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+          :to="href"
+          :target="isDownloadable ? `_self` : `_blank`"
+          :download="isDownloadable"
         >
-          <component
-            :is="icon"
-            class="w-5 h-5 group-hover:translate-y-0.5 transition-transform"
-          />
-          {{ label }}
-        </button>
+          <button
+            class="group inline-flex items-center justify-center gap-2 px-10 py-5 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <template v-if="icon">
+              <component
+                :is="icon"
+                class="w-5 h-5 group-hover:translate-y-0.5 transition-transform"
+              />
+            </template>
+            {{ label }}
+          </button>
+        </NuxtLink>
       </div>
 
       <!-- Quick links -->
@@ -59,11 +67,13 @@ const downloadButtons = [
     id: "windows-download",
     label: "Download for Windows",
     icon: Download,
+    href: "https://github.com/developerHub01/ApiBolt/releases/latest/download/api-bolt-setup.exe",
+    isDownloadable: true,
   },
   {
-    id: "linux-download",
-    label: "Download for Linux",
-    icon: Download,
+    id: "all-release",
+    label: "View All Release",
+    href: "https://github.com/developerHub01/ApiBolt/releases",
   },
 ];
 
