@@ -1,7 +1,14 @@
 <template>
   <section
-    class="w-full h-full flex flex-col gap-8 container mx-auto px-6 pt-15 pb-20"
+    class="w-full h-full flex flex-col gap-8 container mx-auto px-6 pt-40 md:pt-45 pb-20"
   >
+    <!-- Decorative Background Elements -->
+    <div
+      class="fixed top-1/4 -left-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
+    <div
+      class="fixed bottom-1/4 -right-20 size-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
     <h1 class="sr-only">Theme Gallery</h1>
     <ThemesSearch
       @search="handleSearch"

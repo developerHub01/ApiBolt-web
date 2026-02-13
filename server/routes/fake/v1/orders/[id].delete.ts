@@ -4,13 +4,13 @@ export default defineEventHandler((event) => {
   const idParam = event.context.params?.id;
   if (!idParam)
     return {
-      error: "Missing product id",
+      error: "Missing order id",
     };
 
   return {
     data: {
       id: parseInt(idParam),
-      message: "Product deleted (dummy)",
+      message: "Order deleted (dummy)",
     },
   };
 });

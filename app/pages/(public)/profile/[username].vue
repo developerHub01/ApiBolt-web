@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full container mx-auto flex flex-col">
+  <section class="w-full container mx-auto flex flex-col pt-30">
     <ProfileUserDetailsSkeleton v-if="pending" />
     <NotFound
       v-else-if="isNotFound"

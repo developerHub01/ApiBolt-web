@@ -53,7 +53,9 @@
             <SheetHeader class="text-left gap-3">
               <SheetTitle class="flex items-center gap-2">
                 <NuxtImg src="/logo.svg" class="size-6" alt="api-bolt" />
-                <span class="font-black tracking-tighter font-brand">APIBolt</span>
+                <span class="font-black tracking-tighter font-brand"
+                  >APIBolt</span
+                >
               </SheetTitle>
               <SheetDescription class="text-xs">
                 Accelerate your workflow with premium API themes.
@@ -118,6 +120,11 @@ const items = computed(() => [
     label: "Marketplace",
     to: "/marketplace",
     active: route.path.startsWith("/marketplace"),
+  },
+  {
+    label: "Fake APIs",
+    to: "/fake",
+    active: route.path === "/fake",
   },
 ]);
 

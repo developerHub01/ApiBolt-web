@@ -1,9 +1,16 @@
-import { defineEventHandler, readBody } from "h3";
+import { defineEventHandler } from "h3";
 
-export default defineEventHandler(async (event) => ({
-  data: {
-    id: 999,
-    message: "Category modified (dummy response)",
-    received: await readBody(event),
-  },
-}));
+export default defineEventHandler((event) => {
+  const idParam = event.context.params?.id;
+  if (!idParam)
+    return {
+      error: "Missing category id",
+    };
+
+  return {
+    data: {
+      id: parseInt(idParam),
+      message: "Category deleted (dummy)",
+    },
+  };
+});
