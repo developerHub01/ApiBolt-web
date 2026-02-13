@@ -5,6 +5,7 @@
     <PublicHomeHero />
     <PublicHomeVideoSection />
     <PublicHomeFeatures />
+    <PublicHomeFakeApiSection />
     <PublicHomeCallToAction />
   </main>
 </template>
@@ -17,8 +18,7 @@ definePageMeta({
 const config = useRuntimeConfig();
 const siteUrl = config.public.siteUrl as string;
 
-const seoTitle =
-  "APIBolt - Industrial API Testing Desktop App";
+const seoTitle = "APIBolt - Industrial API Testing Desktop App";
 const seoDescription =
   "APIBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry. The best open-source alternative to Postman for Windows and Linux.";
 

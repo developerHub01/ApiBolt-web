@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mx-auto">
+  <div class="w-full mx-auto pt-24">
     <template v-if="pending">pending</template>
     <template v-else-if="error || !data?.success || !data.data">
       <NotFound

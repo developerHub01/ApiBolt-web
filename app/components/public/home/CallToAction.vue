@@ -61,19 +61,20 @@
 <script setup lang="ts">
 import { Download, Github, User } from "lucide-vue-next";
 import SectionHeader from "@/components/public/common/SectionHeader.vue";
+import { APP_INSTALLER_URL, APP_RELEASE_URL } from "~/constant/index.constant";
 
 const downloadButtons = [
   {
     id: "windows-download",
     label: "Download for Windows",
     icon: Download,
-    href: "https://github.com/developerHub01/ApiBolt/releases/latest/download/api-bolt-setup.exe",
+    href: APP_INSTALLER_URL,
     isDownloadable: true,
   },
   {
     id: "all-release",
     label: "View All Releases",
-    href: "https://github.com/developerHub01/ApiBolt/releases",
+    href: APP_RELEASE_URL,
   },
 ];
 

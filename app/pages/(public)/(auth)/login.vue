@@ -1,13 +1,13 @@
 <template>
   <div
-    class="relative flex flex-1 w-full flex-col items-center justify-center py-20 px-4 overflow-hidden"
+    class="relative flex flex-1 w-full flex-col items-center justify-center py-20 px-4 pt-40 overflow-hidden"
   >
     <!-- Decorative Background Elements -->
     <div
-      class="absolute top-1/4 -left-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
+      class="fixed top-1/4 -left-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
     ></div>
     <div
-      class="absolute bottom-1/4 -right-20 size-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none"
+      class="fixed bottom-1/4 -right-20 size-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none"
     ></div>
 
     <Card

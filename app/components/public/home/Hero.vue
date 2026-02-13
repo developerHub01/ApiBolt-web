@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative min-h-screen flex items-center justify-center px-6 pt-45 pb-20 -mt-24"
+    class="relative min-h-screen flex items-center justify-center px-6 pt-46 pb-20"
   >
     <PublicHomeHeroAnimatedBg />
     <div
@@ -109,19 +109,20 @@
 
 <script setup lang="ts">
 import { Download, Lock, ShieldOff, WifiOff, Settings2 } from "lucide-vue-next";
+import { APP_INSTALLER_URL, APP_RELEASE_URL } from "~/constant/index.constant";
 
 const ctaButtonList = [
   {
     id: "windows",
     label: "Windows",
     icon: Download,
-    href: "https://github.com/developerHub01/ApiBolt/releases/latest/download/api-bolt-setup.exe",
+    href: APP_INSTALLER_URL,
     isDownloadable: true,
   },
   {
     id: "all-release",
     label: "View All Releases",
-    href: "https://github.com/developerHub01/ApiBolt/releases",
+    href: APP_RELEASE_URL,
   },
 ];
 

@@ -216,7 +216,7 @@ export default defineNuxtConfig({
   },
   sitemap: {
     exclude: ["/confirm", "/dashboard/**", "/not-found"],
-    urls: async () => ["/marketplace", "/profile/developerHub01"],
+    urls: async () => ["/marketplace", "/profile/developerHub01", "/fake"],
   },
   robots: {
     disallow: ["/confirm", "/dashboard/**", "/not-found"],
