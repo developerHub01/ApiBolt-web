@@ -85,7 +85,7 @@
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                :src="videoUrl"
                 title="ApiBolt Introduction"
                 frameborder="0"
                 allow="
@@ -113,6 +113,11 @@ import SectionHeader from "@/components/public/common/SectionHeader.vue";
 const isOpen = ref(false);
 const videoContainerRef = ref<HTMLElement | null>(null);
 const titleRef = ref<HTMLElement | null>(null);
+
+const videoUrl = computed(() => {
+  const base = "https://www.youtube.com/embed/u2t3AvMtXXI?si=_8mcg3QsrJfCygn-";
+  return isOpen.value ? `${base}&autoplay=1` : base;
+});
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
