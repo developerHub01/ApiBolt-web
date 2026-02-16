@@ -51,7 +51,7 @@
       </div>
     </header>
 
-    <div class="container mx-auto max-w-7xl px-4 py-20">
+    <div class="container mx-auto max-w-7xl px-4 py-20 relative">
       <nav
         ref="navRef"
         class="flex flex-wrap gap-2 mb-16 pb-8 border-b border-white/5 opacity-0 translate-y-4"
@@ -257,6 +257,11 @@
           </div>
         </section>
       </div>
+
+      <!-- Decorative Background Elements -->
+      <div
+        class="absolute bottom-10 -right-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
+      ></div>
     </div>
   </main>
 </template>
