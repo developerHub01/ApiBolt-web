@@ -1,5 +1,10 @@
 <template>
-  <div class="w-full mx-auto pt-24">
+  <div class="w-full mx-auto pt-24 relative">
+    <!-- Decorative Background Elements -->
+    <div
+      class="absolute bottom-10 right-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
+
     <template v-if="pending">pending</template>
     <template v-else-if="error || !data?.success || !data.data">
       <NotFound

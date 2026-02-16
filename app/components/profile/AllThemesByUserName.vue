@@ -1,5 +1,8 @@
 <template>
-  <section class="w-full flex flex-col gap-8 container mx-auto py-15">
+  <section class="w-full flex flex-col gap-8 container mx-auto py-15 relative">
+    <div
+      class="absolute top-1/2 left-1/2 -translate-1/2 size-170 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
+    ></div>
     <ThemesSearch
       @search="handleSearch"
       :searchTerm="searchParams.searchTerm"
