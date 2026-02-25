@@ -115,7 +115,7 @@ const seoTitle = computed(() =>
 const seoDescription = computed(() =>
   searchParams.searchTerm
     ? `Browse themes matching "${searchParams.searchTerm}" for the APIBolt desktop app. Find the perfect style for your API development workflow.`
-    : "Explore and download custom themes for APIBolt, the industrial API testing desktop app. Personalize your workspace with community-crafted designs built for speed and clarity.",
+    : "Explore and download custom themes for APIBolt, the professional API testing desktop app. Personalize your workspace with community-crafted designs built for speed and clarity.",
 );
 const seoImage = computed(() => `${siteUrl}/og.png`);
 

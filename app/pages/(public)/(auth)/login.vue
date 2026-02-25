@@ -72,7 +72,7 @@ definePageMeta({
 const config = useRuntimeConfig();
 const siteUrl = config.public.siteUrl as string;
 
-const authTitle = "Sign in to APIBolt | Industrial API Testing Desktop App";
+const authTitle = "Sign in to APIBolt | Professional API Testing Desktop App";
 const authDescription =
   "Log in to your APIBolt account to manage your projects, themes, and accelerate your API development workflow with speed and privacy.";
 

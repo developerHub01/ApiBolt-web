@@ -276,7 +276,7 @@ const siteUrl = config.public.siteUrl as string;
 const apiBaseUrl = `${siteUrl}/fake/v1`;
 
 const seoTitle = "Fake API | APIBolt";
-const seoDescription = "Industrial-grade fake REST API for testing.";
+const seoDescription = "Professional-grade fake REST API for testing.";
 
 useSeoMeta({
   title: seoTitle,
