@@ -268,7 +268,7 @@
 
 <script setup lang="ts">
 import { Copy, Download } from "lucide-vue-next";
-import EndpointCard from "~/components/public/Fake/EndpointCard.vue";
+import EndpointCard from "~/components/public/fake/EndpointCard.vue";
 import { APP_INSTALLER_URL } from "~/constant/index.constant";
 
 const config = useRuntimeConfig();
