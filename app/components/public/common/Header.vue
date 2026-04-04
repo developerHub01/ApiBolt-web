@@ -126,6 +126,11 @@ const items = computed(() => [
     to: "/fake",
     active: route.path === "/fake",
   },
+  {
+    label: "Docs",
+    to: "/docs",
+    active: route.path.startsWith("/docs"),
+  },
 ]);
 
 onMounted(() => {

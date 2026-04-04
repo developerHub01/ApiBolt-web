@@ -161,7 +161,10 @@ export default defineNuxtConfig({
         },
       ],
     },
-    pageTransition: { name: "page", mode: "out-in" },
+    pageTransition: {
+      name: "page",
+      mode: "out-in",
+    },
   },
   routeRules: {
     "/api/**": {
@@ -216,7 +219,13 @@ export default defineNuxtConfig({
   },
   sitemap: {
     exclude: ["/confirm", "/dashboard/**", "/not-found"],
-    urls: async () => ["/marketplace", "/profile/developerHub01", "/fake"],
+    urls: async () => [
+      "/marketplace",
+      "/profile/developerHub01",
+      "/fake",
+      "/docs",
+      "/docs/testing",
+    ],
   },
   robots: {
     disallow: ["/confirm", "/dashboard/**", "/not-found"],
