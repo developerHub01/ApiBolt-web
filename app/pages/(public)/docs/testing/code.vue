@@ -37,7 +37,7 @@
         formats the given payload explicitly as formatted javascript, json, or
         markdown directly inside your test results.
       </p>
-      <PublicDocsCodeBlock lang="ts" :code="codeString" />
+      <PublicCommonCodeBlock lang="ts" :code="codeString" />
     </div>
   </section>
 </template>

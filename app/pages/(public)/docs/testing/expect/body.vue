@@ -28,7 +28,7 @@
               >===</code
             >). Equivalent to primitive strict matches.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Exact string').toBe('OK');`"
           />
@@ -41,7 +41,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Asserts deep strict equality for full objects or complex arrays.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Body equals').toEqual({ success: true, count: 5 });`"
           />
@@ -56,7 +56,7 @@
             <code class="bg-muted px-1 py-0.5 rounded">undefined</code> or
             <code class="bg-muted px-1 py-0.5 rounded">null</code>.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Has payload').toExist();`"
           />
@@ -74,7 +74,7 @@
               >"string" | "number" | "boolean" | "object" | "array"</code
             >.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Is array').toBeType('array');`"
           />
@@ -88,7 +88,7 @@
             Checks if a substring exists in a string body, or if an item exists
             within an array body.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Contains error token').toContain('TokenExpiredException');`"
           />
@@ -101,7 +101,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Asserts that a deep dot-notated property exists in the JSON body.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Has user mapping').toHaveProperty('data.user.id');`"
           />
@@ -114,7 +114,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Validates the explicit numerical length of a JSON array response.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Exactly 10 results').toHaveLength(10);`"
           />
@@ -128,7 +128,7 @@
             Asserts that the body itself (if it is a raw number) conforms to
             numerical limits.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('> 10').toBeGreaterThanNumber(10);\nab.expect('< 50').toBeLessThanNumber(50);\nab.expect('In window').toBeBetweenNumber(10, 20);`"
           />

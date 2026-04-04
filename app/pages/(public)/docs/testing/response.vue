@@ -29,7 +29,7 @@
           &mdash; A direct property exposing the native payload object.
         </li>
       </ul>
-      <PublicDocsCodeBlock lang="ts" :code="responseAccessCode" />
+      <PublicCommonCodeBlock lang="ts" :code="responseAccessCode" />
     </div>
 
     <div class="mt-8 flex flex-col gap-4">
@@ -42,7 +42,7 @@
         The response exposes the exact standard properties returned from ApiBolt
         runner:
       </p>
-      <PublicDocsCodeBlock lang="ts" :code="responseInterfaceCode" />
+      <PublicCommonCodeBlock lang="ts" :code="responseInterfaceCode" />
     </div>
   </section>
 </template>

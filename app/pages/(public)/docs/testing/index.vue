@@ -134,7 +134,7 @@
         >
         for logical inversion.
       </p>
-      <PublicDocsCodeBlock lang="ts" :code="negationCode" />
+      <PublicCommonCodeBlock lang="ts" :code="negationCode" />
     </div>
 
     <div class="flex flex-col gap-4 mt-6">

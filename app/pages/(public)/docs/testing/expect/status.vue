@@ -26,7 +26,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Asserts that the HTTP status matches the exact expected number.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Status is 200').toBe(200);`"
           />
@@ -39,7 +39,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Asserts that the status is contained within the allowed array.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Valid success').toBeOneOf([200, 201, 204]);`"
           />
@@ -52,7 +52,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Numeric boundary assertions for the HTTP status.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Less than 300').toBeLessThan(300);`"
           />
@@ -65,7 +65,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Asserts the status falls inclusively within the range.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('2xx range').toBeBetween(200, 299);`"
           />
@@ -79,7 +79,7 @@
             Quick semantic checks for overarching categories (2xx, 3xx, 4xx,
             5xx).
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Success').toBeSuccess();\nab.expect('Client error').toBeClientError();\nab.expect('Server error').toBeServerError();\nab.expect('Redirect').toBeRedirect();`"
           />
@@ -92,7 +92,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Human-readable strict equality matchers for common codes.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('OK').toBeOK(); // 200\nab.expect('Created').toBeCreated(); // 201\nab.expect('Accepted').toBeAccepted(); // 202\nab.expect('No Content').toBeNoContent(); // 204\nab.expect('Bad Request').toBeBadRequest(); // 400\nab.expect('Unauthorized').toBeUnauthorized(); // 401\nab.expect('Forbidden').toBeForbidden(); // 403\nab.expect('Not Found').toBeNotFound(); // 404\nab.expect('Internal Server Error').toBeInternalServerError(); // 500\nab.expect('Bad Gateway').toBeBadGateway(); // 502\nab.expect('Service Unavailable').toBeServiceUnavailable(); // 503`"
           />

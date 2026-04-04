@@ -33,11 +33,11 @@
 
     <!-- Code content -->
     <div class="relative">
-      <div class="absolute top-0 left-0 w-1 h-full bg-primary/20"></div>
+      <div class="absolute top-0 left-0 w-1 h-full bg-primary/20" />
       <pre
         class="p-4 pl-5 text-sm font-mono overflow-x-auto doc-scrollbar leading-relaxed"
         v-html="highlightedCode"
-      ></pre>
+      />
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@ const props = defineProps<{
   title?: string;
 }>();
 
-const copied = ref(false);
+const copied = ref<boolean>(false);
 
 const highlightedCode = computed(() => {
   if (!props.code) return "";
