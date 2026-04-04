@@ -81,7 +81,7 @@ const props = defineProps<{
   method: string;
   path: string;
   description?: string;
-  params?: string[];
+  params?: Array<string>;
   example?: string;
 }>();
 
