@@ -26,7 +26,7 @@
           <p class="text-sm text-muted-foreground mb-3">
             Asserts that a specific case-insensitive header payload is present.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Has API Rate Limit').toHaveHeader('x-ratelimit-remaining');`"
           />
@@ -40,7 +40,7 @@
             Asserts the header matches an exact string or passes a Regular
             Expression test.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`// Exact String Matching\nab.expect('Cors Policy').toHaveHeaderValue('access-control-allow-origin', '*');\n\n// Regex Matching\nab.expect('Valid Cache Time').toHaveHeaderValue('cache-control', /max-age/);`"
           />
@@ -57,7 +57,7 @@
             >
             header natively includes the provided signature.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Returns JSON').toHaveContentType('application/json');`"
           />

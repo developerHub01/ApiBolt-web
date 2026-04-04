@@ -60,14 +60,7 @@
         </button>
 
         <div v-show="isOpen" class="mt-3">
-          <div
-            class="relative rounded-md border border-border bg-[#0B0F19] overflow-hidden"
-          >
-            <div class="absolute top-0 left-0 w-1 h-full bg-primary/20"></div>
-            <pre
-              class="p-3 text-xs font-mono text-blue-100 overflow-x-auto custom-scrollbar"
-            ><code>{{ example }}</code></pre>
-          </div>
+          <PublicCommonCodeBlock lang="json" :code="example" />
         </div>
       </div>
     </div>

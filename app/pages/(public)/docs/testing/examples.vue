@@ -19,21 +19,21 @@
         <h3 class="text-xl font-bold text-foreground mb-4">
           Complex Pagination Check
         </h3>
-        <PublicDocsCodeBlock lang="ts" :code="codeExample1" />
+        <PublicCommonCodeBlock lang="ts" :code="codeExample1" />
       </div>
 
       <div>
         <h3 class="text-xl font-bold text-foreground mb-4">
           Deep Cookie & Security Audit
         </h3>
-        <PublicDocsCodeBlock lang="ts" :code="codeExample2" />
+        <PublicCommonCodeBlock lang="ts" :code="codeExample2" />
       </div>
 
       <div>
         <h3 class="text-xl font-bold text-foreground mb-4">
           Conditional Logic (Runtime)
         </h3>
-        <PublicDocsCodeBlock lang="ts" :code="codeExample3" />
+        <PublicCommonCodeBlock lang="ts" :code="codeExample3" />
       </div>
     </div>
   </section>

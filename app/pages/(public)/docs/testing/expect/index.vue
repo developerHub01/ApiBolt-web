@@ -41,7 +41,7 @@
       >
         Basic Usage
       </h2>
-      <PublicDocsCodeBlock lang="ts" :code="codeString" />
+      <PublicCommonCodeBlock lang="ts" :code="codeString" />
     </div>
 
     <div class="mt-12 flex flex-col gap-4">

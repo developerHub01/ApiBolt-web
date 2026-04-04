@@ -15,7 +15,7 @@
     </div>
 
     <div class="mt-4 flex flex-col gap-4">
-      <PublicDocsCodeBlock lang="ts" :code="codeString" />
+      <PublicCommonCodeBlock lang="ts" :code="codeString" />
     </div>
   </section>
 </template>

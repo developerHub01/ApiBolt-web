@@ -261,7 +261,7 @@
       <!-- Decorative Background Elements -->
       <div
         class="absolute bottom-10 -right-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"
-      ></div>
+      />
     </div>
   </main>
 </template>

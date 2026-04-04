@@ -31,7 +31,7 @@
             Validates that a cookie with the specified name key was set during
             the response cycle.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Session Issued').toExistCookie('session_id');`"
           />
@@ -45,7 +45,7 @@
             Asserts the retrieved cookie value strictly equals the provided
             literal.
           </p>
-          <PublicDocsCodeBlock
+          <PublicCommonCodeBlock
             lang="ts"
             :code="`ab.expect('Flags match').toBeCookie('opt_in', 'true');`"
           />
