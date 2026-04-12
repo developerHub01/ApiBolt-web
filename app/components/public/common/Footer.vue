@@ -19,5 +19,5 @@
 </template>
 
 <script setup lang="ts">
-const devLink = "https://shakil-five.vercel.app/";
+const devLink = "https://shakil102043.vercel.app/";
 </script>
