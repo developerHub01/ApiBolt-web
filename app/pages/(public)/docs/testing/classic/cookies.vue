@@ -13,8 +13,51 @@
       </p>
     </div>
 
-    <div class="mt-4 flex flex-col gap-4">
-      <PublicCommonCodeBlock lang="ts" :code="codeString" />
+    <div class="flex flex-col gap-6">
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Existence & Value
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="existenceCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Structure Validation
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="structureCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Expiry, Path & Domain
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="metaCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Security Flags & SameSite
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="securityCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Multiple Cookies
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="multiCode" />
+      </div>
     </div>
   </section>
 </template>
@@ -24,23 +67,30 @@ useSeoMeta({
   title: "Classic API - Cookies",
 });
 
-const codeString = `ab.cookies("session_id").toExist();
+const existenceCode = `ab.cookies("session").toExist();
+ab.cookies("token").not.toExist();
 
-ab.cookies("session_id").toBe("123456");
+ab.cookies("session").toBe("abc123");
+ab.cookies("session").not.toBe("wrong-value");
 
-ab.cookies("session_id").toContain("123");
+ab.cookies("session").toContain("abc");`;
 
-ab.cookies("session_id").toHaveProperty("path");
+const structureCode = `ab.cookies("session").toHaveProperty("value");
+ab.cookies("session").toHaveProperty("domain");
+ab.cookies("session").toHaveProperty("path");`;
 
-ab.cookies("session_id").toHavePath("/");
-ab.cookies("session_id").toBeSecure();
-ab.cookies("session_id").toBeHttpOnly();
+const metaCode = `ab.cookies("session").toExpireAfter(3600);
+ab.cookies("session").toExpireBefore(7200);
 
-ab.cookies("session_id").toBeSameSite("strict");
+ab.cookies("session").toHavePath("/");
+ab.cookies("session").toHaveDomain("example.com");`;
 
-ab.cookies("session_id").toExpireAfter(1800);
-ab.cookies("session_id").toExpireBefore(3600);
-ab.cookies("session_id").toHaveDomain("example.com");
+const securityCode = `ab.cookies("session").toBeSecure();
+ab.cookies("session").toBeHttpOnly();
 
-ab.cookies().toExist();`;
+ab.cookies("session").toBeSameSite("strict");
+ab.cookies("session").toBeSameSite("lax");
+ab.cookies("session").toBeSameSite("none");`;
+
+const multiCode = `ab.cookies().toHaveLength(2);`;
 </script>

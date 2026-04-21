@@ -4,7 +4,7 @@
       <h1
         class="text-3xl font-bold tracking-tight text-foreground font-display mb-4"
       >
-        Status Assertions
+        Status Assertions (Expect API)
       </h1>
       <p class="text-base text-muted-foreground leading-relaxed">
         Validate precise HTTP response statuses directly.
@@ -28,7 +28,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Status is 200').toBe(200);`"
+            :code="`ab.expect('Status is 200').status.toBe(200);`"
           />
         </div>
 
@@ -41,7 +41,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Valid success').toBeOneOf([200, 201, 204]);`"
+            :code="`ab.expect('Valid success').status.toBeOneOf([200, 201, 204]);`"
           />
         </div>
 
@@ -54,7 +54,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Less than 300').toBeLessThan(300);`"
+            :code="`ab.expect('Less than 300').status.toBeLessThan(300);`"
           />
         </div>
 
@@ -67,7 +67,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('2xx range').toBeBetween(200, 299);`"
+            :code="`ab.expect('2xx range').status.toBeBetween(200, 299);`"
           />
         </div>
 
@@ -81,7 +81,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Success').toBeSuccess();\nab.expect('Client error').toBeClientError();\nab.expect('Server error').toBeServerError();\nab.expect('Redirect').toBeRedirect();`"
+            :code="`ab.expect('Success').status.toBeSuccess();\nab.expect('Client error').status.toBeClientError();\nab.expect('Server error').status.toBeServerError();\nab.expect('Redirect').status.toBeRedirect();`"
           />
         </div>
 
@@ -94,7 +94,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('OK').toBeOK(); // 200\nab.expect('Created').toBeCreated(); // 201\nab.expect('Accepted').toBeAccepted(); // 202\nab.expect('No Content').toBeNoContent(); // 204\nab.expect('Bad Request').toBeBadRequest(); // 400\nab.expect('Unauthorized').toBeUnauthorized(); // 401\nab.expect('Forbidden').toBeForbidden(); // 403\nab.expect('Not Found').toBeNotFound(); // 404\nab.expect('Internal Server Error').toBeInternalServerError(); // 500\nab.expect('Bad Gateway').toBeBadGateway(); // 502\nab.expect('Service Unavailable').toBeServiceUnavailable(); // 503`"
+            :code="`ab.expect('OK').status.toBeOK(); // 200\nab.expect('Created').status.toBeCreated(); // 201\nab.expect('Accepted').status.toBeAccepted(); // 202\nab.expect('No Content').status.toBeNoContent(); // 204\nab.expect('Bad Request').status.toBeBadRequest(); // 400\nab.expect('Unauthorized').status.toBeUnauthorized(); // 401\nab.expect('Forbidden').status.toBeForbidden(); // 403\nab.expect('Not Found').status.toBeNotFound(); // 404\nab.expect('Internal Server Error').status.toBeInternalServerError(); // 500\nab.expect('Bad Gateway').status.toBeBadGateway(); // 502\nab.expect('Service Unavailable').status.toBeServiceUnavailable(); // 503`"
           />
         </div>
       </div>

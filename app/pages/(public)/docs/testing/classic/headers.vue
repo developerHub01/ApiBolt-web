@@ -7,12 +7,29 @@
         headers()
       </h1>
       <p class="text-base text-muted-foreground leading-relaxed">
-        The isolated module for executing header verifications directly.
+        The isolated module for executing header verifications directly. All
+        header keys are case-insensitive.
       </p>
     </div>
 
-    <div class="mt-4 flex flex-col gap-4">
-      <PublicCommonCodeBlock lang="ts" :code="codeString" />
+    <div class="flex flex-col gap-6">
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Real API Header Tests
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="realCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Negative Tests
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="negativeCode" />
+      </div>
     </div>
   </section>
 </template>
@@ -22,12 +39,11 @@ useSeoMeta({
   title: "Classic API - Headers",
 });
 
-const codeString = `ab.headers("Headers exist").toExist();
-ab.headers("Is Empty").toBeEmpty();
+const realCode = `ab.headers("content type").toHaveHeader("content-type");
+ab.headers("server header").toHaveHeaderValue("server", "nginx");
+ab.headers("json check").toHaveHeaderValue("content-type", /json/);
+ab.headers("json type").toHaveContentType("application/json");`;
 
-ab.headers("Header 'content-type' exists").toHaveProperty("content-type");
-ab.headers("Header missing").not.toHaveProperty("x-custom-header");
-
-ab.headers("Value check").toHaveHeaderValue("server", "nginx");
-ab.headers("JSON check").toHaveContentType("application/json");`;
+const negativeCode = `ab.headers("missing header").not.toHaveHeader("x-powered-by");
+ab.headers("wrong server").not.toHaveHeaderValue("server", "apache");`;
 </script>

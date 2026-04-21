@@ -4,7 +4,7 @@
       <h1
         class="text-3xl font-bold tracking-tight text-foreground font-display mb-4"
       >
-        Cookies Assertions
+        Cookies Assertions (Expect API)
       </h1>
       <p class="text-base text-muted-foreground leading-relaxed">
         Verify Set-Cookie boundaries directly from the generic
@@ -33,7 +33,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Session Issued').toExistCookie('session_id');`"
+            :code="`ab.expect('Session Issued').cookies.toExistCookie('session');`"
           />
         </div>
 
@@ -47,13 +47,38 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Flags match').toBeCookie('opt_in', 'true');`"
+            :code="`ab.expect('Flags match').cookies.toBeCookie('session', 'abc123');`"
+          />
+        </div>
+        
+        <div>
+          <h3 class="font-mono text-sm font-semibold text-primary mb-1">
+            toHaveLength(count)
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">
+            Asserts the count of cookies received.
+          </p>
+          <PublicCommonCodeBlock
+            lang="ts"
+            :code="`ab.expect('cookie count').cookies.toHaveLength(1);`"
+          />
+        </div>
+        
+        <div>
+          <h3 class="font-mono text-sm font-semibold text-primary mb-1">
+            Security Validations
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">
+            Asserts security flags on the cookies.
+          </p>
+          <PublicCommonCodeBlock
+            lang="ts"
+            :code="`ab.expect('secure check').cookies.toBeSecure();\nab.expect('httpOnly check').cookies.toBeHttpOnly();\nab.expect('sameSite check').cookies.toBeSameSite('strict');`"
           />
         </div>
 
         <div class="p-4 rounded-lg bg-muted text-sm text-muted-foreground mt-4">
-          Looking for deep security audits of cookies like
-          <code class="font-mono font-medium">toBeSecure()</code> or
+          Looking for deep security audits of specific cookies like
           <code class="font-mono font-medium">toHaveDomain()</code>? Drop down
           to the
           <NuxtLink
