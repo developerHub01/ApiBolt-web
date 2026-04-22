@@ -71,6 +71,10 @@ export const docsConfig: Array<DocsNavItem> = [
         label: "Response",
       },
       {
+        slug: "env",
+        label: "Environment",
+      },
+      {
         slug: "summary",
         label: "Summary",
       },

@@ -6,11 +6,15 @@
       <h1
         class="text-3xl font-bold tracking-tight text-foreground font-display mb-4"
       >
-        Response Property Details
+        Response Object
       </h1>
       <p class="text-lg text-muted-foreground leading-relaxed mt-4">
-        To build advanced logical flows and conditional tests, you can directly
-        access the raw HTTP response object returned from the API call.
+        A read-only snapshot of the API response. Access it directly via
+        <code
+          class="px-1.5 py-0.5 rounded-md bg-muted border border-border text-foreground font-mono text-sm"
+          >ab.response</code
+        >
+        to build advanced conditional tests on the raw HTTP payload.
       </p>
     </div>
 
@@ -26,7 +30,7 @@
             class="px-1.5 py-0.5 rounded-md bg-muted border border-border text-foreground font-mono"
             >ab.response</code
           >
-          &mdash; A direct property exposing the native payload object.
+          &mdash; A read-only snapshot of the API response object.
         </li>
       </ul>
       <PublicCommonCodeBlock lang="ts" :code="responseAccessCode" />
@@ -39,8 +43,8 @@
         The Response Interface
       </h2>
       <p class="text-muted-foreground mb-4">
-        The response exposes the exact standard properties returned from ApiBolt
-        runner:
+        The response exposes the exact standard properties returned from the
+        ApiBolt runner:
       </p>
       <PublicCommonCodeBlock lang="ts" :code="responseInterfaceCode" />
     </div>
@@ -49,7 +53,7 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: "Response Property",
+  title: "Response Object",
 });
 
 const responseAccessCode = `const res = ab.response;

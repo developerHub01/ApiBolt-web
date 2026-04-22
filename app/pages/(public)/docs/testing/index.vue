@@ -7,8 +7,8 @@
         ApiBolt Test Engine (ABTestEngine)
       </h1>
       <p class="text-base text-muted-foreground leading-relaxed">
-        A lightweight, powerful testing utility for validating API responses
-        inside ApiBolt.
+        A full-featured API testing DSL inside ApiBolt. Every line executes
+        immediately and stores a test result.
       </p>
     </div>
 
@@ -64,6 +64,15 @@
               >Cookies validation</span
             >
           </div>
+          <div class="flex items-start gap-2">
+            <code
+              class="px-1.5 py-0.5 text-xs rounded bg-muted font-mono text-foreground mt-0.5"
+              >ab.env</code
+            >
+            <span class="text-sm text-muted-foreground leading-snug"
+              >Environment variable access</span
+            >
+          </div>
         </div>
         <div class="space-y-3">
           <div class="flex items-start gap-2">
@@ -114,7 +123,7 @@
             >expect()</code
           >
           <span class="text-sm font-medium text-foreground"
-            >All-In-One Unified API (Recommended)</span
+            >All-In-One Unified API — dual mode: value or response</span
           >
         </div>
       </div>
@@ -132,7 +141,7 @@
           class="px-1.5 py-0.5 bg-muted rounded font-mono text-xs text-foreground"
           >.not</code
         >
-        for logical inversion.
+        for logical inversion. It flips only the last executed test.
       </p>
       <PublicCommonCodeBlock lang="ts" :code="negationCode" />
     </div>
@@ -201,6 +210,15 @@
               </td>
             </tr>
             <tr>
+              <td class="px-4 py-3 text-muted-foreground">Environment</td>
+              <td class="px-4 py-3">
+                <code
+                  class="px-1.5 py-0.5 text-xs bg-muted rounded font-mono text-foreground"
+                  >ab.env</code
+                >
+              </td>
+            </tr>
+            <tr>
               <td class="px-4 py-3 text-muted-foreground">Negation</td>
               <td class="px-4 py-3">
                 <code
@@ -218,21 +236,28 @@
       <h2
         class="text-xl font-semibold text-foreground border-b border-border pb-2"
       >
-        Final Note & Philosophy
+        Final Rules & Philosophy
       </h2>
-      <p class="text-sm text-muted-foreground leading-relaxed">
-        If you are separately calling
-        <code class="text-xs font-mono">ab.status()</code>,
-        <code class="text-xs font-mono">ab.body()</code>,
-        <code class="text-xs font-mono">ab.headers()</code>, and
-        <code class="text-xs font-mono">ab.cookies()</code>, you are doing more
-        work than needed. The
-        <code
-          class="text-xs font-mono font-medium text-primary bg-primary/10 px-1 rounded"
-          >expect()</code
-        >
-        method is designed to behave like a mini-Jest framework inside ApiBolt.
-      </p>
+      <ul
+        class="text-sm text-muted-foreground leading-relaxed space-y-1.5 list-disc pl-5"
+      >
+        <li>Every call immediately creates a test result.</li>
+        <li>
+          <code class="text-xs font-mono">expect()</code> is dual mode — pass a
+          value, or test the full response.
+        </li>
+        <li>No chaining like Jest — each assertion is independent.</li>
+        <li>Headers are case-insensitive.</li>
+        <li>
+          Cookies support optional name lookup or full-list access with
+          <code class="text-xs font-mono">ab.cookies()</code>.
+        </li>
+        <li>
+          <code class="text-xs font-mono">.not</code> flips only the last
+          executed test.
+        </li>
+        <li>Grouping isolates test blocks for clean reporting.</li>
+      </ul>
       <blockquote
         class="border-l-4 border-muted-foreground/30 pl-4 py-2 mt-2 text-sm text-muted-foreground italic bg-muted/20"
       >
@@ -247,7 +272,8 @@ useSeoMeta({
   title: "Testing Overview",
 });
 
-const negationCode = `ab.expect("Not 500").not.toBe(500);
-ab.expect("No error").not.toBeServerError();
-ab.expect("No password field").not.toHaveProperty("password");`;
+const negationCode = `ab.status("check").not.toBe(200);
+ab.body("check").not.toContain("error");
+ab.headers("check").not.toHaveHeader("x-powered-by");
+ab.cookies("session").not.toBe("invalid");`;
 </script>

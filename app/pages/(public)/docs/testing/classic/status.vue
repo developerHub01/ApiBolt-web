@@ -12,8 +12,42 @@
       </p>
     </div>
 
-    <div class="mt-4 flex flex-col gap-4">
-      <PublicCommonCodeBlock lang="ts" :code="codeString" />
+    <div class="flex flex-col gap-6">
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Exact HTTP Validation
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="exactCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Multi-Match
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="multiCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Range Checks
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="rangeCode" />
+      </div>
+
+      <div>
+        <h2
+          class="text-xl font-semibold text-foreground border-b border-border pb-2 mb-3"
+        >
+          Semantic Helpers
+        </h2>
+        <PublicCommonCodeBlock lang="ts" :code="semanticCode" />
+      </div>
     </div>
   </section>
 </template>
@@ -23,25 +57,33 @@ useSeoMeta({
   title: "Classic API - Status",
 });
 
-const codeString = `ab.status("Status is 200").toBe(200);
-ab.status("Status is not 500").not.toBe(500);
+const exactCode = `ab.status("login success").toBe(200);
+ab.status("user created").toBe(201);
+ab.status("accepted async").toBe(202);
+ab.status("no content delete").toBe(204);
+ab.status("bad request validation").toBe(400);
+ab.status("auth required").toBe(401);
+ab.status("access denied").toBe(403);
+ab.status("missing resource").toBe(404);
+ab.status("server crash").toBe(500);
+ab.status("gateway issue").toBe(502);
+ab.status("service down").toBe(503);`;
 
-ab.status("Valid success").toBeOneOf([200, 201, 204]);
-ab.status("Not allowed").not.toBeOneOf([400, 401, 403]);
+const multiCode = `ab.status("auth endpoints").toBeOneOf([200, 201, 204]);
+ab.status("error group").toBeOneOf([400, 401, 403, 404]);`;
 
-ab.status("Greater than 199").toBeGreaterThan(199);
-ab.status("Less than 300").toBeLessThan(300);
+const rangeCode = `ab.status("success range").toBeBetween(200, 299);
+ab.status("client error range").toBeBetween(400, 499);
+ab.status("server error range").toBeBetween(500, 599);
+ab.status("above check").toBeGreaterThan(199);
+ab.status("below check").toBeLessThan(300);`;
 
-ab.status("2xx range").toBeBetween(200, 299);
-ab.status("Not in 4xx range").not.toBeBetween(400, 499);
-
-ab.status("Success response").toBeSuccess();
-ab.status("Client error").toBeClientError();
-ab.status("Server error").toBeServerError();
-ab.status("Redirect").toBeRedirect();
-
-ab.status("OK").toBeOK();
-ab.status("Created").toBeCreated();
-ab.status("Bad Request").toBeBadRequest();
-ab.status("Internal Server Error").toBeInternalServerError();`;
+const semanticCode = `ab.status("success shortcut").toBeSuccess();
+ab.status("client shortcut").toBeClientError();
+ab.status("server shortcut").toBeServerError();
+ab.status("redirect shortcut").toBeRedirect();
+ab.status("ok exact").toBeOK();
+ab.status("created exact").toBeCreated();
+ab.status("accepted exact").toBeAccepted();
+ab.status("no content exact").toBeNoContent();`;
 </script>

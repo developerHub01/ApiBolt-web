@@ -4,7 +4,7 @@
       <h1
         class="text-3xl font-bold tracking-tight text-foreground font-display mb-4"
       >
-        Headers Assertions
+        Headers Assertions (Expect API)
       </h1>
       <p class="text-base text-muted-foreground leading-relaxed">
         Ensure proper metadata and security policies via HTTP Header validation.
@@ -28,7 +28,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Has API Rate Limit').toHaveHeader('x-ratelimit-remaining');`"
+            :code="`ab.expect('Has content-type').headers.toHaveHeader('content-type');`"
           />
         </div>
 
@@ -42,7 +42,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`// Exact String Matching\nab.expect('Cors Policy').toHaveHeaderValue('access-control-allow-origin', '*');\n\n// Regex Matching\nab.expect('Valid Cache Time').toHaveHeaderValue('cache-control', /max-age/);`"
+            :code="`ab.expect('Server checks').headers.toHaveHeaderValue('server', 'nginx');`"
           />
         </div>
 
@@ -59,7 +59,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Returns JSON').toHaveContentType('application/json');`"
+            :code="`ab.expect('Returns JSON').headers.toHaveContentType('application/json');`"
           />
         </div>
       </div>

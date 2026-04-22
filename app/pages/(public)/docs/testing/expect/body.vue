@@ -4,7 +4,7 @@
       <h1
         class="text-3xl font-bold tracking-tight text-foreground font-display mb-4"
       >
-        Body Assertions
+        Body Assertions (Expect API)
       </h1>
       <p class="text-base text-muted-foreground leading-relaxed">
         Validate JSON structures, arrays, and primitive payload types exactly.
@@ -30,7 +30,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Exact string').toBe('OK');`"
+            :code="`ab.expect('Exact match').body.toBe({ success: true });`"
           />
         </div>
 
@@ -43,7 +43,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Body equals').toEqual({ success: true, count: 5 });`"
+            :code="`ab.expect('Body equals').body.toEqual({ user: { id: 1 } });`"
           />
         </div>
 
@@ -58,7 +58,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Has payload').toExist();`"
+            :code="`ab.expect('Has payload').body.toExist();`"
           />
         </div>
 
@@ -76,7 +76,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Is array').toBeType('array');`"
+            :code="`ab.expect('Is array').body.toBeType('array');`"
           />
         </div>
 
@@ -90,7 +90,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Contains error token').toContain('TokenExpiredException');`"
+            :code="`ab.expect('Contains string').body.toContain('success');`"
           />
         </div>
 
@@ -103,7 +103,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Has user mapping').toHaveProperty('data.user.id');`"
+            :code="`ab.expect('Has property').body.toHaveProperty('user.id');`"
           />
         </div>
 
@@ -116,7 +116,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('Exactly 10 results').toHaveLength(10);`"
+            :code="`ab.expect('Exactly 10 results').body.toHaveLength(10);`"
           />
         </div>
 
@@ -130,7 +130,7 @@
           </p>
           <PublicCommonCodeBlock
             lang="ts"
-            :code="`ab.expect('> 10').toBeGreaterThanNumber(10);\nab.expect('< 50').toBeLessThanNumber(50);\nab.expect('In window').toBeBetweenNumber(10, 20);`"
+            :code="`ab.expect('> 10').body.toBeGreaterThanNumber(10);\nab.expect('< 50').body.toBeLessThanNumber(50);\nab.expect('In window').body.toBeBetweenNumber(10, 20);`"
           />
         </div>
       </div>
