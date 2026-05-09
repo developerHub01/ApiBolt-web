@@ -14,6 +14,35 @@ export type Database = {
   }
   public: {
     Tables: {
+      app_install_events: {
+        Row: {
+          created_at: string
+          id: string
+          machine_id: string | null
+          version: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          machine_id?: string | null
+          version?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          machine_id?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "app_install_events_machine_id_fkey"
+            columns: ["machine_id"]
+            isOneToOne: false
+            referencedRelation: "unique_devices_installs"
+            referencedColumns: ["machine_id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -119,6 +148,21 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      unique_devices_installs: {
+        Row: {
+          created_at: string
+          machine_id: string
+        }
+        Insert: {
+          created_at?: string
+          machine_id: string
+        }
+        Update: {
+          created_at?: string
+          machine_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {
