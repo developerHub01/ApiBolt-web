@@ -7,8 +7,25 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["swiper/css", "swiper/css/effect-cards", "~/assets/css/main.css"],
+  build: {
+    transpile: ["gsap"],
+  },
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: [
+        "@vueuse/core",
+        "class-variance-authority",
+        "clsx",
+        "gsap",
+        "gsap/ScrollTrigger",
+        "lenis",
+        "lucide-vue-next",
+        "reka-ui",
+        "tailwind-merge",
+        "vue-sonner",
+      ],
+    },
   },
   modules: [
     "shadcn-nuxt",

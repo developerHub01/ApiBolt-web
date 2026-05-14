@@ -4,7 +4,7 @@ import { SUPABSE_STORAGE_BUCKET_NAME } from "~~/server/constant/supabase";
 import { checkUser } from "~~/server/utils/auth";
 import { handleRemoveStorage } from "~~/server/utils/supabase-bucket";
 import type { H3Event } from "h3";
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 
 export default defineEventHandler(async (event) => {
   const user = await checkUser(event);
@@ -25,8 +25,8 @@ export default defineEventHandler(async (event) => {
   const themeType = fields.type?.[0];
   const palette = Object.fromEntries(
     Object.entries(
-      JSON.parse(fields.palette?.[0] || "{}") as Record<string, string>
-    ).map(([key, value]) => [key, value.toLowerCase()])
+      JSON.parse(fields.palette?.[0] || "{}") as Record<string, string>,
+    ).map(([key, value]) => [key, value.toLowerCase()]),
   );
 
   // File fields
@@ -137,12 +137,12 @@ const handleThemeAssetsStorage = async (event: H3Event, path: string) => {
     handleRemoveStorage(
       event,
       SUPABSE_STORAGE_BUCKET_NAME.theme.theme_preview,
-      path
+      path,
     ),
     handleRemoveStorage(
       event,
       SUPABSE_STORAGE_BUCKET_NAME.theme.theme_thumbnail,
-      path
+      path,
     ),
   ]);
 };

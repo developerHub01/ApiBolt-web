@@ -138,6 +138,7 @@ import {
   HardDrive,
   WifiOff,
   X,
+  FlaskConical,
 } from "lucide-vue-next";
 import SectionHeader from "@/components/public/common/SectionHeader.vue";
 import type { HomeFeatureInterface } from "~/types/public.types";
@@ -447,24 +448,6 @@ const features: Array<HomeFeatureInterface> = [
   },
   {
     id: 19,
-    title: "Import System",
-    description:
-      "Seamlessly migrate your workflow by importing full projects, folders, or individual requests. Sync data from other devices or shared team resources with ease.",
-    thumbnail: null,
-    image: null,
-    icon: Download,
-  },
-  {
-    id: 20,
-    title: "Export System",
-    description:
-      "Prioritize portability with deep export options. Save your projects, folders, or requests into open formats for effortless backup, sharing, and version control.",
-    thumbnail: null,
-    image: null,
-    icon: Upload,
-  },
-  {
-    id: 21,
     title: "Documentation",
     description:
       "Rich Markdown support for every collection. Document your API's behavior, edge cases, and usage examples right where they live.",
@@ -473,7 +456,34 @@ const features: Array<HomeFeatureInterface> = [
     icon: FileText,
   },
   {
+    id: 20,
+    title: "ABTestEngine",
+    description:
+      "Integrated HTTP response testing engine with Jest-like scripting and comprehensive online documentation.",
+    thumbnail: "/images/home/app-thumbnail/ab_test_engine.png",
+    image: "/images/home/app-preview/ab_test_engine.png",
+    icon: FlaskConical,
+  },
+  {
+    id: 21,
+    title: "Import System",
+    description:
+      "Seamlessly migrate your workflow by importing full projects, folders, or individual requests. Sync data from other devices or shared team resources with ease.",
+    thumbnail: null,
+    image: null,
+    icon: Download,
+  },
+  {
     id: 22,
+    title: "Export System",
+    description:
+      "Prioritize portability with deep export options. Save your projects, folders, or requests into open formats for effortless backup, sharing, and version control.",
+    thumbnail: null,
+    image: null,
+    icon: Upload,
+  },
+  {
+    id: 23,
     title: "Layout Customization",
     description:
       "Tailor the workspace to your exact needs with a flexible interface. Customize your panels and sidebars with a fluid, VS Code-inspired layout.",
@@ -482,7 +492,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: Settings,
   },
   {
-    id: 23,
+    id: 24,
     title: "Font Controls",
     description:
       "Optimized for visual comfort. Take full control over typography with independent font sizes and indentation settings for the editor and viewers.",
@@ -491,7 +501,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: Settings,
   },
   {
-    id: 24,
+    id: 25,
     title: "Keyboard Shortcuts",
     description:
       "Become a power user with customizable keybindings. Map every action to your favorite shortcuts for a mouse-free workflow.",
@@ -500,7 +510,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: Keyboard,
   },
   {
-    id: 25,
+    id: 26,
     title: "Custom Wallpapers",
     description:
       "Make your workspace your own by personalizing your environment. Choose from high-quality wallpapers to create a development atmosphere that feels like home.",
@@ -509,7 +519,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: ImageIcon,
   },
   {
-    id: 26,
+    id: 27,
     title: "Theme Builder",
     description:
       "Design your perfect development aesthetic. Our powerful theme engine gives you the freedom to customize every color across the entire application interface.",
@@ -518,7 +528,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: Palette,
   },
   {
-    id: 27,
+    id: 28,
     title: "Theme Marketplace",
     description:
       "Explore a world of community-created styles. Browse, preview, and apply premium themes with a single click.",
@@ -527,7 +537,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: Palette,
   },
   {
-    id: 28,
+    id: 29,
     title: "Project Themes",
     description:
       "Visual separation for mental clarity. Assign unique themes to different projects to avoid sending requests to the wrong environment.",
@@ -536,7 +546,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: Palette,
   },
   {
-    id: 29,
+    id: 30,
     title: "Auto-Save",
     description:
       "Peace of mind by default. Every change you make is instantly committed to local storage, ensuring zero data loss.",
@@ -545,7 +555,7 @@ const features: Array<HomeFeatureInterface> = [
     icon: HardDrive,
   },
   {
-    id: 30,
+    id: 31,
     title: "No Lock-In",
     description:
       "Your data belongs to you. We believe in open standards and provide simple tools to take your data anywhere, anytime.",

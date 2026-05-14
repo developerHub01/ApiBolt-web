@@ -4,7 +4,7 @@ import { SUPABSE_STORAGE_BUCKET_NAME } from "~~/server/constant/supabase";
 import { checkUser } from "~~/server/utils/auth";
 import { handleRemoveStorage } from "~~/server/utils/supabase-bucket";
 import type { H3Event } from "h3";
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 import { ThemeInterface } from "~/types/theme.types";
 
 interface ThemeUpdatePayload extends Partial<
