@@ -4,6 +4,7 @@
   >
     <PublicHomeHero />
     <PublicHomeVideoSection />
+    <PublicHomeInstallationStats />
     <PublicHomeFeatures />
     <PublicHomeFakeApiSection />
     <PublicHomeCallToAction />

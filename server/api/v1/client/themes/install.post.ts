@@ -1,4 +1,5 @@
 import { serverSupabaseServiceRole } from "#supabase/server";
+import { checkValidMachineId } from "~~/server/lib/validator";
 
 const ACTION_TYPE = new Set(["install", "uninstall"]);
 
@@ -14,13 +15,19 @@ export default defineEventHandler(async (event) => {
 
   const { themeId, deviceId, actionType } = body;
 
-  if (!themeId || !deviceId || !ACTION_TYPE.has(actionType)) {
+  if (!themeId || !deviceId || !ACTION_TYPE.has(actionType))
     return sendStandardResponse(event, {
       success: false,
       statusCode: 400,
       message: "Invalid request: missing themeId, deviceId, or actionType",
     });
-  }
+
+  if (!checkValidMachineId(deviceId))
+    return sendStandardResponse(event, {
+      success: false,
+      statusCode: 400,
+      message: "Invalid request deviceId",
+    });
 
   try {
     let error = null;
