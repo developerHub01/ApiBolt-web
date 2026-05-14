@@ -31,7 +31,7 @@ export const description =
 import { ref, onMounted, onUnmounted } from "vue";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import ScrollArea from "~/components/ui/scroll-area/ScrollArea.vue";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
