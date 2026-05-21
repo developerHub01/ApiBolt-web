@@ -76,15 +76,23 @@
         </div>
       </div>
 
-      <Button
-        @click="handleIdCopy"
-        size="sm"
-        variant="outline"
-        class="rounded-full border-white/10 hover:bg-white/5 text-xs"
-      >
-        <component :is="copied ? CheckIcon : CopyIcon" class="size-3.5 mr-2" />
-        {{ copied ? "ID Copied" : "Copy ID" }}
-      </Button>
+      <div class="flex gap-3 items-center">
+        <Button
+          @click="handleIdCopy"
+          size="sm"
+          variant="outline"
+          class="rounded-full border-white/10 hover:bg-white/5 text-xs"
+        >
+          <component
+            :is="copied ? CheckIcon : CopyIcon"
+            class="size-3.5 mr-2"
+          />
+          {{ copied ? "ID Copied" : "Copy ID" }}
+        </Button>
+        <NuxtLink v-if="theme.id" :to="installUrl">
+          <Button>Install in app</Button>
+        </NuxtLink>
+      </div>
     </div>
 
     <!-- Description -->
@@ -153,6 +161,7 @@ import type { ThemeInterface } from "~/types/theme.types";
 import { cn } from "~/lib/utils";
 import { userProfileLinkFromUserName } from "~/composable/userProfileLinkFromUserName";
 import { useClipboard } from "@vueuse/core";
+import { API_BOLT_DESKTOP_APP_PROTOCOL } from "~/constant/index.constant";
 
 const { theme } = defineProps<{
   theme: ThemeInterface;
@@ -160,6 +169,10 @@ const { theme } = defineProps<{
 
 const paletteList = computed(() => Object.entries(theme.palette));
 const authorProfileLink = userProfileLinkFromUserName(theme.authorUsername);
+
+const installUrl = computed(
+  () => `${API_BOLT_DESKTOP_APP_PROTOCOL}://theme/${theme.id}`,
+);
 
 const textToCopy = computed(() => theme.id);
 const { copy, copied } = useClipboard({ source: textToCopy });
