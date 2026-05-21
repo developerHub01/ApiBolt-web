@@ -1,5 +1,6 @@
 export default defineEventHandler(() => {
-  return {
-    message: "no api found",
-  };
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Not Found",
+  });
 });
