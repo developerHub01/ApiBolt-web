@@ -1,0 +1,30 @@
+export const THEME_PREVIEW_SIZE = {
+  REQUIRED_WIDTH: 1920,
+  REQUIRED_HEIGHT: 1080,
+  MAX_SIZE_MB: 2,
+};
+
+export const THEME_PAYLOAD_SIZE = {
+  MAX_NAME: 50,
+  MAX_DESCRIPTION: 200,
+};
+
+export const DEFAULT_THEME_PALETTE = {
+  background: "#151B25",
+  foreground: "#fafafa",
+  popover: "#151B25",
+  "popover-foreground": "#fafafa",
+  primary: "#d5c290",
+  "primary-foreground": "#151B25",
+  secondary: "#11151C",
+  "secondary-foreground": "#fafafa",
+  muted: "#273246",
+  "muted-foreground": "#9f9fa9",
+  accent: "#212D40",
+  "accent-foreground": "#fafafa",
+  destructive: "#cb1b16",
+  border: "#343F54",
+  input: "#364156",
+  ring: "#364156",
+  line: "#485265",
+};
