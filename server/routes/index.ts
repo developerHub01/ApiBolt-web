@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import status from "@/server/routes/status";
+import v1Router from "@/server/routes/v1";
 
 const app = new Hono().basePath("/api");
 
@@ -8,8 +8,8 @@ const routes: Array<{
   route: Hono;
 }> = [
   {
-    path: "/status",
-    route: status,
+    path: "/v1",
+    route: v1Router,
   },
 ];
 

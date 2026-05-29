@@ -8,8 +8,7 @@ interface Props {
 /* SEO ============= */
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
 const authTitle = "APIBolt | Professional API Testing Desktop App";
-const authDescription =
-  "";
+const authDescription = "";
 
 export const metadata: Metadata = {
   title: authTitle,

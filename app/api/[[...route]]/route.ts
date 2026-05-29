@@ -1,5 +1,5 @@
 import { handle } from "hono/vercel";
-import app from "@/server/routes"; // Import your modular Hono app
+import app from "@/server/routes";
 
 export const GET = handle(app);
 export const POST = handle(app);
