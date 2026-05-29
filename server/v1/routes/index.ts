@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import status from "@/server/routes/v1/status";
+import status from "@/server/v1/modules/status/status.route";
 
 const v1Router = new Hono();
 
