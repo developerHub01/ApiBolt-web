@@ -1,22 +1,18 @@
-import { Hono } from "hono";
 import v1Router from "@/server/v1/routes";
+import { RouteListItemInterface } from "@/types/server/api.types";
 import { globalErrorHandler } from "@/utils/server/api";
+import { createRouter } from "@/utils/server/create-router";
 
-const app = new Hono().basePath("/api");
+const app = createRouter().basePath("/api");
 
-const routes: Array<{
-  path: string;
-  route: Hono;
-}> = [
+const routes: Array<RouteListItemInterface> = [
   {
     path: "/v1",
     route: v1Router,
   },
 ];
 
-routes.forEach((route) => {
-  app.route(route.path, route.route);
-});
+routes.forEach((route) => app.route(route.path, route.route));
 
 app.notFound((c) => {
   return c.text("api not found", 404);
