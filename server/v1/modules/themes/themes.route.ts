@@ -1,5 +1,5 @@
 import { createRouter } from "@/utils/server/create-router";
-import { ThemesController } from "./themes.controller";
+import { ThemesController } from "@/server/v1/modules/themes/themes.controller";
 
 const themes = createRouter();
 

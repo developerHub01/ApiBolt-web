@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Download, Lock, ShieldOff, WifiOff, Settings2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import HeroAnimatedBg from "./HeroAnimatedBg";
+import HeroAnimatedBg from "@/components/app/public/home/hero/HeroAnimatedBg";
 import { APP_INSTALLER_URL, APP_RELEASE_URL } from "@/constant/index.constant";
 import * as motion from "motion/react-client";
 
