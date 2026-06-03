@@ -157,6 +157,12 @@
   --sidebar-ring: oklch(0.556 0 0);
 } */
 
+@theme {
+  --font-display: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-brand: "Zen Dots", sans-serif;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
