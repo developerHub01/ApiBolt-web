@@ -2,9 +2,9 @@ import { AppInstallationInterface } from "@/types/status.types";
 import * as motion from "motion/react-client";
 import CounterAnimation from "@/components/app/common/CounterAnimation";
 import SectionHeader from "@/components/app/common/SectionHeader";
+import SpotlightEffectCard from "@/components/app/common/SpotlightEffectCard";
 
 const getStats = async () => {
-  console.log(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/status/installs`);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/status/installs`,
     {
@@ -76,7 +76,7 @@ const InstallationStates = async () => {
           }}
         >
           {statsList.map((stat) => (
-            <motion.div
+            <SpotlightEffectCard
               key={stat.id}
               className="group relative flex flex-col gap-4 rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md shadow-xl overflow-hidden hover:border-primary/30 transition-colors duration-500 p-5"
               whileHover={{
@@ -99,7 +99,7 @@ const InstallationStates = async () => {
                   {stat.description}
                 </p>
               </div>
-            </motion.div>
+            </SpotlightEffectCard>
           ))}
         </motion.div>
       </div>

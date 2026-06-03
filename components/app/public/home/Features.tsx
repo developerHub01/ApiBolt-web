@@ -25,7 +25,7 @@ import {
   FlaskConical,
 } from "lucide-react";
 import { HomeFeatureInterface } from "@/types/public.types";
-import SpotlghtEffectCard from "@/components/app/common/SpotlghtEffectCard";
+import SpotlightEffectCard from "@/components/app/common/SpotlightEffectCard";
 import SectionHeader from "@/components/app/common/SectionHeader";
 
 const features: Array<HomeFeatureInterface> = [
@@ -348,7 +348,7 @@ export default function FeaturesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map(
             ({ id, title, description, thumbnail, image, Icon }, index) => (
-              <SpotlghtEffectCard
+              <SpotlightEffectCard
                 key={id}
                 className="feature-card group relative flex flex-col gap-4 rounded-xl border-2 border-white/10 bg-card/40 backdrop-blur-md shadow-xl overflow-hidden hover:border-primary/30 transition-colors duration-500 p-5"
                 onMouseMove={handleMouseMove}
@@ -412,7 +412,7 @@ export default function FeaturesSection() {
                     {description}
                   </p>
                 </div>
-              </SpotlghtEffectCard>
+              </SpotlightEffectCard>
             ),
           )}
         </div>

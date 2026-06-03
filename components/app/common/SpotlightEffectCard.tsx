@@ -7,9 +7,15 @@ import { HTMLMotionProps, motion } from "motion/react";
 interface Props extends HTMLMotionProps<"div"> {
   className?: string;
   children: React.ReactNode;
+  spotlightClassName?: string;
 }
 
-const SpotlghtEffectCard = ({ className, children, ...props }: Props) => {
+const SpotlightEffectCard = ({
+  className,
+  spotlightClassName = "",
+  children,
+  ...props
+}: Props) => {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
@@ -23,10 +29,15 @@ const SpotlghtEffectCard = ({ className, children, ...props }: Props) => {
       onMouseMove={handleMouseMove}
       {...props}
     >
-      <div className="absolute w-100 h-100 bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-1/2 -translate-y-1/2 left-(--mouse-x) top-(--mouse-y) z-0" />
+      <div
+        className={cn(
+          "absolute w-100 h-100 bg-primary/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-1/2 -translate-y-1/2 left-(--mouse-x) top-(--mouse-y) z-0",
+          spotlightClassName,
+        )}
+      />
       {children}
     </motion.div>
   );
 };
 
-export default SpotlghtEffectCard;
+export default SpotlightEffectCard;
