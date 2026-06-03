@@ -6,5 +6,5 @@ export interface HomeFeatureInterface {
   description: string;
   image: string | null;
   thumbnail: string | null;
-  icon: LucideIcon;
+  Icon: LucideIcon;
 }

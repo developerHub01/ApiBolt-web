@@ -1,7 +1,6 @@
 import { prisma } from "@/db/client";
-import { AppInstallationInterface } from "@/types/status.types";
 
-const getStatusInstall = async (): Promise<AppInstallationInterface> => {
+const getStatusInstall = async () => {
   const totalInstalls = await prisma.app_install_events.count();
   const uniqueDevices = await prisma.unique_devices_installs.count();
 
@@ -11,6 +10,6 @@ const getStatusInstall = async (): Promise<AppInstallationInterface> => {
   };
 };
 
-export const StatusService = {
+export const ThemesService = {
   getStatusInstall,
 };
