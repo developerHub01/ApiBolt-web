@@ -3,18 +3,23 @@ import * as motion from "motion/react-client";
 import CounterAnimation from "@/components/app/common/CounterAnimation";
 import SectionHeader from "@/components/app/common/SectionHeader";
 import SpotlightEffectCard from "@/components/app/common/SpotlightEffectCard";
+import { API_URL } from "@/constant/index.constant";
+import { ApiResponse } from "@/types/server/api.types";
 
 const getStats = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/status/installs`,
-    {
-      next: {
-        revalidate: 60,
-      },
+  const res = await fetch(`${API_URL}/status/installs`, {
+    next: {
+      revalidate: 60,
     },
-  );
+  });
 
-  return (await res.json())?.data as AppInstallationInterface;
+  const response: ApiResponse<AppInstallationInterface> = await res.json();
+  return (
+    response.data ?? {
+      totalInstalls: 0,
+      uniqueDevices: 0,
+    }
+  );
 };
 
 const InstallationStates = async () => {
