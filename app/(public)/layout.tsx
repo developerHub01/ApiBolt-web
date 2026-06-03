@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Header from "@/components/app/common/Header";
 import Footer from "@/components/app/common/Footer";
 import ScrollToTop from "@/components/app/common/ScrollToTop";
+import LenisProvider from "@/provider/LenisProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <>
+    <LenisProvider>
       <main className="min-h-screen flex flex-col font-sans text-foreground bg-background overflow-x-clip">
         <Header />
         <section className="flex-1 w-full flex flex-col -mt-24">
@@ -38,7 +39,7 @@ const Layout = ({ children }: Props) => {
         <Footer />
         <ScrollToTop />
       </main>
-    </>
+    </LenisProvider>
   );
 };
 
