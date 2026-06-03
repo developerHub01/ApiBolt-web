@@ -1,10 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
 import {
   Sheet,
   SheetContent,
@@ -19,45 +19,35 @@ import { cn } from "@/lib/utils";
 
 // import PublicCommonProfileMenu from "@/components/public-common-profile-menu";
 
+const ITEMS = [
+  {
+    label: "Home",
+    to: "/",
+  },
+  {
+    label: "Marketplace",
+    to: "/marketplace",
+  },
+  {
+    label: "Fake APIs",
+    to: "/fake",
+  },
+  {
+    label: "Docs",
+    to: "/docs",
+  },
+];
+
 const Header = () => {
   const pathname = usePathname();
-  const { scrollY } = useScroll();
 
-  const bgOpacity = useTransform(scrollY, [0, 100], [0, 1]);
-  const background = useTransform(
-    bgOpacity,
-    (value) =>
-      `linear-gradient(to bottom, rgba(21, 27, 37, ${0.9 * value}) 0%, rgba(21, 27, 37, ${0.5 * value}) 50%, rgba(21, 27, 37, 0) 100%)`,
+  const activeItem = useMemo(
+    () => ITEMS.find((item) => pathname.startsWith(item.to))?.to,
+    [pathname],
   );
 
-  const items = [
-    {
-      label: "Home",
-      to: "/",
-      active: pathname === "/",
-    },
-    {
-      label: "Marketplace",
-      to: "/marketplace",
-      active: pathname.startsWith("/marketplace"),
-    },
-    {
-      label: "Fake APIs",
-      to: "/fake",
-      active: pathname === "/fake",
-    },
-    {
-      label: "Docs",
-      to: "/docs",
-      active: pathname.startsWith("/docs"),
-    },
-  ];
-
   return (
-    <motion.section
-      style={{ background }}
-      className="sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none"
-    >
+    <section className="sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none">
       <header className="container flex items-center justify-between gap-6 px-4">
         <Link
           href="/"
@@ -75,13 +65,13 @@ const Header = () => {
 
         <div className="flex items-center gap-2 pointer-events-auto">
           <nav className="hidden md:flex items-center gap-1 mr-4">
-            {items.map(({ to, label, active }) => (
+            {ITEMS.map(({ to, label }) => (
               <Link key={to} href={to}>
                 <Button
                   variant="ghost"
                   className={cn(
                     "px-4 rounded-full font-medium transition-all",
-                    active
+                    activeItem === to
                       ? "bg-primary/10 text-primary hover:bg-primary/20"
                       : "text-muted-foreground hover:text-foreground",
                   )}
@@ -127,14 +117,14 @@ const Header = () => {
               </SheetHeader>
 
               <nav className="flex flex-col gap-2 mt-4">
-                {items.map(({ to, label, active }) => (
+                {ITEMS.map(({ to, label }) => (
                   <Link key={to} href={to}>
                     <SheetClose asChild>
                       <Button
                         variant="ghost"
                         className={cn(
                           "w-full justify-start h-12 rounded-xl text-base font-medium transition-all",
-                          active
+                          activeItem === to
                             ? "bg-primary/10 text-primary"
                             : "text-muted-foreground hover:bg-white/5",
                         )}
@@ -155,7 +145,7 @@ const Header = () => {
           </Sheet>
         </div>
       </header>
-    </motion.section>
+    </section>
   );
 };
 
