@@ -40,7 +40,7 @@ const ITEMS = [
 
 const Header = () => {
   const pathname = usePathname();
-  
+
   const activeItem = useMemo(
     () =>
       ITEMS.find((item) => {

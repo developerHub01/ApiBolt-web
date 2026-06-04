@@ -1,12 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
-import { APP_INSTALLER_URL, SITE_URL } from "@/constant/index.constant";
+import { SITE_URL } from "@/constant/index.constant";
 import * as motion from "motion/react-client";
-import Link from "next/link";
-import { Download } from "lucide-react";
-import CopyButton from "@/components/app/public/fake/CopyButton";
 import ScrollNav from "@/components/app/public/fake/ScrollNav";
-import HeroAnimatedBg from "@/components/app/public/home/hero/HeroAnimatedBg";
 import FakeHeader from "@/components/app/public/fake/FakeHeader";
 
 interface Props {

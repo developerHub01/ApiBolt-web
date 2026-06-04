@@ -4,13 +4,13 @@ import type { ThemeInterface } from "@/types/theme.types";
 import { ApiResponse } from "@/types/server/api.types";
 import { API_URL } from "@/constant/index.constant";
 
-interface PageProps {
+interface Props {
   params: Promise<{
     id: string;
   }>;
 }
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params }: Props) => {
   const { id: themeId } = await params;
   let theme: ThemeInterface | null = null;
   let hasError = false;

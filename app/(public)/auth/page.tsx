@@ -3,13 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { signInWithGithub } from "@/lib/actions/auth/actions";
 
-const Page = ({
-  searchParams,
-}: {
+interface Props {
   searchParams: {
     error?: string;
   };
-}) => {
+}
+
+const Page = ({ searchParams }: Props) => {
   return (
     <div className="relative flex flex-1 w-full flex-col items-center justify-center py-20 px-4 pt-40 overflow-hidden">
       {/* Decorative Background */}
@@ -40,7 +40,7 @@ const Page = ({
           )}
         </div>
 
-        {/* Server Action form — no client JS needed */}
+        {/* Server Action form */}
         <form action={signInWithGithub} className="w-full flex justify-center">
           <button
             type="submit"
