@@ -12,6 +12,8 @@ import { ClientService } from "@/server/v1/modules/client/client.service";
 import type { Prisma } from "@/prisma/generated/prisma/client";
 import { prisma } from "@/db/client";
 import { HTTPContext } from "@/types/server/env.types";
+import { ThemeMetaResponse } from "@/types/server/themes.types";
+import { ThemeMetaInterface, TThemeType } from "@/types/theme.types";
 
 const VALID_ACTIONS = new Set(["install", "uninstall"]);
 
@@ -150,18 +152,18 @@ const handleGetThemeMeta = async (c: HTTPContext) => {
     prisma.themes.count(),
   ]);
 
-  const sanitizedData = themes.map((theme) => ({
+  const sanitizedData: Array<ThemeMetaInterface> = themes.map((theme) => ({
     id: theme.id,
     name: theme.name,
     description: theme.description,
     thumbnail: theme.thumbnail,
     install_count: theme.install_count,
-    type: theme.type,
+    type: theme.type as TThemeType,
     author: theme.profiles?.full_name ?? null,
     authorUsername: theme.profiles?.user_name ?? null,
   }));
 
-  return sendResponse(c, {
+  return sendResponse<ThemeMetaResponse>(c, {
     statusCode: 200,
     message: "theme found successfully",
     data: {

@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: `${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID!}.supabase.co`,
         port: "",
-        pathname: "/storage/v1/object/public/theme_preview/**",
+        pathname: "/storage/v1/object/public/**",
       },
     ],
   },
