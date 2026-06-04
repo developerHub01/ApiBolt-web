@@ -3,6 +3,7 @@ import { createRouter } from "@/utils/server/create-router";
 import fakeCategories from "@/server/fake/v1/categories/categories.route";
 import fakeOrders from "@/server/fake/v1/orders/orders.route";
 import fakePosts from "@/server/fake/v1/posts/posts.route";
+import fakeProducts from "@/server/fake/v1/products/products.route";
 
 const fakeRouterV1 = createRouter();
 
@@ -18,6 +19,10 @@ const routes: Array<RouteListItemInterface> = [
   {
     path: "/posts",
     route: fakePosts,
+  },
+  {
+    path: "/products",
+    route: fakeProducts,
   },
 ];
 
