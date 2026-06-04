@@ -6,10 +6,15 @@ const fakeCategories = createRouter();
 fakeCategories.get("/", FakeCategoriesController.handleGetCategories);
 fakeCategories.post("/", FakeCategoriesController.handlePostCategories);
 
-
 fakeCategories.get("/:id", FakeCategoriesController.handleGetCategoriesById);
 fakeCategories.put("/:id", FakeCategoriesController.handlePutCategoriesById);
-fakeCategories.patch("/:id", FakeCategoriesController.handlePatchCategoriesById);
-fakeCategories.delete("/:id", FakeCategoriesController.handleDeleteCategoriesById);
+fakeCategories.patch(
+  "/:id",
+  FakeCategoriesController.handlePatchCategoriesById,
+);
+fakeCategories.delete(
+  "/:id",
+  FakeCategoriesController.handleDeleteCategoriesById,
+);
 
 export default fakeCategories;

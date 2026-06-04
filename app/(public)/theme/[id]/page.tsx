@@ -16,14 +16,11 @@ const Page = async ({ params }: PageProps) => {
   let hasError = false;
 
   try {
-    const res = await fetch(
-      `${API_URL}/client/themes/details/${themeId}`,
-      {
-        next: {
-          revalidate: 60,
-        },
+    const res = await fetch(`${API_URL}/client/themes/details/${themeId}`, {
+      next: {
+        revalidate: 60,
       },
-    );
+    });
     const json: ApiResponse<ThemeInterface> = await res.json();
 
     if (json.success && json.data) theme = json.data;

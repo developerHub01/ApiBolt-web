@@ -6,7 +6,6 @@ const fakeUsers = createRouter();
 fakeUsers.get("/", FakeUsersController.handleGetUsers);
 fakeUsers.post("/", FakeUsersController.handlePostUsers);
 
-
 fakeUsers.get("/:id", FakeUsersController.handleGetUsersById);
 fakeUsers.put("/:id", FakeUsersController.handlePutUsersById);
 fakeUsers.patch("/:id", FakeUsersController.handlePatchUsersById);

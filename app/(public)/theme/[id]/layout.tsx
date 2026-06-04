@@ -20,14 +20,11 @@ export const generateMetadata = async ({
   const { id: themeId } = await params;
 
   try {
-    const res = await fetch(
-      `${API_URL}/client/themes/details/${themeId}`,
-      {
-        next: {
-          revalidate: 60,
-        },
+    const res = await fetch(`${API_URL}/client/themes/details/${themeId}`, {
+      next: {
+        revalidate: 60,
       },
-    );
+    });
     const json: ApiResponse<ThemeInterface> = await res.json();
 
     if (!json.success || !json.data)
