@@ -1,4 +1,4 @@
-import { Context, Next } from "hono";
+import { Next } from "hono";
 import { createClient } from "@/lib/supabase/server";
 import type { HTTPContext } from "@/types/server/env.types";
 
