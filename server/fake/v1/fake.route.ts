@@ -1,6 +1,8 @@
 import { RouteListItemInterface } from "@/types/server/api.types";
 import { createRouter } from "@/utils/server/create-router";
 import fakeCategories from "@/server/fake/v1/categories/categories.route";
+import fakeOrders from "@/server/fake/v1/orders/orders.route";
+import fakePosts from "@/server/fake/v1/posts/posts.route";
 
 const fakeRouterV1 = createRouter();
 
@@ -8,6 +10,14 @@ const routes: Array<RouteListItemInterface> = [
   {
     path: "/categories",
     route: fakeCategories,
+  },
+  {
+    path: "/orders",
+    route: fakeOrders,
+  },
+  {
+    path: "/posts",
+    route: fakePosts,
   },
 ];
 
