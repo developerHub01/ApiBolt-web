@@ -26,6 +26,8 @@ interface Props {
   initialSearchTerm: string;
   initialThemeType: string;
   totalThemeCount: number;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
 }
 
 const themeTypeList: Array<ThemeTypeOption> = [
@@ -51,6 +53,8 @@ const ThemesSearch = ({
   initialSearchTerm,
   initialThemeType,
   totalThemeCount,
+  title,
+  description,
 }: Props) => {
   const router = useRouter();
 
@@ -81,24 +85,28 @@ const ThemesSearch = ({
     <div className="w-full flex flex-col items-center gap-8 py-10">
       <SectionHeader
         title={
-          <>
-            <span className="text-primary">Theme</span> Market
-          </>
+          title ?? (
+            <>
+              <span className="text-primary">Theme</span> Market
+            </>
+          )
         }
         description={
-          <>
-            {totalThemeCount > 0 ? (
-              <>
-                Explore and share{" "}
-                <span className="inline-block bg-primary text-primary-foreground rounded-full px-3 py-1 mx-0.5 text-sm font-bold ring-1 ring-primary/30 backdrop-blur-sm shadow-[0_0_80px_0px] shadow-primary animate-pulse">
-                  {totalThemeCount}+
-                </span>{" "}
-                custom themes to make your workspace truly yours.
-              </>
-            ) : (
-              "Explore and share custom themes to make your workspace truly yours."
-            )}
-          </>
+          description ?? (
+            <>
+              {totalThemeCount > 0 ? (
+                <>
+                  Explore and share{" "}
+                  <span className="inline-block bg-primary text-primary-foreground rounded-full px-3 py-1 mx-0.5 text-sm font-bold ring-1 ring-primary/30 backdrop-blur-sm shadow-[0_0_80px_0px] shadow-primary animate-pulse">
+                    {totalThemeCount}+
+                  </span>{" "}
+                  custom themes to make your workspace truly yours.
+                </>
+              ) : (
+                "Explore and share custom themes to make your workspace truly yours."
+              )}
+            </>
+          )
         }
       />
 

@@ -2,18 +2,24 @@ import { ClientController } from "@/server/v1/modules/client/client.controller";
 import { AuthMiddleware } from "@/server/v1/middlwares/auth";
 import { createRouter } from "@/utils/server/create-router";
 
-const client = createRouter();
+const clientRouter = createRouter();
 
-client.post("/app-install/report", ClientController.handleReportAppInstall);
+clientRouter.post(
+  "/app-install/report",
+  ClientController.handleReportAppInstall,
+);
 
-client.get("/themes/details/:id", ClientController.handleGetThemeDetailsById);
+clientRouter.get(
+  "/themes/details/:id",
+  ClientController.handleGetThemeDetailsById,
+);
 
-client.get(
+clientRouter.get(
   "/themes/meta",
   AuthMiddleware.checkUser,
   ClientController.handleGetThemeMeta,
 );
 
-client.post("/themes/install", ClientController.handleThemeInstall);
+clientRouter.post("/themes/install", ClientController.handleThemeInstall);
 
-export default client;
+export default clientRouter;

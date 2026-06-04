@@ -1,8 +1,8 @@
 import { StatusController } from "@/server/v1/modules/status/status.controller";
 import { createRouter } from "@/utils/server/create-router";
 
-const status = createRouter();
+const statusRouter = createRouter();
 
-status.get("/installs", StatusController.handleGetStatusInstall);
+statusRouter.get("/installs", StatusController.handleGetStatusInstall);
 
-export default status;
+export default statusRouter;
