@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Zen_Dots } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/constant/index.constant";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,12 +17,24 @@ const zenDots = Zen_Dots({
   weight: "400",
 });
 
+/* SEO ============= */
 export const metadata: Metadata = {
   title: "APIBolt - Professional API Testing Desktop App",
   description:
     "APIBolt is a powerful desktop application for API development, testing, and debugging. Local-first, zero cloud, and zero telemetry.",
+  openGraph: {
+    title: "APIBolt - Professional API Testing Desktop App",
+    description: "Local-first, zero cloud, and zero telemetry API client.",
+    url: SITE_URL,
+    images: [`${SITE_URL}/og.png`],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "APIBolt - Professional API Testing Desktop App",
+    description: "Local-first, zero cloud, and zero telemetry API client.",
+    images: [`${SITE_URL}/og.png`],
+  },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

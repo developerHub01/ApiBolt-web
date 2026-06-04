@@ -1,12 +1,12 @@
 import React from "react";
 import { Metadata } from "next";
+import { SITE_URL } from "@/constant/index.constant";
 
 interface Props {
   children: React.ReactNode;
 }
 
 /* SEO ============= */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
 const authTitle = "Sign in to APIBolt | Professional API Testing Desktop App";
 const authDescription =
   "Log in to your APIBolt account to manage your projects, themes, and accelerate your API development workflow with speed and privacy.";
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: authTitle,
     description: authDescription,
-    images: [`${siteUrl}/og.png`],
-    url: `${siteUrl}/login`,
+    images: [`${SITE_URL}/og.png`],
+    url: `${SITE_URL}/login`,
   },
   twitter: {
     card: "summary_large_image",
     title: authTitle,
     description: authDescription,
-    images: [`${siteUrl}/og.png`],
+    images: [`${SITE_URL}/og.png`],
   },
 };
 

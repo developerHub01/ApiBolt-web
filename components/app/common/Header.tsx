@@ -40,9 +40,13 @@ const ITEMS = [
 
 const Header = () => {
   const pathname = usePathname();
-
+  
   const activeItem = useMemo(
-    () => ITEMS.find((item) => pathname.startsWith(item.to))?.to,
+    () =>
+      ITEMS.find((item) => {
+        if (item.to === "/docs") return pathname.startsWith(item.to);
+        else return pathname === item.to;
+      })?.to,
     [pathname],
   );
 

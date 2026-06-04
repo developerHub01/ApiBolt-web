@@ -4,6 +4,7 @@ import Header from "@/components/app/common/Header";
 import Footer from "@/components/app/common/Footer";
 import ScrollToTop from "@/components/app/common/ScrollToTop";
 import LenisProvider from "@/provider/LenisProvider";
+import { SITE_URL } from "@/constant/index.constant";
 
 interface Props {
   children: React.ReactNode;
@@ -17,14 +18,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "APIBolt - Professional API Testing Desktop App",
     description: "Local-first, zero cloud, and zero telemetry API client.",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/og.png`],
+    url: SITE_URL,
+    images: [`${SITE_URL}/og.png`],
   },
   twitter: {
     card: "summary_large_image",
     title: "APIBolt - Professional API Testing Desktop App",
     description: "Local-first, zero cloud, and zero telemetry API client.",
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/og.png`],
+    images: [`${SITE_URL}/og.png`],
   },
 };
 
