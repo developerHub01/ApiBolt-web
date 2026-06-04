@@ -5,6 +5,7 @@ import fakeOrders from "@/server/fake/v1/orders/orders.route";
 import fakePosts from "@/server/fake/v1/posts/posts.route";
 import fakeProducts from "@/server/fake/v1/products/products.route";
 import fakeStatus from "@/server/fake/v1/status/status.route";
+import fakeUsers from "@/server/fake/v1/users/users.route";
 
 const fakeRouterV1 = createRouter();
 
@@ -28,6 +29,10 @@ const routes: Array<RouteListItemInterface> = [
   {
     path: "/status",
     route: fakeStatus,
+  },
+  {
+    path: "/users",
+    route: fakeUsers,
   },
 ];
 
