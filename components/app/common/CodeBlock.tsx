@@ -58,7 +58,11 @@ const CodeBlock = ({ code = "", language = "js" }: Props) => {
 
       <div className="relative">
         <div className="absolute top-0 left-0 w-1 h-full bg-primary/20" />
-        <Code code={code} language={language} className="rounded-none p-4 text-sm" />
+        <Code
+          code={code}
+          language={language}
+          className="rounded-none p-4 text-sm"
+        />
       </div>
     </div>
   );
