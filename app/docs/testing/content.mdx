@@ -1,0 +1,89 @@
+# ApiBolt Test Engine (ABTestEngine)
+
+A full-featured API testing DSL inside ApiBolt. Every line executes immediately and stores a test result.
+
+## Core Idea
+
+`ABTestEngine` provides multiple assertion layers:
+
+<CoreIdeaGrid
+  leftColumn={[
+    {
+      code: "status()",
+      label: "HTTP status testing",
+    },
+    {
+      code: "body()",
+      label: "Response body validation",
+    },
+    {
+      code: "headers()",
+      label: "Headers validation",
+    },
+    {
+      code: "cookies()",
+      label: "Cookies validation",
+    },
+    {
+      code: "ab.env",
+      label: "Environment variable access",
+    },
+  ]}
+  rightColumn={[
+    {
+      code: "group()",
+      label: "Organize tests into blocks",
+    },
+    {
+      code: "print()",
+      label: "Log values to console",
+    },
+    {
+      code: "code()",
+      label: "Log formatted code blocks",
+    },
+    {
+      code: "summary()",
+      label: "Generate visual summary",
+    },
+  ]}
+/>
+
+<ExpectHighlight>
+  <code>`expect()`</code>
+  <span>All-In-One Unified API — dual mode: value or response</span>
+</ExpectHighlight>
+
+## Negation (.not)
+
+Every assertion supports `.not` for logical inversion. It flips only the last executed test.
+
+```ts
+ab.status("check").not.toBe(200);
+ab.body("check").not.toContain("error");
+ab.headers("check").not.toHaveHeader("x-powered-by");
+ab.cookies("session").not.toBe("invalid");
+```
+
+## Summary Matrix
+
+| Category    | Primary Method |
+| ----------- | -------------- |
+| Status      | `expect()`     |
+| Body        | `expect()`     |
+| Headers     | `expect()`     |
+| Cookies     | `expect()`     |
+| Environment | `ab.env`       |
+| Negation    | `.not`         |
+
+## Final Rules & Philosophy
+
+- Every call immediately creates a test result.
+- `expect()` is dual mode — pass a value, or test the full response.
+- No chaining like Jest — each assertion is independent.
+- Headers are case-insensitive.
+- Cookies support optional name lookup or full-list access with `ab.cookies()`.
+- `.not` flips only the last executed test.
+- Grouping isolates test blocks for clean reporting.
+
+> "One method. Full control. Zero confusion."

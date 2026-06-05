@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import CodeMirror from "@uiw/react-codemirror";
-import { githubDark } from "@uiw/codemirror-theme-github";
-import { json } from "@codemirror/lang-json";
+import Code from "@/components/app/common/Code";
 
 interface Props {
   example: string;
@@ -54,20 +52,7 @@ const ExampleToggle = ({ example }: Props) => {
             }}
             className="mt-3 overflow-hidden rounded-md"
           >
-            <CodeMirror
-              className="bg-black/40 rounded-lg text-base text-white font-mono custom-scrollbar overflow-hidden selection:text-white selection:bg-primary"
-              theme={githubDark}
-              value={example}
-              extensions={[json()]}
-              editable={false}
-              readOnly={true}
-              indentWithTab={true}
-              basicSetup={{
-                lineNumbers: false,
-                closeBrackets: false,
-                foldGutter: false,
-              }}
-            />
+            <Code code={example} language="json" />
           </motion.div>
         )}
       </AnimatePresence>

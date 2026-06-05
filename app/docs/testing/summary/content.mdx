@@ -1,0 +1,16 @@
+# Test Summary
+
+The summary methods allow you to generate a final report at the end of your script.
+
+```ts
+ab.group("Final Audit", () => {
+  // Perform some tests
+  ab.expect("Final check").toBeOK();
+
+  // Push summary into results
+  ab.summary();
+
+  // Print summary to debug console
+  ab.printSummary();
+});
+```

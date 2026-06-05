@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { ComponentProps, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -38,7 +38,11 @@ const ITEMS = [
   },
 ];
 
-const Header = () => {
+interface Props extends ComponentProps<"section"> {
+  className?: string;
+}
+
+const Header = ({ className, ...props }: Props) => {
   const pathname = usePathname();
 
   const activeItem = useMemo(
@@ -51,7 +55,13 @@ const Header = () => {
   );
 
   return (
-    <section className="sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none">
+    <section
+      className={cn(
+        "sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none",
+        className,
+      )}
+      {...props}
+    >
       <header className="container flex items-center justify-between gap-6 px-4">
         <Link
           href="/"
