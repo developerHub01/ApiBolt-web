@@ -1,0 +1,17 @@
+# Debugging & Logging
+
+Use `print()` to inspect the state of your response or environment variables during test execution.
+
+```ts
+// Log raw values
+ab.print("Status Code", ab.response.status);
+
+// Log objects (auto-stringified)
+ab.print("Response Payload", ab.response.body);
+
+// Log specific parts of the response
+const user = ab.response.body.user;
+if (user) {
+  ab.print("User ID detected", user.id);
+}
+```
