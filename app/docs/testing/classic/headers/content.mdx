@@ -1,0 +1,19 @@
+# headers()
+
+The isolated module for executing header verifications directly. All header keys are case-insensitive.
+
+## Real API Header Tests
+
+```ts
+ab.headers("content type").toHaveHeader("content-type");
+ab.headers("server header").toHaveHeaderValue("server", "nginx");
+ab.headers("json check").toHaveHeaderValue("content-type", /json/);
+ab.headers("json type").toHaveContentType("application/json");
+```
+
+## Negative Tests
+
+```ts
+ab.headers("missing header").not.toHaveHeader("x-powered-by");
+ab.headers("wrong server").not.toHaveHeaderValue("server", "apache");
+```
