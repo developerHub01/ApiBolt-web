@@ -25,7 +25,7 @@ const CodeBlock = ({ code = "", language = "js" }: Props) => {
   };
 
   return (
-    <div className="doc-code-block group relative rounded-lg border border-border/60 bg-[#0B0F19] overflow-hidden my-4">
+    <div className="doc-code-block group relative rounded-lg border border-border/60 bg-[#0B0F19] overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2.5 bg-card/60 border-b border-border/40">
         {language && (
           <div className="flex items-center gap-2">
