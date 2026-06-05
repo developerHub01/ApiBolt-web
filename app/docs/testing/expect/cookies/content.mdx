@@ -1,0 +1,41 @@
+# Cookies Assertions (Expect API)
+
+Verify Set-Cookie boundaries directly from the generic `expect()` root sequence.
+
+## Available Matchers
+
+### toExistCookie(key)
+
+Validates that a cookie with the specified name key was set during the response cycle.
+
+```ts
+ab.expect("Session Issued").cookies.toExistCookie("session");
+```
+
+### toBeCookie(key, exactValue)
+
+Asserts the retrieved cookie value strictly equals the provided literal.
+
+```ts
+ab.expect("Flags match").cookies.toBeCookie("session", "abc123");
+```
+
+### toHaveLength(count)
+
+Asserts the count of cookies received.
+
+```ts
+ab.expect("cookie count").cookies.toHaveLength(1);
+```
+
+### Security Validations
+
+Asserts security flags on the cookies.
+
+```ts
+ab.expect("secure check").cookies.toBeSecure();
+ab.expect("httpOnly check").cookies.toBeHttpOnly();
+ab.expect("sameSite check").cookies.toBeSameSite("strict");
+```
+
+> Looking for deep security audits of specific cookies like `toHaveDomain()`? Drop down to the [Classic Cookies API](/docs/testing/classic/cookies) which provides exhaustive attributes testing.
