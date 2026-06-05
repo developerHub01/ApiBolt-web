@@ -72,8 +72,8 @@ const handleGetThemeMeta = async (c: HTTPContext) => {
 
   const page = Math.max(1, Number(query.page) || 1);
   const pageSize = Math.max(1, Number(query.pageSize) || 6);
-  const searchTerm = query.searchTerm;
-  const searchFilter = query.searchFilter;
+  const searchTerm = query.term;
+  const searchFilter = query.filter;
   const byMe = ["true", "1"].includes((query.byMe as string)?.trim());
   const userName = query.userName;
 

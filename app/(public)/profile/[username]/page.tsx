@@ -14,8 +14,8 @@ interface Props {
   params: Promise<Params>;
   searchParams: Promise<{
     page?: string;
-    searchTerm?: string;
-    searchFilter?: string;
+    term?: string;
+    filter?: string;
   }>;
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, ChangeEvent, SubmitEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -57,6 +57,7 @@ const ThemesSearch = ({
   description,
 }: Props) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm);
   const [themeType, setThemeType] = useState<TThemeTypeSearch>(
@@ -65,20 +66,20 @@ const ThemesSearch = ({
 
   const showClearSearch = searchTerm || themeType !== "all";
 
-  const handleSubmit = (e: SubmitEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (searchTerm) params.set("searchTerm", searchTerm);
-    if (themeType !== "all") params.set("searchFilter", themeType);
+    if (searchTerm) params.set("term", searchTerm);
+    if (themeType !== "all") params.set("filter", themeType);
     params.set("page", "1");
 
-    router.push(`/marketplace?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   const handleClearFilter = () => {
     setSearchTerm("");
     setThemeType("all");
-    router.push("/marketplace");
+    router.push(pathname);
   };
 
   return (

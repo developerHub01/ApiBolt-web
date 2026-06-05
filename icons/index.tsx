@@ -7,7 +7,7 @@ interface Props extends SVGProps<SVGSVGElement> {
 export const GithubIcon = ({
   size = 24,
   viewBox = "0 0 24 24",
-  fill = "currentColor",
+  fill = "none",
   ...props
 }: Props) => {
   return (

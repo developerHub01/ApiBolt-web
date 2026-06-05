@@ -5,11 +5,12 @@ import ThemesCard from "@/components/app/public/themes/ThemesCard";
 import ThemePagination from "@/components/app/public/themes/ThemePagination";
 import { ApiResponse } from "@/server/types";
 import { ThemeMetaResponse } from "@/types/server/themes.types";
+import { cn } from "@/lib/utils";
 
 interface SearchParams {
   page?: string;
-  searchTerm?: string;
-  searchFilter?: string;
+  term?: string;
+  filter?: string;
 }
 
 interface Props {
@@ -35,9 +36,11 @@ const fetchThemesByUser = async (
     page: page.toString(),
     pageSize: pageSize.toString(),
     userName: username,
-    ...(searchTerm && { searchTerm }),
+    ...(searchTerm && {
+      term: searchTerm,
+    }),
     ...(searchFilter !== "all" && {
-      searchFilter,
+      filter: searchFilter,
     }),
   });
 
@@ -70,8 +73,8 @@ const ProfileAllThemesByUserName = async ({
   const params = await searchParams;
 
   const currentPage = Number(params.page) || 1;
-  const searchTerm = params.searchTerm || "";
-  const themeType = params.searchFilter || "all";
+  const searchTerm = params.term || "";
+  const themeType = params.filter || "all";
   const pageSize = 6;
 
   const { themeList, totalCount, totalThemeCount } = await fetchThemesByUser(
@@ -84,9 +87,10 @@ const ProfileAllThemesByUserName = async ({
 
   return (
     <section
-      className={`w-full flex flex-col gap-8 relative ${className || ""}`}
+      className={cn("w-full flex flex-col gap-8 relative py-15", className)}
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-170 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="w-full flex flex-col gap-8 container mx-auto relative" />
+      <div className="absolute top-1/2 left-1/2 -translate-1/2 size-170 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
       <ThemesSearch
         key={`${searchTerm}-${themeType}`}
@@ -101,34 +105,38 @@ const ProfileAllThemesByUserName = async ({
             </span>
           </>
         }
+        description={
+          <>Discover and share custom themes to personalize your workspace</>
+        }
       />
 
-      <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-        {themeList.length ? (
-          themeList.map((theme) => (
-            <Link key={theme.id} href={`/theme/${theme.id}`} target="_blank">
-              <ThemesCard
-                {...theme}
-                canDelete={false}
-                showLink={false}
-                showAuthor={false}
-              />
-            </Link>
-          ))
-        ) : (
-          <section className="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96">
-            <p className="text-xl font-semibold">No themes found</p>
-          </section>
-        )}
-      </div>
-
-      <ThemePagination
-        total={totalCount}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        searchTerm={searchTerm}
-        themeType={themeType}
-      />
+      {themeList.length ? (
+        <>
+          <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+            {themeList.map((theme) => (
+              <Link key={theme.id} href={`/theme/${theme.id}`} target="_blank">
+                <ThemesCard
+                  {...theme}
+                  canDelete={false}
+                  showLink={false}
+                  showAuthor={false}
+                />
+              </Link>
+            ))}
+          </div>
+          <ThemePagination
+            total={totalCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            searchTerm={searchTerm}
+            themeType={themeType}
+          />
+        </>
+      ) : (
+        <section className="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96">
+          <p className="text-xl font-semibold">No themes found</p>
+        </section>
+      )}
     </section>
   );
 };

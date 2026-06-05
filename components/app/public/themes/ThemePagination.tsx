@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Pagination,
   PaginationContent,
@@ -6,6 +8,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { usePathname } from "next/navigation";
 
 interface Props {
   total: number;
@@ -43,15 +46,17 @@ const ThemePagination = ({
   searchTerm,
   themeType,
 }: Props) => {
+  const pathname = usePathname();
+
   const totalPages = Math.ceil(total / pageSize);
   if (totalPages <= 1) return null;
 
   const buildHref = (page: number) => {
     const params = new URLSearchParams();
-    if (searchTerm) params.set("searchTerm", searchTerm);
-    if (themeType !== "all") params.set("searchFilter", themeType);
+    if (searchTerm) params.set("term", searchTerm);
+    if (themeType !== "all") params.set("filter", themeType);
     params.set("page", page.toString());
-    return `/marketplace?${params.toString()}`;
+    return `${pathname}?${params.toString()}`;
   };
 
   const pages = getPages({

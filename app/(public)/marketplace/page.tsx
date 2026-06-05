@@ -10,8 +10,8 @@ import { ThemeMetaResponse } from "@/types/server/themes.types";
 interface Props {
   searchParams: Promise<{
     page?: string;
-    searchTerm?: string;
-    searchFilter?: string;
+    term?: string;
+    filter?: string;
   }>;
 }
 
@@ -30,8 +30,12 @@ const fetchThemes = async (
   const params = new URLSearchParams({
     page: page.toString(),
     pageSize: pageSize.toString(),
-    ...(searchTerm && { searchTerm }),
-    ...(searchFilter !== "all" && { searchFilter }),
+    ...(searchTerm && {
+      term: searchTerm,
+    }),
+    ...(searchFilter !== "all" && {
+      filter: searchFilter,
+    }),
   });
 
   const res = await fetch(
@@ -60,7 +64,7 @@ export const generateMetadata = async ({
   searchParams,
 }: Props): Promise<Metadata> => {
   const params = await searchParams;
-  const searchTerm = params.searchTerm || "";
+  const searchTerm = params.term || "";
 
   const title = searchTerm
     ? `Results for "${searchTerm}" | APIBolt Theme Marketplace`
@@ -92,8 +96,8 @@ const Page = async ({ searchParams }: Props) => {
   const params = await searchParams;
 
   const currentPage = Number(params.page) || 1;
-  const searchTerm = params.searchTerm || "";
-  const themeType = params.searchFilter || "all";
+  const searchTerm = params.term || "";
+  const themeType = params.filter || "all";
   const pageSize = 6;
 
   const { themeList, totalCount, totalThemeCount } = await fetchThemes(
@@ -115,34 +119,35 @@ const Page = async ({ searchParams }: Props) => {
         totalThemeCount={totalThemeCount}
       />
 
-      <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {themeList.length ? (
-          themeList.map((theme) => (
-            <Link key={theme.id} href={`/theme/${theme.id}`} target="_blank">
-              <ThemesCard
-                {...theme}
-                canDelete={false}
-                showLink={false}
-                className="pointer-events-none"
-              />
-            </Link>
-          ))
-        ) : (
-          <section className="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96">
-            <div className="text-center">
-              <p className="text-xl font-semibold">No themes found</p>
-            </div>
-          </section>
-        )}
-      </div>
-
-      <ThemePagination
-        total={totalCount}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        searchTerm={searchTerm}
-        themeType={themeType}
-      />
+      {themeList.length ? (
+        <>
+          <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {themeList.map((theme) => (
+              <Link key={theme.id} href={`/theme/${theme.id}`} target="_blank">
+                <ThemesCard
+                  {...theme}
+                  canDelete={false}
+                  showLink={false}
+                  className="pointer-events-none"
+                />
+              </Link>
+            ))}
+          </div>
+          <ThemePagination
+            total={totalCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            searchTerm={searchTerm}
+            themeType={themeType}
+          />
+        </>
+      ) : (
+        <section className="w-full py-20 flex flex-col items-center justify-center border-2 border-dashed rounded-xl border-muted min-h-96">
+          <div className="text-center">
+            <p className="text-xl font-semibold">No themes found</p>
+          </div>
+        </section>
+      )}
     </section>
   );
 };
