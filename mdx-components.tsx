@@ -28,7 +28,7 @@ const CustomCode = ({ className, children }: CodeProps) => {
     return (
       <code
         className={cn(
-          "px-1.5 py-0.5 rounded-md bg-muted border border-border text-foreground font-mono text-xs",
+          "px-1.5 py-0.5 rounded-md bg-muted border border-border text-foreground font-mono text-sm",
         )}
       >
         {children}
@@ -103,7 +103,7 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => {
     blockquote: ({ children }) => (
       <blockquote
         className={cn(
-          "border-l-4 border-muted-foreground/30 pl-4 py-2 mt-2 text-sm text-muted-foreground italic bg-muted/20 rounded-r-md",
+          "border-l-4 border-muted-foreground/30 pl-4 py-2 mt-2 text-sm text-muted-foreground italic bg-muted/20 rounded-r-md mb-4",
           "[&>*:last-child]:mb-0",
         )}
       >
