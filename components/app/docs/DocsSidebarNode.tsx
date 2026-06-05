@@ -14,13 +14,13 @@ interface Props {
   depth: number;
 }
 
-const resolvePath = (parents: Array<string>, slug: string): Array<string> => {
-  return [...parents, slug];
-};
+const resolvePath = (parents: Array<string>, slug: string): Array<string> => [
+  ...parents,
+  slug,
+];
 
-const resolveFullPath = (parents: Array<string>, slug: string): string => {
-  return `/docs/${[...parents, slug].join("/")}`;
-};
+const resolveFullPath = (parents: Array<string>, slug: string): string =>
+  `/docs/${[...parents, slug].join("/")}`;
 
 const isPathActiveOrChildActive = (
   pathArr: Array<string>,
@@ -32,7 +32,18 @@ const isPathActiveOrChildActive = (
 
 const DocsSidebarNode = ({ items, parentPath, depth }: Props) => {
   const pathname = usePathname();
-  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
+
+  const [openSections, setOpenSections] = useState<Set<string>>(() => {
+    const initialSet = new Set<string>();
+    for (const item of items) {
+      if (
+        item.children &&
+        isPathActiveOrChildActive(resolvePath(parentPath, item.slug), pathname)
+      )
+        initialSet.add(item.slug);
+    }
+    return initialSet;
+  });
 
   const isActive = (pathArr: Array<string>): boolean => {
     const fullPath = `/docs/${pathArr.join("/")}`;
@@ -49,33 +60,30 @@ const DocsSidebarNode = ({ items, parentPath, depth }: Props) => {
     });
   };
 
-  const [prevPathname, setPrevPathname] = useState(pathname);
-
+  const [prevPathname, setPrevPathname] = useState<string>(pathname);
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
     setOpenSections((prev) => {
       const newSet = new Set(prev);
-      for (const item of items) {
+      items.forEach((item) => {
         if (
           item.children &&
           isPathActiveOrChildActive(
             resolvePath(parentPath, item.slug),
             pathname,
           )
-        ) {
+        )
           newSet.add(item.slug);
-        }
-      }
+      });
       return newSet;
     });
   }
 
   return (
     <div
-      className={cn(
-        "flex flex-col w-full gap-1",
-        depth > 0 && "pl-5 border-l border-border/40 mt-1",
-      )}
+      className={cn("flex flex-col w-full gap-1", {
+        "pl-5 border-l border-border/40 mt-1": depth > 0,
+      })}
     >
       {items.map((item) => (
         <div key={item.slug}>
@@ -84,8 +92,11 @@ const DocsSidebarNode = ({ items, parentPath, depth }: Props) => {
               href={resolveFullPath(parentPath, item.slug)}
               className={cn(
                 "flex items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-all cursor-pointer w-full group text-muted-foreground hover:text-foreground",
-                isActive(resolvePath(parentPath, item.slug)) &&
-                  "font-medium text-foreground bg-muted/50",
+                {
+                  "font-medium text-foreground bg-muted/50": isActive(
+                    resolvePath(parentPath, item.slug),
+                  ),
+                },
               )}
             >
               <span>{item.label}</span>
@@ -101,16 +112,18 @@ const DocsSidebarNode = ({ items, parentPath, depth }: Props) => {
                   ) || openSections.has(item.slug)
                     ? "text-foreground"
                     : "text-muted-foreground",
-                  depth === 0 && "mt-2 font-medium",
+                  {
+                    "mt-2 font-medium": !depth,
+                  },
                 )}
               >
                 <Link
                   href={resolveFullPath(parentPath, item.slug)}
-                  className={cn(
-                    "flex-1 hover:text-foreground truncate",
-                    isActive(resolvePath(parentPath, item.slug)) &&
-                      "font-medium text-foreground",
-                  )}
+                  className={cn("flex-1 hover:text-foreground truncate", {
+                    "font-medium text-foreground": isActive(
+                      resolvePath(parentPath, item.slug),
+                    ),
+                  })}
                 >
                   {item.label}
                 </Link>
@@ -124,13 +137,17 @@ const DocsSidebarNode = ({ items, parentPath, depth }: Props) => {
                   }}
                   className={cn(
                     "p-1 hover:bg-muted rounded-sm transition-colors cursor-pointer shrink-0 ml-1 text-muted-foreground",
-                    openSections.has(item.slug) && "text-foreground",
+                    {
+                      "text-foreground": openSections.has(item.slug),
+                    },
                   )}
                 >
                   <ChevronDown
                     className={cn(
                       "w-3.5 h-3.5 transition-transform duration-200 opacity-60",
-                      openSections.has(item.slug) && "rotate-180 opacity-100",
+                      {
+                        "rotate-180 opacity-100": openSections.has(item.slug),
+                      },
                     )}
                   />
                 </button>
