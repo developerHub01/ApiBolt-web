@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import Header from "@/components/app/common/Header";
+import Header from "@/components/app/common/header/Header";
 import Footer from "@/components/app/common/Footer";
 import ScrollToTop from "@/components/app/common/ScrollToTop";
 import LenisProvider from "@/provider/LenisProvider";

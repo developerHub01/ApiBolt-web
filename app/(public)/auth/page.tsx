@@ -5,12 +5,14 @@ import { signInWithGithub } from "@/lib/actions/auth/actions";
 import { Card } from "@/components/ui/card";
 
 interface Props {
-  searchParams: {
+  searchParams: Promise<{
     error?: string;
-  };
+  }>;
 }
 
-const Page = ({ searchParams }: Props) => {
+const Page = async ({ searchParams }: Props) => {
+  const { error } = await searchParams;
+
   return (
     <div className="relative flex flex-1 w-full flex-col items-center justify-center py-20 px-4 pt-40 overflow-hidden">
       {/* Decorative Background */}
@@ -34,7 +36,7 @@ const Page = ({ searchParams }: Props) => {
           <p className="mt-3 text-muted-foreground text-base leading-relaxed max-w-70">
             Sign in to your account and continue your masterpiece.
           </p>
-          {searchParams.error && (
+          {error && (
             <p className="mt-2 text-sm text-destructive">
               Sign-in failed. Please try again.
             </p>

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Header from "@/components/app/common/Header";
+import Header from "@/components/app/common/header/Header";
 import PublicDocsSidebar from "@/components/app/docs/PublicDocsSidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SITE_URL } from "@/constant/index.constant";
