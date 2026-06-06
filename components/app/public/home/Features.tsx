@@ -383,6 +383,7 @@ export default function FeaturesSection() {
                         fill
                         className="object-cover"
                         loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <div
                         className="absolute inset-0 bg-primary/10 rounded-lg backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center cursor-pointer"
@@ -476,6 +477,7 @@ export default function FeaturesSection() {
                 width={1040}
                 height={1040}
                 className="block w-[85vw] md:w-auto md:max-w-[85vw] h-auto max-h-[85vh] rounded-lg border-2 md:border-8 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] bg-black/50 select-none"
+                sizes="85vw"
               />
             </motion.div>
           </motion.div>
