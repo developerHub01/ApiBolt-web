@@ -2,6 +2,10 @@ import React from "react";
 import { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Header from "@/components/app/dashboard/layout/Header";
+import Sidebar from "@/components/app/dashboard/layout/Sidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -38,7 +42,24 @@ const Layout = async ({ children }: Props) => {
 
   if (!user) redirect("/auth");
 
-  return <>{children}</>;
+  return (
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "19rem",
+        } as React.CSSProperties
+      }
+      className="h-screen overflow-hidden"
+    >
+      <Sidebar variant="inset" />
+      <SidebarInset>
+        <Header />
+        <ScrollArea>
+          <section className="flex-1 container p-5">{children}</section>
+        </ScrollArea>
+      </SidebarInset>
+    </SidebarProvider>
+  );
 };
 
 export default Layout;
