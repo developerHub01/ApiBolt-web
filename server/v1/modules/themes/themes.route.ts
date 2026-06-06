@@ -3,6 +3,6 @@ import { ThemesController } from "@/server/v1/modules/themes/themes.controller";
 
 const themesRouter = createRouter();
 
-themesRouter.post("/publis", ThemesController.handlePublishTheme);
+themesRouter.post("/publish", ThemesController.handlePublishTheme);
 
 export default themesRouter;

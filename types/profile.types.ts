@@ -5,9 +5,9 @@ export interface ProfileMetaInterface {
   user_name: string;
   full_name: string;
   bio: string | null;
-  avatar_url: string;
+  avatar_url: string | null;
   cover_url: string | null;
-  created_at: string;
+  created_at: string | null;
 }
 
 export interface ProfileInterface extends ProfileMetaInterface {
