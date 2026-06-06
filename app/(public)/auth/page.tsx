@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { signInWithGithub } from "@/lib/actions/auth/actions";
+import { Card } from "@/components/ui/card";
 
 interface Props {
   searchParams: {
@@ -16,7 +17,7 @@ const Page = ({ searchParams }: Props) => {
       <div className="fixed top-1/4 -left-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="fixed bottom-1/4 -right-20 size-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="w-full max-w-md bg-card/30 backdrop-blur-2xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] rounded-2xl px-6 md:p-12 flex flex-col items-center relative z-10">
+      <Card className="w-full max-w-md bg-card/30 backdrop-blur-2xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] rounded-2xl px-6 md:p-12 flex flex-col items-center relative z-10">
         <div className="mb-5 flex flex-col items-center text-center">
           <div className="size-16 rounded-2xl bg-linear-to-tr from-primary/20 to-transparent p-3 border border-white/10 mb-6 shadow-2xl">
             <Image
@@ -65,7 +66,7 @@ const Page = ({ searchParams }: Props) => {
             Back to home
           </Link>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
