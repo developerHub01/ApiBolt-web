@@ -1,6 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 import { SITE_URL } from "@/constant/index.constant";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +30,15 @@ export const metadata: Metadata = {
   },
 };
 
-const Layout = ({ children }: Props) => {
+const Layout = async ({ children }: Props) => {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) redirect("/dashboard");
+
   return <>{children}</>;
 };
 
