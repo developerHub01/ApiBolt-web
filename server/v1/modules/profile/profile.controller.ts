@@ -3,16 +3,15 @@ import { sendResponse } from "@/utils/server/api";
 import { HTTPContext } from "@/types/server/env.types";
 import { ProfileService } from "@/server/v1/modules/profile/profile.service";
 import { FullProfileInterface } from "@/types/server/profiles.types";
+import { createClient } from "@/lib/supabase/server";
 
 const handleGetMyProfile = async (c: HTTPContext) => {
-  const user = c.get("user");
+  const supabase = await createClient();
+  console.log(await supabase.auth.getUser());
 
-  if (!user || !user?.id)
-    throw new HTTPException(400, {
-      message: "No user found",
-    });
-
+  const user = c.get("user")!;
   const id = user.id;
+
   const profile = await ProfileService.getFullProfileById(id);
 
   return sendResponse<FullProfileInterface | null>(c, {

@@ -1,9 +1,10 @@
-import { User } from "@supabase/supabase-js";
 import { Context } from "hono";
+import { type SupabaseClient, User } from "@supabase/supabase-js";
 
 export interface AppEnv {
   Variables: {
     user: User | null;
+    supabase: SupabaseClient;
   };
 }
 
