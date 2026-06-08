@@ -29,6 +29,7 @@ const Header = ({ className, ...props }: Props) => {
             height={32}
             className="size-6 sm:size-8"
             alt="api-bolt"
+            loading="eager"
           />
           <span className="tracking-tighter">APIBolt</span>
         </Link>

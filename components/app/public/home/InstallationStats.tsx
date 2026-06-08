@@ -1,26 +1,10 @@
-import { AppInstallationInterface } from "@/types/status.types";
 import * as motion from "motion/react-client";
 import CounterAnimation from "@/components/app/common/CounterAnimation";
 import SectionHeader from "@/components/app/common/SectionHeader";
 import SpotlightEffectCard from "@/components/app/common/SpotlightEffectCard";
-import { API_URL } from "@/constant/index.constant";
-import { ApiResponse } from "@/types/server/api.types";
+import { StatusService } from "@/server/v1/modules/status/status.service";
 
-const getStats = async () => {
-  const res = await fetch(`${API_URL}/status/installs`, {
-    next: {
-      revalidate: 60,
-    },
-  });
-
-  const response: ApiResponse<AppInstallationInterface> = await res.json();
-  return (
-    response.data ?? {
-      totalInstalls: 0,
-      uniqueDevices: 0,
-    }
-  );
-};
+const getStats = async () => await StatusService.getStatusInstall();
 
 const InstallationStates = async () => {
   const stats = await getStats();
