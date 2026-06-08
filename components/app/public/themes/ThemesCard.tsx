@@ -77,7 +77,6 @@ const ThemesCard = ({
             </Button>
           )}
 
-          {/* Extracted to Client Component because it has onClick handlers */}
           <CardActions
             id={id}
             canEdit={canEdit}

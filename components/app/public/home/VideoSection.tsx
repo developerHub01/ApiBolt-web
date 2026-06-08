@@ -103,6 +103,7 @@ const VideoSection = () => {
 
             <div className="absolute inset-0 flex items-center justify-center">
               <button
+                type="button"
                 onClick={() => setIsOpen(true)}
                 className="relative group/btn flex items-center gap-3 px-4 py-2 sm:px-8 sm:py-4 bg-background/10 hover:bg-background/90 backdrop-blur-md rounded-full border border-white/10 hover:border-primary/20 shadow-[0_0_200px_50px] shadow-transparent group-hover:shadow-accent hover:shadow-[0_0_200px_150px] group-hover:scale-105 hover:scale-120 transition-all duration-300"
               >

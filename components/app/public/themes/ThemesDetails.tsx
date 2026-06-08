@@ -128,7 +128,9 @@ const ThemesDetails = ({
               <div
                 className={cn(
                   "capitalize p-3 flex items-center text-sm font-medium border-b border-r border-white/10 text-muted-foreground bg-accent/10",
-                  index >= paletteList.length - 1 && "border-b-0",
+                  {
+                    "border-b-0": index >= paletteList.length - 1,
+                  },
                 )}
               >
                 {key.replaceAll("-", " ")}
@@ -136,8 +138,10 @@ const ThemesDetails = ({
               <div
                 className={cn(
                   "p-3 border-b border-white/10 flex items-center justify-center",
-                  index >= paletteList.length - 1 && "border-b-0",
-                  index % 2 === 0 && "lg:border-r border-white/10",
+                  {
+                    "border-b-0": index >= paletteList.length - 1,
+                    "lg:border-r border-white/10": !(index % 2),
+                  },
                 )}
               >
                 <div
