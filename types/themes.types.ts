@@ -25,7 +25,7 @@ export interface ThemeInterface extends ThemeMetaInterface {
   updated_at: string;
 }
 
-export interface ThemeListThemeMetaInterface {
+export type ThemeMetaResponse = {
   data: Array<ThemeMetaInterface>;
   meta: {
     total: number;
@@ -34,4 +34,21 @@ export interface ThemeListThemeMetaInterface {
     totalPages: number;
     totalThemeCount: number;
   };
+};
+
+export interface ThemeDetailsInterface extends Pick<
+  ThemeInterface,
+  | "id"
+  | "name"
+  | "description"
+  | "type"
+  | "preview"
+  | "thumbnail"
+  | "palette"
+  | "version"
+  | "install_count"
+> {
+  authorId: string;
+  author: string;
+  authorUsername: string;
 }

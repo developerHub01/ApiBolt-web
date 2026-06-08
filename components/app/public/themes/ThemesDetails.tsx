@@ -13,8 +13,8 @@ import {
   API_BOLT_DESKTOP_APP_PROTOCOL,
   SITE_URL,
 } from "@/constant/index.constant";
-import type { ThemeInterface } from "@/types/theme.types";
 import CopyButton from "@/components/ui/copy-button";
+import { ThemeDetailsInterface } from "@/types/themes.types";
 
 const ThemesDetails = ({
   id,
@@ -27,7 +27,7 @@ const ThemesDetails = ({
   type,
   version,
   author,
-}: ThemeInterface) => {
+}: ThemeDetailsInterface) => {
   const paletteList = Object.entries(palette);
   const authorProfileLink = `${SITE_URL}/profile/${authorUsername}`;
   const installUrl = `${API_BOLT_DESKTOP_APP_PROTOCOL}://theme/${id}`;

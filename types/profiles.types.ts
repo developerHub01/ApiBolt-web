@@ -1,4 +1,4 @@
-import { ThemeMetaInterface } from "@/types/theme.types";
+import { ThemeMetaInterface } from "@/types/themes.types";
 
 export interface ProfileInterface {
   id: string;

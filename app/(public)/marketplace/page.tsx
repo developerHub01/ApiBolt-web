@@ -5,7 +5,7 @@ import ThemesSearch from "@/components/app/public/themes/ThemesSearch";
 import ThemesCard from "@/components/app/public/themes/ThemesCard";
 import ThemePagination from "@/components/app/public/themes/ThemePagination";
 import { ApiResponse } from "@/server/types";
-import { ThemeMetaResponse } from "@/types/server/themes.types";
+import { ThemeMetaResponse } from "@/types/themes.types";
 
 interface Props {
   searchParams: Promise<{

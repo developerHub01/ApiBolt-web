@@ -1,8 +1,10 @@
 import ThemesDetails from "@/components/app/public/themes/ThemesDetails";
 import NotFound from "@/components/ui/not-found";
-import type { ThemeInterface } from "@/types/theme.types";
-import { ApiResponse } from "@/types/server/api.types";
-import { API_URL } from "@/constant/index.constant";
+import { unstable_cache } from "next/cache";
+import { ClientService } from "@/server/v1/modules/client/client.service";
+import { ThemeDetailsInterface } from "@/types/themes.types";
+import { Metadata } from "next";
+import { SITE_URL } from "@/constant/index.constant";
 
 interface Props {
   params: Promise<{
@@ -10,21 +12,54 @@ interface Props {
   }>;
 }
 
+const fetchTheme = unstable_cache(
+  async (id: string) => await ClientService.getThemeDetailsById(id),
+  ["theme_details_by_id"],
+  {
+    revalidate: 60 * 60,
+  },
+);
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const { id } = await params;
+  const theme = await fetchTheme(id);
+
+  if (!theme)
+    return {
+      title: "Theme not found - APIBolt",
+      description: "This theme does not exist or has been deleted.",
+    };
+
+  const title = `${theme.name} - APIBolt Theme`;
+  const description = `Download and explore the ${theme.name} theme for APIBolt.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [`${SITE_URL}/og.png`],
+      url: `${SITE_URL}/theme/${id}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SITE_URL}/og.png`],
+    },
+  };
+};
+
 const Page = async ({ params }: Props) => {
   const { id: themeId } = await params;
-  let theme: ThemeInterface | null = null;
+  let theme: ThemeDetailsInterface | null = null;
   let hasError = false;
 
   try {
-    const res = await fetch(`${API_URL}/client/themes/details/${themeId}`, {
-      next: {
-        revalidate: 60,
-      },
-    });
-    const json: ApiResponse<ThemeInterface> = await res.json();
-
-    if (json.success && json.data) theme = json.data;
-    else hasError = true;
+    theme = await fetchTheme(themeId);
   } catch {
     hasError = true;
   }

@@ -3,6 +3,7 @@ import {
   AppInstallReportBodyInterface,
   InstallThemeBodyPayloadInterface,
 } from "@/types/server/client.types";
+import { ThemeDetailsInterface } from "@/types/themes.types";
 
 const reportAppInstall = async ({
   deviceId,
@@ -34,7 +35,9 @@ const reportAppInstall = async ({
   }
 };
 
-const getThemeDetailsById = async (id: string) => {
+const getThemeDetailsById = async (
+  id: string,
+): Promise<ThemeDetailsInterface | null> => {
   try {
     const theme = await prisma.themes.findUnique({
       where: {
@@ -62,12 +65,15 @@ const getThemeDetailsById = async (id: string) => {
 
     if (!theme) throw new Error();
 
+    const { profiles, ...themeData } = theme;
+
     return {
-      ...theme,
-      authorId: theme.profiles?.id,
-      author: theme.profiles?.full_name,
-      authorUsername: theme.profiles?.user_name,
-      profiles: undefined,
+      ...themeData,
+      type: themeData.type as ThemeDetailsInterface["type"],
+      palette: themeData.palette as ThemeDetailsInterface["palette"],
+      authorId: profiles?.id,
+      author: profiles?.full_name,
+      authorUsername: profiles?.user_name,
     };
   } catch {
     return null;
