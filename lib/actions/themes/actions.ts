@@ -1,6 +1,6 @@
 "use server";
 
-import { getUser } from "@/lib/actions/auth/actions";
+import { getUserAction } from "@/lib/actions/auth/actions";
 import { createClient } from "@/lib/supabase/server";
 import { Prisma } from "@/prisma/generated/prisma/client";
 import { ProfileService } from "@/server/v1/modules/profile/profile.service";
@@ -309,8 +309,8 @@ export const updateThemeAction = async (
   }
 };
 
-export const deleteThemeById = async (id: string) => {
-  const user = await getUser();
+export const deleteThemeByIdAction = async (id: string) => {
+  const user = await getUserAction();
   if (!user) return false;
 
   const response = await ThemesService.deleteThemebyIdAndAuthorId({

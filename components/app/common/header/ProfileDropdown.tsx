@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { signOut } from "@/lib/actions/auth/actions";
+import { signOutAction } from "@/lib/actions/auth/actions";
 import type { User } from "@supabase/supabase-js";
 
 interface Props {
@@ -52,7 +52,7 @@ const ProfileDropdown = ({ user }: Props) => {
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
-          onClick={signOut}
+          onClick={signOutAction}
           className="cursor-pointer rounded-lg hover:bg-destructive/10 hover:text-destructive transition-colors gap-3 py-2.5"
         >
           <Settings className="size-4" />

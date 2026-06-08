@@ -1,5 +1,5 @@
 import { prisma } from "@/db/client";
-import { FullProfileInterface } from "@/types/profiles.types";
+import { FullProfileInterface, ProfileInterface } from "@/types/profiles.types";
 
 export const getUserIdFromUserName = async (userName: string) => {
   try {
@@ -31,6 +31,24 @@ export const getUserNameById = async (id: string) => {
     console.log({ profile });
 
     return profile?.user_name ?? null;
+  } catch {
+    return null;
+  }
+};
+
+export const getProfileById = async (
+  id: string,
+): Promise<ProfileInterface | null> => {
+  try {
+    const profile = await prisma.profiles.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!profile) return null;
+
+    return profile;
   } catch {
     return null;
   }
@@ -122,9 +140,34 @@ export const getFullProfileByUserName = async (
   }
 };
 
+export const updateProfile = async ({
+  userId,
+  payload,
+}: {
+  userId: string;
+  payload: Partial<
+    Pick<ProfileInterface, "full_name" | "bio" | "avatar_url" | "cover_url">
+  >;
+}): Promise<ProfileInterface | null> => {
+  try {
+    return await prisma.profiles.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        ...payload,
+      },
+    });
+  } catch {
+    return null;
+  }
+};
+
 export const ProfileService = {
   getUserIdFromUserName,
   getUserNameById,
+  getProfileById,
   getFullProfileById,
   getFullProfileByUserName,
+  updateProfile,
 };

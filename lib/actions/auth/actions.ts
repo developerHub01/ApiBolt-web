@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
-export const signInWithGithub = async () => {
+export const signInWithGithubAction = async () => {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -22,7 +22,7 @@ export const signInWithGithub = async () => {
   redirect(data.url);
 };
 
-export const signOut = async () => {
+export const signOutAction = async () => {
   const supabase = await createClient();
   const { error } = await supabase.auth.signOut();
 
@@ -34,7 +34,7 @@ export const signOut = async () => {
   redirect("/");
 };
 
-export const getUser = async () => {
+export const getUserAction = async () => {
   const supabase = await createClient();
   const {
     data: { user },

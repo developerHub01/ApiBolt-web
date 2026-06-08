@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { signInWithGithub } from "@/lib/actions/auth/actions";
+import { signInWithGithubAction } from "@/lib/actions/auth/actions";
 import { Card } from "@/components/ui/card";
 
 interface Props {
@@ -15,7 +15,6 @@ const Page = async ({ searchParams }: Props) => {
 
   return (
     <div className="relative flex flex-1 w-full flex-col items-center justify-center py-20 px-4 pt-40 overflow-hidden">
-      {/* Decorative Background */}
       <div className="fixed top-1/4 -left-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="fixed bottom-1/4 -right-20 size-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
 
@@ -43,8 +42,10 @@ const Page = async ({ searchParams }: Props) => {
           )}
         </div>
 
-        {/* Server Action form */}
-        <form action={signInWithGithub} className="w-full flex justify-center">
+        <form
+          action={signInWithGithubAction}
+          className="w-full flex justify-center"
+        >
           <button
             type="submit"
             className="flex h-14 w-full max-w-xs items-center justify-center gap-4 rounded-full bg-foreground text-background font-bold transition-all hover:bg-foreground/90 active:scale-[0.98] shadow-xl"

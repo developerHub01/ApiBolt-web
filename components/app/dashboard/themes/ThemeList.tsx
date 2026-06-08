@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { ThemeMetaInterface } from "@/types/themes.types";
 import { useThemesStore } from "@/store/dashboard/themes.store";
-import { deleteThemeById } from "@/lib/actions/themes/actions";
+import { deleteThemeByIdAction } from "@/lib/actions/themes/actions";
 import { toast } from "sonner";
 
 interface Props {
@@ -35,7 +35,7 @@ const ThemeList = ({ initialList }: Props) => {
     if (!deleteCandidateId) return;
 
     setIsDeleting(true);
-    const result = await deleteThemeById(deleteCandidateId);
+    const result = await deleteThemeByIdAction(deleteCandidateId);
 
     if (result) {
       toast.success("Theme deleted successfully");

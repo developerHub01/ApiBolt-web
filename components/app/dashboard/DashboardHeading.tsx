@@ -7,7 +7,7 @@ interface Props {
 
 const DashboardHeading = ({ children }: Props) => {
   return (
-    <CardTitle className="text-center text-3xl font-brand">
+    <CardTitle className="text-center text-3xl font-brand font-semibold pb-1">
       {children}
     </CardTitle>
   );

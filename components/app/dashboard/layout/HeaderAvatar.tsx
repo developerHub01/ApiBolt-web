@@ -8,7 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { signOut } from "@/lib/actions/auth/actions";
+import { signOutAction } from "@/lib/actions/auth/actions";
 
 const HeaderAvatar = () => {
   return (
@@ -19,7 +19,7 @@ const HeaderAvatar = () => {
             <Button
               size="icon"
               variant="secondary"
-              onClick={signOut}
+              onClick={signOutAction}
               aria-label="Logout from account"
             >
               <LogOut />

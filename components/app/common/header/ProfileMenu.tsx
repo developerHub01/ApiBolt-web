@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getUser } from "@/lib/actions/auth/actions";
-import ProfileDropdown from "./ProfileDropdown";
+import { getUserAction } from "@/lib/actions/auth/actions";
+import ProfileDropdown from "@/components/app/common/header/ProfileDropdown";
 
 const UserMenu = async () => {
-  const user = await getUser();
+  const user = await getUserAction();
 
   if (!user)
     return (
