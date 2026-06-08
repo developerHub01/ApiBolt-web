@@ -6,9 +6,15 @@ import { cn } from "@/lib/utils";
 
 interface Props extends ComponentProps<"section"> {
   description?: string;
+  showCTA?: boolean;
 }
 
-const NotFound = ({ description, className, ...props }: Props) => {
+const NotFound = ({
+  description,
+  showCTA = true,
+  className,
+  ...props
+}: Props) => {
   return (
     <section
       className={cn(
@@ -41,17 +47,19 @@ const NotFound = ({ description, className, ...props }: Props) => {
             "The page you're searching for seems to have vanished into the digital void. Let's get you back on track."}
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/">
-            <Button
-              size="lg"
-              className="px-8 font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 w-35"
-            >
-              Return Home
-            </Button>
-          </Link>
-          <GoBackButton className="w-35">Go Back</GoBackButton>
-        </div>
+        {showCTA && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/">
+              <Button
+                size="lg"
+                className="px-8 font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 w-35"
+              >
+                Return Home
+              </Button>
+            </Link>
+            <GoBackButton className="w-35">Go Back</GoBackButton>
+          </div>
+        )}
       </div>
     </section>
   );

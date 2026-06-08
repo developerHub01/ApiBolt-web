@@ -1,38 +1,30 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, ChangeEvent } from "react";
 import { cn } from "@/lib/utils";
-import useThemeEditorStore from "@/store/dashboard/theme-editor.store";
 import { isValidColor } from "@/utils/color.utils";
 
 interface Props {
   name: string;
-  initialColor: string;
+  color: string;
+  onChange: (color: string) => void;
 }
 
-const DashboardThemeEditorPaletteRow = ({ name, initialColor }: Props) => {
-  const [localColor, setLocalColor] = useState<string>(initialColor);
-  const [prevInitialColor, setPrevInitialColor] =
-    useState<string>(initialColor);
-  const setPalette = useThemeEditorStore((state) => state.setPalette);
-  const currentPalette = useThemeEditorStore((state) => state.palette);
+const DashboardThemeEditorPaletteRow = ({ name, color, onChange }: Props) => {
+  const [localColor, setLocalColor] = useState<string>(color);
+  const [prevColor, setPrevColor] = useState<string>(color);
 
-  if (initialColor !== prevInitialColor) {
-    setPrevInitialColor(initialColor);
-    setLocalColor(initialColor);
+  if (color !== prevColor) {
+    setPrevColor(color);
+    setLocalColor(color);
   }
 
   const isError = useMemo(() => !isValidColor(localColor), [localColor]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newColor = e.target.value;
     setLocalColor(newColor);
-
-    if (isValidColor(newColor) && newColor !== currentPalette[name])
-      setPalette({
-        ...currentPalette,
-        [name]: newColor.toLowerCase(),
-      });
+    if (isValidColor(newColor)) onChange(newColor.toLowerCase());
   };
 
   return (
@@ -58,7 +50,7 @@ const DashboardThemeEditorPaletteRow = ({ name, initialColor }: Props) => {
           <input
             id={name}
             value={localColor}
-            placeholder={initialColor}
+            placeholder={color}
             onChange={handleChange}
             className="w-full px-0 py-0 border-0 bg-transparent focus-visible:ring-0 focus-visible:outline-0 rounded-none h-full text-center uppercase tracking-wide text-sm"
           />

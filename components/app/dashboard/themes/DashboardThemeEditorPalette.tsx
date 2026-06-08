@@ -18,10 +18,9 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { DEFAULT_THEME_PALETTE } from "@/constant/default-theme.constant";
-import useThemeEditorStore from "@/store/dashboard/theme-editor.store";
 import { isValidColor } from "@/utils/color.utils";
 import { ThemeInterface } from "@/types/themes.types";
-import DashboardThemeEditorPaletteRow from "./DashboardThemeEditorPaletteRow";
+import DashboardThemeEditorPaletteRow from "@/components/app/dashboard/themes/DashboardThemeEditorPaletteRow";
 
 interface ActionButton {
   id: "copy" | "paste" | "download" | "import" | "reset";
@@ -57,10 +56,12 @@ const ACTION_BUTTON_LIST: Array<ActionButton> = [
   },
 ];
 
-const DashboardThemeEditorPalette = () => {
-  const palette = useThemeEditorStore((state) => state.palette);
-  const setPalette = useThemeEditorStore((state) => state.setPalette);
+interface Props {
+  palette: ThemeInterface["palette"];
+  onPaletteChange: (palette: ThemeInterface["palette"]) => void;
+}
 
+const DashboardThemeEditorPalette = ({ palette, onPaletteChange }: Props) => {
   const handlePaletteModifier = async (
     type: ActionButton["id"],
   ): Promise<void> => {
@@ -82,7 +83,7 @@ const DashboardThemeEditorPalette = () => {
             });
             return;
           }
-          setPalette(payload);
+          onPaletteChange(payload);
           toast.success("Paste success");
         } catch {
           toast.error("Paste error", { description: "Invalid JSON" });
@@ -90,9 +91,7 @@ const DashboardThemeEditorPalette = () => {
         break;
       }
       case "reset": {
-        setPalette({
-          ...DEFAULT_THEME_PALETTE,
-        });
+        onPaletteChange({ ...DEFAULT_THEME_PALETTE });
         toast.success("Reset success");
         break;
       }
@@ -127,7 +126,7 @@ const DashboardThemeEditorPalette = () => {
               });
               return;
             }
-            setPalette(payload);
+            onPaletteChange(payload);
             toast.success("Import success");
           } catch {
             toast.error("Import error");
@@ -175,7 +174,10 @@ const DashboardThemeEditorPalette = () => {
             <DashboardThemeEditorPaletteRow
               key={name}
               name={name}
-              initialColor={color}
+              color={color}
+              onChange={(newColor) =>
+                onPaletteChange({ ...palette, [name]: newColor.toLowerCase() })
+              }
             />
           ))}
         </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -10,21 +11,32 @@ import DashboardThemeEditorBasicInfo from "@/components/app/dashboard/themes/Das
 import DashboardThemeEditorPreview from "@/components/app/dashboard/themes/DashboardThemeEditorPreview";
 import DashboardThemeEditorPalette from "@/components/app/dashboard/themes/DashboardThemeEditorPalette";
 import DashboardThemeEditorDescription from "@/components/app/dashboard/themes/DashboardThemeEditorDescription";
-import useThemeEditorStore from "@/store/dashboard/theme-editor.store";
+import useThemeCreateStore from "@/store/dashboard/theme-create.store";
 import { publishThemeAction } from "@/lib/actions/themes/actions";
 
-const ThemeEditorForm = () => {
+const ThemeCreateForm = () => {
   const router = useRouter();
-  const name = useThemeEditorStore((state) => state.name);
-  const description = useThemeEditorStore((state) => state.description);
-  const themeType = useThemeEditorStore((state) => state.themeType);
-  const palette = useThemeEditorStore((state) => state.palette);
-  const previewFile = useThemeEditorStore((state) => state.previewFile);
-  const isSubmitting = useThemeEditorStore((state) => state.isSubmitting);
-  const resetForm = useThemeEditorStore((state) => state.resetForm);
-  const setIsSubmitting = useThemeEditorStore((state) => state.setIsSubmitting);
 
-  const isFormValid = name.trim() && description.trim() && previewFile;
+  const name = useThemeCreateStore((state) => state.name);
+  const description = useThemeCreateStore((state) => state.description);
+  const themeType = useThemeCreateStore((state) => state.themeType);
+  const palette = useThemeCreateStore((state) => state.palette);
+  const previewUrl = useThemeCreateStore((state) => state.previewUrl);
+  const previewFile = useThemeCreateStore((state) => state.previewFile);
+  const isSubmitting = useThemeCreateStore((state) => state.isSubmitting);
+
+  const setName = useThemeCreateStore((state) => state.setName);
+  const setThemeType = useThemeCreateStore((state) => state.setThemeType);
+  const setPalette = useThemeCreateStore((state) => state.setPalette);
+  const setDescription = useThemeCreateStore((state) => state.setDescription);
+  const setPreviewFile = useThemeCreateStore((state) => state.setPreviewFile);
+  const setIsSubmitting = useThemeCreateStore((state) => state.setIsSubmitting);
+  const resetForm = useThemeCreateStore((state) => state.resetForm);
+
+  const isFormValid = useMemo(
+    () => name.trim() && description.trim() && previewFile,
+    [name, description, previewFile],
+  );
 
   const handleSubmit = async (formData: FormData) => {
     if (!isFormValid) return;
@@ -63,10 +75,24 @@ const ThemeEditorForm = () => {
           description="Configure your palette, assets, and metadata to share with the community."
         />
         <CardContent className="w-full flex flex-col gap-8 p-0">
-          <DashboardThemeEditorBasicInfo />
-          <DashboardThemeEditorPreview />
-          <DashboardThemeEditorPalette />
-          <DashboardThemeEditorDescription />
+          <DashboardThemeEditorBasicInfo
+            name={name}
+            themeType={themeType}
+            onNameChange={setName}
+            onThemeTypeChange={setThemeType}
+          />
+          <DashboardThemeEditorPreview
+            previewUrl={previewUrl}
+            onPreviewChange={setPreviewFile}
+          />
+          <DashboardThemeEditorPalette
+            palette={palette}
+            onPaletteChange={setPalette}
+          />
+          <DashboardThemeEditorDescription
+            description={description}
+            onDescriptionChange={setDescription}
+          />
         </CardContent>
         <CardFooter className="w-full flex gap-4 justify-end pt-6 border-white/5 px-0">
           <Button
@@ -85,4 +111,4 @@ const ThemeEditorForm = () => {
   );
 };
 
-export default ThemeEditorForm;
+export default ThemeCreateForm;

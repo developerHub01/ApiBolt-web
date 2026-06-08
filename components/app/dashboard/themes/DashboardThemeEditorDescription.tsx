@@ -2,16 +2,18 @@
 
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
-import useThemeEditorStore from "@/store/dashboard/theme-editor.store";
 
 interface Props {
+  description: string;
   maxLength?: number;
+  onDescriptionChange: (value: string) => void;
 }
 
-const DashboardThemeEditorDescription = ({ maxLength = 500 }: Props) => {
-  const description = useThemeEditorStore((state) => state.description);
-  const setDescription = useThemeEditorStore((state) => state.setDescription);
-
+const DashboardThemeEditorDescription = ({
+  description,
+  maxLength = 500,
+  onDescriptionChange,
+}: Props) => {
   return (
     <div className="grid gap-6">
       <Field>
@@ -30,7 +32,7 @@ const DashboardThemeEditorDescription = ({ maxLength = 500 }: Props) => {
           id="theme-description"
           placeholder="Describe your theme's style, inspiration, and key features..."
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => onDescriptionChange(e.target.value)}
           maxLength={maxLength}
           className="w-full resize-none min-h-40 bg-muted/20 border-white/5 focus-visible:ring-primary/50 transition-all p-4 leading-relaxed"
         />

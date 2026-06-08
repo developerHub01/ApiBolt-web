@@ -9,7 +9,6 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import useThemeEditorStore from "@/store/dashboard/theme-editor.store";
 import { TThemeType } from "@/types/themes.types";
 
 const THEME_TYPE_LIST: Array<{
@@ -31,15 +30,20 @@ const THEME_TYPE_LIST: Array<{
 ];
 
 interface Props {
+  name: string;
+  themeType: TThemeType;
   maxLength?: number;
+  onNameChange: (value: string) => void;
+  onThemeTypeChange: (value: TThemeType) => void;
 }
 
-const DashboardThemeEditorBasicInfo = ({ maxLength = 50 }: Props) => {
-  const name = useThemeEditorStore((state) => state.name);
-  const themeType = useThemeEditorStore((state) => state.themeType);
-  const setName = useThemeEditorStore((state) => state.setName);
-  const setThemeType = useThemeEditorStore((state) => state.setThemeType);
-
+const DashboardThemeEditorBasicInfo = ({
+  name,
+  themeType,
+  maxLength = 50,
+  onNameChange,
+  onThemeTypeChange,
+}: Props) => {
   return (
     <div className="grid gap-6">
       <Field>
@@ -55,7 +59,7 @@ const DashboardThemeEditorBasicInfo = ({ maxLength = 50 }: Props) => {
           id="theme-name"
           placeholder="e.g. Neon Horizon"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => onNameChange(e.target.value)}
           maxLength={maxLength}
           className="bg-muted/20 border-white/5 focus-visible:ring-primary/50 transition-all"
         />
@@ -63,10 +67,7 @@ const DashboardThemeEditorBasicInfo = ({ maxLength = 50 }: Props) => {
 
       <Field>
         <FieldLabel className="text-base font-medium">Category</FieldLabel>
-        <Select
-          value={themeType}
-          onValueChange={(val) => setThemeType(val as TThemeType)}
-        >
+        <Select value={themeType} onValueChange={onThemeTypeChange}>
           <SelectTrigger className="h-12 bg-muted/20 border-white/5 focus-visible:ring-primary/50 transition-all">
             <SelectValue placeholder="Select theme type" />
           </SelectTrigger>

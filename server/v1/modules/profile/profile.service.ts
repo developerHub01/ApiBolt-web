@@ -3,7 +3,7 @@ import { FullProfileInterface } from "@/types/profiles.types";
 
 export const getUserIdFromUserName = async (userName: string) => {
   try {
-    const profile = await prisma.profiles.findUnique({
+    const profile = await prisma.profiles.findFirst({
       where: {
         user_name: userName,
       },
@@ -13,6 +13,24 @@ export const getUserIdFromUserName = async (userName: string) => {
     });
 
     return profile?.id ?? null;
+  } catch {
+    return null;
+  }
+};
+
+export const getUserNameById = async (id: string) => {
+  try {
+    const profile = await prisma.profiles.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        user_name: true,
+      },
+    });
+    console.log({ profile });
+
+    return profile?.user_name ?? null;
   } catch {
     return null;
   }
@@ -106,6 +124,7 @@ export const getFullProfileByUserName = async (
 
 export const ProfileService = {
   getUserIdFromUserName,
+  getUserNameById,
   getFullProfileById,
   getFullProfileByUserName,
 };

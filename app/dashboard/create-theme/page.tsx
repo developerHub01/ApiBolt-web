@@ -1,4 +1,4 @@
-import ThemeEditorForm from "@/components/app/dashboard/themes/ThemeEditorForm";
+import ThemeCreateForm from "@/components/app/dashboard/themes/ThemeCreateForm";
 import * as motion from "motion/react-client";
 
 const Page = () => {
@@ -17,7 +17,7 @@ const Page = () => {
         duration: 0.5,
       }}
     >
-      <ThemeEditorForm />
+      <ThemeCreateForm />
     </motion.section>
   );
 };

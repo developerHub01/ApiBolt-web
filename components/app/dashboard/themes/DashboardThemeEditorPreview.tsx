@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { THEME_PREVIEW_SIZE } from "@/constant/default-theme.constant";
-import useThemeEditorStore from "@/store/dashboard/theme-editor.store";
 
 const REQUIRED_RATIO = (
   THEME_PREVIEW_SIZE.REQUIRED_WIDTH / THEME_PREVIEW_SIZE.REQUIRED_HEIGHT
@@ -15,10 +14,16 @@ const REQUIRED_RATIO = (
 
 const { REQUIRED_WIDTH, REQUIRED_HEIGHT, MAX_SIZE_MB } = THEME_PREVIEW_SIZE;
 
-const DashboardThemeEditorPreview = () => {
+interface Props {
+  previewUrl: string;
+  onPreviewChange: (file: File) => void;
+}
+
+const DashboardThemeEditorPreview = ({
+  previewUrl,
+  onPreviewChange,
+}: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const previewUrl = useThemeEditorStore((state) => state.previewUrl);
-  const setPreviewFile = useThemeEditorStore((state) => state.setPreviewFile);
 
   const handleClick = () => fileInputRef.current?.click();
 
@@ -40,7 +45,7 @@ const DashboardThemeEditorPreview = () => {
         toast.error(`Required size: ${REQUIRED_WIDTH}x${REQUIRED_HEIGHT}px`);
         return;
       }
-      setPreviewFile(file);
+      onPreviewChange(file);
     };
     img.src = objectUrl;
   };
@@ -86,7 +91,7 @@ const DashboardThemeEditorPreview = () => {
               )}
             </AspectRatio>
 
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-2xl overflow-hidden">
               <div className="p-3 rounded-full bg-white/20 border border-white/20 mb-2">
                 <CameraIcon className="size-6 text-white" />
               </div>
