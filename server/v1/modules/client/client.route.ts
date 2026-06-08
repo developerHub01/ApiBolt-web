@@ -13,10 +13,7 @@ clientRouter.get(
   ClientController.handleGetThemeDetailsById,
 );
 
-clientRouter.get(
-  "/themes/meta",
-  ClientController.handleGetThemeMeta,
-);
+clientRouter.get("/themes/meta", ClientController.handleGetThemeMeta);
 
 clientRouter.post("/themes/install", ClientController.handleThemeInstall);
 

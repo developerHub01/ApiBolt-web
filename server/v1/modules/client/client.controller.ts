@@ -12,7 +12,11 @@ import { ClientService } from "@/server/v1/modules/client/client.service";
 import type { Prisma } from "@/prisma/generated/prisma/client";
 import { prisma } from "@/db/client";
 import { HTTPContext } from "@/types/server/env.types";
-import { ThemeMetaInterface, ThemeMetaResponse, TThemeType } from "@/types/themes.types";
+import {
+  ThemeMetaInterface,
+  ThemeMetaResponse,
+  TThemeType,
+} from "@/types/themes.types";
 
 const VALID_ACTIONS = new Set(["install", "uninstall"]);
 

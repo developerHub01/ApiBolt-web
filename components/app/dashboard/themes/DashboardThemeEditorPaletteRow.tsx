@@ -12,7 +12,8 @@ interface Props {
 
 const DashboardThemeEditorPaletteRow = ({ name, initialColor }: Props) => {
   const [localColor, setLocalColor] = useState<string>(initialColor);
-  const [prevInitialColor, setPrevInitialColor] = useState<string>(initialColor);
+  const [prevInitialColor, setPrevInitialColor] =
+    useState<string>(initialColor);
   const setPalette = useThemeEditorStore((state) => state.setPalette);
   const currentPalette = useThemeEditorStore((state) => state.palette);
 
