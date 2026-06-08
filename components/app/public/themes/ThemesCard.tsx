@@ -13,6 +13,7 @@ interface Props extends ThemeMetaInterface {
   showAuthor?: boolean;
   showLink?: boolean;
   className?: string;
+  onDelete?: () => void;
 }
 
 const ThemesCard = ({
@@ -27,6 +28,7 @@ const ThemesCard = ({
   showAuthor = true,
   showLink = true,
   className = "",
+  onDelete,
 }: Props) => {
   return (
     <div
@@ -82,6 +84,7 @@ const ThemesCard = ({
             canEdit={canEdit}
             canDelete={canDelete}
             showLink={showLink}
+            onDelete={onDelete}
           />
         </div>
       </div>

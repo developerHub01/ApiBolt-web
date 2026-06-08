@@ -1,15 +1,46 @@
 import { prisma } from "@/db/client";
+import { ThemeInterface } from "@/types/themes.types";
 
-const getStatusInstall = async () => {
-  const totalInstalls = await prisma.app_install_events.count();
-  const uniqueDevices = await prisma.unique_devices_installs.count();
+const createTheme = async (
+  payload: Pick<
+    ThemeInterface,
+    | "id"
+    | "name"
+    | "description"
+    | "palette"
+    | "author"
+    | "preview"
+    | "thumbnail"
+    | "type"
+  >,
+) => {
+  return await prisma.themes.create({
+    data: payload,
+  });
+};
 
-  return {
-    totalInstalls,
-    uniqueDevices,
-  };
+const deleteThemebyIdAndAuthorId = async ({
+  id,
+  authorId,
+}: {
+  id: string;
+  authorId: string;
+}): Promise<boolean> => {
+  try {
+    await prisma.themes.delete({
+      where: {
+        id,
+        author: authorId,
+      },
+    });
+
+    return true;
+  } catch {
+    return false;
+  }
 };
 
 export const ThemesService = {
-  getStatusInstall,
+  createTheme,
+  deleteThemebyIdAndAuthorId,
 };

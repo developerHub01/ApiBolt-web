@@ -1,5 +1,4 @@
 import { ClientController } from "@/server/v1/modules/client/client.controller";
-import { AuthMiddleware } from "@/server/v1/middlwares/auth";
 import { createRouter } from "@/utils/server/create-router";
 
 const clientRouter = createRouter();
@@ -16,7 +15,6 @@ clientRouter.get(
 
 clientRouter.get(
   "/themes/meta",
-  AuthMiddleware.checkUser,
   ClientController.handleGetThemeMeta,
 );
 

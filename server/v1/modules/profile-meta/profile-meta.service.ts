@@ -1,5 +1,5 @@
 import { prisma } from "@/db/client";
-import { ProfileMetaInterface } from "@/types/profile.types";
+import { ProfileInterface } from "@/types/profiles.types";
 
 export const getProfileMetaById = async (id: string) => {
   try {
@@ -8,7 +8,7 @@ export const getProfileMetaById = async (id: string) => {
         where: {
           id,
         },
-      })) as ProfileMetaInterface) ?? null
+      })) as ProfileInterface) ?? null
     );
   } catch {
     return null;
@@ -24,7 +24,7 @@ export const getUserIdFromUserName = async (userName: string) => {
       select: {
         id: true,
       },
-    })) as Pick<ProfileMetaInterface, "id">;
+    })) as Pick<ProfileInterface, "id">;
 
     return data?.id ?? null;
   } catch {
