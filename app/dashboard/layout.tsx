@@ -54,8 +54,8 @@ const Layout = async ({ children }: Props) => {
       <Sidebar variant="inset" />
       <SidebarInset>
         <Header />
-        <ScrollArea>
-          <section className="flex-1 container p-5">{children}</section>
+        <ScrollArea className="min-h-0">
+          <section className="flex-1 container p-5 mx-auto">{children}</section>
         </ScrollArea>
       </SidebarInset>
     </SidebarProvider>

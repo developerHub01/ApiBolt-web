@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { User } from "lucide-react";
 import CardActions from "@/components/app/public/themes/CardActions";
-import type { ThemeMetaInterface } from "@/types/theme.types";
 import { cn } from "@/lib/utils";
+import { ThemeMetaInterface } from "@/types/themes.types";
 
 interface Props extends ThemeMetaInterface {
   canDelete?: boolean;

@@ -2,15 +2,15 @@ import {
   DEFAULT_PROFILE_AVATAR,
   DEFAULT_PROFILE_COVER,
 } from "@/constant/profile.constant";
-import type { ProfileMetaInterface } from "@/types/profile.types";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { GithubIcon } from "@/icons";
+import { FullProfileInterface } from "@/types/profiles.types";
 
 interface Props {
-  profile: ProfileMetaInterface;
+  profile: FullProfileInterface;
 }
 
 const ProfileTop = ({ profile }: Props) => {

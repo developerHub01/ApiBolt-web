@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Zen_Dots } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "@/constant/index.constant";
+import MainLayoutProviderWrapper from "@/components/MainLayoutProviderWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,7 +46,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${zenDots.variable} h-full antialiased`}
     >
-      <body className="min-h-screen flex flex-col">{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <MainLayoutProviderWrapper>{children}</MainLayoutProviderWrapper>
+      </body>
     </html>
   );
 }

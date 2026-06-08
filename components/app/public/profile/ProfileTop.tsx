@@ -6,9 +6,9 @@ import {
   DEFAULT_PROFILE_AVATAR,
   DEFAULT_PROFILE_COVER,
 } from "@/constant/profile.constant";
-import type { ProfileInterface } from "@/types/profile.types";
 import { cn } from "@/lib/utils";
 import { GithubIcon } from "@/icons";
+import { ProfileInterface } from "@/types/profiles.types";
 
 interface Props {
   profile: ProfileInterface;

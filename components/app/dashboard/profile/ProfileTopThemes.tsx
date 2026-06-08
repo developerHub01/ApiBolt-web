@@ -1,7 +1,7 @@
-import type { ThemeMetaInterface } from "@/types/theme.types";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ThemesCard from "@/components/app/public/themes/ThemesCard";
+import { ThemeMetaInterface } from "@/types/themes.types";
 
 interface Props {
   themes: Array<ThemeMetaInterface>;
