@@ -3,8 +3,15 @@ import CounterAnimation from "@/components/app/common/CounterAnimation";
 import SectionHeader from "@/components/app/common/SectionHeader";
 import SpotlightEffectCard from "@/components/app/common/SpotlightEffectCard";
 import { StatusService } from "@/server/v1/modules/status/status.service";
+import { unstable_cache } from "next/cache";
 
-const getStats = async () => await StatusService.getStatusInstall();
+const getStats = unstable_cache(
+  async () => await StatusService.getStatusInstall(),
+  ["installation_states"],
+  {
+    revalidate: 60 * 60,
+  },
+);
 
 const InstallationStates = async () => {
   const stats = await getStats();

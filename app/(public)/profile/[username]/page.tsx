@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { API_URL, SITE_URL } from "@/constant/index.constant";
-import { ApiResponse } from "@/server/types";
-import type { ProfileInterface } from "@/types/profile.types";
+import { SITE_URL } from "@/constant/index.constant";
 import ProfileTop from "@/components/app/public/profile/ProfileTop";
 import ProfileAllThemesByUserName from "@/components/app/public/profile/ProfileAllThemesByUserName";
+import { ProfileService } from "@/server/v1/modules/profile/profile.service";
+import { unstable_cache } from "next/cache";
 
 interface Params {
   username: string;
@@ -19,20 +19,14 @@ interface Props {
   }>;
 }
 
-const fetchProfile = async (username: string) => {
-  const res = await fetch(`${API_URL}/profile/${username}`, {
-    next: {
-      revalidate: 120,
-    },
-  });
-
-  if (!res.ok) return null;
-
-  const json: ApiResponse<ProfileInterface> = await res.json();
-  if (!json.success || !json.data) return null;
-
-  return json.data;
-};
+const fetchProfile = unstable_cache(
+  async (username: string) =>
+    await ProfileService.getFullProfileByUserName(username),
+  ["profile_by_username"],
+  {
+    revalidate: 60 * 60,
+  },
+);
 
 export const generateMetadata = async ({
   params,

@@ -2,7 +2,7 @@ import { HTTPException } from "hono/http-exception";
 import { sendResponse } from "@/utils/server/api";
 import { HTTPContext } from "@/types/server/env.types";
 import { ProfileService } from "@/server/v1/modules/profile/profile.service";
-import { FullProfileInterface } from "@/types/server/profiles.types";
+import { FullProfileInterface } from "@/types/profiles.types";
 import { createClient } from "@/lib/supabase/server";
 
 const handleGetMyProfile = async (c: HTTPContext) => {
@@ -29,14 +29,7 @@ const handleGetProfileByUsername = async (c: HTTPContext) => {
       message: "Username is required",
     });
 
-  const id = await ProfileService.getUserIdFromUserName(userName);
-
-  if (!id)
-    throw new HTTPException(404, {
-      message: "No user found",
-    });
-
-  const data = await ProfileService.getFullProfileById(id);
+  const data = await ProfileService.getFullProfileByUserName(userName);
 
   return sendResponse<FullProfileInterface | null>(c, {
     statusCode: 200,
