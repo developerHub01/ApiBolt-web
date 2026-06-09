@@ -46,7 +46,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${zenDots.variable} h-full antialiased`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-dvh flex flex-col">
         <MainLayoutProviderWrapper>{children}</MainLayoutProviderWrapper>
       </body>
     </html>
