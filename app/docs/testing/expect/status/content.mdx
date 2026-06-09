@@ -1,0 +1,66 @@
+# Status Assertions (Expect API)
+
+Validate precise HTTP response statuses directly.
+
+## Available Matchers
+
+### toBe(expected: number)
+
+Asserts that the HTTP status matches the exact expected number.
+
+```ts
+ab.expect("Status is 200").status.toBe(200);
+```
+
+### toBeOneOf(list: Array\<number\>)
+
+Asserts that the status is contained within the allowed array.
+
+```ts
+ab.expect("Valid success").status.toBeOneOf([200, 201, 204]);
+```
+
+### toBeGreaterThan(num) / toBeLessThan(num)
+
+Numeric boundary assertions for the HTTP status.
+
+```ts
+ab.expect("Less than 300").status.toBeLessThan(300);
+```
+
+### toBeBetween(min, max)
+
+Asserts the status falls inclusively within the range.
+
+```ts
+ab.expect("2xx range").status.toBeBetween(200, 299);
+```
+
+### Category Matchers
+
+Quick semantic checks for overarching categories (2xx, 3xx, 4xx, 5xx).
+
+```ts
+ab.expect("Success").status.toBeSuccess();
+ab.expect("Client error").status.toBeClientError();
+ab.expect("Server error").status.toBeServerError();
+ab.expect("Redirect").status.toBeRedirect();
+```
+
+### Semantic Strict Matchers
+
+Human-readable strict equality matchers for common codes.
+
+```ts
+ab.expect("OK").status.toBeOK(); // 200
+ab.expect("Created").status.toBeCreated(); // 201
+ab.expect("Accepted").status.toBeAccepted(); // 202
+ab.expect("No Content").status.toBeNoContent(); // 204
+ab.expect("Bad Request").status.toBeBadRequest(); // 400
+ab.expect("Unauthorized").status.toBeUnauthorized(); // 401
+ab.expect("Forbidden").status.toBeForbidden(); // 403
+ab.expect("Not Found").status.toBeNotFound(); // 404
+ab.expect("Internal Server Error").status.toBeInternalServerError(); // 500
+ab.expect("Bad Gateway").status.toBeBadGateway(); // 502
+ab.expect("Service Unavailable").status.toBeServiceUnavailable(); // 503
+```

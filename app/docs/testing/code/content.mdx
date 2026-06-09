@@ -1,0 +1,18 @@
+# Code Block Logging
+
+Use `code()` to log complex objects, payloads, or debug variables into the ApiBolt console as syntax-highlighted code blocks.
+
+## Log Variables as Code
+
+Unlike `print()` which renders simple objects or strings, `code()` formats the given payload explicitly as formatted javascript, json, or markdown directly inside your test results.
+
+```ts
+// Render as a javascript code block
+ab.code("First Item ID", ab.response.body, "javascript");
+
+// Render as a json payload
+ab.code("First Item ID", ab.response, "json");
+
+// Example of inspecting deeply nested elements visually
+ab.code("Headers Output", ab.response.headers, "json");
+```

@@ -1,0 +1,62 @@
+# body()
+
+The isolated module for strictly executing payload body verifications.
+
+## Exact Matching
+
+```ts
+ab.body("success response").toBe({ success: true });
+ab.body("deep object").toEqual({
+  user: {
+    id: 1,
+    profile: {
+      name: "John",
+    },
+  },
+});
+```
+
+## Existence & Type Validation
+
+```ts
+ab.body("exists check").toExist();
+ab.body("missing check").not.toExist();
+
+ab.body("string type").toBeType("string");
+ab.body("number type").toBeType("number");
+ab.body("boolean type").toBeType("boolean");
+ab.body("object type").toBeType("object");
+ab.body("array type").toBeType("array");
+```
+
+## Contains & Property Checks
+
+```ts
+ab.body("string contains").toContain("success");
+ab.body("array contains").toContain(10);
+ab.body("negative string").not.toContain("error");
+
+ab.body("simple property").toHaveProperty("user");
+ab.body("nested property").toHaveProperty("user.id");
+ab.body("deep property").toHaveProperty("data.user.profile.name");
+ab.body("missing property").not.toHaveProperty("user.password");
+
+ab.body("exact length").toHaveLength(3);
+ab.body("wrong length").not.toHaveLength(10);
+```
+
+## Number Validation
+
+```ts
+ab.body("gt simple").toBeGreaterThan(10);
+ab.body("lt simple").toBeLessThan(100);
+ab.body("between simple").toBeBetween(10, 100);
+```
+
+## Strict Number Validation
+
+```ts
+ab.body("strict gt").toBeGreaterThanNumber(10);
+ab.body("strict lt").toBeLessThanNumber(100);
+ab.body("strict range").toBeBetweenNumber(10, 100);
+```

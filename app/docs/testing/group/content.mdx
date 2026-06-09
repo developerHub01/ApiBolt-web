@@ -1,0 +1,21 @@
+# Organizing Tests
+
+Use `group()` to create logical boundaries for your tests. This is essential for large API suites.
+
+```ts
+// 1. Basic Grouping
+ab.group("Profile Module", () => {
+  ab.expect("Status is 200").toBeOK();
+  ab.expect("Valid JSON Body").toBeType("object");
+});
+
+// 2. Functional Segregation
+ab.group("Authentication Security", () => {
+  ab.expect("HSTS Header").toHaveHeader("strict-transport-security");
+  ab.expect("XSS Protection").toHaveHeaderValue(
+    "x-xss-protection",
+    "1; mode=block",
+  );
+  ab.expect("No sensitive data in body").not.toHaveProperty("user.password");
+});
+```

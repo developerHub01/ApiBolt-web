@@ -1,0 +1,71 @@
+# Body Assertions (Expect API)
+
+Validate JSON structures, arrays, and primitive payload types exactly.
+
+## Available Matchers
+
+### toBe(expected)
+
+Asserts strict equality (`===`). Equivalent to primitive strict matches.
+
+```ts
+ab.expect("Exact match").body.toBe({ success: true });
+```
+
+### toEqual(expected)
+
+Asserts deep strict equality for full objects or complex arrays.
+
+```ts
+ab.expect("Body equals").body.toEqual({ user: { id: 1 } });
+```
+
+### toExist()
+
+Asserts that the body payload is strictly not `undefined` or `null`.
+
+```ts
+ab.expect("Has payload").body.toExist();
+```
+
+### toBeType(type)
+
+Validates the primitive runtime type. Arrays are explicitly mapped to `"array"`. Supported: `"string" | "number" | "boolean" | "object" | "array"`.
+
+```ts
+ab.expect("Is array").body.toBeType("array");
+```
+
+### toContain(item)
+
+Checks if a substring exists in a string body, or if an item exists within an array body.
+
+```ts
+ab.expect("Contains string").body.toContain("success");
+```
+
+### toHaveProperty(keyPath)
+
+Asserts that a deep dot-notated property exists in the JSON body.
+
+```ts
+ab.expect("Has property").body.toHaveProperty("user.id");
+```
+
+### toHaveLength(len)
+
+Validates the explicit numerical length of a JSON array response.
+
+```ts
+ab.expect("Exactly 10 results").body.toHaveLength(10);
+```
+
+### Numerical Boundaries
+
+Asserts that the body itself (if it is a raw number) conforms to numerical limits.
+
+```ts
+ab.expect("> 10").body.toBeGreaterThanNumber(10);
+ab.expect("< 50").body.toBeLessThanNumber(50);
+ab.expect("In window").body.toBeBetweenNumber(10, 20);
+```

@@ -1,0 +1,86 @@
+import { DocsNavItem } from "@/types/docs.types";
+
+export const docsConfig: Array<DocsNavItem> = [
+  {
+    slug: "testing",
+    label: "Testing",
+    children: [
+      {
+        slug: "expect",
+        label: "Expect API",
+        children: [
+          {
+            slug: "status",
+            label: "Status Assertions",
+          },
+          {
+            slug: "body",
+            label: "Body Assertions",
+          },
+          {
+            slug: "headers",
+            label: "Headers Assertions",
+          },
+          {
+            slug: "cookies",
+            label: "Cookies Assertions",
+          },
+        ],
+      },
+      {
+        slug: "classic",
+        label: "Classic API",
+        children: [
+          {
+            slug: "status",
+            label: "Status",
+          },
+          {
+            slug: "body",
+            label: "Body",
+          },
+          {
+            slug: "headers",
+            label: "Headers",
+          },
+          {
+            slug: "cookies",
+            label: "Cookies",
+          },
+        ],
+      },
+      {
+        slug: "group",
+        label: "Group",
+      },
+      {
+        slug: "print",
+        label: "Print",
+      },
+      {
+        slug: "code",
+        label: "Code",
+      },
+      {
+        slug: "response",
+        label: "Response",
+      },
+      {
+        slug: "env",
+        label: "Environment",
+      },
+      {
+        slug: "summary",
+        label: "Summary",
+      },
+      {
+        slug: "examples",
+        label: "Examples",
+      },
+    ],
+  },
+];
+
+export const resolveDocsPath = (pathSegments: Array<string>): string => {
+  return `/docs/${pathSegments.join("/")}`;
+};

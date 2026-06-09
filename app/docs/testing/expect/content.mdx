@@ -1,0 +1,55 @@
+# Why `expect()`?
+
+> `expect()` is the **most powerful API** in ABTestEngine
+
+It operates in two modes:
+
+- **Value Mode** — pass a second argument to assert against a specific value
+- **Response Mode** — omit the second argument to test status, body, headers, and cookies
+
+You can test everything from a single interface.
+
+## Value Mode
+
+Pass a second argument to assert against a specific value directly.
+
+```ts
+ab.expect("user id", user.id).toBe(1);
+ab.expect("username", user.name).toBe("john");
+ab.expect("array check", [1, 2, 3]).toContain(2);
+ab.expect("object check", user).toHaveProperty("id");
+ab.expect("length check", [1, 2, 3]).toHaveLength(3);
+ab.expect("type check", user.id).toBeType("number");
+ab.expect("exists check", user.id).toExist();
+ab.expect("gt check", 20).toBeGreaterThan(10);
+ab.expect("lt check", 10).toBeLessThan(50);
+ab.expect("range check", 15).toBeBetween(10, 20);
+```
+
+## Response Mode
+
+Omit the second argument to access `.status`, `.body`, `.headers`, and `.cookies` sub-chains.
+
+```ts
+// Status
+ab.expect("status check").status.toBe(200);
+ab.expect("status ok").status.toBeOK();
+
+// Body
+ab.expect("body exact").body.toBe({
+  success: true,
+});
+ab.expect("body prop").body.toHaveProperty("user.id");
+
+// Headers
+ab.expect("headers exists").headers.toHaveHeader("content-type");
+ab.expect("headers type").headers.toHaveContentType("application/json");
+
+// Cookies
+ab.expect("cookie exists").cookies.toExistCookie("session");
+ab.expect("cookie value").cookies.toBeCookie("session", "abc123");
+```
+
+## Expect API Full Documentation
+
+Select a category on the sidebar to view all supported matchers.

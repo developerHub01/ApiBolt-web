@@ -1,0 +1,52 @@
+# Advanced Examples
+
+Real-world combinations of tests mapping over deeply nested properties, iteration arrays, and complex dynamic logical flows.
+
+## Complex Pagination Check
+
+```ts
+ab.group("Pagination Tests", () => {
+  ab.expect("Is Array").toBeType("array");
+  ab.expect("Has 10 items").toHaveLength(10);
+
+  const firstItem = ab.response.body[0];
+  ab.print("First Item ID", firstItem.id);
+  ab.code("First Item ID", ab.response.body, "javascript");
+  ab.code("First Item ID", ab.response, "json");
+
+  ab.expect("Has ID").toHaveProperty("0.id");
+  ab.expect("Has Metadata").toHaveHeader("x-total-count");
+});
+```
+
+## Deep Cookie & Security Audit
+
+```ts
+ab.group("Strict Security Check", () => {
+  const sid = ab.cookies("session_id");
+
+  sid.toExist();
+  sid.toBeSecure();
+  sid.toBeHttpOnly();
+  sid.toBeSameSite("strict");
+  sid.toExpireAfter(3600); // 1 hour
+  sid.toHavePath("/api");
+  sid.toHaveDomain("api.production.com");
+});
+```
+
+## Conditional Logic (Runtime)
+
+```ts
+const res = ab.response;
+
+if (res.status === 201) {
+  ab.group("Resource Created Verification", () => {
+    ab.expect("Has Location Header").toHaveHeader("location");
+    ab.expect("Body has ID").toHaveProperty("id");
+  });
+} else {
+  ab.print("Warning", "Resource was not created, skipping deep checks.");
+  ab.expect("Fallback Status").toBeOK();
+}
+```

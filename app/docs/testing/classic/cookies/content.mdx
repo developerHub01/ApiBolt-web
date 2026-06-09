@@ -1,0 +1,50 @@
+# cookies()
+
+The isolated module for strictly executing complete cookie-level assertions including secure flags, httpOnly flags, origins, and lifespans.
+
+## Existence & Value
+
+```ts
+ab.cookies("session").toExist();
+ab.cookies("token").not.toExist();
+
+ab.cookies("session").toBe("abc123");
+ab.cookies("session").not.toBe("wrong-value");
+
+ab.cookies("session").toContain("abc");
+```
+
+## Structure Validation
+
+```ts
+ab.cookies("session").toHaveProperty("value");
+ab.cookies("session").toHaveProperty("domain");
+ab.cookies("session").toHaveProperty("path");
+```
+
+## Expiry, Path & Domain
+
+```ts
+ab.cookies("session").toExpireAfter(3600);
+ab.cookies("session").toExpireBefore(7200);
+
+ab.cookies("session").toHavePath("/");
+ab.cookies("session").toHaveDomain("example.com");
+```
+
+## Security Flags & SameSite
+
+```ts
+ab.cookies("session").toBeSecure();
+ab.cookies("session").toBeHttpOnly();
+
+ab.cookies("session").toBeSameSite("strict");
+ab.cookies("session").toBeSameSite("lax");
+ab.cookies("session").toBeSameSite("none");
+```
+
+## Multiple Cookies
+
+```ts
+ab.cookies().toHaveLength(2);
+```

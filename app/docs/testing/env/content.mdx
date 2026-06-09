@@ -1,0 +1,33 @@
+# Environment Access
+
+Access your environment variables directly inside test scripts via `ab.env`.
+
+## Accessing Environment
+
+- `ab.env` — A `Record<string, string>` of all environment variables available in the current context.
+
+```ts
+// Access the full env object
+const env = ab.env;
+
+// Read individual variables
+const nodeEnv = ab.env.NODE_ENV;
+const apiKey = ab.env.API_KEY;
+const port = ab.env.PORT;
+```
+
+## Real-World Usage Examples
+
+Combine environment access with the `expect()` API for powerful runtime validation:
+
+```ts
+ab.expect("env production", ab.env.NODE_ENV).toBe("production");
+ab.expect("env not debug", ab.env.MODE).not.toBe("debug");
+ab.expect("env exists", ab.env.API_KEY).toExist();
+ab.expect("env valid mode", ab.env.NODE_ENV).toBeOneOf([
+  "development",
+  "staging",
+  "production",
+]);
+ab.expect("env port range", ab.env.PORT).toBeBetweenNumber(1000, 9999);
+```

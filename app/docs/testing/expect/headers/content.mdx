@@ -1,0 +1,29 @@
+# Headers Assertions (Expect API)
+
+Ensure proper metadata and security policies via HTTP Header validation.
+
+## Available Matchers
+
+### toHaveHeader(key)
+
+Asserts that a specific case-insensitive header payload is present.
+
+```ts
+ab.expect("Has content-type").headers.toHaveHeader("content-type");
+```
+
+### toHaveHeaderValue(key, expectedOrRegex)
+
+Asserts the header matches an exact string or passes a Regular Expression test.
+
+```ts
+ab.expect("Server checks").headers.toHaveHeaderValue("server", "nginx");
+```
+
+### toHaveContentType(typeSubstring)
+
+Shorthand to ensure the `Content-Type` header natively includes the provided signature.
+
+```ts
+ab.expect("Returns JSON").headers.toHaveContentType("application/json");
+```
