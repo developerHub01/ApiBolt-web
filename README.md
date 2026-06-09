@@ -1,12 +1,12 @@
 <div align="center">
   <img src="./public/og.png" alt="ApiBolt Web Banner" width="400"/>
 
-  # ApiBolt Web
+# ApiBolt Web
 
-  **The community and theme marketplace for the ApiBolt REST API client.**
+**The community and theme marketplace for the ApiBolt REST API client.**
 
-  [![License](https://img.shields.io/github/license/developerHub01/ApiBolt-web?style=for-the-badge&color=2E86C1)](/LICENSE)
-  [![Issues](https://img.shields.io/github/issues/developerHub01/ApiBolt-web?style=for-the-badge&logo=github&color=C70039)](https://github.com/developerHub01/ApiBolt-web/issues)
+[![License](https://img.shields.io/github/license/developerHub01/ApiBolt-web?style=for-the-badge&color=2E86C1)](/LICENSE)
+[![Issues](https://img.shields.io/github/issues/developerHub01/ApiBolt-web?style=for-the-badge&logo=github&color=C70039)](https://github.com/developerHub01/ApiBolt-web/issues)
 
 </div>
 
@@ -14,22 +14,22 @@ This is the official web platform for **[ApiBolt](https://github.com/developerHu
 
 ## ✨ Features
 
--   **Theme Marketplace**: Discover a variety of themes created by the community to customize the look and feel of your ApiBolt application.
--   **User Profiles**: Sign up and create a public profile to showcase your own themes and contributions.
--   **Theme Management**: Upload, manage, and update your themes directly through the platform.
--   **Responsive Design**: A fully responsive interface to browse the marketplace on any device.
+- **Theme Marketplace**: Discover a variety of themes created by the community to customize the look and feel of your ApiBolt application.
+- **User Profiles**: Sign up and create a public profile to showcase your own themes and contributions.
+- **Theme Management**: Upload, manage, and update your themes directly through the platform.
+- **Responsive Design**: A fully responsive interface to browse the marketplace on any device.
 
 ## 🛠️ Tech Stack
 
 ApiBolt Web is built with a modern and powerful tech stack:
 
--   **[Next.js](https://nextjs.org/)**: A powerful React.js framework for building server-side rendered and static websites.
--   **[React.js](https://react.dev/)**: The JavaScript library for building user interfaces.
--   **[Supabase](https://supabase.io/)**: Used for database, authentication, and storage.
--   **[Zustand](https://zustand-demo.pmnd.rs/)**: Intuitive state management for React.
--   **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for rapid UI development.
--   **[Shadcn](https://ui.shadcn.com/)**: A collection of beautifully designed and accessible UI components.
--   **[TypeScript](https://www.typescriptlang.org/)**: Brings static typing to JavaScript, enhancing code quality and developer productivity.
+- **[Next.js](https://nextjs.org/)**: A powerful React.js framework for building server-side rendered and static websites.
+- **[React.js](https://react.dev/)**: The JavaScript library for building user interfaces.
+- **[Supabase](https://supabase.io/)**: Used for database, authentication, and storage.
+- **[Zustand](https://zustand-demo.pmnd.rs/)**: Intuitive state management for React.
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for rapid UI development.
+- **[Shadcn](https://ui.shadcn.com/)**: A collection of beautifully designed and accessible UI components.
+- **[TypeScript](https://www.typescriptlang.org/)**: Brings static typing to JavaScript, enhancing code quality and developer productivity.
 
 ## 🚀 Getting Started
 
@@ -37,8 +37,8 @@ Follow these instructions to get the ApiBolt web platform up and running on your
 
 ### Prerequisites
 
--   [Node.js](https://nodejs.org/) (v18.x or later recommended)
--   [pnpm](https://pnpm.io/)
+- [Node.js](https://nodejs.org/) (v18.x or later recommended)
+- [pnpm](https://pnpm.io/)
 
 ### Installation
 
@@ -64,29 +64,29 @@ Follow these instructions to get the ApiBolt web platform up and running on your
     ```
 
     Then run the command to generate Supabase types:
+
     ```bash
     pnpm gen:db:types
     ```
 
-
 ### Running the Application
 
--   **Development Mode:**
+- **Development Mode:**
 
-    To run the app in development mode with hot-reloading:
+  To run the app in development mode with hot-reloading:
 
-    ```bash
-    pnpm dev
-    ```
+  ```bash
+  pnpm dev
+  ```
 
--   **Preview Mode:**
+- **Preview Mode:**
 
-    To build and preview the production build locally:
+  To build and preview the production build locally:
 
-    ```bash
-    pnpm build
-    pnpm preview
-    ```
+  ```bash
+  pnpm build
+  pnpm preview
+  ```
 
 ## 🤝 Contributing
 

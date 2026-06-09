@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { API_URL, SITE_URL } from "@/constant/index.constant";
 import { ApiResponse } from "@/types/server/api.types";
-import { ThemeInterface } from "@/types/theme.types";
+import { ThemeInterface } from "@/types/themes.types";
 
 interface Props {
   children: React.ReactNode;
