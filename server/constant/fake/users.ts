@@ -1,5 +1,5 @@
-import { faker } from "~~/server/constant";
-import { FakeUserInterface } from "~~/server/types/fake";
+import { FakeUserInterface } from "@/server/types/fake";
+import { faker } from "@faker-js/faker";
 
 export const FAKE_USERS_MAP = Array.from(
   { length: 100 },

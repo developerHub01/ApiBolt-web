@@ -1,4 +1,4 @@
-import { FakeCategoryInterface } from "~~/server/types/fake";
+import { FakeCategoryInterface } from "@/server/types/fake";
 
 export const FAKE_CATEGORIES_LIST: Array<FakeCategoryInterface> = [
   {

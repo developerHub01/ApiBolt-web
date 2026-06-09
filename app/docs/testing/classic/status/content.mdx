@@ -1,0 +1,49 @@
+# status()
+
+The isolated module explicitly binding execution logic directly to HTTP statuses without parsing overheads.
+
+## Exact HTTP Validation
+
+```ts
+ab.status("login success").toBe(200);
+ab.status("user created").toBe(201);
+ab.status("accepted async").toBe(202);
+ab.status("no content delete").toBe(204);
+ab.status("bad request validation").toBe(400);
+ab.status("auth required").toBe(401);
+ab.status("access denied").toBe(403);
+ab.status("missing resource").toBe(404);
+ab.status("server crash").toBe(500);
+ab.status("gateway issue").toBe(502);
+ab.status("service down").toBe(503);
+```
+
+## Multi-Match
+
+```ts
+ab.status("auth endpoints").toBeOneOf([200, 201, 204]);
+ab.status("error group").toBeOneOf([400, 401, 403, 404]);
+```
+
+## Range Checks
+
+```ts
+ab.status("success range").toBeBetween(200, 299);
+ab.status("client error range").toBeBetween(400, 499);
+ab.status("server error range").toBeBetween(500, 599);
+ab.status("above check").toBeGreaterThan(199);
+ab.status("below check").toBeLessThan(300);
+```
+
+## Semantic Helpers
+
+```ts
+ab.status("success shortcut").toBeSuccess();
+ab.status("client shortcut").toBeClientError();
+ab.status("server shortcut").toBeServerError();
+ab.status("redirect shortcut").toBeRedirect();
+ab.status("ok exact").toBeOK();
+ab.status("created exact").toBeCreated();
+ab.status("accepted exact").toBeAccepted();
+ab.status("no content exact").toBeNoContent();
+```

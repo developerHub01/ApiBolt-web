@@ -1,5 +1,5 @@
-import { faker } from "~~/server/constant";
-import { FakePostInterface } from "~~/server/types/fake";
+import { FakePostInterface } from "@/server/types/fake";
+import { faker } from "@faker-js/faker";
 
 export const FAKE_POSTS_MAP = Array.from(
   { length: 200 },
