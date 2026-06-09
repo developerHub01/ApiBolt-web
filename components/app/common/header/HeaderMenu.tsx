@@ -61,9 +61,12 @@ const HeaderMenu = ({ profileMenu = null }: Props) => {
               variant="ghost"
               className={cn(
                 "px-4 rounded-full font-medium transition-all",
-                activeItem === to
-                  ? "bg-primary/10 text-primary hover:bg-primary/20"
-                  : "text-muted-foreground hover:text-foreground",
+                {
+                  "bg-primary/10 text-primary hover:bg-primary/20 backdrop-blur-3xl":
+                    activeItem === to,
+                  "text-muted-foreground hover:text-foreground":
+                    activeItem !== to,
+                },
               )}
             >
               {label}

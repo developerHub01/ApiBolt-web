@@ -13,7 +13,7 @@ const Header = ({ className, ...props }: Props) => {
   return (
     <section
       className={cn(
-        "sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none",
+        "sticky top-0 w-full flex items-center justify-center py-4 z-50 transition-all duration-300 pointer-events-none bg-linear-to-b from-secondary/70 via-secondary/40 to-transparent",
         className,
       )}
       {...props}
