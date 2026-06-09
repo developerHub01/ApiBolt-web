@@ -59,15 +59,12 @@ const HeaderMenu = ({ profileMenu = null }: Props) => {
           <Link key={to} href={to}>
             <Button
               variant="ghost"
-              className={cn(
-                "px-4 rounded-full font-medium transition-all",
-                {
-                  "bg-primary/10 text-primary hover:bg-primary/20 backdrop-blur-3xl":
-                    activeItem === to,
-                  "text-muted-foreground hover:text-foreground":
-                    activeItem !== to,
-                },
-              )}
+              className={cn("px-4 rounded-full font-medium transition-all", {
+                "bg-primary/10 text-primary hover:bg-primary/20 backdrop-blur-3xl":
+                  activeItem === to,
+                "text-muted-foreground hover:text-foreground":
+                  activeItem !== to,
+              })}
             >
               {label}
             </Button>
