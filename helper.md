@@ -1,4 +1,4 @@
-## helper commands for interacting with supabase
+## Helper commands for interacting with supabase
 
 ```shell
 pnpm add -D supabase
