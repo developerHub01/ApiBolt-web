@@ -1,0 +1,64 @@
+# Response Object
+
+A read-only snapshot of the API response. Access it directly via `ab.response` to build advanced conditional tests on the raw HTTP payload.
+
+## Accessing Response
+
+- `ab.response` — A read-only snapshot of the API response object.
+
+```ts
+const res = ab.response;
+
+// Read the native status code
+if (res.status === 201) {
+  ab.expect("Created Successfully").toBeOK();
+}
+
+// Read the native body payload directly
+const totalCount = res.body.metadata.total;
+if (totalCount > 100) {
+  ab.print("High traffic detected", totalCount);
+}
+
+// Read native headers
+const isJson = res.headers["content-type"]?.includes("application/json");
+```
+
+
+
+## The Response Interface
+
+The response exposes the exact standard properties returned from the ApiBolt runner:
+
+```ts
+export interface ResponseInterface {
+  body: unknown;
+  headers: Record<string, unknown>;
+  cookies?: Array<CookieInterface>;
+  status: number;
+  statusText: string;
+  statusDescription?: string;
+  requestSize: RequestResponseSizeInterface;
+  responseSize: RequestResponseSizeInterface;
+}
+
+export interface CookieInterface {
+  key: string;
+  value: string;
+  domain?: string;
+  path?: string;
+  secure?: boolean;
+  httpOnly?: boolean;
+  hostOnly?: boolean;
+  maxAge?: number | null;
+  expires?: string | null;
+  sameSite?: "lax" | "strict" | "none";
+  creation?: string;
+  lastAccessed?: string;
+}
+
+export interface RequestResponseSizeInterface {
+  header: number;
+  body: number;
+}
+```

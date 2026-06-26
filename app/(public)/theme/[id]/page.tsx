@@ -5,6 +5,8 @@ import { ClientService } from "@/server/v1/modules/client/client.service";
 import { ThemeDetailsInterface } from "@/types/themes.types";
 import { Metadata } from "next";
 import { SITE_URL } from "@/constant/index.constant";
+import LiveViewers from "@/components/app/public/themes/LiveViewers";
+import { createClient } from "@/lib/supabase/server";
 
 interface Props {
   params: Promise<{
@@ -58,6 +60,11 @@ const Page = async ({ params }: Props) => {
   let theme: ThemeDetailsInterface | null = null;
   let hasError = false;
 
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   try {
     theme = await fetchTheme(themeId);
   } catch {
@@ -76,6 +83,7 @@ const Page = async ({ params }: Props) => {
     <div className="w-full mx-auto pt-24 relative">
       <div className="absolute bottom-10 right-20 size-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <ThemesDetails {...theme} />
+      <LiveViewers id={themeId} user={user} />
     </div>
   );
 };
