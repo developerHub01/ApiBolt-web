@@ -81,9 +81,12 @@ const DocsSidebarNode = ({ items, parentPath, depth }: Props) => {
 
   return (
     <div
-      className={cn("flex flex-col w-full gap-1", {
-        "pl-5 border-l border-border/40 mt-1": depth > 0,
-      })}
+      className={cn(
+        "flex flex-col w-full gap-1 relative before:absolute before:content-[''] before:left-2.5 before:top-0 before:w-px before:h-full",
+        {
+          "pl-5 before:bg-border/40 mt-1": depth,
+        },
+      )}
     >
       {items.map((item) => (
         <div key={item.slug}>
