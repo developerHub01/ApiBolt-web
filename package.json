@@ -15,6 +15,7 @@
     "db:sync": "npx supabase db pull && npx prisma db pull && npx prisma generate"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.2",
     "@ai-sdk/react": "^4.0.5",
     "@codemirror/lang-javascript": "^6.2.5",
     "@codemirror/lang-json": "^6.0.2",
