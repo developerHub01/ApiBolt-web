@@ -11,11 +11,11 @@ const google = createGoogleGenerativeAI({
 });
 
 const handleAskQuery = async (c: HTTPContext) => {
-  const { message } = await c.req.json<AskQueryBodyInterface>();
+  const { prompt } = await c.req.json<AskQueryBodyInterface>();
 
   const { text } = await generateText({
     model: google("gemini-3-flash-preview"),
-    prompt: message,
+    prompt,
   });
 
   return sendResponse(c, {

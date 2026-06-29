@@ -1,3 +1,3 @@
 export interface AskQueryBodyInterface {
-  message: string;
+  prompt: string;
 }
