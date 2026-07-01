@@ -1,6 +1,5 @@
 import Header from "@/components/app/common/header/Header";
 import PublicDocsSidebar from "@/components/app/docs/PublicDocsSidebar";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Props {
   children: React.ReactNode;
@@ -15,11 +14,7 @@ const Layout = ({ children }: Props) => {
         <PublicDocsSidebar />
 
         <main className="flex-1 min-w-0 flex flex-col bg-background relative z-0 overflow-hidden">
-          <ScrollArea className="h-full w-full relative" data-lenis-prevent>
-            <div className="max-w-4xl mx-auto py-8 sm:py-10 px-6 sm:px-8 md:px-12 w-full">
-              {children}
-            </div>
-          </ScrollArea>
+          {children}
         </main>
       </div>
     </div>

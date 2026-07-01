@@ -1,15 +1,17 @@
 import { Metadata } from "next";
 import * as motion from "motion/react-client";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Summary API | APIBolt",
 };
 
 interface Props {
+  className?: string;
   children: React.ReactNode;
 }
 
-const ContentWrapper = ({ children }: Props) => {
+const ContentWrapper = ({ className, children }: Props) => {
   return (
     <motion.section
       initial={{
@@ -24,7 +26,7 @@ const ContentWrapper = ({ children }: Props) => {
         duration: 0.3,
         ease: "easeOut",
       }}
-      className="flex flex-col w-full"
+      className={cn("flex flex-col w-full", className)}
     >
       {children}
     </motion.section>
