@@ -1,27 +1,35 @@
 import { AskQueryBodyInterface } from "@/types/ai.types";
 import { HTTPContext } from "@/types/server/env.types";
-import { sendResponse } from "@/utils/server/api";
-import { generateText } from "ai";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import {
+  convertToModelMessages,
+  createUIMessageStreamResponse,
+  streamText,
+  toUIMessageStream,
+} from "ai";
+import { createGroq } from "@ai-sdk/groq";
 
+// const BASE_URL = "https://api.groq.com/openai/v1/chat/completions";
 const API_KEY = process.env.ASK_AI_API_KEY!;
 
-const google = createGoogleGenerativeAI({
+const groq = createGroq({
   apiKey: API_KEY,
 });
 
-const handleAskQuery = async (c: HTTPContext) => {
-  const { prompt } = await c.req.json<AskQueryBodyInterface>();
+export const maxDuration = 30;
 
-  const { text } = await generateText({
-    model: google("gemini-3-flash-preview"),
-    prompt,
+const handleAskQuery = async (c: HTTPContext) => {
+  const { messages } = await c.req.json<AskQueryBodyInterface>();
+
+  const result = streamText({
+    model: groq("meta-llama/llama-4-scout-17b-16e-instruct"),
+    instructions: "You are a helpful assistant.",
+    messages: await convertToModelMessages(messages),
   });
 
-  return sendResponse(c, {
-    statusCode: 200,
-    message: "AI message got successfully",
-    data: text,
+  return createUIMessageStreamResponse({
+    stream: toUIMessageStream({
+      stream: result.stream,
+    }),
   });
 };
 

@@ -1,3 +1,5 @@
+import { UIMessage } from "ai";
+
 export interface AskQueryBodyInterface {
-  prompt: string;
+  messages: Array<UIMessage>;
 }
