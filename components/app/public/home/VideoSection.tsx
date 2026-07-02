@@ -10,10 +10,11 @@ import {
   AnimatePresence,
 } from "motion/react";
 import { Play, X } from "lucide-react";
+import SectionHeader from "@/components/app/common/SectionHeader";
 
 const VideoSection = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const titleRef = useRef<HTMLDivElement>(null);
+  // const titleRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -46,34 +47,14 @@ const VideoSection = () => {
           perspective: "800px",
         }}
       >
-        <motion.div
-          ref={titleRef}
-          className="text-center mb-12"
-          initial={{
-            opacity: 0,
-            y: 32,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            margin: "0px 0px -15% 0px",
-          }}
-          transition={{
-            duration: 0.8,
-            ease: [0.33, 0, 0.2, 1],
-          }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            See APIBolt in Action
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Watch how fast you can build and test APIs
-          </p>
-        </motion.div>
-
+        <SectionHeader
+          title={
+            <>
+              See APIBolt in <span className="text-primary">Action</span>
+            </>
+          }
+          description={<>Watch how fast you can build and test APIs</>}
+        />
         <motion.div
           ref={videoContainerRef}
           className="group relative rounded-2xl bg-background/50 border border-border/50 shadow-2xl backdrop-blur-sm overflow-hidden scale-90!"
