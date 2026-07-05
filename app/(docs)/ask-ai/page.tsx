@@ -24,7 +24,14 @@ import {
   MessageScrollerViewport,
 } from "@/components/ui/message-scroller";
 import { DefaultChatTransport } from "ai";
-import { ChangeEvent, Fragment, useCallback, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  Fragment,
+  useCallback,
+  useId,
+  useMemo,
+  useState,
+} from "react";
 import {
   Message,
   MessageAvatar,
@@ -36,12 +43,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 const Page = () => {
-  const { messages, sendMessage, status, setMessages } = useChat({
+  const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/v1/ai/ask-query",
     }),
   });
   const [input, setInput] = useState<string>("");
+  const inputId = useId();
 
   const isBusy = useMemo(
     () => status === "submitted" || status === "streaming",
@@ -156,13 +164,15 @@ const Page = () => {
             }}
             className="w-full"
           >
-            <InputGroup aria-orientation="horizontal">
+            <InputGroup>
               <Textarea
+                id={inputId}
+                name="message"
                 placeholder="Type your query here."
                 value={input}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                className="max-h-24"
+                className="max-h-24 border-0 focus-visible:ring-0 text-sm resize-none"
               />
               <InputGroupAddon align="block-end" className="pt-1">
                 <InputGroupButton

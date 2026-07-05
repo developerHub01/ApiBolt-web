@@ -12,7 +12,6 @@ const Layout = ({ children }: Props) => {
 
       <div className="flex-1 flex overflow-hidden w-full">
         <PublicDocsSidebar />
-
         <main className="flex-1 min-w-0 flex flex-col bg-background relative z-0 overflow-hidden">
           {children}
         </main>

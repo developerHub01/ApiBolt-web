@@ -6,8 +6,8 @@ import { docsConfig } from "@/constant/docs.constant";
 import DocsSidebarNode from "@/components/app/docs/DocsSidebarNode";
 import AskAIButton from "@/components/app/ask-ai/AskAIButton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
+import ExpendMobileMenuButton from "@/components/app/docs/ExpendMobileMenuButton";
 
 interface Props {
   isOpen: boolean;
@@ -16,27 +16,8 @@ interface Props {
 
 const MobileMenu = ({ isOpen, handleToggleOpen }: Props) => {
   return (
-    <div className="lg:hidden">
-      <button
-        type="button"
-        title="Open documentation menu"
-        aria-label="Open documentation menu"
-        onClick={() => handleToggleOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all md:bottom-8 md:right-8 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-      >
-        <Menu
-          className={cn(
-            "w-5 h-5 absolute transition-all duration-200",
-            isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
-          )}
-        />
-        <X
-          className={cn(
-            "w-5 h-5 absolute transition-all duration-200",
-            isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0",
-          )}
-        />
-      </button>
+    <div className="lg:hidden lg:pointer-events-none">
+      <ExpendMobileMenuButton />
       <AnimatePresence>
         {isOpen && (
           <>
