@@ -1,11 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import {
-  ArrowUpIcon,
-  Bot as AIIcon,
-  MessageCircleDashedIcon,
-} from "lucide-react";
+import { ArrowUpIcon, Bot as AIIcon } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   Empty,
