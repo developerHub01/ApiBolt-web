@@ -3,32 +3,10 @@
 import { useChat } from "@ai-sdk/react";
 import {
   ArrowUpIcon,
-  GlobeIcon,
-  ImageIcon,
+  Bot as AIIcon,
   MessageCircleDashedIcon,
-  PaperclipIcon,
-  PlusIcon,
-  RotateCwIcon,
-  TelescopeIcon,
 } from "lucide-react";
-// import { MessageAnimated } from "@/components/message-animated";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   Empty,
   EmptyDescription,
@@ -49,12 +27,7 @@ import {
   MessageScrollerProvider,
   MessageScrollerViewport,
 } from "@/components/ui/message-scroller";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { DefaultChatTransport, TextStreamChatTransport } from "ai";
+import { TextStreamChatTransport } from "ai";
 import { ChangeEvent, Fragment, useCallback, useMemo, useState } from "react";
 import {
   Message,
@@ -64,7 +37,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
 const Page = () => {
   const { messages, sendMessage, status, setMessages } = useChat({
@@ -73,8 +46,6 @@ const Page = () => {
     }),
   });
   const [input, setInput] = useState<string>("");
-
-  console.log(messages);
 
   const isBusy = useMemo(
     () => status === "submitted" || status === "streaming",
@@ -100,29 +71,7 @@ const Page = () => {
   return (
     <MessageScrollerProvider>
       <Card className="w-full gap-0 flex-1 bg-transparent ring-0 h-full px-2">
-        <CardHeader className="gap-1 border-b max-w-4xl mx-auto w-full px-0">
-          <CardTitle>New Chat</CardTitle>
-          <CardDescription>How can I help you today?</CardDescription>
-          <CardAction>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label="Reset conversation"
-                  onClick={handleSend}
-                  disabled={isBusy}
-                >
-                  <RotateCwIcon />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Reset</p>
-              </TooltipContent>
-            </Tooltip>
-          </CardAction>
-        </CardHeader>
-        <CardContent className="flex-1 flex overflow-hidden p-0 max-w-4xl mx-auto w-full flex-col">
+        <CardContent className="flex-1 flex overflow-hidden p-0! mx-auto w-full flex-col">
           {/* <ScrollArea className="flex-1 min-h-0">
             {Array.from({ length: 30 }).map((_, index) => (
               <p key={index}>
@@ -138,21 +87,31 @@ const Page = () => {
             <Empty className="h-full">
               <EmptyHeader>
                 <EmptyMedia variant="icon">
-                  <MessageCircleDashedIcon />
+                  <AIIcon />
                 </EmptyMedia>
-                <EmptyTitle>Morning, shadcn!</EmptyTitle>
+                <EmptyTitle>APIBolt AI!</EmptyTitle>
                 <EmptyDescription>
-                  What are we working on today? Press send to start a new
-                  conversation
+                  Ask any question to as to get docs details and ans of your
+                  queries.
                 </EmptyDescription>
               </EmptyHeader>
             </Empty>
           ) : (
             <MessageScroller>
-              <MessageScrollerViewport>
+              <MessageScrollerViewport
+                className={cn(
+                  "[scrollbar-color:var(--accent)_var(--secondary)]",
+                  "[&::-webkit-scrollbar]:w-2.5",
+                  "[&::-webkit-scrollbar-track]:bg-secondary",
+                  "[&::-webkit-scrollbar-thumb]:rounded-full",
+                  "[&::-webkit-scrollbar-thumb]:bg-accent",
+                  "[&::-webkit-scrollbar-thumb]:border-2",
+                  "[&::-webkit-scrollbar-thumb]:border-secondary",
+                )}
+              >
                 <MessageScrollerContent
                   aria-busy={isBusy}
-                  className="p-(--card-spacing)"
+                  className="max-w-4xl mx-auto p-2"
                 >
                   {messages.map(({ id, parts, role }) => (
                     <MessageScrollerItem
@@ -189,7 +148,7 @@ const Page = () => {
             </MessageScroller>
           )}
         </CardContent>
-        <CardFooter className="flex-col gap-2 max-w-4xl mx-auto w-full px-0">
+        <CardFooter className="flex-col gap-2 max-w-4xl mx-auto w-full px-0 border-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -199,7 +158,7 @@ const Page = () => {
           >
             <InputGroup aria-orientation="horizontal">
               <Textarea
-                placeholder="Type your message here."
+                placeholder="Type your query here."
                 value={input}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
@@ -210,7 +169,7 @@ const Page = () => {
                   type="submit"
                   variant="default"
                   size="icon-sm"
-                  // disabled={!nextMessage || isBusy}
+                  disabled={isBusy}
                   className="ml-auto"
                 >
                   <ArrowUpIcon />
