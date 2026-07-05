@@ -4,15 +4,17 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import MobileMenu from "@/components/app/docs/MobileMenu";
 import DesktopMenu from "@/components/app/docs/DesktopMenu";
+import { useSidebarStore } from "@/store/docs/sidebar.store";
 
 const PublicDocsSidebar = () => {
   const pathname = usePathname();
-  const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
+  const isMobileMenuOpen = useSidebarStore((state) => state.isMobileMenuOpen);
+  const handleToggle = useSidebarStore((state) => state.handleToggle);
 
   const [prevPathname, setPrevPathname] = useState(pathname);
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
-    setIsMobileOpen(false);
+    handleToggle(false);
   }
 
   return (
@@ -21,7 +23,7 @@ const PublicDocsSidebar = () => {
       <DesktopMenu />
 
       {/* Mobile Sidebar */}
-      <MobileMenu isOpen={isMobileOpen} handleToggleOpen={setIsMobileOpen} />
+      <MobileMenu isOpen={isMobileMenuOpen} handleToggleOpen={handleToggle} />
     </>
   );
 };
