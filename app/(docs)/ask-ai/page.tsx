@@ -41,6 +41,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import MarkdownPreview from "@/components/ui/markdown-preview";
 
 const Page = () => {
   const { messages, sendMessage, status } = useChat({
@@ -118,7 +119,7 @@ const Page = () => {
                         {role === "assistant" && (
                           <MessageAvatar>
                             <Avatar>
-                              <AvatarImage src="/logo.svg" alt="@shadcn" />
+                              <AvatarImage src="/logo.svg" alt="apibolt" />
                               <AvatarFallback>AB</AvatarFallback>
                             </Avatar>
                           </MessageAvatar>
@@ -136,7 +137,12 @@ const Page = () => {
                             <BubbleContent>
                               {parts.map((part, index) => (
                                 <Fragment key={`${id}_${index}`}>
-                                  {part.type === "text" && part.text}
+                                  {part.type === "text" &&
+                                    (role === "assistant" ? (
+                                      <MarkdownPreview code={part.text} />
+                                    ) : (
+                                      part.text
+                                    ))}
                                   {part.type === "tool-invocation" && (
                                     <div className="text-xs opacity-70 mt-1">
                                       Using tool...

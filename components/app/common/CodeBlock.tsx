@@ -9,9 +9,10 @@ import Code from "@/components/app/common/Code";
 interface Props {
   code: string;
   language?: LangType;
+  className?: string;
 }
 
-const CodeBlock = ({ code = "", language = "js" }: Props) => {
+const CodeBlock = ({ code = "", language = "js", className = "" }: Props) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const handleCopy = async () => {
@@ -25,7 +26,12 @@ const CodeBlock = ({ code = "", language = "js" }: Props) => {
   };
 
   return (
-    <div className="doc-code-block group relative rounded-lg border border-border/60 bg-[#0B0F19] overflow-hidden">
+    <div
+      className={cn(
+        "doc-code-block group relative rounded-lg border border-border/60 bg-[#0B0F19] overflow-hidden",
+        className,
+      )}
+    >
       <div className="flex items-center justify-between px-4 py-2.5 bg-card/60 border-b border-border/40">
         {language && (
           <div className="flex items-center gap-2">
