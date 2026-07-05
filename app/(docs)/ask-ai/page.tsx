@@ -23,7 +23,7 @@ import {
   MessageScrollerProvider,
   MessageScrollerViewport,
 } from "@/components/ui/message-scroller";
-import { TextStreamChatTransport } from "ai";
+import { DefaultChatTransport } from "ai";
 import { ChangeEvent, Fragment, useCallback, useMemo, useState } from "react";
 import {
   Message,
@@ -37,7 +37,7 @@ import { cn } from "@/lib/utils";
 
 const Page = () => {
   const { messages, sendMessage, status, setMessages } = useChat({
-    transport: new TextStreamChatTransport({
+    transport: new DefaultChatTransport({
       api: "/api/v1/ai/ask-query",
     }),
   });
@@ -64,23 +64,14 @@ const Page = () => {
     }
   };
 
+  console.log(messages);
+
   return (
     <MessageScrollerProvider>
-      <Card className="w-full gap-0 flex-1 bg-transparent ring-0 h-full px-2">
+      <Card className="w-full gap-0 flex-1 bg-transparent ring-0 h-full py-0">
         <CardContent className="flex-1 flex overflow-hidden p-0! mx-auto w-full flex-col">
-          {/* <ScrollArea className="flex-1 min-h-0">
-            {Array.from({ length: 30 }).map((_, index) => (
-              <p key={index}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Provident eligendi aut aperiam molestiae delectus, inventore
-                temporibus, doloribus officiis sint recusandae quisquam culpa
-                assumenda porro non quam alias cumque similique possimus.
-              </p>
-            ))}
-          </ScrollArea> */}
-
           {!messages.length ? (
-            <Empty className="h-full">
+            <Empty className="h-full p-3">
               <EmptyHeader>
                 <EmptyMedia variant="icon">
                   <AIIcon />
@@ -107,7 +98,7 @@ const Page = () => {
               >
                 <MessageScrollerContent
                   aria-busy={isBusy}
-                  className="max-w-4xl mx-auto p-2"
+                  className="max-w-4xl mx-auto p-3"
                 >
                   {messages.map(({ id, parts, role }) => (
                     <MessageScrollerItem
@@ -124,16 +115,29 @@ const Page = () => {
                             </Avatar>
                           </MessageAvatar>
                         )}
-                        <MessageContent className="selection:bg-background selection:text-primary">
-                          {parts.map((part, index) => (
-                            <Fragment key={`${id}_${index}`}>
-                              {part.type === "text" && (
-                                <Bubble>
-                                  <BubbleContent>{part.text}</BubbleContent>
-                                </Bubble>
-                              )}
-                            </Fragment>
-                          ))}
+                        <MessageContent>
+                          <Bubble
+                            variant={
+                              role === "assistant" ? "secondary" : "default"
+                            }
+                            className={cn({
+                              "selection:bg-secondary selection:text-foreground":
+                                role === "user",
+                            })}
+                          >
+                            <BubbleContent>
+                              {parts.map((part, index) => (
+                                <Fragment key={`${id}_${index}`}>
+                                  {part.type === "text" && part.text}
+                                  {part.type === "tool-invocation" && (
+                                    <div className="text-xs opacity-70 mt-1">
+                                      Using tool...
+                                    </div>
+                                  )}
+                                </Fragment>
+                              ))}
+                            </BubbleContent>
+                          </Bubble>
                         </MessageContent>
                       </Message>
                     </MessageScrollerItem>
@@ -144,7 +148,7 @@ const Page = () => {
             </MessageScroller>
           )}
         </CardContent>
-        <CardFooter className="flex-col gap-2 max-w-4xl mx-auto w-full px-0 border-0">
+        <CardFooter className="flex-col gap-2 max-w-4xl mx-auto w-full p-3 border-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
