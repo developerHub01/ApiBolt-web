@@ -33,7 +33,9 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  return <ContentWrapper className="flex-1 flex h-full">{children}</ContentWrapper>;
+  return (
+    <ContentWrapper className="flex-1 flex h-full">{children}</ContentWrapper>
+  );
 };
 
 export default Layout;
