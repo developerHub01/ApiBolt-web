@@ -1,16 +1,23 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { ComponentPropsWithoutRef, useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface Props {
+interface Props extends ComponentPropsWithoutRef<typeof Button> {
   value: string;
-  className?: string;
+  showLabel?: boolean;
 }
 
-const CopyButton = ({ value, className }: Props) => {
+const CopyButton = ({
+  value,
+  className,
+  size = "default",
+  variant = "ghost",
+  showLabel = true,
+  ...props
+}: Props) => {
   const [copied, setCopied] = useState<boolean>(false);
 
   const handleIdCopy = useCallback(async () => {
@@ -26,16 +33,17 @@ const CopyButton = ({ value, className }: Props) => {
   return (
     <Button
       onClick={handleIdCopy}
-      size="default"
-      variant="outline"
+      size={size}
+      variant={variant}
       className={cn(className)}
+      {...props}
     >
       {copied ? (
-        <CheckIcon className="size-3.5 mr-2" />
+        <CheckIcon className="size-4" />
       ) : (
-        <CopyIcon className="size-3.5 mr-2" />
+        <CopyIcon className="size-4" />
       )}
-      {copied ? "Copied" : "Copy"}
+      {showLabel && <span>{copied ? "Copied" : "Copy"}</span>}
     </Button>
   );
 };

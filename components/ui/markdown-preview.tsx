@@ -4,7 +4,6 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CodeBlock from "@/components/app/common/CodeBlock";
 import { LangType } from "@/types/code.types";
-import Image from "next/image";
 
 interface MarkdownPreviewProps {
   code: string;
@@ -19,7 +18,10 @@ const MarkdownPreview = ({
 }: MarkdownPreviewProps) => {
   return (
     <div
-      className={cn("text-sm text-foreground select-text", className)}
+      className={cn(
+        "text-sm text-foreground select-text [&>*:last-child]:mb-0",
+        className,
+      )}
       {...props}
     >
       <Markdown
@@ -83,7 +85,7 @@ const MarkdownPreview = ({
               return (
                 <CodeBlock
                   language={language}
-                  code={children}
+                  code={children.trim()}
                   className=" mb-4"
                 />
               );
@@ -105,14 +107,16 @@ const MarkdownPreview = ({
               {children}
             </a>
           ),
-          img: ({ src, alt }: React.ComponentProps<"img">) => (
-            <Image
-              src={typeof src === "string" ? src : ""}
-              alt={alt || ""}
-              width={400}
-              height={300}
-              className="mb-4 rounded max-w-full h-auto"
-            />
+          img: (
+            // { src, alt }: React.ComponentProps<"img">
+          ) => (null
+            // <Image
+            //   src={typeof src === "string" ? src : ""}
+            //   alt={alt || ""}
+            //   width={400}
+            //   height={300}
+            //   className="mb-4 rounded max-w-full h-auto"
+            // />
           ),
           table: ({ children }: React.ComponentProps<"table">) => (
             <table className="w-full mb-4">{children}</table>
