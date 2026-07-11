@@ -2,6 +2,10 @@ import { DocsNavItem } from "@/types/docs.types";
 
 export const docsConfig: Array<DocsNavItem> = [
   {
+    slug: "keyboard",
+    label: "Keyboard Shortcuts",
+  },
+  {
     slug: "testing",
     label: "Testing",
     children: [
