@@ -19,7 +19,7 @@ const MarkdownPreview = ({
   return (
     <div
       className={cn(
-        "text-sm text-foreground select-text [&>*:last-child]:mb-0",
+        "w-full text-sm text-foreground select-text [&>*:last-child]:mb-0",
         className,
       )}
       {...props}
@@ -86,7 +86,7 @@ const MarkdownPreview = ({
                 <CodeBlock
                   language={language}
                   code={children.trim()}
-                  className=" mb-4"
+                  className="mb-4 w-full"
                 />
               );
             else
@@ -107,17 +107,16 @@ const MarkdownPreview = ({
               {children}
             </a>
           ),
-          img: (
+          img: () =>
             // { src, alt }: React.ComponentProps<"img">
-          ) => (null
-            // <Image
-            //   src={typeof src === "string" ? src : ""}
-            //   alt={alt || ""}
-            //   width={400}
-            //   height={300}
-            //   className="mb-4 rounded max-w-full h-auto"
-            // />
-          ),
+            null,
+          // <Image
+          //   src={typeof src === "string" ? src : ""}
+          //   alt={alt || ""}
+          //   width={400}
+          //   height={300}
+          //   className="mb-4 rounded max-w-full h-auto"
+          // />
           table: ({ children }: React.ComponentProps<"table">) => (
             <table className="w-full mb-4">{children}</table>
           ),
