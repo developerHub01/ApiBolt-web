@@ -78,7 +78,9 @@ export const ModelName = {
   profiles: 'profiles',
   theme_device_installs: 'theme_device_installs',
   themes: 'themes',
-  unique_devices_installs: 'unique_devices_installs'
+  unique_devices_installs: 'unique_devices_installs',
+  doc_chunk: 'doc_chunk',
+  document: 'document'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -132,7 +134,8 @@ export const Custom_oauth_providersScalarFieldEnum = {
   userinfo_url: 'userinfo_url',
   jwks_uri: 'jwks_uri',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  custom_claims_allowlist: 'custom_claims_allowlist'
 } as const
 
 export type Custom_oauth_providersScalarFieldEnum = (typeof Custom_oauth_providersScalarFieldEnum)[keyof typeof Custom_oauth_providersScalarFieldEnum]
@@ -529,6 +532,25 @@ export const Unique_devices_installsScalarFieldEnum = {
 } as const
 
 export type Unique_devices_installsScalarFieldEnum = (typeof Unique_devices_installsScalarFieldEnum)[keyof typeof Unique_devices_installsScalarFieldEnum]
+
+
+export const Doc_chunkScalarFieldEnum = {
+  id: 'id',
+  document_id: 'document_id',
+  section: 'section',
+  content: 'content'
+} as const
+
+export type Doc_chunkScalarFieldEnum = (typeof Doc_chunkScalarFieldEnum)[keyof typeof Doc_chunkScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  path: 'path',
+  title: 'title'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 
 
 export const SortOrder = {

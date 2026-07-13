@@ -411,7 +411,9 @@ export const ModelName = {
   profiles: 'profiles',
   theme_device_installs: 'theme_device_installs',
   themes: 'themes',
-  unique_devices_installs: 'unique_devices_installs'
+  unique_devices_installs: 'unique_devices_installs',
+  doc_chunk: 'doc_chunk',
+  document: 'document'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -427,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "audit_log_entries" | "custom_oauth_providers" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "oauth_authorizations" | "oauth_client_states" | "oauth_clients" | "oauth_consents" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "webauthn_challenges" | "webauthn_credentials" | "app_install_events" | "profiles" | "theme_device_installs" | "themes" | "unique_devices_installs"
+    modelProps: "audit_log_entries" | "custom_oauth_providers" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "oauth_authorizations" | "oauth_client_states" | "oauth_clients" | "oauth_consents" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "webauthn_challenges" | "webauthn_credentials" | "app_install_events" | "profiles" | "theme_device_installs" | "themes" | "unique_devices_installs" | "doc_chunk" | "document"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2503,6 +2505,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    doc_chunk: {
+      payload: Prisma.$doc_chunkPayload<ExtArgs>
+      fields: Prisma.doc_chunkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.doc_chunkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.doc_chunkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>
+        }
+        findFirst: {
+          args: Prisma.doc_chunkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.doc_chunkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>
+        }
+        findMany: {
+          args: Prisma.doc_chunkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>[]
+        }
+        create: {
+          args: Prisma.doc_chunkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>
+        }
+        createMany: {
+          args: Prisma.doc_chunkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.doc_chunkCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>[]
+        }
+        delete: {
+          args: Prisma.doc_chunkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>
+        }
+        update: {
+          args: Prisma.doc_chunkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>
+        }
+        deleteMany: {
+          args: Prisma.doc_chunkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.doc_chunkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.doc_chunkUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>[]
+        }
+        upsert: {
+          args: Prisma.doc_chunkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$doc_chunkPayload>
+        }
+        aggregate: {
+          args: Prisma.Doc_chunkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDoc_chunk>
+        }
+        groupBy: {
+          args: Prisma.doc_chunkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Doc_chunkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.doc_chunkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Doc_chunkCountAggregateOutputType> | number
+        }
+      }
+    }
+    document: {
+      payload: Prisma.$documentPayload<ExtArgs>
+      fields: Prisma.documentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.documentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.documentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>
+        }
+        findFirst: {
+          args: Prisma.documentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.documentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>
+        }
+        findMany: {
+          args: Prisma.documentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>[]
+        }
+        create: {
+          args: Prisma.documentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>
+        }
+        createMany: {
+          args: Prisma.documentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.documentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>[]
+        }
+        delete: {
+          args: Prisma.documentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>
+        }
+        update: {
+          args: Prisma.documentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>
+        }
+        deleteMany: {
+          args: Prisma.documentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.documentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.documentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>[]
+        }
+        upsert: {
+          args: Prisma.documentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$documentPayload>
+        }
+        aggregate: {
+          args: Prisma.DocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDocument>
+        }
+        groupBy: {
+          args: Prisma.documentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.documentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DocumentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2577,7 +2727,8 @@ export const Custom_oauth_providersScalarFieldEnum = {
   userinfo_url: 'userinfo_url',
   jwks_uri: 'jwks_uri',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  custom_claims_allowlist: 'custom_claims_allowlist'
 } as const
 
 export type Custom_oauth_providersScalarFieldEnum = (typeof Custom_oauth_providersScalarFieldEnum)[keyof typeof Custom_oauth_providersScalarFieldEnum]
@@ -2974,6 +3125,25 @@ export const Unique_devices_installsScalarFieldEnum = {
 } as const
 
 export type Unique_devices_installsScalarFieldEnum = (typeof Unique_devices_installsScalarFieldEnum)[keyof typeof Unique_devices_installsScalarFieldEnum]
+
+
+export const Doc_chunkScalarFieldEnum = {
+  id: 'id',
+  document_id: 'document_id',
+  section: 'section',
+  content: 'content'
+} as const
+
+export type Doc_chunkScalarFieldEnum = (typeof Doc_chunkScalarFieldEnum)[keyof typeof Doc_chunkScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  path: 'path',
+  title: 'title'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3398,6 +3568,8 @@ export type GlobalOmitConfig = {
   theme_device_installs?: Prisma.theme_device_installsOmit
   themes?: Prisma.themesOmit
   unique_devices_installs?: Prisma.unique_devices_installsOmit
+  doc_chunk?: Prisma.doc_chunkOmit
+  document?: Prisma.documentOmit
 }
 
 /* Types for Logging */
