@@ -3,13 +3,27 @@
 import { useCallback, useMemo } from "react";
 import { useChat } from "@ai-sdk/react";
 import { CardContent } from "@/components/ui/card";
-import { DefaultChatTransport } from "ai";
+import { DefaultChatTransport, UIMessage } from "ai";
 import ChatBotFooter from "@/components/app/ask-ai/ChatBotFooter";
 import EmptyMessage from "@/components/app/ask-ai/EmptyMessage";
 import MessageArea from "@/components/app/ask-ai/MessageArea";
 
+const initialMessages: Array<UIMessage> = [
+  {
+    id: "welcome-message",
+    role: "assistant",
+    parts: [
+      {
+        type: "text",
+        text: "Hello! I am Ms. AB, here to help you with APIBolt software and API testing.",
+      },
+    ],
+  },
+] as const;
+
 const ChatRoot = () => {
   const { messages, sendMessage, status } = useChat({
+    messages: initialMessages,
     transport: new DefaultChatTransport({
       api: "/api/v1/ai/ask-query",
     }),
