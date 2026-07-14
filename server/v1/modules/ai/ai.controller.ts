@@ -11,16 +11,9 @@ import { createGroq } from "@ai-sdk/groq";
 import { tryRotatedKey } from "@/utils/server/ai/index.utils";
 import { z } from "zod";
 import { getKeyboardShortcutDocs } from "@/server/v1/modules/ai/ai.tools";
-import { handleReadDocs } from "@/utils/server/ai/docs.utils";
+import { ASK_AI_API_KEY } from "@/constant/ai.constant";
 
 // const BASE_URL = "https://api.groq.com/openai/v1/chat/completions";
-const API_KEY: Array<string> = (() => {
-  try {
-    return JSON.parse(process.env.ASK_AI_API_KEY!);
-  } catch {
-    return [];
-  }
-})();
 
 export const maxDuration = 30;
 
@@ -28,7 +21,7 @@ const handleAskQuery = async (c: HTTPContext) => {
   const { messages } = await c.req.json<AskQueryBodyInterface>();
 
   const result = await tryRotatedKey({
-    keys: API_KEY,
+    keys: ASK_AI_API_KEY,
     callback: async (key) => {
       const groq = createGroq({
         apiKey: key,
@@ -59,8 +52,6 @@ const handleAskQuery = async (c: HTTPContext) => {
       });
     },
   });
-
-  console.log(await handleReadDocs());
 
   return createUIMessageStreamResponse({
     stream: toUIMessageStream({
