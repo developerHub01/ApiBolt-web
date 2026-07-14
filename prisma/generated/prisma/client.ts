@@ -212,12 +212,12 @@ export type themes = Prisma.themesModel
  */
 export type unique_devices_installs = Prisma.unique_devices_installsModel
 /**
- * Model doc_chunk
+ * Model doc_chunks
  * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
  */
-export type doc_chunk = Prisma.doc_chunkModel
+export type doc_chunks = Prisma.doc_chunksModel
 /**
- * Model document
+ * Model documents
  * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
  */
-export type document = Prisma.documentModel
+export type documents = Prisma.documentsModel

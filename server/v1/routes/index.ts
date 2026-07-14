@@ -1,7 +1,7 @@
 import { RouteListItemInterface } from "@/types/server/api.types";
 import { createRouter } from "@/utils/server/create-router";
 import clientRouter from "@/server/v1/modules/client/client.route";
-import aiRouter from "@/server/v1/modules/ai/ai.route";
+import aiRouter from "@/server/v1/modules/rag/rag.route";
 
 const v1Router = createRouter();
 

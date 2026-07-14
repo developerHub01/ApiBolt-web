@@ -1,4 +1,4 @@
-import { AIService } from "@/server/v1/modules/ai/ai.service";
+import { RAGService } from "@/server/v1/modules/rag/rag.service";
 
 /* wrapper function to handle the script execution and exit codes */
 const runSeedScript = async (): Promise<void> => {
@@ -6,7 +6,7 @@ const runSeedScript = async (): Promise<void> => {
     console.log("Starting vector DB creating process...");
 
     /* call the main seeding function from our service */
-    await AIService.createDocsVectorDB();
+    await RAGService.createDocsVectorDB();
 
     console.log("Vector DB creating completed successfully.");
     /* exit with 0 to tell the terminal everything is good */

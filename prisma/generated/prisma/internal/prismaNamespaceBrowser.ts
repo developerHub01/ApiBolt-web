@@ -79,8 +79,8 @@ export const ModelName = {
   theme_device_installs: 'theme_device_installs',
   themes: 'themes',
   unique_devices_installs: 'unique_devices_installs',
-  doc_chunk: 'doc_chunk',
-  document: 'document'
+  doc_chunks: 'doc_chunks',
+  documents: 'documents'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -534,23 +534,23 @@ export const Unique_devices_installsScalarFieldEnum = {
 export type Unique_devices_installsScalarFieldEnum = (typeof Unique_devices_installsScalarFieldEnum)[keyof typeof Unique_devices_installsScalarFieldEnum]
 
 
-export const Doc_chunkScalarFieldEnum = {
+export const Doc_chunksScalarFieldEnum = {
   id: 'id',
   document_id: 'document_id',
   section: 'section',
   content: 'content'
 } as const
 
-export type Doc_chunkScalarFieldEnum = (typeof Doc_chunkScalarFieldEnum)[keyof typeof Doc_chunkScalarFieldEnum]
+export type Doc_chunksScalarFieldEnum = (typeof Doc_chunksScalarFieldEnum)[keyof typeof Doc_chunksScalarFieldEnum]
 
 
-export const DocumentScalarFieldEnum = {
+export const DocumentsScalarFieldEnum = {
   id: 'id',
   path: 'path',
   title: 'title'
 } as const
 
-export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+export type DocumentsScalarFieldEnum = (typeof DocumentsScalarFieldEnum)[keyof typeof DocumentsScalarFieldEnum]
 
 
 export const SortOrder = {

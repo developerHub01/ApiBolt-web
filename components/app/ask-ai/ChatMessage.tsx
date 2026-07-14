@@ -3,12 +3,10 @@
 import { Fragment, memo } from "react";
 import {
   Message,
-  MessageAvatar,
   MessageContent,
   MessageFooter,
 } from "@/components/ui/message";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import MarkdownPreview from "@/components/ui/markdown-preview";
 import { MessageScrollerItem } from "@/components/ui/message-scroller";
@@ -36,28 +34,20 @@ const ChatMessage = memo(({ id, role, parts }: Props) => {
   return (
     <MessageScrollerItem messageId={id} scrollAnchor={role === "user"}>
       <Message align={role === "assistant" ? "start" : "end"}>
-        {role === "assistant" && (
-          <MessageAvatar>
-            <Avatar>
-              <AvatarImage
-                src="/icons/masked-logo.png"
-                alt="apibolt"
-                className="rounded-md"
-              />
-              <AvatarFallback>AB</AvatarFallback>
-            </Avatar>
-          </MessageAvatar>
-        )}
         <MessageContent className="">
           <Bubble
-            variant={role === "assistant" ? "secondary" : "default"}
+            variant={role === "assistant" ? "transparent" : "default"}
             className={cn("overflow-visible", {
               "selection:bg-secondary selection:text-foreground":
                 role === "user",
-              "w-full": role === "assistant",
+              "w-full max-w-full": role === "assistant",
             })}
           >
-            <BubbleContent className="w-fit">
+            <BubbleContent
+              className={cn("w-fit", {
+                "w-full p-0": role === "assistant",
+              })}
+            >
               {parts.map((part, index) => (
                 <Fragment key={`${id}_${index}`}>
                   {part.type === "text" &&

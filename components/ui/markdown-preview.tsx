@@ -127,7 +127,7 @@ const MarkdownPreview = ({
             <tbody>{children}</tbody>
           ),
           tr: ({ children }: React.ComponentProps<"tr">) => (
-            <tr className="m-0 border-t p-0 even:bg-muted">{children}</tr>
+            <tr className="m-0 border-t p-0 even:bg-muted/30">{children}</tr>
           ),
           th: ({ children }: React.ComponentProps<"th">) => (
             <th className="border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right">

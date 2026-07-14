@@ -1,5 +1,5 @@
 import { createRouter } from "@/utils/server/create-router";
-import { AIController } from "@/server/v1/modules/ai/ai.controller";
+import { AIController } from "@/server/v1/modules/rag/rag.controller";
 
 const aiRouter = createRouter();
 

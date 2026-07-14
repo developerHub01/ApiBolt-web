@@ -1,4 +1,4 @@
-import { embedMany } from "ai";
+import { embed, embedMany } from "ai";
 import { createGoogle } from "@ai-sdk/google";
 import { AI_EMBEDDING_API_KEY } from "@/constant/ai.constant";
 import { handleReadDocs } from "@/utils/server/ai/docs.utils";
@@ -49,4 +49,24 @@ export const generateDocsEmbeddedData = async () => {
   }
 
   return embeddedDocs;
+};
+
+export const generateEmbeddQuery = async ({
+  query,
+  outputDimensionality = 1536,
+}: {
+  query: string;
+  outputDimensionality?: number;
+}) => {
+  const { embedding } = await embed({
+    model: google.embedding("gemini-embedding-001"),
+    value: query,
+    providerOptions: {
+      google: {
+        outputDimensionality,
+      },
+    },
+  });
+
+  return embedding;
 };
