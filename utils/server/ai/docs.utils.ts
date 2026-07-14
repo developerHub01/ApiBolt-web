@@ -3,24 +3,22 @@ import path from "path";
 
 export const handleReadDocs = async () => {
   const dir = path.join(process.cwd(), "app/(docs)/(scrollable)/docs");
+  const rootDir = path.join(process.cwd(), "app/(docs)/(scrollable)");
 
   return handleReadRecursive({
     dir,
-    rootDir: dir,
+    rootDir,
   });
 };
 
 const handleReadRecursive = async ({
   dir,
   rootDir,
-  results = [],
+  results = {},
 }: {
   dir: string;
   rootDir: string;
-  results?: Array<{
-    path: string;
-    content: string;
-  }>;
+  results?: Record<string, string>;
 }) => {
   const dirents = await fs.readdir(dir, {
     withFileTypes: true,
@@ -40,10 +38,7 @@ const handleReadRecursive = async ({
       const normalizedPath = path.dirname(
         path.relative(rootDir, fullPath).split(path.sep).join("/"),
       );
-      results.push({
-        path: normalizedPath,
-        content,
-      });
+      results[normalizedPath] = content;
     }
   }
 
