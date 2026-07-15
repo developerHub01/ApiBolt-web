@@ -51,7 +51,9 @@ const MarkdownPreview = ({
           h6: ({ children }) => (
             <h6 className="text-sm font-medium mt-4 mb-2">{children}</h6>
           ),
-          p: ({ children }) => <p className="leading-7 mb-3 last:mb-0">{children}</p>,
+          p: ({ children }) => (
+            <p className="leading-7 mb-3 last:mb-0">{children}</p>
+          ),
           ul: ({ children }) => (
             <ul className="list-disc pl-5 mb-3 space-y-0.5">{children}</ul>
           ),
@@ -123,7 +125,9 @@ const MarkdownPreview = ({
             </div>
           ),
           thead: ({ children }: React.ComponentProps<"thead">) => (
-            <thead className="bg-muted/60 border-b border-border/50">{children}</thead>
+            <thead className="bg-muted/60 border-b border-border/50">
+              {children}
+            </thead>
           ),
           tbody: ({ children }: React.ComponentProps<"thead">) => (
             <tbody className="divide-y divide-border/30">{children}</tbody>
@@ -137,9 +141,7 @@ const MarkdownPreview = ({
             </th>
           ),
           td: ({ children }: React.ComponentProps<"td">) => (
-            <td className="px-3 py-2 text-foreground/85">
-              {children}
-            </td>
+            <td className="px-3 py-2 text-foreground/85">{children}</td>
           ),
         }}
       >

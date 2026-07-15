@@ -45,8 +45,7 @@ const MessageArea = memo(({ isBusy, messages, status }: Props) => {
               isBusy={isBusy}
             />
           ))}
-          {<ThinkingUI />}
-          {/* {status === "submitted" && <ThinkingUI />} */}
+          {status === "submitted" && <ThinkingUI />}
         </MessageScrollerContent>
       </MessageScrollerViewport>
       <MessageScrollerButton />
