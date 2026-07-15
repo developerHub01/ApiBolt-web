@@ -28,7 +28,7 @@ const ChatRoot = () => {
       api: "/api/v1/ai/ask-query",
     }),
   });
-
+  
   const isBusy = useMemo(
     () => ["submitted", "streaming"].includes(status),
     [status],

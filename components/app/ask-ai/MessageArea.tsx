@@ -36,10 +36,17 @@ const MessageArea = memo(({ isBusy, messages, status }: Props) => {
           aria-busy={isBusy}
           className="max-w-4xl mx-auto p-3"
         >
-          {messages.map((message) => (
-            <ChatMessage key={message.id} {...message} />
+          {messages.map((message, index) => (
+            <ChatMessage
+              key={message.id}
+              {...message}
+              messageIndex={index}
+              status={status}
+              isBusy={isBusy}
+            />
           ))}
-          {status === "submitted" && <ThinkingUI />}
+          {<ThinkingUI />}
+          {/* {status === "submitted" && <ThinkingUI />} */}
         </MessageScrollerContent>
       </MessageScrollerViewport>
       <MessageScrollerButton />

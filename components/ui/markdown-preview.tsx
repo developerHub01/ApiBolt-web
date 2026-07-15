@@ -51,16 +51,16 @@ const MarkdownPreview = ({
           h6: ({ children }) => (
             <h6 className="text-sm font-medium mt-4 mb-2">{children}</h6>
           ),
-          p: ({ children }) => <p className="leading-7 mb-3">{children}</p>,
+          p: ({ children }) => <p className="leading-7 mb-3 last:mb-0">{children}</p>,
           ul: ({ children }) => (
-            <ul className="list-disc pl-6 mb-4">{children}</ul>
+            <ul className="list-disc pl-5 mb-3 space-y-0.5">{children}</ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal pl-6 mb-4">{children}</ol>
+            <ol className="list-decimal pl-5 mb-3 space-y-0.5">{children}</ol>
           ),
-          li: ({ children }) => <li className="mt-1">{children}</li>,
+          li: ({ children }) => <li className="leading-6">{children}</li>,
           blockquote: ({ children }) => (
-            <blockquote className="border-l-2 pl-4 italic mb-4 text-muted-foreground">
+            <blockquote className="border-l-[3px] border-primary/40 pl-4 italic mb-3 text-muted-foreground bg-muted/20 py-1.5 pr-3 rounded-r-md">
               {children}
             </blockquote>
           ),
@@ -75,7 +75,7 @@ const MarkdownPreview = ({
             if (!language) {
               return (
                 <code
-                  className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono"
+                  className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-primary"
                   {...rest}
                 >
                   {children}
@@ -86,23 +86,23 @@ const MarkdownPreview = ({
                 <CodeBlock
                   language={language}
                   code={children.trim()}
-                  className="mb-4 w-full"
+                  className="mb-3 w-full"
                 />
               );
             else
               return (
-                <pre className="bg-muted p-3 rounded overflow-x-auto text-xs font-mono my-4">
+                <pre className="bg-muted border border-border/40 p-3 rounded-lg overflow-x-auto text-xs font-mono my-3">
                   <code {...rest}>{children}</code>
                 </pre>
               );
           },
-          hr: () => <hr className="mb-6 border-muted" />,
+          hr: () => <hr className="my-4 border-border/50" />,
           a: ({ href, children }) => (
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary underline underline-offset-2 hover:opacity-80"
+              className="text-primary font-medium underline underline-offset-2 hover:text-primary/70 transition-colors"
             >
               {children}
             </a>
@@ -118,24 +118,26 @@ const MarkdownPreview = ({
           //   className="mb-4 rounded max-w-full h-auto"
           // />
           table: ({ children }: React.ComponentProps<"table">) => (
-            <table className="w-full mb-4">{children}</table>
+            <div className="overflow-x-auto my-3 rounded-lg border border-border/50">
+              <table className="w-full border-collapse mb-0">{children}</table>
+            </div>
           ),
           thead: ({ children }: React.ComponentProps<"thead">) => (
-            <thead>{children}</thead>
+            <thead className="bg-muted/60 border-b border-border/50">{children}</thead>
           ),
           tbody: ({ children }: React.ComponentProps<"thead">) => (
-            <tbody>{children}</tbody>
+            <tbody className="divide-y divide-border/30">{children}</tbody>
           ),
           tr: ({ children }: React.ComponentProps<"tr">) => (
-            <tr className="m-0 border-t p-0 even:bg-muted/30">{children}</tr>
+            <tr className="hover:bg-muted/20 transition-colors">{children}</tr>
           ),
           th: ({ children }: React.ComponentProps<"th">) => (
-            <th className="border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right">
+            <th className="px-3 py-2 text-left font-semibold text-muted-foreground text-[11px] uppercase tracking-wide">
               {children}
             </th>
           ),
           td: ({ children }: React.ComponentProps<"td">) => (
-            <td className="border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right">
+            <td className="px-3 py-2 text-foreground/85">
               {children}
             </td>
           ),

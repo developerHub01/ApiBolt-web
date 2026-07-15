@@ -1,80 +1,59 @@
 "use client";
 
-import { Fragment, memo } from "react";
-import {
-  Message,
-  MessageContent,
-  MessageFooter,
-} from "@/components/ui/message";
-import { Bubble, BubbleContent } from "@/components/ui/bubble";
-import { cn } from "@/lib/utils";
+import { Fragment, memo, useMemo } from "react";
+import { Message, MessageContent } from "@/components/ui/message";
 import MarkdownPreview from "@/components/ui/markdown-preview";
 import { MessageScrollerItem } from "@/components/ui/message-scroller";
-import { ButtonGroup } from "@/components/ui/button-group";
-import CopyButton from "@/components/ui/copy-button";
-import { UIDataTypes, UIMessage, UITools } from "ai";
+import { ChatStatus, TextUIPart, UIDataTypes, UIMessage, UITools } from "ai";
+import MessageStatusBadge from "@/components/app/ask-ai/MessageStatusBadge";
+import ChatBubble from "@/components/app/ask-ai//ChatBubble";
 
-type Props = UIMessage<unknown, UIDataTypes, UITools>;
-
-const extractTextFromParts = (
-  parts: Array<{
-    type: string;
-    text?: string;
-  }>,
-) => {
-  return parts
-    .filter((part) => part.type === "text" && part.text)
-    .map((part) => part.text as string)
-    .join("\n");
+type Props = UIMessage<unknown, UIDataTypes, UITools> & {
+  messageIndex: number;
+  status: ChatStatus;
+  isBusy: boolean;
 };
 
-const ChatMessage = memo(({ id, role, parts }: Props) => {
-  const textContent = extractTextFromParts(parts);
+const ChatMessage = memo(({ id, role, parts, messageIndex, isBusy }: Props) => {
+  const showCopy = useMemo(
+    () => Boolean(messageIndex && !isBusy),
+    [messageIndex, isBusy],
+  );
 
   return (
     <MessageScrollerItem messageId={id} scrollAnchor={role === "user"}>
       <Message align={role === "assistant" ? "start" : "end"}>
-        <MessageContent className="">
-          <Bubble
-            variant={role === "assistant" ? "transparent" : "default"}
-            className={cn("overflow-visible", {
-              "selection:bg-secondary selection:text-foreground":
-                role === "user",
-              "w-full max-w-full": role === "assistant",
-            })}
-          >
-            <BubbleContent
-              className={cn("w-fit", {
-                "w-full p-0": role === "assistant",
-              })}
-            >
-              {parts.map((part, index) => (
+        <MessageContent>
+          <ChatBubble parts={parts} role={role} showCopy={showCopy}>
+            {parts.map((part, index) => {
+              const processingText =
+                part.type === "dynamic-tool" || part.type.startsWith("tool-")
+                  ? "Using tool..."
+                  : part.type === "reasoning"
+                    ? "Reasoning..."
+                    : part.type === "text"
+                      ? null
+                      : "Processing...";
+
+              return (
                 <Fragment key={`${id}_${index}`}>
-                  {part.type === "text" &&
-                    (role === "assistant" ? (
-                      <MarkdownPreview code={part.text} />
-                    ) : (
-                      part.text
-                    ))}
-                  {part.type === "tool-invocation" && (
-                    <div className="text-xs opacity-70 mt-1">Using tool...</div>
+                  {processingText ? (
+                    <MessageStatusBadge isLoading={isBusy}>
+                      <span>{processingText}</span>
+                    </MessageStatusBadge>
+                  ) : (
+                    <>
+                      {role === "assistant" ? (
+                        <MarkdownPreview code={(part as TextUIPart).text} />
+                      ) : (
+                        (part as TextUIPart).text
+                      )}
+                    </>
                   )}
                 </Fragment>
-              ))}
-            </BubbleContent>
-            {role === "assistant" && (
-              <MessageFooter className="px-0">
-                <ButtonGroup>
-                  <CopyButton
-                    value={textContent}
-                    showLabel={false}
-                    size={"icon-xs"}
-                    variant={"secondary"}
-                  />
-                </ButtonGroup>
-              </MessageFooter>
-            )}
-          </Bubble>
+              );
+            })}
+          </ChatBubble>
         </MessageContent>
       </Message>
     </MessageScrollerItem>
