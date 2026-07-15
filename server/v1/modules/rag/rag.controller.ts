@@ -3,13 +3,14 @@ import { HTTPContext } from "@/types/server/env.types";
 import {
   convertToModelMessages,
   createUIMessageStreamResponse,
+  hasToolCall,
   isStepCount,
   streamText,
   toUIMessageStream,
 } from "ai";
 import { createGroq } from "@ai-sdk/groq";
 import { tryRotatedKey } from "@/utils/server/ai/index.utils";
-import { searchDocsTool } from "@/server/v1/modules/rag/rag.tools";
+import { done, searchDocsTool } from "@/server/v1/modules/rag/rag.tools";
 import { ASK_AI_API_KEY } from "@/constant/ai.constant";
 import { dateTimeFormatter } from "@/constant/date-and-time.constant";
 
@@ -22,7 +23,7 @@ const INSTRUCTIONS_MESSAGE = `CORE DIRECTIVE (ABSOLUTE):
 - If a user asks for examples, code, schemas, or explanations NOT explicitly found in the tool results, you MUST refuse.
 - CRITICAL: If the tool returns "No relevant documentation found" OR the request is outside APIBolt docs, your ENTIRE response MUST BE EXACTLY: "I couldn't find any information about that in the APIBolt documentation. Could you rephrase your question or ask about a specific APIBolt feature?"
 - NEVER generate dummy code, schemas, or generic examples. If it is not in the docs, you do not know it.
-- Never use emojies.
+- NEVER use emojis and always ans in way that you know these not mention that "based on docs or something".
 
 PERSONALITY:
 - Be playful, warm, and conversational like a smart friend. Avoid stiff or robotic language.
@@ -57,22 +58,34 @@ const handleAskQuery = async (c: HTTPContext) => {
         messages: await convertToModelMessages(messages),
         tools: {
           searchDocsTool,
+          done,
         },
-        stopWhen: isStepCount(10),
+        stopWhen: [isStepCount(5), hasToolCall("done")],
         temperature: 0.1,
+        maxOutputTokens: 1500,
+        timeout: {
+          totalMs: 30000,
+          stepMs: 15000,
+          toolMs: 10000,
+        },
+        reasoning: "none",
         onError: (error) => {
           console.error("Stream error:", error);
         },
+        onStepStart: (step) => {
+          console.log("Step started. Reason:", step);
+        },
         onStepEnd: (step) => {
-          console.log("Step finished. Reason:", step.finishReason);
+          console.log(
+            "Step finished. Reason:",
+            JSON.stringify(step.response.messages, null, 2),
+          );
           if (step.warnings && step.warnings.length)
             console.warn("Step warnings:", step.warnings);
         },
       });
     },
   });
-
-  console.log(result);
 
   return createUIMessageStreamResponse({
     stream: toUIMessageStream({

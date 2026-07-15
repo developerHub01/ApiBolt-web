@@ -16,10 +16,19 @@ export const searchDocsTool = tool({
   execute: async ({ query }: { query: string }) => {
     const context = await RAGService.retriveMatchedDocsContext({
       query,
-      topK: 10,
+      topK: 3,
       matchThreshold: 0.4,
     });
 
     return context;
   },
+});
+
+export const done = tool({
+  description:
+    "Call this tool when you have the final answer and no more searches are needed.",
+  inputSchema: z.object({}),
+  execute: async () => ({
+    status: "finished",
+  }),
 });
