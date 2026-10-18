@@ -35,7 +35,7 @@ const CustomCode = ({ className, children }: CodeProps) => {
       </code>
     );
 
-  return <CodeBlock language={language} code={codeString}  />;
+  return <CodeBlock language={language} code={codeString} />;
 };
 
 const CustomLink = ({ href, children }: LinkProps) => {
