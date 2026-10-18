@@ -1,14 +1,10 @@
-import { Card } from "@/components/ui/card";
-import { MessageScrollerProvider } from "@/components/ui/message-scroller";
-import ChatRoot from "@/components/app/ask-ai/ChatRoot";
-
 const Page = () => {
   return (
-    <MessageScrollerProvider>
-      <Card className="w-full gap-0 flex-1 bg-transparent ring-0 h-full py-0">
-        <ChatRoot />
-      </Card>
-    </MessageScrollerProvider>
+    <div className="w-full h-full flex flex-col justify-center items-center">
+      <h1 className="text-2xl md:text-5xl font-bold animate-pulse text-center font-brand">
+        Coming soon...
+      </h1>
+    </div>
   );
 };
 

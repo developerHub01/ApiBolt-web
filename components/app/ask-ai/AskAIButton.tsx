@@ -18,8 +18,11 @@ const AskAIButton = ({ children = <DefaultChildren /> }: Props) => {
   return (
     <div className="px-3">
       <Link href="/ask-ai">
-        <Button className="w-full" variant={isActive ? "secondary" : "outline"}>
-          {children}
+        <Button
+          className="w-full text-muted-foreground"
+          variant={isActive ? "secondary" : "outline"}
+        >
+          {children} Coming soon..
         </Button>
       </Link>
     </div>

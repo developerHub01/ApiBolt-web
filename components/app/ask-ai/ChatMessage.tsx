@@ -6,7 +6,7 @@ import MarkdownPreview from "@/components/ui/markdown-preview";
 import { MessageScrollerItem } from "@/components/ui/message-scroller";
 import { ChatStatus, TextUIPart, UIDataTypes, UIMessage, UITools } from "ai";
 import MessageStatusBadge from "@/components/app/ask-ai/MessageStatusBadge";
-import ChatBubble from "@/components/app/ask-ai//ChatBubble";
+import ChatBubble from "@/components/app/ask-ai/ChatBubble";
 
 type Props = UIMessage<unknown, UIDataTypes, UITools> & {
   messageIndex: number;
