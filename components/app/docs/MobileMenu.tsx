@@ -58,10 +58,11 @@ const MobileMenu = ({ isOpen, handleToggleOpen }: Props) => {
               className="fixed inset-y-0 left-0 z-110 w-70 bg-background border-r border-border shadow-2xl lg:hidden flex flex-col gap-4  pb-3"
             >
               <div className="flex items-center justify-between p-3 border-b border-border bg-muted/10 shrink-0">
-                <SIdebarMenuHeadingLink />
-                <span className="font-semibold tracking-tight text-foreground">
-                  Documentation
-                </span>
+                <SIdebarMenuHeadingLink>
+                  {/* <span className="font-semibold tracking-tight text-foreground"> */}
+                    Documentation
+                  {/* </span> */}
+                </SIdebarMenuHeadingLink>
                 <button
                   type="button"
                   title="Close menu"
