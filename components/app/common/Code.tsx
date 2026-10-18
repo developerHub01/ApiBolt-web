@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { githubDark } from "@uiw/codemirror-theme-github";
 import { json } from "@codemirror/lang-json";
 import { javascript } from "@codemirror/lang-javascript";
@@ -45,7 +45,7 @@ const Code = ({
       )}
       theme={githubDark}
       value={code}
-      extensions={[getLang(language)]}
+      extensions={[getLang(language), EditorView.lineWrapping]}
       editable={false}
       readOnly={true}
       indentWithTab={true}

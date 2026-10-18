@@ -35,7 +35,7 @@ const CustomCode = ({ className, children }: CodeProps) => {
       </code>
     );
 
-  return <CodeBlock language={language} code={codeString} />;
+  return <CodeBlock language={language} code={codeString}  />;
 };
 
 const CustomLink = ({ href, children }: LinkProps) => {
@@ -141,7 +141,9 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => {
         }}
       />
     ),
-    pre: ({ children }) => <div className={cn("my-6")}>{children}</div>,
+    pre: ({ children }) => (
+      <div className={cn("my-6 flex flex-col w-full")}>{children}</div>
+    ),
     code: CustomCode,
     ...components,
     CoreIdeaGrid,
